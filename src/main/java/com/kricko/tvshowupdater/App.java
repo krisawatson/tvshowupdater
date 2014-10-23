@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.httpclient.HttpException;
 import org.json.simple.parser.ParseException;
 
 import com.kricko.tvshowupdater.objects.Details;
@@ -50,6 +51,10 @@ public class App
             is.close();
         }
         
-        Xbmc.updateHosts();
+        try {
+			Xbmc.updateHosts();
+		} catch (HttpException e) {
+			System.err.println(e.getLocalizedMessage());
+		}
     }
 }
