@@ -17,10 +17,11 @@ import com.kricko.tvshowupdater.objects.Rss;
 import com.kricko.tvshowupdater.objects.Shows;
 import com.kricko.tvshowupdater.parser.TvShowParser;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
+import com.kricko.tvshowupdater.xbmc.Xbmc;
 
 public class App 
 {
-    public static void main( String[] args ) throws JAXBException, IOException, ParseException
+	public static void main( String[] args ) throws JAXBException, IOException, ParseException
     {
     	JAXBContext jc = JAXBContext.newInstance(Rss.class);
 
@@ -49,5 +50,6 @@ public class App
             is.close();
         }
         
+        Xbmc.updateHosts();
     }
 }
