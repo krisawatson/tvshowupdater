@@ -7,10 +7,28 @@
 			"path":"G:/TV Shows (A-G)/Big Bang Theory, The"
 		},
 		{
+			"name":"Family Guy"
+			"rssfeed":"http://showrss.info/feeds/27.rss"
+			"regex":"(^|)(Family Guy *([0-9]+).*?)( |$)"
+			"path":"G:/TV Shows (A-G)/Family Guy"
+		},
+		{
 			"name":"The Good Wife"
 			"rssfeed":"http://showrss.info/feeds/208.rss"
 			"regex":"(^|)(The Good Wife *([0-9]+).*?)( |$)"
 			"path":"G:/TV Shows (A-G)/Good Wife, The"
+		},
+		{
+			"name":"Grey's Anatomy"
+			"rssfeed":"http://showrss.info/feeds/34.rss"
+			"regex":"(^|)(Greys Anatomy *([0-9]+).*?)( |$)"
+			"path":"G:/TV Shows (A-G)/Greys Anatomy"
+		},
+		{
+			"name":"Scandal"
+			"rssfeed":"http://showrss.info/feeds/439.rss"
+			"regex":"(^|)(Scandal \(2012\) *([0-9]+).*?)( |$)"
+			"path":"G:/TV Shows (M-Z)/Scandal (2012)"
 		}
 	]
 }
