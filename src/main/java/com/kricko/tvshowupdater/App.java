@@ -51,10 +51,14 @@ public class App
             is.close();
         }
         
-        try {
-			Xbmc.updateHosts();
-		} catch (HttpException e) {
-			System.err.println(e.getLocalizedMessage());
-		}
+        // TODO Fix the updating of Xbmc hosts
+//        try {
+//			Xbmc.updateHosts();
+//		} catch (HttpException e) {
+//			System.err.println(e.getLocalizedMessage());
+//		}
+        
+
+        TvShowUtils.appendDirToTidyUpList();
     }
 }

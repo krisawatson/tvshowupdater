@@ -1,7 +1,13 @@
 package com.kricko.tvshowupdater.utils;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -12,14 +18,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.kricko.tvshowupdater.constants.TvShowConst;
 import com.kricko.tvshowupdater.objects.Details;
 import com.kricko.tvshowupdater.objects.Item;
 
 public class TvShowUtils {
 
+	private static List<String> tidyUpDirs = new ArrayList<String>();
+	
 	public static List<Item> removeDuplicateEpisodes(List<Item> items, String regex){
 		Map<Integer,List<String>> shows = new HashMap<Integer,List<String>>();
 		List<Item> newItems = new ArrayList<Item>();
@@ -79,10 +89,16 @@ public class TvShowUtils {
 			if(episodeExists(existingItems, filePrefix)){
 				System.out.println(filePrefix + " episode already exists");
 			} else {
-				/* TODO Use the uTorrent command line to download the latest episode
-				 * e.g. utorrent.exe /DIRECTORY "SAVE PATH" ".TORRENT FILE TO OPEN"
-				 */
+				Properties prop = TvShowProperties.getInstance().getProperties();
+				String[] params = {prop.getProperty("torrent.client"),"/DIRECTORY", "\""+dir+"\"", "\""+item.getLink()+"\"" };
 				System.out.println("Executing command: utorrent.exe /DIRECTORY \""+dir+"\" \""+item.getLink()+"\"");
+				
+				String sDir = dir.toString();
+				if(!tidyUpDirs.contains(sDir)){
+					tidyUpDirs.add(sDir);
+				}
+				
+				Runtime.getRuntime().exec(params);
 			}
 		}
 	}
@@ -119,5 +135,33 @@ public class TvShowUtils {
 		} 
 		
 		return result;
+	}
+	
+	public static void appendDirToTidyUpList(){
+		try {
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(TvShowConst.FILE_TIDY_UP_DIR, true)));
+		    for(String dir:tidyUpDirs){
+		    	out.println(dir);
+		    }
+		    out.flush();
+		    out.close();
+		}catch (IOException e) {
+		    //exception handling left as an exercise for the reader
+		}
+	}
+	
+	public static List<String> getListOfTidyUpDirs(){
+		List<String> directories = new ArrayList<String>();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(TvShowConst.FILE_TIDY_UP_DIR));
+			String line = null;
+			while((line = reader.readLine()) != null){
+				directories.add(line);
+			}
+		} catch (IOException e) {
+			System.err.println(e.getLocalizedMessage());
+		}
+		
+		return directories;
 	}
 }

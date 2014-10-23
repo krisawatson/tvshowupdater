@@ -1,6 +1,6 @@
 package com.kricko.tvshowupdater.constants;
 
-public class TvShowFeeds {
+public class TvShowConst {
 
 	/*
 	 * List of shows and their RSS feeds
@@ -13,4 +13,6 @@ public class TvShowFeeds {
 	 */
 	public static final String[] MY_SHOWS = {THE_BIG_BANG_THEORY, 
 	                                       THE_GOOD_WIFE};
+	
+	public static final String FILE_TIDY_UP_DIR = "tidyuplist.txt";
 }
