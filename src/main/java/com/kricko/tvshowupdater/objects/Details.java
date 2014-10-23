@@ -8,6 +8,8 @@ public class Details {
 	private String rssfeed;
 	
 	private String regex;
+	
+	private String path;
 
 	public String getName() {
 		return name;
@@ -31,5 +33,13 @@ public class Details {
 
 	public void setRegex(String regex) {
 		this.regex = regex;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

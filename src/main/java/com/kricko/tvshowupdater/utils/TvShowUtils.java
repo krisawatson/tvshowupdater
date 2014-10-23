@@ -1,5 +1,6 @@
 package com.kricko.tvshowupdater.utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.kricko.tvshowupdater.objects.Details;
 import com.kricko.tvshowupdater.objects.Item;
 
 public class TvShowUtils {
@@ -40,5 +42,61 @@ public class TvShowUtils {
 		}
 		
 		return newItems;
+	}
+	
+	public static void downloadNewItems(Item item, Details detail){
+		List<String> existingItems = new ArrayList<String>();
+		existingItems.add("S05E17.mp4");
+		existingItems.add("S05E18.mp4");
+		existingItems.add("S05E19.mp4");
+		existingItems.add("S05E20.mp4");
+		
+		existingItems = removeAnyPrefix(existingItems);
+		
+		Pattern pattern = Pattern.compile(detail.getRegex());
+		Matcher itemMatcher = pattern.matcher(item.getTitle());
+		while(itemMatcher.find()){
+			String nameAndEpisode = itemMatcher.group();
+			String[] nameList = nameAndEpisode.split(" ");
+			String episodeDetails = nameList[nameList.length - 1];
+			
+			String[] seasonAndEpisode = episodeDetails.split("x");
+			
+			int seasonInt = 0, episodeInt = 0;
+			try{
+				seasonInt = Integer.parseInt(seasonAndEpisode[0]);
+				episodeInt = Integer.parseInt(seasonAndEpisode[1]);
+			} catch (NumberFormatException nfe){
+				
+			}
+			
+			String dir = detail.getPath() + File.separatorChar + "Season " + seasonAndEpisode[0];
+			System.out.println("The directory is " + dir);
+			
+			String filePrefix = String.format("S%sE%s", formatIntToString(seasonInt), formatIntToString(episodeInt));
+			
+			if(existingItems.contains(filePrefix)){
+				System.out.println(filePrefix + " episode already exists");
+			} else {
+				System.out.println("Adding file " + item.getTitle());
+			}
+		}
+	}
+	
+	private static List<String> removeAnyPrefix(List<String> items){
+		List<String> newItems = new ArrayList<String>();
+		for(String item:items){
+			newItems.add(item.substring(0,item.lastIndexOf(".")));
+		}
+		
+		return newItems;
+	}
+	
+	private static String formatIntToString(int value){
+		String str = ""+value;
+		if(value < 10){
+			str = "0" + value;
+		}
+		return str;
 	}
 }
