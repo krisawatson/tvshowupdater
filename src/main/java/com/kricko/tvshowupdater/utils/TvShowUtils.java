@@ -157,6 +157,7 @@ public class TvShowUtils {
 			while((line = reader.readLine()) != null){
 				directories.add(line);
 			}
+			reader.close();
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
 		}
