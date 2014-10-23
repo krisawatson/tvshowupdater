@@ -38,7 +38,11 @@ public class App
             List<Item> items = rss.getChannel().getItem();
             items = TvShowUtils.removeDuplicateEpisodes(items, detail.getRegex());
             for(Item item:items){
-            	TvShowUtils.downloadNewItems(item, detail);
+            	try {
+					TvShowUtils.downloadNewItems(item, detail);
+				} catch (Throwable e) {
+					System.err.println(e.getLocalizedMessage());
+				}
             	System.out.println(detail.getPath());
             	System.out.println(item.getTitle());
             }       
