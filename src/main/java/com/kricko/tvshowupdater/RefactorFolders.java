@@ -7,7 +7,7 @@ import com.kricko.tvshowupdater.utils.TvShowUtils;
 
 public class RefactorFolders {
 
-	public static void main(String[] args) {
+	public static void tidyFolders() {
 
 		List<String> directories = TvShowUtils.getListOfTidyUpDirs();
 		FolderRefactorer refactorer = new FolderRefactorer();
