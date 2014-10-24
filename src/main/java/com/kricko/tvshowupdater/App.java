@@ -6,11 +6,15 @@ import java.io.InputStreamReader;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.commons.httpclient.HttpException;
 import org.json.simple.parser.ParseException;
+
+import com.kricko.tvshowupdater.xbmc.Xbmc;
 
 public class App 
 {
-	public static void main( String[] args ) throws JAXBException, IOException, ParseException
+	public static void main( String[] args ) 
+			throws JAXBException, IOException, ParseException, HttpException 
     {
 		System.out.println("**********************************");
     	System.out.println("Welcome to TV Show Updater");
@@ -45,18 +49,21 @@ public class App
         
         try {
 			doSelectedOption(option);
-		} catch (JAXBException | IOException | ParseException e) {
+		} catch (JAXBException | IOException | ParseException | HttpException e) {
 			System.out.println("Unexpected error");
             System.exit(1);
 		}
 	}
 	
-	private static void doSelectedOption(String option) throws JAXBException, IOException, ParseException{
+	private static void doSelectedOption(String option) 
+			throws JAXBException, IOException, ParseException, HttpException{
 		if(option != null){
 			if(option.equals("update") || option.equals("1")){
 				DownloadShows.doDownload();
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFolders.tidyFolders();
+			} else if(option.equals("xbmc") || option.equals("3")){
+				Xbmc.updateHostVideos();
 			} else {
 				System.out.println("Invalid option, try again");
 				showInteractiveCommandLine();

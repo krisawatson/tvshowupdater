@@ -20,20 +20,16 @@ public class Xbmc {
 		prop = TvShowProperties.getInstance().getProperties();
 	}
 	
-	public static void updateHosts() throws IOException, HttpException{
-		HttpClient client = new HttpClient();
-
+	public static void updateHostVideos() throws IOException, HttpException{
 		String[] hosts = prop.getProperty("xbmc.host_list").split(",");
     	for(String host:hosts){
     		String hostName = prop.getProperty("xbmc."+host+".address");
-    		String hostPort = prop.getProperty("xbmc."+host+".port");
+    		String tcpPort = prop.getProperty("xbmc."+host+".tcpport");
     		
-    		URL url = new URL("http://"+hostName+":"+hostPort);
-    		GetMethod method = new GetMethod(url.toString());
-    		client.startSession(url);
-    		int statusCode = client.executeMethod(method);
+    		int port = Integer.parseInt(tcpPort);
     		
-    		System.out.println("Status code is " + statusCode);
+    		XbmcJsonRpc rpc = new XbmcJsonRpc(hostName, port, false);
+    		rpc.updateVideoLibrary();
     	}
 	}
 }

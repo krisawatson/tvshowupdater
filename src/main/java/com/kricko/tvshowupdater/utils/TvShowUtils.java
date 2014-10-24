@@ -21,7 +21,6 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.kricko.tvshowupdater.constants.TvShowConst;
 import com.kricko.tvshowupdater.objects.Details;
 import com.kricko.tvshowupdater.objects.Item;
 
@@ -138,7 +137,7 @@ public class TvShowUtils {
 	
 	public static void appendDirToTidyUpList(){
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(TvShowConst.FILE_TIDY_UP_DIR, true)));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Constants.FILE_TIDY_UP_DIR, true)));
 		    for(String dir:tidyUpDirs){
 		    	out.println(dir);
 		    }
@@ -152,7 +151,7 @@ public class TvShowUtils {
 	public static List<String> getListOfTidyUpDirs(){
 		List<String> directories = new ArrayList<String>();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(TvShowConst.FILE_TIDY_UP_DIR));
+			BufferedReader reader = new BufferedReader(new FileReader(Constants.FILE_TIDY_UP_DIR));
 			String line = null;
 			while((line = reader.readLine()) != null){
 				directories.add(line);
