@@ -33,6 +33,8 @@ public class App
 		System.out.println("Please enter one of the following options:");
     	System.out.println("\t1 - To check if there are shows you need to download");
     	System.out.println("\t2 - To tidy up existing folders");
+    	System.out.println("\t3 - Update XBMC host video library");
+    	System.out.println("\t4 - Clean XBMC servers video library");
     	System.out.println("");
     	System.out.println("What is your choice: ");
     	
@@ -67,10 +69,10 @@ public class App
 				DownloadShows.doDownload();
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFolders.tidyFolders();
-			} else if(option.equals("xbmc") || option.equals("3")){
+			} else if(option.equals("xbmcupdate") || option.equals("3")){
 				String[] hosts = TvShowProperties.getInstance().getProperty("xbmc.host_list").split(",");
 		    	Xbmc.updateHostVideos(hosts);
-			} else if(option.equals("xbmc") || option.equals("3")){
+			} else if(option.equals("xbmcclean") || option.equals("4")){
 				String[] hosts = TvShowProperties.getInstance().getProperty("xbmc.host_list").split(",");
 		    	Xbmc.cleanVideoLibrary(hosts);
 			} else {
