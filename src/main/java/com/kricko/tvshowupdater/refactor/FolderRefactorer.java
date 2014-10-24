@@ -15,43 +15,38 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FileRefactorer {
+public class FolderRefactorer {
 
 	public void doRefactor(String parentDirectory){
-		Path parent = Paths.get(parentDirectory);
 		try {
 			List<Path> dirs = getDirectories(Paths.get(parentDirectory));
+
+			Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+
 			for(Path dir:dirs){
-				matchAndMove(parent, dir);
+				System.out.println(dir.toString());
+				Matcher itemMatcher = pattern.matcher(dir.toString());
+				String episodeName = null;
+				while(itemMatcher.find()){
+					episodeName = itemMatcher.group();
+				}
+				List<Path> files = getMovieFiles(dir);
+				for(Path file:files){
+					String fileName = file.getFileName().toString();
+					System.out.println(fileName);
+					String ext = fileName.substring(fileName.lastIndexOf("."));
+					String newFileName = episodeName + ext;
+
+					Path target = Paths.get(parentDirectory.toString(), newFileName);
+					System.out.println("Moving " + file.toString() + " to " + target.toString());
+
+					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+				}
+
 				deleteDirectory(dir);
 			}
-			Path parentParent = parent.getParent();
-			matchAndMove(parentParent, parent);
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
-		}
-	}
-	
-	private void matchAndMove(Path parentDirectory, Path dir) throws IOException{
-		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
-		
-		System.out.println(dir.toString());
-		Matcher itemMatcher = pattern.matcher(dir.toString());
-		String episodeName = null;
-		while(itemMatcher.find()){
-			episodeName = itemMatcher.group();
-		}
-		List<Path> files = getMovieFiles(dir);
-		for(Path file:files){
-			String fileName = file.getFileName().toString();
-			System.out.println(fileName);
-			String ext = fileName.substring(fileName.lastIndexOf("."));
-			String newFileName = episodeName + ext;
-
-			Path target = Paths.get(parentDirectory.toString(), newFileName);
-			System.out.println("Moving " + file.toString() + " to " + target.toString());
-
-			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 		}
 	}
 
