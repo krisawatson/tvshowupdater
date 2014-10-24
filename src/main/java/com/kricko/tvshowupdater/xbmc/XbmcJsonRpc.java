@@ -21,7 +21,7 @@ import org.json.JSONStringer;
 public class XbmcJsonRpc implements Runnable
 {
 	private boolean useHTTP=false, useRawTCP=true;
-	private int port = 9090;
+	private int port = 9090, maxRetries = 1;
 	private String server = "localhost";
 	private long tcpReadTimeout = 50, tcpInitializeTimeout = 1000 * 60;//give XBMC x seconds to start returning data, then cancel the call
 	private long lastRead = 0, tcpInit = 0;
@@ -30,17 +30,18 @@ public class XbmcJsonRpc implements Runnable
 
 	private final static String JSON_RPC_WEBSERVER_USERNAME = "xbmc";
 	private final static String JSON_RPC_WEBSERVER_PASSWORD = null;
-	
-	public XbmcJsonRpc(String server, int port, boolean useHttp){
+
+	public XbmcJsonRpc(String server, int port, boolean useHttp, int maxRetries){
 		this.server = server;
 		this.port = port;
 		this.useHTTP = useHttp;
 		this.useRawTCP = !useHttp;
+		this.maxRetries = maxRetries;
 	}
 
 	public JSONObject callMethod(String method, int id, Map<String,Object> params)
 	{
-		for(int i=0;i<3;i++)
+		for(int i=0;i<maxRetries;i++)
 		{
 			switch(i)
 			{
@@ -58,7 +59,8 @@ public class XbmcJsonRpc implements Runnable
 			}
 			else
 			{
-				System.out.println("JSON Returned was not valid (attempt " + (i + 1) + " of 3)" + (i == 2 ? "Ending retries, JSON is not valid" : ", will try again... "));
+				System.out.println("JSON Returned was not valid (attempt " + (i + 1) + " of "+maxRetries+")" 
+						+ (i == (maxRetries - 1) ? "Ending retries, JSON is not valid" : ", will try again... "));
 				if(i < 2)//if will try again, sleep a little bit
 				{
 					try{Thread.sleep((i+1) * 2500);}catch(Exception x){}
@@ -86,7 +88,7 @@ public class XbmcJsonRpc implements Runnable
 		}
 		cmd += ", \"id\": \""+id+"\"}";
 
-		System.out.println("Connecting to JSON-RPC and sending command: " + cmd);
+		System.out.println("Connecting to "+server+"(JSON-RPC) and sending command: " + cmd);
 
 		StringBuilder response = new StringBuilder();
 		if(useHTTP)
@@ -142,7 +144,7 @@ public class XbmcJsonRpc implements Runnable
 					catch(SocketException x)
 					{
 						if(!socketTimedOut)//expect an error on timeout
-						System.err.println("Exception in JSON-RPC interface: "+ x.getLocalizedMessage());
+							System.err.println("Exception in JSON-RPC interface: "+ x.getLocalizedMessage());
 						break;
 					}
 					response.append(c);

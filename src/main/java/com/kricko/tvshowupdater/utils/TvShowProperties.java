@@ -36,7 +36,15 @@ public class TvShowProperties {
 		return prop.getProperty(propertyName);
 	}
 	
-	private boolean getBooleanProperty(String propertyName){
+	public Integer getIntProperty(String propertyName){
+		String property = getProperty(propertyName);
+		if(null != property){
+			return Integer.parseInt(property);
+		}
+		return null;
+	}
+	
+	public boolean getBooleanProperty(String propertyName){
 		String property = getProperty(propertyName);
 		if(null != property){
 			return Boolean.parseBoolean(property);
