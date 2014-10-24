@@ -1,12 +1,9 @@
 package com.kricko.tvshowupdater.xbmc;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Properties;
 
-import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.methods.GetMethod;
 
 import com.kricko.tvshowupdater.utils.TvShowProperties;
 
