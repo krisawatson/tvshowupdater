@@ -137,7 +137,7 @@ public class TvShowUtils {
 	
 	public static void appendDirToTidyUpList(){
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Constants.FILE_TIDY_UP_DIR, true)));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Constants.FILE_TIDY_UP_DIR, false)));
 		    for(String dir:tidyUpDirs){
 		    	out.println(dir);
 		    }

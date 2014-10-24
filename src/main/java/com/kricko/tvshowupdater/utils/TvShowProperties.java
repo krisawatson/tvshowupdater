@@ -1,7 +1,9 @@
 package com.kricko.tvshowupdater.utils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class TvShowProperties {
@@ -10,8 +12,9 @@ public class TvShowProperties {
 	private static Properties prop = null;
 	protected TvShowProperties() {
 		prop = new Properties();
-		InputStream in = TvShowProperties.class.getClassLoader().getResourceAsStream("config.properties");
+		InputStream in = null;
 		try {
+			in = new FileInputStream(Paths.get("config.properties").toString());
 			prop.load(in);
 			in.close();
 		} catch (IOException e) {
