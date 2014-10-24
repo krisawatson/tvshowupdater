@@ -15,11 +15,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FolderRefactorer {
+public class FileRefactorer {
 
 	public void doRefactor(String parentDirectory){
 		try {
 			List<Path> dirs = getDirectories(Paths.get(parentDirectory));
+			dirs.add(Paths.get(parentDirectory));
 
 			Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
 
