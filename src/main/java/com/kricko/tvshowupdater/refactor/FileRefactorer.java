@@ -15,38 +15,57 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FolderRefactorer {
+public class FileRefactorer {
 
 	public void doRefactor(String parentDirectory){
 		try {
 			List<Path> dirs = getDirectories(Paths.get(parentDirectory));
 
-			Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
-
 			for(Path dir:dirs){
 				System.out.println(dir.toString());
-				Matcher itemMatcher = pattern.matcher(dir.toString());
-				String episodeName = null;
+
+				List<Path> files = getMovieFiles(dir);
+				refactorFiles(files, dir, parentDirectory);
+				deleteDirectory(dir);
+			}
+
+			List<Path> files = getMovieFiles(Paths.get(parentDirectory));
+			refactorFiles(files, Paths.get(parentDirectory), null);
+
+		} catch (IOException e) {
+			System.err.println(e.getLocalizedMessage());
+		}
+	}
+
+	private void refactorFiles(List<Path> files, Path dir, String parentDir) throws IOException{
+		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+
+		boolean isParent = (parentDir == null) ? false : true;
+		Matcher itemMatcher = null;
+		String episodeName = null;
+		if(isParent){
+			itemMatcher = pattern.matcher(dir.toString());
+			while(itemMatcher.find()){
+				episodeName = itemMatcher.group();
+			}
+		}
+		for(Path file:files){
+			if(!isParent){
+				itemMatcher = pattern.matcher(file.toString());
 				while(itemMatcher.find()){
 					episodeName = itemMatcher.group();
 				}
-				List<Path> files = getMovieFiles(dir);
-				for(Path file:files){
-					String fileName = file.getFileName().toString();
-					System.out.println(fileName);
-					String ext = fileName.substring(fileName.lastIndexOf("."));
-					String newFileName = episodeName + ext;
-
-					Path target = Paths.get(parentDirectory.toString(), newFileName);
-					System.out.println("Moving " + file.toString() + " to " + target.toString());
-
-					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
-				}
-
-				deleteDirectory(dir);
 			}
-		} catch (IOException e) {
-			System.err.println(e.getLocalizedMessage());
+			String fileName = file.getFileName().toString();
+			System.out.println(fileName);
+			String ext = fileName.substring(fileName.lastIndexOf("."));
+			String newFileName = episodeName + ext;
+
+			String newDir = (parentDir == null) ? dir.toString() : parentDir;
+			Path target = Paths.get(newDir.toString(), newFileName);
+			System.out.println("Moving " + file.toString() + " to " + target.toString());
+
+			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 		}
 	}
 
