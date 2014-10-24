@@ -343,10 +343,6 @@ public class XbmcJsonRpc implements Runnable
 	/**
 	 * Public methods for XBMC calls
 	 */
-	/*
-	 * Gets all Music
-	 * includeExtras - if true, then artists and albums will be included. If false, only songs will be included
-	 */
 	public void updateVideoLibrary()
 	{
 		try
@@ -360,4 +356,16 @@ public class XbmcJsonRpc implements Runnable
 		}
 	}
 
+	public void cleanVideoLibrary()
+	{
+		try
+		{
+			JSONObject response = callMethod("VideoLibrary.Clean", 1, null);
+			System.out.println(response);
+		}
+		catch(Exception x)
+		{
+			System.err.println("Failed to cleaning VideoLibrary using JSON-RPC: "+x.getLocalizedMessage());
+		}
+	}
 }

@@ -70,6 +70,6 @@ public class Xbmc {
     		int port = Integer.parseInt(tcpPort);
     		
     		XbmcJsonRpc rpc = new XbmcJsonRpc(hostName, port, false);
-    		rpc.updateVideoLibrary();
+    		rpc.cleanVideoLibrary();
 	}
 }
