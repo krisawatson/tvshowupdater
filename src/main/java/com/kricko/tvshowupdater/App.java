@@ -68,7 +68,11 @@ public class App
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFolders.tidyFolders();
 			} else if(option.equals("xbmc") || option.equals("3")){
-				Xbmc.updateHostVideos();
+				String[] hosts = TvShowProperties.getInstance().getProperty("xbmc.host_list").split(",");
+		    	Xbmc.updateHostVideos(hosts);
+			} else if(option.equals("xbmc") || option.equals("3")){
+				String[] hosts = TvShowProperties.getInstance().getProperty("xbmc.host_list").split(",");
+		    	Xbmc.cleanVideoLibrary(hosts);
 			} else {
 				System.out.println("Invalid option, try again");
 				showInteractiveCommandLine();
