@@ -3,12 +3,14 @@ package com.kricko.tvshowupdater;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.httpclient.HttpException;
 import org.json.simple.parser.ParseException;
 
+import com.kricko.tvshowupdater.utils.TvShowProperties;
 import com.kricko.tvshowupdater.xbmc.Xbmc;
 
 public class App 
@@ -59,6 +61,9 @@ public class App
 			throws JAXBException, IOException, ParseException, HttpException{
 		if(option != null){
 			if(option.equals("update") || option.equals("1")){
+				if(TvShowProperties.getInstance().updateBeforeDownload()){
+					RefactorFolders.tidyFolders();
+				}
 				DownloadShows.doDownload();
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFolders.tidyFolders();

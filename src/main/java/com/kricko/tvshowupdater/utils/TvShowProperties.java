@@ -28,4 +28,20 @@ public class TvShowProperties {
 	public Properties getProperties(){
 		return prop;
 	}
+	
+	public String getProperty(String propertyName){
+		return prop.getProperty(propertyName);
+	}
+	
+	private boolean getBooleanProperty(String propertyName){
+		String property = getProperty(propertyName);
+		if(null != property){
+			return Boolean.parseBoolean(property);
+		}
+		return false;
+	}
+	
+	public boolean updateBeforeDownload(){
+		return getBooleanProperty(Constants.SETTING_UPDATE_BEFORE_DOWNLOAD);
+	}
 }
