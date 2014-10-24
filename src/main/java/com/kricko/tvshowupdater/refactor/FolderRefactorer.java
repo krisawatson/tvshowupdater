@@ -71,7 +71,9 @@ public class FolderRefactorer {
 				Path file = dir.resolve(it.next());
 				if(!Files.isDirectory(file)){
 					String contentType = Files.probeContentType(file);
-					if(contentType != null && contentType.startsWith("video")){
+					if(contentType != null && contentType.startsWith("video")
+							&& !file.toString().contains("sample")
+							&& !file.toString().contains("Sample")){
 						System.out.println(file.toString() + " content Type is "+ contentType);
 						fileList.add(file);
 					}
