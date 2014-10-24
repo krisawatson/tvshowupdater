@@ -18,36 +18,40 @@ import java.util.regex.Pattern;
 public class FileRefactorer {
 
 	public void doRefactor(String parentDirectory){
+		Path parent = Paths.get(parentDirectory);
 		try {
 			List<Path> dirs = getDirectories(Paths.get(parentDirectory));
-			dirs.add(Paths.get(parentDirectory));
-
-			Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
-
 			for(Path dir:dirs){
-				System.out.println(dir.toString());
-				Matcher itemMatcher = pattern.matcher(dir.toString());
-				String episodeName = null;
-				while(itemMatcher.find()){
-					episodeName = itemMatcher.group();
-				}
-				List<Path> files = getMovieFiles(dir);
-				for(Path file:files){
-					String fileName = file.getFileName().toString();
-					System.out.println(fileName);
-					String ext = fileName.substring(fileName.lastIndexOf("."));
-					String newFileName = episodeName + ext;
-
-					Path target = Paths.get(parentDirectory.toString(), newFileName);
-					System.out.println("Moving " + file.toString() + " to " + target.toString());
-
-					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
-				}
-
+				matchAndMove(parent, dir);
 				deleteDirectory(dir);
 			}
+			Path parentParent = parent.getParent();
+			matchAndMove(parentParent, parent);
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
+		}
+	}
+	
+	private void matchAndMove(Path parentDirectory, Path dir) throws IOException{
+		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+		
+		System.out.println(dir.toString());
+		Matcher itemMatcher = pattern.matcher(dir.toString());
+		String episodeName = null;
+		while(itemMatcher.find()){
+			episodeName = itemMatcher.group();
+		}
+		List<Path> files = getMovieFiles(dir);
+		for(Path file:files){
+			String fileName = file.getFileName().toString();
+			System.out.println(fileName);
+			String ext = fileName.substring(fileName.lastIndexOf("."));
+			String newFileName = episodeName + ext;
+
+			Path target = Paths.get(parentDirectory.toString(), newFileName);
+			System.out.println("Moving " + file.toString() + " to " + target.toString());
+
+			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 		}
 	}
 
