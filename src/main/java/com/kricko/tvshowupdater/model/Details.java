@@ -1,4 +1,4 @@
-package com.kricko.tvshowupdater.objects;
+package com.kricko.tvshowupdater.model;
 
 
 public class Details {

@@ -21,8 +21,13 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.kricko.tvshowupdater.objects.Details;
-import com.kricko.tvshowupdater.objects.Item;
+import org.json.simple.parser.ParseException;
+
+import com.kricko.tvshowupdater.model.Details;
+import com.kricko.tvshowupdater.model.Episode;
+import com.kricko.tvshowupdater.model.Item;
+import com.kricko.tvshowupdater.model.Shows;
+import com.kricko.tvshowupdater.parser.TvShowParser;
 
 public class TvShowUtils {
 
@@ -34,16 +39,16 @@ public class TvShowUtils {
 		Pattern pattern = Pattern.compile(regex);
 
 		for(Item item:items){
-			Matcher itemMatcher = pattern.matcher(item.getTitle());
+			Matcher itemMatcher = pattern.matcher(item.getRawTitle());
 
 			if(!shows.containsKey(item.getShowId())){
-				newItems.add(item);
 				List<String> episodes = new ArrayList<String>();
 
 				while(itemMatcher.find()){
+					newItems.add(item);
 					episodes.add(itemMatcher.group());
+					shows.put(item.getShowId(), episodes);
 				}
-				shows.put(item.getShowId(), episodes);
 			} else {
 				List<String> episodes = shows.get(item.getShowId());
 				while(itemMatcher.find()){
@@ -62,23 +67,15 @@ public class TvShowUtils {
 	public static void downloadNewItems(Item item, Details detail) throws Throwable{
 
 		Pattern pattern = Pattern.compile(detail.getRegex());
-		Matcher itemMatcher = pattern.matcher(item.getTitle());
+		Matcher itemMatcher = pattern.matcher(item.getRawTitle());
 		while(itemMatcher.find()){
 			String nameAndEpisode = itemMatcher.group();
-			String[] nameList = nameAndEpisode.split(" ");
-			String episodeDetails = nameList[nameList.length - 1];
+			int[] seasonAndEpisode = getSeasonAndEpisode(nameAndEpisode);
 
-			String[] seasonAndEpisode = episodeDetails.split("x");
-
-			int seasonInt = 0, episodeInt = 0;
-			try{
-				seasonInt = Integer.parseInt(seasonAndEpisode[0]);
-				episodeInt = Integer.parseInt(seasonAndEpisode[1]);
-			} catch (NumberFormatException nfe){
-
-			}
-
-			Path dir = Paths.get(detail.getPath() + File.separatorChar + "Season " + seasonAndEpisode[0]);
+			int seasonInt = seasonAndEpisode[0];
+			int episodeInt = seasonAndEpisode[1];
+			
+			Path dir = Paths.get(detail.getPath() + File.separatorChar + "Season " + seasonInt);
 			List<String> existingItems = getExistingItems(dir);
 			System.out.println("The directory is " + dir);
 
@@ -164,8 +161,44 @@ public class TvShowUtils {
 		return directories;
 	}
 	
+	public static Shows getListOfShows() throws IOException, ParseException{
+		TvShowParser parser = new TvShowParser();
+        return parser.parseShows(); 
+	}
+	
 	public static boolean valid(String s)
 	{
 		return s != null && !s.trim().isEmpty();
+	}
+	
+	public static int[] getEpisodeIds(String value){
+		int[] items = new int[2];
+		items[0] = Integer.parseInt(value.substring(1, value.indexOf("E")));
+		items[1] = Integer.parseInt(value.substring(value.indexOf("E") + 1));
+		
+		return items;
+	}
+	
+	public static String buildFileName(Episode ep){
+		String filename = "S"+formatIntToString(ep.getSeasonNumber())
+				+ "E"+formatIntToString(ep.getEpisodeNumber()) 
+				+ " - " + replaceSpecialChars(ep.getEpisodeName());
+		
+		return filename;
+	}
+	
+	public static String replaceSpecialChars(String value){
+		return value.replace(":", "").replace("?","");
+	}
+	
+	private static int[] getSeasonAndEpisode(String title){
+		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+		Matcher itemMatcher = pattern.matcher(title);
+		while(itemMatcher.find()){
+			String se = itemMatcher.group();
+			return getEpisodeIds(se);
+		}
+		
+		return null;
 	}
 }

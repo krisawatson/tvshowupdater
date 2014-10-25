@@ -12,4 +12,10 @@ public interface Constants {
 	// For The Pirate Bay search engine
 	public final String TPB_URL = "http://thepiratebay.se";
 	public final String TPB_SEARCH = "/search/";
+	
+	/*
+	 * The TV DB values
+	 */
+	public final String API_KEY = "2805AD2873519EC5";
+	public final String LANGUAGE = "en";
 }

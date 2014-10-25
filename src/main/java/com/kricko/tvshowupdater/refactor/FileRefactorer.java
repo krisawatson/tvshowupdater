@@ -15,20 +15,27 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.kricko.tvshowupdater.model.Episode;
+import com.kricko.tvshowupdater.model.Series;
+import com.kricko.tvshowupdater.thetvdb.TheTVDBApi;
+import com.kricko.tvshowupdater.utils.Constants;
+import com.kricko.tvshowupdater.utils.TvShowUtils;
+
 public class FileRefactorer {
 
-	public void doRefactor(String parentDirectory){
+	TheTVDBApi tvdb = new TheTVDBApi(Constants.API_KEY);
+
+	public void cleanDownloaded(String parentDirectory){
 		try {
 			// Refactor any files in the parent directory first
 			List<Path> files = getMovieFiles(Paths.get(parentDirectory));
-			refactorFiles(files, Paths.get(parentDirectory), null);
-			
+
 			// Get the list of sub-directories and refactor the files
 			List<Path> dirs = getDirectories(Paths.get(parentDirectory));
 
 			for(Path dir:dirs){
 				files = getMovieFiles(dir);
-				
+
 				refactorFiles(files, dir, parentDirectory);
 				deleteDirectory(dir);
 			}
@@ -38,12 +45,34 @@ public class FileRefactorer {
 		}
 	}
 
+	public void doRefactor(String seriesName, String parentDirectory){
+		try {
+			// Refactor any files in the parent directory first
+			List<Path> files = getMovieFiles(Paths.get(parentDirectory));
+			refactorFilesAddTitle(seriesName, files);
+
+			// Get the list of sub-directories and refactor the files
+			List<Path> dirs = getDirectories(Paths.get(parentDirectory));
+
+			for(Path dir:dirs){
+				files = getMovieFiles(dir);
+
+				refactorFiles(seriesName, files, dir, parentDirectory);
+			}
+
+		} catch (IOException e) {
+			System.err.println(e.getLocalizedMessage());
+		}
+	}
+
+
 	private void refactorFiles(List<Path> files, Path dir, String parentDir) throws IOException{
 		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
 
 		boolean isParent = (parentDir == null) ? false : true;
 		Matcher itemMatcher = null;
 		String episodeName = null;
+
 		if(isParent){
 			itemMatcher = pattern.matcher(dir.toString());
 			while(itemMatcher.find()){
@@ -67,6 +96,85 @@ public class FileRefactorer {
 			System.out.println("Moving " + file.toString() + " to " + target.toString());
 
 			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+		}
+	}
+
+
+	private void refactorFiles(String seriesName, List<Path> files, Path dir, String parentDir) throws IOException{
+		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+
+		List<Series> seriesList = null;
+		if(seriesName != null){
+			System.out.println("Searching Series Name " + seriesName);
+			seriesList = tvdb.searchSeries(seriesName, Constants.LANGUAGE);
+			System.out.println("Series ID " + seriesList.get(0).getId());
+		}
+
+		Matcher itemMatcher = null;
+		int[] episodeIds = null;
+		String episodeName = null;
+		for(Path file:files){
+			itemMatcher = pattern.matcher(file.toString());
+			while(itemMatcher.find()){
+				episodeName = itemMatcher.group();
+				System.out.println(episodeName);
+				episodeIds = TvShowUtils.getEpisodeIds(episodeName);
+			}
+			Episode ep = null;
+			if(episodeIds != null){
+				System.out.println(String.format("Series %d Episodes %d", episodeIds[0], episodeIds[1]));
+				ep = tvdb.getEpisode(seriesList.get(0).getId(), episodeIds[0], episodeIds[1], Constants.LANGUAGE);
+			}
+
+			String fileName = file.getFileName().toString();
+			String ext = fileName.substring(fileName.lastIndexOf("."));
+			String newFileName = TvShowUtils.buildFileName(ep) + ext;
+
+			Path target = Paths.get(dir.toString(), newFileName);
+			System.out.println("Moving " + file.toString() + " to " + target.toString());
+
+			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+		}
+	}
+
+	private void refactorFilesAddTitle(String seriesName, List<Path> files) throws IOException{
+		if(files != null){
+			Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+
+			List<Series> seriesList = null;
+			if(seriesName != null){
+				System.out.println("Searching Series Name " + seriesName);
+				seriesList = tvdb.searchSeries(seriesName, Constants.LANGUAGE);
+				System.out.println("Series ID " + seriesList.get(0).getId());
+			}
+
+			Matcher itemMatcher = null;
+			int[] episodeIds = null;
+			String episodeName = null;
+
+			for(Path file:files){
+				itemMatcher = pattern.matcher(file.toString());
+				while(itemMatcher.find()){
+					episodeName = itemMatcher.group();
+					System.out.println(episodeName);
+					episodeIds = TvShowUtils.getEpisodeIds(episodeName);
+				}
+				Episode ep = null;
+				if(episodeIds != null){
+					System.out.println(String.format("Series %d Episodes %d", episodeIds[0], episodeIds[1]));
+					ep = tvdb.getEpisode(seriesList.get(0).getId(), episodeIds[0], episodeIds[1], Constants.LANGUAGE);
+				}
+
+				String fileName = file.getFileName().toString();
+				String ext = fileName.substring(fileName.lastIndexOf("."));
+				String newFileName = TvShowUtils.buildFileName(ep) + ext;
+
+				String newDir = file.getParent().toString();
+				Path target = Paths.get(newDir.toString(), newFileName);
+				System.out.println("Moving " + file.toString() + " to " + target.toString());
+
+				//				Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+			}
 		}
 	}
 

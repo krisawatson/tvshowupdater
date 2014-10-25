@@ -1,76 +1,10 @@
 {
 	"shows":[
 		{
-			"name":"The Big Bang Theory"
-			"rssfeed":"http://showrss.info/feeds/5.rss"
-			"regex":"(^|)(The Big Bang Theory *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series A-G/Big Bang Theory, The"
-		},
-		{
-			"name":"Brooklyn Nine Nine"
-			"rssfeed":"http://showrss.info/feeds/613.rss"
-			"regex":"(^|)(Brooklyn Nine-Nine *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series A-G/Brooklyn Nine Nine"
-		},
-		{
-			"name":"Family Guy"
-			"rssfeed":"http://showrss.info/feeds/27.rss"
-			"regex":"(^|)(Family Guy *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series A-G/Family Guy"
-		},
-		{
-			"name":"The Flash"
-			"rssfeed":"http://showrss.info/feeds/849.rss"
-			"regex":"(^|)(The Flash *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series A-G/Flash, The"
-		},
-		{
 			"name":"The Good Wife"
 			"rssfeed":"http://showrss.info/feeds/208.rss"
-			"regex":"(^|)(The Good Wife *([0-9]+).*?)( |$)"
+			"regex":"(^|)(The Good Wife S([0-9]+)E([0-9]+).*)(LOL).*(|$)"
 			"path":"G:/TV Series A-G/Good Wife, The"
-		},
-		{
-			"name":"Gotham"
-			"rssfeed":"http://showrss.info/feeds/928.rss"
-			"regex":"(^|)(Gotham *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series A-G/Gotham"
-		},
-		{
-			"name":"Grey's Anatomy"
-			"rssfeed":"http://showrss.info/feeds/34.rss"
-			"regex":"(^|)(Greys Anatomy *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series A-G/Greys Anatomy"
-		},
-		{
-			"name":"Homeland"
-			"rssfeed":"http://showrss.info/feeds/400.rss"
-			"regex":"(^|)(Homeland *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series H-O/Homeland"
-		},
-		{
-			"name":"Person of Interest"
-			"rssfeed":"http://showrss.info/feeds/388.rss"
-			"regex":"(^|)(Person of Interest *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series P-Z/Person of Interest"
-		},
-		{
-			"name":"Revenge"
-			"rssfeed":"http://showrss.info/feeds/393.rss"
-			"regex":"(^|)(Revenge *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series P-Z/Revenge"
-		},
-		{
-			"name":"Scandal"
-			"rssfeed":"http://showrss.info/feeds/439.rss"
-			"regex":"(^|)(Scandal \(2012\) *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series P-Z/Scandal (2012)"
-		},
-		{
-			"name":"Suits"
-			"rssfeed":"http://showrss.info/feeds/439.rss"
-			"regex":"(^|)(Suits \(2012\) *([0-9]+).*?)( |$)"
-			"path":"G:/TV Series P-Z/Suits"
 		}
 	]
 }

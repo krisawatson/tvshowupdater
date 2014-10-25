@@ -61,11 +61,11 @@ public class App
 		if(option != null){
 			if(option.equals("update") || option.equals("1")){
 				if(TvShowProperties.getInstance().updateBeforeDownload()){
-					RefactorFiles.tidyFolders();
+					RefactorFiles.tidyFolders(false);
 				}
 				DownloadShows.doDownload();
 			} else if(option.equals("tidyup") || option.equals("2")){
-				RefactorFiles.tidyFolders();
+				RefactorFiles.tidyFolders(true);
 			} else if(option.equals("xbmcupdate") || option.equals("3")){
 				String[] hosts = TvShowProperties.getInstance().getProperty("xbmc.host_list").split(",");
 				Xbmc.updateHostVideos(hosts);

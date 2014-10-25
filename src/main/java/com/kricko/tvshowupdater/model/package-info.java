@@ -10,7 +10,7 @@
    }
 )
 
-package com.kricko.tvshowupdater.objects;
+package com.kricko.tvshowupdater.model;
 
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;

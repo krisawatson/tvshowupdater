@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.kricko.tvshowupdater.objects.Shows;
+import com.kricko.tvshowupdater.model.Shows;
 
 public class TvShowParser {
 

@@ -11,11 +11,10 @@ import javax.xml.bind.Unmarshaller;
 
 import org.json.simple.parser.ParseException;
 
-import com.kricko.tvshowupdater.objects.Details;
-import com.kricko.tvshowupdater.objects.Item;
-import com.kricko.tvshowupdater.objects.Rss;
-import com.kricko.tvshowupdater.objects.Shows;
-import com.kricko.tvshowupdater.parser.TvShowParser;
+import com.kricko.tvshowupdater.model.Details;
+import com.kricko.tvshowupdater.model.Item;
+import com.kricko.tvshowupdater.model.Rss;
+import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 
 public class DownloadShows {
@@ -25,8 +24,7 @@ public class DownloadShows {
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         
-        TvShowParser parser = new TvShowParser();
-        Shows shows = parser.parseShows();
+        Shows shows = TvShowUtils.getListOfShows();
         
         for(Details detail:shows.getShows()){
         	System.out.println(detail.getName());
