@@ -67,7 +67,7 @@ public class FileRefactorer {
 
 
 	private void refactorFiles(List<Path> files, Path dir, String parentDir) throws IOException{
-		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+		Pattern pattern = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
 
 		boolean isParent = (parentDir == null) ? false : true;
 		Matcher itemMatcher = null;
@@ -101,7 +101,7 @@ public class FileRefactorer {
 
 
 	private void refactorFiles(String seriesName, List<Path> files, Path dir, String parentDir) throws IOException{
-		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+		Pattern pattern = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
 
 		List<Series> seriesList = null;
 		if(seriesName != null){
@@ -139,7 +139,7 @@ public class FileRefactorer {
 
 	private void refactorFilesAddTitle(String seriesName, List<Path> files) throws IOException{
 		if(files != null){
-			Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
+			Pattern pattern = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
 
 			List<Series> seriesList = null;
 			if(seriesName != null){

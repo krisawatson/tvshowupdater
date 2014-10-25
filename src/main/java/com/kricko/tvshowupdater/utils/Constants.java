@@ -18,4 +18,7 @@ public interface Constants {
 	 */
 	public final String API_KEY = "2805AD2873519EC5";
 	public final String LANGUAGE = "en";
+	
+	// REGEX Expressions
+	public final String REGEX_SERIES_EPISODE = "(^|)[sS]([0-9]+)[eE]([0-9]+)";
 }
