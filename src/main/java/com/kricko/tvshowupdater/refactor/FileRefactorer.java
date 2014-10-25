@@ -19,18 +19,19 @@ public class FileRefactorer {
 
 	public void doRefactor(String parentDirectory){
 		try {
+			// Refactor any files in the parent directory first
+			List<Path> files = getMovieFiles(Paths.get(parentDirectory));
+			refactorFiles(files, Paths.get(parentDirectory), null);
+			
+			// Get the list of sub-directories and refactor the files
 			List<Path> dirs = getDirectories(Paths.get(parentDirectory));
 
 			for(Path dir:dirs){
-				System.out.println(dir.toString());
-
-				List<Path> files = getMovieFiles(dir);
+				files = getMovieFiles(dir);
+				
 				refactorFiles(files, dir, parentDirectory);
 				deleteDirectory(dir);
 			}
-
-			List<Path> files = getMovieFiles(Paths.get(parentDirectory));
-			refactorFiles(files, Paths.get(parentDirectory), null);
 
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());

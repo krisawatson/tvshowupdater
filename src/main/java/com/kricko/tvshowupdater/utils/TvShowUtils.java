@@ -163,4 +163,9 @@ public class TvShowUtils {
 		
 		return directories;
 	}
+	
+	public static boolean valid(String s)
+	{
+		return s != null && !s.trim().isEmpty();
+	}
 }

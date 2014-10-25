@@ -1,22 +1,18 @@
 package com.kricko.tvshowupdater.xbmc;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.URL;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
+
+import com.kricko.tvshowupdater.utils.HttpUtils;
+import com.kricko.tvshowupdater.utils.TvShowUtils;
 
 public class XbmcJsonRpc implements Runnable
 {
@@ -100,8 +96,12 @@ public class XbmcJsonRpc implements Runnable
 			if(!rpcprefix.toLowerCase().startsWith("http"))
 				rpcprefix = "http://"+rpcprefix;            
 			try{
-				String strResponse = post(rpcprefix, cmd);
-				if(!valid(strResponse)) throw new Exception("No reponse or invalid response code.");
+				String authString = null;
+				if(TvShowUtils.valid(JSON_RPC_WEBSERVER_USERNAME) && TvShowUtils.valid(JSON_RPC_WEBSERVER_PASSWORD)){
+					authString = JSON_RPC_WEBSERVER_USERNAME + ":" + JSON_RPC_WEBSERVER_PASSWORD;
+				}
+				String strResponse = HttpUtils.post(rpcprefix, cmd, authString);
+				if(!TvShowUtils.valid(strResponse)) throw new Exception("No reponse or invalid response code.");
 				response = new StringBuilder(strResponse);//save the response
 
 			}catch(Exception x){
@@ -186,99 +186,6 @@ public class XbmcJsonRpc implements Runnable
 			return "";
 		}
 
-	}
-
-	private static boolean valid(String s)
-	{
-		return s != null && !s.trim().isEmpty();
-	}
-
-	/*
-	 * Returns null if fail, otherwise returns the String response from the post
-	 */
-	@SuppressWarnings("restriction")
-	private static String post(String strUrl, String data) throws Exception{
-		URL url = new URL(strUrl);
-
-		final String method = "POST";
-		final String host = url.getHost();
-		final String contentType = "application/x-www-form-urlencoded";
-		final int contentLength = getContentLength(data);
-		final String encoding = "UTF-8";//good idea?        
-		final String connection = "Close";// "keep-alive";
-
-		System.out.println("Sending data to: "+ url+" (host="+host+", encoding="+encoding+", method="+method+", Content-Type="+contentType+", Content-Length="+contentLength+", Connection="+connection+"):"
-				+"\r\n"+data);        
-
-		HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-		conn.setDoOutput(true);//let it know we are writing data  
-		conn.setRequestMethod(method);//POST
-		conn.setRequestProperty("host", host);        
-		conn.setRequestProperty("content-type", contentType);
-		conn.setRequestProperty("Content-Encoding", encoding);
-		conn.setRequestProperty("content-length", contentLength+"");                                      
-		conn.setRequestProperty("connection", connection);                
-
-		//authenticate if used
-		if(valid(JSON_RPC_WEBSERVER_USERNAME) && valid(JSON_RPC_WEBSERVER_PASSWORD)){
-			String authString = JSON_RPC_WEBSERVER_USERNAME + ":" + JSON_RPC_WEBSERVER_PASSWORD;            
-			String authStringEnc = new sun.misc.BASE64Encoder().encode(authString.getBytes());
-			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
-		}
-
-		conn.setReadTimeout((int) (60*1000));
-
-		//send data the to remote server
-		OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-		writer.write(data);
-		writer.flush();
-		writer.close();
-
-		int responseCode = 400;
-		try{
-			responseCode = conn.getResponseCode();
-		}catch(Exception x){
-			System.err.println("Failed to get response code from HTTP Server. Check your URL and username/password.\n"+x.getLocalizedMessage());
-		}
-
-		//read the response                
-		String response = readStream(responseCode == 200 ? conn.getInputStream() : conn.getErrorStream());        
-		if(response == null){
-			return null;
-		}
-
-		System.out.println("Raw response from POST. Response Code = "+conn.getResponseCode()+" ("+conn.getResponseMessage()+"):\r\n"+ response);
-		return response.toString();
-	}
-
-	private static int getContentLength(String data) throws UnsupportedEncodingException{        
-		ByteArrayOutputStream sizeArray = new ByteArrayOutputStream();
-		PrintWriter sizeGetter = new PrintWriter(new OutputStreamWriter(sizeArray, "UTF-8" ));                
-		sizeGetter.write(data);
-		sizeGetter.flush();
-		sizeGetter.close();        
-		return sizeArray.size();        
-	}
-
-	private static String readStream(InputStream is)
-	{
-		try
-		{
-			BufferedReader in = new BufferedReader(new InputStreamReader(is));
-			//return the raw data as a string
-			StringBuilder data = new StringBuilder();
-			while(true)
-			{
-				int i = in.read();
-				if(i == -1)break;
-				data.append( (char) i);//convert int to char
-			}    
-			return data.toString();
-		}
-		catch(IOException x){
-			System.out.println("Failed to read stream: "+ x.getLocalizedMessage());
-			return null;
-		}
 	}
 
 	private void closeTCPSocket()
