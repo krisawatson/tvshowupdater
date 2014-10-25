@@ -39,13 +39,8 @@ public class XbmcJsonRpc implements Runnable
 	{
 		for(int i=0;i<maxRetries;i++)
 		{
-			switch(i)
-			{
-			case 0: break;
-			case 1: tcpReadTimeout = tcpReadTimeout + 400; break;
-			case 2: tcpReadTimeout = tcpReadTimeout + 1400; break;
-			}
-
+			tcpReadTimeout = tcpReadTimeout * (i+1);
+			
 			JSONObject json = callMethodWithRetry(method, id, params);
 			if(json != null)
 			{
