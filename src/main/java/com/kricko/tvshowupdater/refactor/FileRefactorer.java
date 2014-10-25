@@ -124,16 +124,16 @@ public class FileRefactorer {
 			if(episodeIds != null){
 				System.out.println(String.format("Series %d Episodes %d", episodeIds[0], episodeIds[1]));
 				ep = tvdb.getEpisode(seriesList.get(0).getId(), episodeIds[0], episodeIds[1], Constants.LANGUAGE);
+				
+				String fileName = file.getFileName().toString();
+				String ext = fileName.substring(fileName.lastIndexOf("."));
+				String newFileName = TvShowUtils.buildFileName(ep) + ext;
+
+				Path target = Paths.get(dir.toString(), newFileName);
+				System.out.println("Moving " + file.toString() + " to " + target.toString());
+
+				Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 			}
-
-			String fileName = file.getFileName().toString();
-			String ext = fileName.substring(fileName.lastIndexOf("."));
-			String newFileName = TvShowUtils.buildFileName(ep) + ext;
-
-			Path target = Paths.get(dir.toString(), newFileName);
-			System.out.println("Moving " + file.toString() + " to " + target.toString());
-
-			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 		}
 	}
 
