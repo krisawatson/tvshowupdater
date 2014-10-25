@@ -173,8 +173,8 @@ public class TvShowUtils {
 	
 	public static int[] getEpisodeIds(String value){
 		int[] items = new int[2];
-		items[0] = Integer.parseInt(value.substring(1, value.indexOf("E")));
-		items[1] = Integer.parseInt(value.substring(value.indexOf("E") + 1));
+		items[0] = Integer.parseInt(value.substring(1, value.toUpperCase().indexOf("E")));
+		items[1] = Integer.parseInt(value.substring(value.toUpperCase().indexOf("E") + 1));
 		
 		return items;
 	}
@@ -188,7 +188,8 @@ public class TvShowUtils {
 	}
 	
 	public static String replaceSpecialChars(String value){
-		return value.replace(":", "").replace("?","");
+		return value.replace(":", "").replace("?","")
+				.replace("\\"," ").replace("/"," ");
 	}
 	
 	private static int[] getSeasonAndEpisode(String title){
