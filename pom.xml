@@ -93,5 +93,11 @@
         </exclusions>
     </dependency>
     
+    <!-- JSoup -->
+    <dependency>
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>1.7.2</version>
+    </dependency>
   </dependencies>
 </project>

@@ -8,7 +8,7 @@ import javax.xml.bind.JAXBException;
 import org.apache.commons.httpclient.HttpException;
 import org.json.simple.parser.ParseException;
 
-import com.kricko.tvshowupdater.utils.TvShowProperties;
+import com.kricko.tvshowupdater.utils.Config;
 import com.kricko.tvshowupdater.xbmc.Xbmc;
 
 public class App 
@@ -60,17 +60,17 @@ public class App
 			throws JAXBException, IOException, ParseException, HttpException{
 		if(option != null){
 			if(option.equals("update") || option.equals("1")){
-				if(TvShowProperties.getInstance().updateBeforeDownload()){
+				if(Config.getInstance().updateBeforeDownload()){
 					RefactorFiles.tidyFolders(false);
 				}
 				DownloadShows.doDownload();
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFiles.tidyFolders(true);
 			} else if(option.equals("xbmcupdate") || option.equals("3")){
-				String[] hosts = TvShowProperties.getInstance().getProperty("xbmc.host_list").split(",");
+				String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
 				Xbmc.updateHostVideos(hosts);
 			} else if(option.equals("xbmcclean") || option.equals("4")){
-				String[] hosts = TvShowProperties.getInstance().getProperty("xbmc.host_list").split(",");
+				String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
 				Xbmc.cleanVideoLibrary(hosts);
 			} else if(option.equals("0")){
 				System.exit(0);

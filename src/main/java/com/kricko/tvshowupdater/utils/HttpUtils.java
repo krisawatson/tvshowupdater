@@ -31,7 +31,10 @@ public class HttpUtils {
 
 		final String host = url.getHost();
 		final String contentType = "application/x-www-form-urlencoded";
-		final int contentLength = getContentLength(data);
+		int contentLength = 0;
+		if(data != null) {
+			contentLength = getContentLength(data);
+		}
 		final String encoding = "UTF-8";//good idea?        
 		final String connection = "Close";// "keep-alive";
 
@@ -56,10 +59,12 @@ public class HttpUtils {
 		conn.setReadTimeout((int) (60*1000));
 
 		//send data the to remote server
-		OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
-		writer.write(data);
-		writer.flush();
-		writer.close();
+		if(data != null){
+			OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+			writer.write(data);
+			writer.flush();
+			writer.close();
+		}
 
 		int responseCode = 400;
 		try{

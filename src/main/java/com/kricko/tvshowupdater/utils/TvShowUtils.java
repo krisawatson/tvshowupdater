@@ -84,7 +84,7 @@ public class TvShowUtils {
 			if(episodeExists(existingItems, filePrefix)){
 				System.out.println(filePrefix + " episode already exists");
 			} else {
-				Properties prop = TvShowProperties.getInstance().getProperties();
+				Properties prop = Config.getInstance().getProperties();
 				String[] params = {prop.getProperty("torrent.client"),"/DIRECTORY", "\""+dir+"\"", "\""+item.getLink()+"\"" };
 				System.out.println("Executing command: utorrent.exe /DIRECTORY \""+dir+"\" \""+item.getLink()+"\"");
 				

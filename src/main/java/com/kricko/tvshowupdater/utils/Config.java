@@ -6,11 +6,11 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class TvShowProperties {
+public class Config {
 	
-	private static TvShowProperties instance = null;
+	private static Config instance = null;
 	private static Properties prop = null;
-	protected TvShowProperties() {
+	protected Config() {
 		prop = new Properties();
 		InputStream in = null;
 		try {
@@ -21,9 +21,9 @@ public class TvShowProperties {
 			e.printStackTrace();
 		}
 	}
-	public static TvShowProperties getInstance() {
+	public static Config getInstance() {
 		if(instance == null) {
-			instance = new TvShowProperties();
+			instance = new Config();
 		}
 		return instance;
 	}

@@ -87,15 +87,17 @@ public class FileRefactorer {
 				}
 			}
 			String fileName = file.getFileName().toString();
-			System.out.println(fileName);
+			System.out.println("Checking if need to refactor " + dir.toString() +"\\" +fileName);
 			String ext = fileName.substring(fileName.lastIndexOf("."));
 			String newFileName = episodeName + ext;
 
-			String newDir = (parentDir == null) ? dir.toString() : parentDir;
-			Path target = Paths.get(newDir.toString(), newFileName);
-			System.out.println("Moving " + file.toString() + " to " + target.toString());
+			if(!newFileName.equals(fileName)){
+				String newDir = (parentDir == null) ? dir.toString() : parentDir;
+				Path target = Paths.get(newDir.toString(), newFileName);
+				System.out.println("Moving " + file.toString() + " to " + target.toString());
 
-			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+				Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+			}
 		}
 	}
 
@@ -107,7 +109,6 @@ public class FileRefactorer {
 		if(seriesName != null){
 			System.out.println("Searching Series Name " + seriesName);
 			seriesList = tvdb.searchSeries(seriesName, Constants.LANGUAGE);
-			System.out.println("Series ID " + seriesList.get(0).getId());
 		}
 
 		Matcher itemMatcher = null;
@@ -122,18 +123,20 @@ public class FileRefactorer {
 			}
 			Episode ep = null;
 			if(episodeIds != null){
-				System.out.println(String.format("Series %d Episodes %d", episodeIds[0], episodeIds[1]));
 				ep = tvdb.getEpisode(seriesList.get(0).getId(), episodeIds[0], episodeIds[1], Constants.LANGUAGE);
 				
 				String fileName = file.getFileName().toString();
+				System.out.println("Checking if need to refactor " + dir.toString() +"\\" +fileName);
 				String ext = fileName.substring(fileName.lastIndexOf("."));
 				String newFileName = TvShowUtils.buildFileName(ep);
 
 				newFileName = (newFileName == null) ? fileName : newFileName + ext;
-				Path target = Paths.get(dir.toString(), newFileName);
-				System.out.println("Moving " + file.toString() + " to " + target.toString());
-
-				Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+				if(!newFileName.equals(fileName)){
+					Path target = Paths.get(dir.toString(), newFileName);
+					System.out.println("Moving " + file.toString() + " to " + target.toString());
+	
+					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+				}
 			}
 		}
 	}
@@ -146,7 +149,6 @@ public class FileRefactorer {
 			if(seriesName != null){
 				System.out.println("Searching Series Name " + seriesName);
 				seriesList = tvdb.searchSeries(seriesName, Constants.LANGUAGE);
-				System.out.println("Series ID " + seriesList.get(0).getId());
 			}
 
 			Matcher itemMatcher = null;
@@ -167,14 +169,17 @@ public class FileRefactorer {
 				}
 
 				String fileName = file.getFileName().toString();
+				System.out.println("Checking if need to refactor " + file.getParent().toString() +"\\" +fileName);
 				String ext = fileName.substring(fileName.lastIndexOf("."));
 				String newFileName = TvShowUtils.buildFileName(ep) + ext;
 
-				String newDir = file.getParent().toString();
-				Path target = Paths.get(newDir.toString(), newFileName);
-				System.out.println("Moving " + file.toString() + " to " + target.toString());
+				if(!newFileName.equals(fileName)){
+					String newDir = file.getParent().toString();
+					Path target = Paths.get(newDir.toString(), newFileName);
+					System.out.println("Moving " + file.toString() + " to " + target.toString());
 
-				//				Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+				}
 			}
 		}
 	}

@@ -4,13 +4,13 @@ import java.io.IOException;
 
 import org.apache.commons.httpclient.HttpException;
 
-import com.kricko.tvshowupdater.utils.TvShowProperties;
+import com.kricko.tvshowupdater.utils.Config;
 
 public class Xbmc {
 	
-	static TvShowProperties p;
+	static Config p;
 	static{
-		p = TvShowProperties.getInstance();
+		p = Config.getInstance();
 	}
 	
 	/**
