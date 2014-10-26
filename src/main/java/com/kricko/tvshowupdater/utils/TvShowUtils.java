@@ -180,9 +180,12 @@ public class TvShowUtils {
 	}
 	
 	public static String buildFileName(Episode ep){
-		String filename = "S"+formatIntToString(ep.getSeasonNumber())
-				+ "E"+formatIntToString(ep.getEpisodeNumber()) 
-				+ " - " + replaceSpecialChars(ep.getEpisodeName());
+		String filename = null;
+		if(ep.getEpisodeName() != null){
+			filename = "S"+formatIntToString(ep.getSeasonNumber())
+					+ "E"+formatIntToString(ep.getEpisodeNumber()) 
+					+ " - " + replaceSpecialChars(ep.getEpisodeName());
+		}
 		
 		return filename;
 	}

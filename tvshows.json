@@ -1,10 +1,10 @@
 {
 	"shows":[
 		{
-			"name":"The Good Wife"
-			"rssfeed":"http://showrss.info/feeds/208.rss"
-			"regex":"(^|)(The Good Wife S([0-9]+)E([0-9]+).*)(LOL).*(|$)"
-			"path":"G:/TV Series A-G/Good Wife, The"
+			"name":"Silicon Valley"
+			"rssfeed":"http://showrss.info/feeds/799.rss"
+			"regex":"(^|)(Silicon Valley S([0-9]+)E([0-9]+).*)(|$)"
+			"path":"G:/TV Series P-Z/Silicon Valley"
 		}
 	]
 }

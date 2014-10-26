@@ -127,8 +127,9 @@ public class FileRefactorer {
 				
 				String fileName = file.getFileName().toString();
 				String ext = fileName.substring(fileName.lastIndexOf("."));
-				String newFileName = TvShowUtils.buildFileName(ep) + ext;
+				String newFileName = TvShowUtils.buildFileName(ep);
 
+				newFileName = (newFileName == null) ? fileName : newFileName + ext;
 				Path target = Paths.get(dir.toString(), newFileName);
 				System.out.println("Moving " + file.toString() + " to " + target.toString());
 
