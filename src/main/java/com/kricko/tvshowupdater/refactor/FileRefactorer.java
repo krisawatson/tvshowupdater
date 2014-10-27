@@ -87,9 +87,10 @@ public class FileRefactorer {
 						? file.getParent().toString() : parentDir;
 				
 				Path target = Paths.get(newDir.toString(), newFileName);
-				System.out.println("Moving " + file.toString() + " to " + target.toString());
-
-				Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+				if(!file.toString().equals(target.toString())){
+					System.out.println("Moving " + file.toString() + " to " + target.toString());
+					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+				}
 
 				if(parentDir.equals(newDir)){
 					return true;
