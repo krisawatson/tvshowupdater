@@ -20,7 +20,7 @@ public class RefactorFiles {
 		try {
 			List<String> directories = TvShowUtils.getListOfTidyUpDirs();
 			for(String dir:directories){
-				refactorer.cleanDownloaded(dir);
+				refactorer.doRefactor(null, dir);
 			}
 
 			if(existing){
