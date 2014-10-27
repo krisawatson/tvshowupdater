@@ -68,7 +68,7 @@ public class FileRefactorer {
 					System.out.println(episodeName);
 					episodeIds = TvShowUtils.getEpisodeIds(episodeName);
 				}
-				
+
 				Episode ep = null;
 				if(seriesList != null){
 					if(episodeIds != null){
@@ -82,16 +82,15 @@ public class FileRefactorer {
 				String ext = fileName.substring(fileName.lastIndexOf("."));
 				String newFileName = (ep != null) ? TvShowUtils.buildFileName(ep)  + ext : episodeName + ext;
 
-//				if(!newFileName.equals(fileName)){
-					String currentParentDir = file.getParent().getFileName().toString();
-					String newDir = (parentDir == null || currentParentDir.equals("Season "+ episodeIds[0])) 
-								? file.getParent().toString() : parentDir;
-					Path target = Paths.get(newDir.toString(), newFileName);
-					System.out.println("Moving " + file.toString() + " to " + target.toString());
+				String currentParentDir = file.getParent().getFileName().toString();
+				String newDir = (parentDir == null || currentParentDir.equals("Season "+ episodeIds[0])) 
+						? file.getParent().toString() : parentDir;
+				
+				Path target = Paths.get(newDir.toString(), newFileName);
+				System.out.println("Moving " + file.toString() + " to " + target.toString());
 
-					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
-//				}
-					
+				Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+
 				if(parentDir.equals(newDir)){
 					return true;
 				}
