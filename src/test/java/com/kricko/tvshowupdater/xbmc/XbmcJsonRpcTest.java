@@ -22,10 +22,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the XbmcJsonRpc(String,int,boolean,int) constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testXbmcJsonRpc_1()
 		throws Exception {
@@ -43,10 +43,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCallMethod_1()
 		throws Exception {
@@ -64,10 +64,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCallMethod_2()
 		throws Exception {
@@ -85,10 +85,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCallMethod_3()
 		throws Exception {
@@ -106,10 +106,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCallMethod_4()
 		throws Exception {
@@ -127,10 +127,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCallMethod_5()
 		throws Exception {
@@ -148,10 +148,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void cleanVideoLibrary() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCleanVideoLibrary_1()
 		throws Exception {
@@ -165,10 +165,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_1()
 		throws Exception {
@@ -182,10 +182,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_2()
 		throws Exception {
@@ -199,10 +199,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_3()
 		throws Exception {
@@ -216,10 +216,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_4()
 		throws Exception {
@@ -233,10 +233,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_5()
 		throws Exception {
@@ -250,10 +250,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_6()
 		throws Exception {
@@ -267,10 +267,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_7()
 		throws Exception {
@@ -284,10 +284,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_8()
 		throws Exception {
@@ -301,10 +301,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void run() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRun_9()
 		throws Exception {
@@ -318,10 +318,10 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Run the void updateVideoLibrary() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateVideoLibrary_1()
 		throws Exception {
@@ -335,11 +335,11 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -349,11 +349,11 @@ public class XbmcJsonRpcTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

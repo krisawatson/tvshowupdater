@@ -24,6 +24,7 @@ package com.kricko.tvshowupdater.model;
  *
  * @author Stuart.Boston
  *
+ * @version $Revision: 1.0 $
  */
 public enum BannerType {
 
@@ -39,10 +40,18 @@ public enum BannerType {
 
     private final String type;
 
+    /**
+     * Constructor for BannerType.
+     * @param type String
+     */
     private BannerType(String type) {
         this.type = type;
     }
 
+    /**
+     * Method getType.
+     * @return String
+     */
     public String getType() {
         return this.type;
     }
@@ -52,7 +61,8 @@ public enum BannerType {
  will be set to ARTWORK
      *
      * @param type
-     * @return
+    
+     * @return BannerType
      */
     public static BannerType fromString(String type) {
         if (type != null) {

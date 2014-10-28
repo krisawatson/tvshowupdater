@@ -17,8 +17,16 @@ import com.kricko.tvshowupdater.model.Rss;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 
+/**
+ */
 public class DownloadShows {
 
+	/**
+	 * Method doDownload.
+	 * @throws JAXBException
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static void doDownload() throws JAXBException, IOException, ParseException {
 		JAXBContext jc = JAXBContext.newInstance(Rss.class);
 

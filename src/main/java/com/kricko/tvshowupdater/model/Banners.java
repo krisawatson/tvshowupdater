@@ -28,6 +28,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  *
  * @author matthew.altman
+ * @version $Revision: 1.0 $
  */
 public class Banners implements Serializable {
 
@@ -39,62 +40,122 @@ public class Banners implements Serializable {
     private List<Banner> posterList = new ArrayList<Banner>();
     private List<Banner> fanartList = new ArrayList<Banner>();
 
+    /**
+     * Method getSeriesId.
+     * @return int
+     */
     public int getSeriesId() {
         return seriesId;
     }
 
+    /**
+     * Method getSeriesList.
+     * @return List<Banner>
+     */
     public List<Banner> getSeriesList() {
         return seriesList;
     }
 
+    /**
+     * Method getSeasonList.
+     * @return List<Banner>
+     */
     public List<Banner> getSeasonList() {
         return seasonList;
     }
 
+    /**
+     * Method getPosterList.
+     * @return List<Banner>
+     */
     public List<Banner> getPosterList() {
         return posterList;
     }
 
+    /**
+     * Method getFanartList.
+     * @return List<Banner>
+     */
     public List<Banner> getFanartList() {
         return fanartList;
     }
 
+    /**
+     * Method setSeriesId.
+     * @param seriesId int
+     */
     public void setSeriesId(int seriesId) {
         this.seriesId = seriesId;
     }
 
+    /**
+     * Method setSeriesList.
+     * @param seriesList List<Banner>
+     */
     public void setSeriesList(List<Banner> seriesList) {
         this.seriesList = seriesList;
     }
 
+    /**
+     * Method addSeriesBanner.
+     * @param banner Banner
+     */
     public void addSeriesBanner(Banner banner) {
         this.seriesList.add(banner);
     }
 
+    /**
+     * Method setSeasonList.
+     * @param seasonList List<Banner>
+     */
     public void setSeasonList(List<Banner> seasonList) {
         this.seasonList = seasonList;
     }
 
+    /**
+     * Method addSeasonBanner.
+     * @param banner Banner
+     */
     public void addSeasonBanner(Banner banner) {
         this.seasonList.add(banner);
     }
 
+    /**
+     * Method setPosterList.
+     * @param posterList List<Banner>
+     */
     public void setPosterList(List<Banner> posterList) {
         this.posterList = posterList;
     }
 
+    /**
+     * Method addPosterBanner.
+     * @param banner Banner
+     */
     public void addPosterBanner(Banner banner) {
         this.posterList.add(banner);
     }
 
+    /**
+     * Method setFanartList.
+     * @param fanartList List<Banner>
+     */
     public void setFanartList(List<Banner> fanartList) {
         this.fanartList = fanartList;
     }
 
+    /**
+     * Method addFanartBanner.
+     * @param banner Banner
+     */
     public void addFanartBanner(Banner banner) {
         this.fanartList.add(banner);
     }
 
+    /**
+     * Method addBanner.
+     * @param banner Banner
+     */
     public void addBanner(Banner banner) {
         if (banner != null) {
             if (seriesId == 0) {
@@ -113,6 +174,10 @@ public class Banners implements Serializable {
         }
     }
 
+    /**
+     * Method toString.
+     * @return String
+     */
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);

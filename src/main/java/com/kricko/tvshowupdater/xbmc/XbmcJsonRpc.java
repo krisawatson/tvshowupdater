@@ -14,6 +14,8 @@ import org.json.JSONStringer;
 import com.kricko.tvshowupdater.utils.HttpUtils;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 
+/**
+ */
 public class XbmcJsonRpc implements Runnable
 {
 	private boolean useHTTP=false, useRawTCP=true;
@@ -27,6 +29,13 @@ public class XbmcJsonRpc implements Runnable
 	private final static String JSON_RPC_WEBSERVER_USERNAME = "xbmc";
 	private final static String JSON_RPC_WEBSERVER_PASSWORD = null;
 
+	/**
+	 * Constructor for XbmcJsonRpc.
+	 * @param server String
+	 * @param port int
+	 * @param useHttp boolean
+	 * @param maxRetries int
+	 */
 	public XbmcJsonRpc(String server, int port, boolean useHttp, int maxRetries){
 		this.server = server;
 		this.port = port;
@@ -35,6 +44,13 @@ public class XbmcJsonRpc implements Runnable
 		this.maxRetries = maxRetries;
 	}
 
+	/**
+	 * Method callMethod.
+	 * @param method String
+	 * @param id int
+	 * @param params Map<String,Object>
+	 * @return JSONObject
+	 */
 	public JSONObject callMethod(String method, int id, Map<String,Object> params)
 	{
 		for(int i=0;i<maxRetries;i++)
@@ -61,6 +77,13 @@ public class XbmcJsonRpc implements Runnable
 		return null;//reached end of tired and no valid json was returned
 	}
 
+	/**
+	 * Method callMethodWithRetry.
+	 * @param method String
+	 * @param id int
+	 * @param params Map<String,Object>
+	 * @return JSONObject
+	 */
 	private JSONObject callMethodWithRetry(String method, int id, Map<String,Object> params)
 	{
 		String cmd = "{\"jsonrpc\": \"2.0\", ";
@@ -171,6 +194,12 @@ public class XbmcJsonRpc implements Runnable
 		}
 	}
 
+	/**
+	 * Method jsonKeyValue.
+	 * @param key String
+	 * @param value Object
+	 * @return String
+	 */
 	private static String jsonKeyValue(String key, Object value)
 	{
 		try{
@@ -201,6 +230,10 @@ public class XbmcJsonRpc implements Runnable
 		}
 	}
 
+	/**
+	 * Method run.
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run()
 	{

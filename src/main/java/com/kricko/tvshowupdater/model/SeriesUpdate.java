@@ -23,6 +23,8 @@ import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+/**
+ */
 public class SeriesUpdate implements Serializable {
 
     // Default serial UID
@@ -30,22 +32,42 @@ public class SeriesUpdate implements Serializable {
     private String id;
     private String time;
 
+    /**
+     * Method getId.
+     * @return String
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Method getTime.
+     * @return String
+     */
     public String getTime() {
         return time;
     }
 
+    /**
+     * Method setId.
+     * @param id String
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * Method setTime.
+     * @param time String
+     */
     public void setTime(String time) {
         this.time = time;
     }
 
+    /**
+     * Method toString.
+     * @return String
+     */
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);

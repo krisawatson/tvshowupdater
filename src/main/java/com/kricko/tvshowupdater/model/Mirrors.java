@@ -34,6 +34,7 @@ import com.kricko.tvshowupdater.utils.DOMHelper;
  *
  * @author altman.matthew
  * @author stuart.boston
+ * @version $Revision: 1.0 $
  */
 public class Mirrors {
 
@@ -51,6 +52,10 @@ public class Mirrors {
     private final List<String> bannerList = new ArrayList<String>();
     private final List<String> zipList = new ArrayList<String>();
 
+    /**
+     * Constructor for Mirrors.
+     * @param apiKey String
+     */
     public Mirrors(String apiKey) {
         // Make this synchronized so that only one
         synchronized (this) {
@@ -75,6 +80,11 @@ public class Mirrors {
         }
     }
 
+    /**
+     * Method getMirror.
+     * @param type String
+     * @return String
+     */
     public String getMirror(String type) {
         String url = null;
         if (type.equals(TYPE_XML) && !xmlList.isEmpty()) {
@@ -87,6 +97,11 @@ public class Mirrors {
         return url;
     }
 
+    /**
+     * Method addMirror.
+     * @param typeMask int
+     * @param url String
+     */
     private void addMirror(int typeMask, String url) {
         switch (typeMask) {
             case MASK_XML:

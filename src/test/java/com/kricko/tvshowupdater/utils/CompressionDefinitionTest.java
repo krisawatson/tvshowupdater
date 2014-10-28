@@ -21,10 +21,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the CompressionDefinition(String,String,String,List<String>) constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCompressionDefinition_1()
 		throws Exception {
@@ -45,10 +45,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the CompressionDefinition(String,String,String,List<String>) constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCompressionDefinition_2()
 		throws Exception {
@@ -69,10 +69,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the CompressionDefinition(String,String,String,List<String>) constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCompressionDefinition_3()
 		throws Exception {
@@ -93,10 +93,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the boolean equals(Object) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testEquals_1()
 		throws Exception {
@@ -112,10 +112,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the boolean equals(Object) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testEquals_2()
 		throws Exception {
@@ -131,10 +131,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the boolean equals(Object) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testEquals_3()
 		throws Exception {
@@ -150,10 +150,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the String getCommand() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetCommand_1()
 		throws Exception {
@@ -168,10 +168,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the String getEncodeToExt() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEncodeToExt_1()
 		throws Exception {
@@ -186,10 +186,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the String getName() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetName_1()
 		throws Exception {
@@ -204,10 +204,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the List<String> getVerificationLines() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetVerificationLines_1()
 		throws Exception {
@@ -223,10 +223,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the int hashCode() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testHashCode_1()
 		throws Exception {
@@ -241,10 +241,10 @@ public class CompressionDefinitionTest {
 	/**
 	 * Run the int hashCode() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testHashCode_2()
 		throws Exception {
@@ -259,11 +259,11 @@ public class CompressionDefinitionTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -273,11 +273,11 @@ public class CompressionDefinitionTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

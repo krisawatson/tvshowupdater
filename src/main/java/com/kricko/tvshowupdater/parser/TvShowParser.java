@@ -11,8 +11,16 @@ import org.json.simple.parser.ParseException;
 
 import com.kricko.tvshowupdater.model.Shows;
 
+/**
+ */
 public class TvShowParser {
 
+	/**
+	 * Method parseShows.
+	 * @return Shows
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public Shows parseShows() throws IOException, ParseException{
 		ObjectMapper mapper = new ObjectMapper();
     	FileReader reader = new FileReader(Paths.get("tvshows.json").toString());

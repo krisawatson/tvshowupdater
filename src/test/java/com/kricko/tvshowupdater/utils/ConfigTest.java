@@ -15,10 +15,10 @@ public class ConfigTest {
 	/**
 	 * Run the Config() constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConfig_1()
 		throws Exception {
@@ -33,10 +33,10 @@ public class ConfigTest {
 	/**
 	 * Run the Config() constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConfig_2()
 		throws Exception {
@@ -51,10 +51,10 @@ public class ConfigTest {
 	/**
 	 * Run the Config() constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConfig_3()
 		throws Exception {
@@ -69,10 +69,10 @@ public class ConfigTest {
 	/**
 	 * Run the Config() constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConfig_4()
 		throws Exception {
@@ -87,10 +87,10 @@ public class ConfigTest {
 	/**
 	 * Run the boolean getBooleanProperty(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBooleanProperty_1()
 		throws Exception {
@@ -106,10 +106,10 @@ public class ConfigTest {
 	/**
 	 * Run the boolean getBooleanProperty(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBooleanProperty_2()
 		throws Exception {
@@ -125,10 +125,10 @@ public class ConfigTest {
 	/**
 	 * Run the boolean getBooleanProperty(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBooleanProperty_3()
 		throws Exception {
@@ -144,10 +144,10 @@ public class ConfigTest {
 	/**
 	 * Run the Config getInstance() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetInstance_1()
 		throws Exception {
@@ -162,10 +162,10 @@ public class ConfigTest {
 	/**
 	 * Run the Config getInstance() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetInstance_2()
 		throws Exception {
@@ -180,10 +180,10 @@ public class ConfigTest {
 	/**
 	 * Run the Integer getIntProperty(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetIntProperty_1()
 		throws Exception {
@@ -199,10 +199,10 @@ public class ConfigTest {
 	/**
 	 * Run the Integer getIntProperty(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetIntProperty_2()
 		throws Exception {
@@ -218,10 +218,10 @@ public class ConfigTest {
 	/**
 	 * Run the Integer getIntProperty(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetIntProperty_3()
 		throws Exception {
@@ -237,10 +237,10 @@ public class ConfigTest {
 	/**
 	 * Run the Properties getProperties() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetProperties_1()
 		throws Exception {
@@ -256,10 +256,10 @@ public class ConfigTest {
 	/**
 	 * Run the String getProperty(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetProperty_1()
 		throws Exception {
@@ -275,10 +275,10 @@ public class ConfigTest {
 	/**
 	 * Run the boolean updateBeforeDownload() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateBeforeDownload_1()
 		throws Exception {
@@ -293,10 +293,10 @@ public class ConfigTest {
 	/**
 	 * Run the boolean updateBeforeDownload() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateBeforeDownload_2()
 		throws Exception {
@@ -311,11 +311,11 @@ public class ConfigTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -325,11 +325,11 @@ public class ConfigTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

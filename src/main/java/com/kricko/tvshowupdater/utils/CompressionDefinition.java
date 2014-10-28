@@ -5,11 +5,19 @@ import java.util.List;
 /**
  *
  * @author bvidovic
+ * @version $Revision: 1.0 $
  */
 public class CompressionDefinition {
 
     String command, encode_to_ext, name;
     List<String> verificationLines;
+    /**
+     * Constructor for CompressionDefinition.
+     * @param name String
+     * @param command String
+     * @param encodeToExt String
+     * @param verificationLines List<String>
+     */
     public CompressionDefinition(String name, String command, String encodeToExt, List<String> verificationLines)
     {
         this.name = name;
@@ -24,31 +32,56 @@ public class CompressionDefinition {
         this.verificationLines=verificationLines;
        
     }
+    /**
+     * Method getVerificationLines.
+     * @return List<String>
+     */
     public List<String> getVerificationLines()
     {
         return verificationLines;
     }
+    /**
+     * Method getCommand.
+     * @return String
+     */
     public String getCommand()
     {
         return command;
     }
+    /**
+     * Method getEncodeToExt.
+     * @return String
+     */
     public String getEncodeToExt()
     {
         return encode_to_ext;
     }
    
+    /**
+     * Method getName.
+     * @return String
+     */
     public String getName()
     {
         return name;
     }
 
     //case-insensitive matching based on name
+    /**
+     * Method equals.
+     * @param o Object
+     * @return boolean
+     */
     public boolean equals(Object o)
     {
         if(!(o instanceof CompressionDefinition)) return false;
         return getName().equalsIgnoreCase( ((CompressionDefinition)o).getName());
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -56,6 +89,11 @@ public class CompressionDefinition {
         return hash;
     }
 
+    /**
+     * Method valid.
+     * @param s String
+     * @return boolean
+     */
     private static boolean valid(String s)
     {
         return s != null && !s.trim().isEmpty();

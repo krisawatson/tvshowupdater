@@ -10,8 +10,14 @@ import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.refactor.FileRefactorer;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 
+/**
+ */
 public class RefactorFiles {
 
+	/**
+	 * Method tidyFolders.
+	 * @param existing boolean
+	 */
 	public static void tidyFolders(boolean existing) {
 
 		FileRefactorer refactorer = new FileRefactorer();

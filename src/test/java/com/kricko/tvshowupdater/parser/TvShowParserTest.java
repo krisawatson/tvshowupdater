@@ -22,10 +22,10 @@ public class TvShowParserTest {
 	/**
 	 * Run the Shows parseShows() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test(expected = java.io.FileNotFoundException.class)
 	public void testParseShows_1()
 		throws Exception {
@@ -40,10 +40,10 @@ public class TvShowParserTest {
 	/**
 	 * Run the Shows parseShows() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test(expected = java.io.FileNotFoundException.class)
 	public void testParseShows_2()
 		throws Exception {
@@ -59,11 +59,11 @@ public class TvShowParserTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -73,11 +73,11 @@ public class TvShowParserTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

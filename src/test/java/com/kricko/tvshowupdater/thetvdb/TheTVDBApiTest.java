@@ -29,10 +29,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the TheTVDBApi(String) constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testTheTVDBApi_1()
 		throws Exception {
@@ -47,10 +47,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the TheTVDBApi(String,CommonHttpClient) constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testTheTVDBApi_2()
 		throws Exception {
@@ -66,10 +66,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the TheTVDBApi(String,CommonHttpClient) constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testTheTVDBApi_3()
 		throws Exception {
@@ -85,10 +85,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getAbsoluteEpisode(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAbsoluteEpisode_1()
 		throws Exception {
@@ -105,10 +105,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getAbsoluteEpisode(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAbsoluteEpisode_2()
 		throws Exception {
@@ -125,10 +125,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Actor> getActors(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetActors_1()
 		throws Exception {
@@ -143,10 +143,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_1()
 		throws Exception {
@@ -164,10 +164,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_2()
 		throws Exception {
@@ -185,10 +185,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_3()
 		throws Exception {
@@ -206,10 +206,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the String getBannerMirror(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBannerMirror_1()
 		throws Exception {
@@ -224,10 +224,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Banners getBanners(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBanners_1()
 		throws Exception {
@@ -242,10 +242,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getDVDEpisode(String,int,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetDVDEpisode_1()
 		throws Exception {
@@ -263,10 +263,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getDVDEpisode(String,int,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetDVDEpisode_2()
 		throws Exception {
@@ -284,10 +284,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getEpisode(String,int,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_1()
 		throws Exception {
@@ -332,10 +332,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getEpisode(String,int,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_2()
 		throws Exception {
@@ -380,10 +380,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getEpisode(String,int,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_3()
 		throws Exception {
@@ -428,10 +428,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getEpisode(String,int,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_4()
 		throws Exception {
@@ -476,10 +476,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getEpisode(String,int,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_5()
 		throws Exception {
@@ -524,10 +524,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getEpisodeById(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisodeById_1()
 		throws Exception {
@@ -543,10 +543,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Episode getEpisodeById(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisodeById_2()
 		throws Exception {
@@ -562,10 +562,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Episode> getSeasonEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeasonEpisodes_1()
 		throws Exception {
@@ -582,10 +582,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Episode> getSeasonEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeasonEpisodes_2()
 		throws Exception {
@@ -602,10 +602,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the String getSeasonYear(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeasonYear_1()
 		throws Exception {
@@ -623,10 +623,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the String getSeasonYear(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeasonYear_2()
 		throws Exception {
@@ -644,10 +644,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the String getSeasonYear(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeasonYear_3()
 		throws Exception {
@@ -665,10 +665,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the String getSeasonYear(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeasonYear_4()
 		throws Exception {
@@ -686,10 +686,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Series getSeries(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeries_1()
 		throws Exception {
@@ -705,10 +705,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the Series getSeries(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeries_2()
 		throws Exception {
@@ -724,10 +724,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the TVDBUpdates getWeeklyUpdates() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetWeeklyUpdates_1()
 		throws Exception {
@@ -741,10 +741,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the String getXmlMirror(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetXmlMirror_1()
 		throws Exception {
@@ -759,10 +759,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Series> searchSeries(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testSearchSeries_1()
 		throws Exception {
@@ -778,10 +778,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Series> searchSeries(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testSearchSeries_2()
 		throws Exception {
@@ -797,10 +797,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the List<Series> searchSeries(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testSearchSeries_3()
 		throws Exception {
@@ -816,10 +816,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the void setProxy(String,int,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testSetProxy_1()
 		throws Exception {
@@ -835,10 +835,10 @@ public class TheTVDBApiTest {
 	/**
 	 * Run the void setTimeout(int,int) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testSetTimeout_1()
 		throws Exception {
@@ -853,11 +853,11 @@ public class TheTVDBApiTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -867,11 +867,11 @@ public class TheTVDBApiTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

@@ -27,6 +27,7 @@ public class TvShowUtilsTest {
 	 * Run the TvShowUtils() constructor test.
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
+	 * @throws Exception
 	 */
 	@Test
 	public void testTvShowUtils_1()
@@ -39,10 +40,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void appendDirToTidyUpList() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testAppendDirToTidyUpList_1()
 		throws Exception {
@@ -62,10 +63,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void appendDirToTidyUpList() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testAppendDirToTidyUpList_2()
 		throws Exception {
@@ -85,10 +86,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void appendDirToTidyUpList() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testAppendDirToTidyUpList_3()
 		throws Exception {
@@ -108,10 +109,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the String buildFileName(Episode) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testBuildFileName_1()
 		throws Exception {
@@ -129,10 +130,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void downloadNewItems(Item,Details) method test.
 	 *
-	 * @throws Throwable
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Throwable */
 	@Test(expected = java.lang.NullPointerException.class)
 	public void testDownloadNewItems_1()
 		throws Throwable {
@@ -150,10 +151,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void downloadNewItems(Item,Details) method test.
 	 *
-	 * @throws Throwable
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Throwable */
 	@Test(expected = java.lang.NullPointerException.class)
 	public void testDownloadNewItems_2()
 		throws Throwable {
@@ -172,10 +173,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void downloadNewItems(Item,Details) method test.
 	 *
-	 * @throws Throwable
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Throwable */
 	@Test(expected = java.lang.NullPointerException.class)
 	public void testDownloadNewItems_3()
 		throws Throwable {
@@ -194,10 +195,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void downloadNewItems(Item,Details) method test.
 	 *
-	 * @throws Throwable
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Throwable */
 	@Test(expected = java.lang.NullPointerException.class)
 	public void testDownloadNewItems_4()
 		throws Throwable {
@@ -216,10 +217,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void downloadNewItems(Item,Details) method test.
 	 *
-	 * @throws Throwable
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Throwable */
 	@Test(expected = java.lang.NullPointerException.class)
 	public void testDownloadNewItems_5()
 		throws Throwable {
@@ -237,10 +238,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the void downloadNewItems(Item,Details) method test.
 	 *
-	 * @throws Throwable
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Throwable */
 	@Test(expected = java.lang.NullPointerException.class)
 	public void testDownloadNewItems_6()
 		throws Throwable {
@@ -257,10 +258,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the int[] getEpisodeIds(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisodeIds_1()
 		throws Exception {
@@ -279,10 +280,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the int[] getEpisodeIds(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisodeIds_2()
 		throws Exception {
@@ -301,10 +302,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the int[] getEpisodeIds(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisodeIds_3()
 		throws Exception {
@@ -323,10 +324,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the Shows getListOfShows() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test(expected = java.io.FileNotFoundException.class)
 	public void testGetListOfShows_1()
 		throws Exception {
@@ -340,10 +341,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the Shows getListOfShows() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test(expected = java.io.FileNotFoundException.class)
 	public void testGetListOfShows_2()
 		throws Exception {
@@ -357,10 +358,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the Shows getListOfShows() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test(expected = java.io.FileNotFoundException.class)
 	public void testGetListOfShows_3()
 		throws Exception {
@@ -374,10 +375,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<String> getListOfTidyUpDirs() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetListOfTidyUpDirs_1()
 		throws Exception {
@@ -392,10 +393,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<String> getListOfTidyUpDirs() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetListOfTidyUpDirs_2()
 		throws Exception {
@@ -410,10 +411,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<String> getListOfTidyUpDirs() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetListOfTidyUpDirs_3()
 		throws Exception {
@@ -428,10 +429,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<String> getListOfTidyUpDirs() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetListOfTidyUpDirs_4()
 		throws Exception {
@@ -446,10 +447,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<String> getListOfTidyUpDirs() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetListOfTidyUpDirs_5()
 		throws Exception {
@@ -464,10 +465,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<Item> removeDuplicateEpisodes(List<Item>,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRemoveDuplicateEpisodes_1()
 		throws Exception {
@@ -484,10 +485,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<Item> removeDuplicateEpisodes(List<Item>,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRemoveDuplicateEpisodes_2()
 		throws Exception {
@@ -504,10 +505,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<Item> removeDuplicateEpisodes(List<Item>,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRemoveDuplicateEpisodes_3()
 		throws Exception {
@@ -524,10 +525,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<Item> removeDuplicateEpisodes(List<Item>,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRemoveDuplicateEpisodes_4()
 		throws Exception {
@@ -544,10 +545,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<Item> removeDuplicateEpisodes(List<Item>,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRemoveDuplicateEpisodes_5()
 		throws Exception {
@@ -564,10 +565,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the List<Item> removeDuplicateEpisodes(List<Item>,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testRemoveDuplicateEpisodes_6()
 		throws Exception {
@@ -584,10 +585,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the String replaceSpecialChars(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testReplaceSpecialChars_1()
 		throws Exception {
@@ -602,10 +603,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the boolean valid(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testValid_1()
 		throws Exception {
@@ -620,10 +621,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the boolean valid(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testValid_2()
 		throws Exception {
@@ -638,10 +639,10 @@ public class TvShowUtilsTest {
 	/**
 	 * Run the boolean valid(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testValid_3()
 		throws Exception {
@@ -656,11 +657,11 @@ public class TvShowUtilsTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -670,11 +671,11 @@ public class TvShowUtilsTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

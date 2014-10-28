@@ -22,10 +22,17 @@ import com.kricko.tvshowupdater.thetvdb.TheTVDBApi;
 import com.kricko.tvshowupdater.utils.Constants;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 
+/**
+ */
 public class FileRefactorer {
 
 	TheTVDBApi tvdb = new TheTVDBApi(Constants.API_KEY);
 
+	/**
+	 * Method doRefactor.
+	 * @param seriesName String
+	 * @param parentDirectory String
+	 */
 	public void doRefactor(String seriesName, String parentDirectory){
 		try {
 			// Refactor any files in the parent directory first
@@ -47,6 +54,14 @@ public class FileRefactorer {
 		}
 	}
 
+	/**
+	 * Method refactorFilesAddTitle.
+	 * @param seriesName String
+	 * @param files List<Path>
+	 * @param parentDir String
+	 * @return boolean
+	 * @throws IOException
+	 */
 	private boolean refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir) throws IOException{
 		if(files != null){
 			Pattern pattern = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
@@ -99,6 +114,12 @@ public class FileRefactorer {
 		return false;
 	}
 
+	/**
+	 * Method getDirectories.
+	 * @param dir Path
+	 * @return List<Path>
+	 * @throws IOException
+	 */
 	private List<Path> getDirectories(final Path dir) throws IOException {
 		final List<Path> dirlist = new ArrayList<>();
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
@@ -113,6 +134,12 @@ public class FileRefactorer {
 	}
 
 
+	/**
+	 * Method getMovieFiles.
+	 * @param dir Path
+	 * @return List<Path>
+	 * @throws IOException
+	 */
 	private List<Path> getMovieFiles(final Path dir) throws IOException {
 		final List<Path> fileList = new ArrayList<>();
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
@@ -132,6 +159,11 @@ public class FileRefactorer {
 		return fileList;
 	}
 
+	/**
+	 * Method deleteDirectory.
+	 * @param path Path
+	 * @throws IOException
+	 */
 	private void deleteDirectory(Path path) throws IOException{
 		Files.walkFileTree(path, new FileVisitor<Path>() {
 

@@ -11,8 +11,18 @@ import org.json.simple.parser.ParseException;
 import com.kricko.tvshowupdater.utils.Config;
 import com.kricko.tvshowupdater.xbmc.Xbmc;
 
+/**
+ */
 public class App 
 {
+	/**
+	 * Method main.
+	 * @param args String[]
+	 * @throws JAXBException
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws HttpException
+	 */
 	public static void main( String[] args ) 
 			throws JAXBException, IOException, ParseException, HttpException 
 	{
@@ -56,6 +66,14 @@ public class App
 		}
 	}
 
+	/**
+	 * Method doSelectedOption.
+	 * @param option String
+	 * @throws JAXBException
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws HttpException
+	 */
 	private static void doSelectedOption(String option) 
 			throws JAXBException, IOException, ParseException, HttpException{
 		if(option != null){

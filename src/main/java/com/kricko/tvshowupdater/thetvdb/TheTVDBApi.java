@@ -47,6 +47,7 @@ import com.kricko.tvshowupdater.utils.DOMHelper;
 /**
  * @author altman.matthew
  * @author stuart.boston
+ * @version $Revision: 1.0 $
  */
 public class TheTVDBApi {
 
@@ -89,7 +90,8 @@ public class TheTVDBApi {
     /**
      * Get the mirror information from TheTVDb
      *
-     * @return True if everything is OK, false otherwise.
+    
+     * @param apiKey String
      */
     private static void getMirrors(String apiKey) {
         // If we don't need to get the mirrors, then just return
@@ -149,7 +151,8 @@ public class TheTVDBApi {
      *
      * @param id
      * @param language
-     * @return
+    
+     * @return Series
      */
     public Series getSeries(String id, String language) {
         StringBuilder urlBuilder = new StringBuilder();
@@ -180,7 +183,8 @@ public class TheTVDBApi {
      *
      * @param id
      * @param language
-     * @return
+    
+     * @return List<Episode>
      */
     public List<Episode> getAllEpisodes(String id, String language) {
         List<Episode> episodeList = Collections.emptyList();
@@ -212,7 +216,8 @@ public class TheTVDBApi {
      * @param id
      * @param season
      * @param language
-     * @return
+    
+     * @return List<Episode>
      */
     public List<Episode> getSeasonEpisodes(String id, int season, String language) {
         StringBuilder urlBuilder = new StringBuilder();
@@ -245,7 +250,8 @@ public class TheTVDBApi {
      * @param seasonNbr
      * @param episodeNbr
      * @param language
-     * @return
+    
+     * @return Episode
      */
     public Episode getEpisode(String seriesId, int seasonNbr, int episodeNbr, String language) {
         if (!isValidNumber(seriesId) || !isValidNumber(seasonNbr) || !isValidNumber(episodeNbr)) {
@@ -253,26 +259,15 @@ public class TheTVDBApi {
             return new Episode();
         }
 
-        StringBuilder urlBuilder = new StringBuilder();
-        try {
-            urlBuilder.append(getXmlMirror(apiKey));
-            urlBuilder.append(apiKey);
-            urlBuilder.append(SERIES_URL);
-            urlBuilder.append(seriesId);
-            urlBuilder.append("/default/");
-            urlBuilder.append(seasonNbr);
-            urlBuilder.append("/");
-            urlBuilder.append(episodeNbr);
-            urlBuilder.append("/");
-            if (language != null) {
-                urlBuilder.append(language).append(XML_EXTENSION);
-            }
-        } catch (WebServiceException ex) {
-            System.out.println(String.format(ex.getMessage(), ex));
-            return new Episode();
-        }
+        StringBuilder url = null;
+        
+    	try{
+    		url = urlBuilder(seriesId, "/default/", seasonNbr, episodeNbr, language);
+    	} catch (Exception ex){
+    		return new Episode();
+    	}
 
-        return TvdbParser.getEpisode(urlBuilder.toString(), getBannerMirror(apiKey));
+        return TvdbParser.getEpisode(url.toString(), getBannerMirror(apiKey));
     }
 
     /**
@@ -282,29 +277,19 @@ public class TheTVDBApi {
      * @param seasonNbr
      * @param episodeNbr
      * @param language
-     * @return
+    
+     * @return Episode
      */
     public Episode getDVDEpisode(String seriesId, int seasonNbr, int episodeNbr, String language) {
-        StringBuilder urlBuilder = new StringBuilder();
-        try {
-            urlBuilder.append(getXmlMirror(apiKey));
-            urlBuilder.append(apiKey);
-            urlBuilder.append(SERIES_URL);
-            urlBuilder.append(seriesId);
-            urlBuilder.append("/dvd/");
-            urlBuilder.append(seasonNbr);
-            urlBuilder.append("/");
-            urlBuilder.append(episodeNbr);
-            urlBuilder.append("/");
-            if (language != null) {
-                urlBuilder.append(language).append(XML_EXTENSION);
-            }
-        } catch (WebServiceException ex) {
-            System.out.println(String.format(ex.getMessage(), ex));
-            return new Episode();
-        }
+    	StringBuilder url = null;
+    
+    	try{
+    		url = urlBuilder(seriesId, "/dvd/", seasonNbr, episodeNbr, language);
+    	} catch (Exception ex){
+    		return new Episode();
+    	}
 
-        return TvdbParser.getEpisode(urlBuilder.toString(), getBannerMirror(apiKey));
+        return TvdbParser.getEpisode(url.toString(), getBannerMirror(apiKey));
     }
 
     /**
@@ -313,7 +298,8 @@ public class TheTVDBApi {
      * @param seriesId
      * @param episodeNbr
      * @param language
-     * @return
+    
+     * @return Episode
      */
     public Episode getAbsoluteEpisode(String seriesId, int episodeNbr, String language) {
         StringBuilder urlBuilder = new StringBuilder();
@@ -342,7 +328,8 @@ public class TheTVDBApi {
      * @param id
      * @param seasonNbr
      * @param language
-     * @return
+    
+     * @return String
      */
     public String getSeasonYear(String id, int seasonNbr, String language) {
         String year = null;
@@ -369,6 +356,11 @@ public class TheTVDBApi {
         return year;
     }
 
+    /**
+     * Method getBanners.
+     * @param seriesId String
+     * @return Banners
+     */
     public Banners getBanners(String seriesId) {
         StringBuilder urlBuilder = new StringBuilder();
         try {
@@ -389,7 +381,8 @@ public class TheTVDBApi {
      * Get a list of actors from the series id
      *
      * @param seriesId
-     * @return
+    
+     * @return List<Actor>
      */
     public List<Actor> getActors(String seriesId) {
         StringBuilder urlBuilder = new StringBuilder();
@@ -408,6 +401,12 @@ public class TheTVDBApi {
         return TvdbParser.getActors(urlBuilder.toString(), getBannerMirror(apiKey));
     }
 
+    /**
+     * Method searchSeries.
+     * @param title String
+     * @param language String
+     * @return List<Series>
+     */
     public List<Series> searchSeries(String title, String language) {
         StringBuilder urlBuilder = new StringBuilder();
 
@@ -435,7 +434,8 @@ public class TheTVDBApi {
      *
      * @param episodeId
      * @param language
-     * @return
+    
+     * @return Episode
      */
     public Episode getEpisodeById(String episodeId, String language) {
         StringBuilder urlBuilder = new StringBuilder();
@@ -458,6 +458,10 @@ public class TheTVDBApi {
         return TvdbParser.getEpisode(urlBuilder.toString(), getBannerMirror(apiKey));
     }
 
+    /**
+     * Method getWeeklyUpdates.
+     * @return TVDBUpdates
+     */
     public TVDBUpdates getWeeklyUpdates() {
         StringBuilder urlBuilder = new StringBuilder();
 
@@ -472,7 +476,8 @@ public class TheTVDBApi {
      * Get the XML Mirror URL
      *
      * @param apiKey
-     * @return
+    
+     * @return String
      */
     public static String getXmlMirror(String apiKey) {
         // Force a load of the mirror information if it doesn't exist
@@ -484,7 +489,8 @@ public class TheTVDBApi {
      * Get the Banner Mirror URL
      *
      * @param apiKey
-     * @return
+    
+     * @return String
      */
     public static String getBannerMirror(String apiKey) {
         // Force a load of the mirror information if it doesn't exist
@@ -492,11 +498,48 @@ public class TheTVDBApi {
         return bannerMirror;
     }
 
+    /**
+     * Method isValidNumber.
+     * @param number String
+     * @return boolean
+     */
     private boolean isValidNumber(String number) {
         return StringUtils.isNumeric(number);
     }
 
+    /**
+     * Method isValidNumber.
+     * @param number int
+     * @return boolean
+     */
     private boolean isValidNumber(int number) {
         return (number >= 0);
+    }
+    
+    private StringBuilder urlBuilder(String seriesId, String postfix, int seasonNbr, 
+    		int episodeNbr, String language) throws Exception{
+    	if (!isValidNumber(seriesId) || !isValidNumber(seasonNbr) || !isValidNumber(episodeNbr)) {
+            throw new Exception("Invalid number exceptions");
+        }
+    	
+    	StringBuilder urlBuilder = new StringBuilder();
+        try {
+            urlBuilder.append(getXmlMirror(apiKey));
+            urlBuilder.append(apiKey);
+            urlBuilder.append(SERIES_URL);
+            urlBuilder.append(seriesId);
+            urlBuilder.append(postfix);
+            urlBuilder.append(seasonNbr);
+            urlBuilder.append("/");
+            urlBuilder.append(episodeNbr);
+            urlBuilder.append("/");
+            if (language != null) {
+                urlBuilder.append(language).append(XML_EXTENSION);
+            }
+        } catch (WebServiceException ex) {
+            System.out.println(String.format(ex.getMessage(), ex));
+            throw ex;
+        }
+        return urlBuilder;
     }
 }

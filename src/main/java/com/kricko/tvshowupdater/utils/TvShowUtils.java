@@ -29,10 +29,18 @@ import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.parser.TvShowParser;
 
+/**
+ */
 public class TvShowUtils {
 
 	private static List<String> tidyUpDirs = new ArrayList<String>();
 	
+	/**
+	 * Method removeDuplicateEpisodes.
+	 * @param items List<Item>
+	 * @param regex String
+	 * @return List<Item>
+	 */
 	public static List<Item> removeDuplicateEpisodes(List<Item> items, String regex){
 		Map<Integer,List<String>> shows = new HashMap<Integer,List<String>>();
 		List<Item> newItems = new ArrayList<Item>();
@@ -64,6 +72,12 @@ public class TvShowUtils {
 		return newItems;
 	}
 
+	/**
+	 * Method downloadNewItems.
+	 * @param item Item
+	 * @param detail Details
+	 * @throws Throwable
+	 */
 	public static void downloadNewItems(Item item, Details detail) throws Throwable{
 
 		Pattern pattern = Pattern.compile(detail.getRegex());
@@ -98,6 +112,12 @@ public class TvShowUtils {
 		}
 	}
 
+	/**
+	 * Method episodeExists.
+	 * @param items List<String>
+	 * @param episodeName String
+	 * @return boolean
+	 */
 	private static boolean episodeExists(List<String> items, String episodeName){
 		if(!items.isEmpty()){
 			for(String item:items){
@@ -108,6 +128,11 @@ public class TvShowUtils {
 		return false;
 	}
 
+	/**
+	 * Method formatIntToString.
+	 * @param value int
+	 * @return String
+	 */
 	private static String formatIntToString(int value){
 		String str = ""+value;
 		if(value < 10){
@@ -116,6 +141,12 @@ public class TvShowUtils {
 		return str;
 	}
 
+	/**
+	 * Method getExistingItems.
+	 * @param dir Path
+	 * @return List<String>
+	 * @throws Throwable
+	 */
 	private static List<String> getExistingItems(Path dir) throws Throwable{
 		List<String> result = new ArrayList<>();
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{mp4,avi,mkv}")) {
@@ -145,6 +176,10 @@ public class TvShowUtils {
 		}
 	}
 	
+	/**
+	 * Method getListOfTidyUpDirs.
+	 * @return List<String>
+	 */
 	public static List<String> getListOfTidyUpDirs(){
 		List<String> directories = new ArrayList<String>();
 		try {
@@ -161,16 +196,32 @@ public class TvShowUtils {
 		return directories;
 	}
 	
+	/**
+	 * Method getListOfShows.
+	 * @return Shows
+	 * @throws IOException
+	 * @throws ParseException
+	 */
 	public static Shows getListOfShows() throws IOException, ParseException{
 		TvShowParser parser = new TvShowParser();
         return parser.parseShows(); 
 	}
 	
+	/**
+	 * Method valid.
+	 * @param s String
+	 * @return boolean
+	 */
 	public static boolean valid(String s)
 	{
 		return s != null && !s.trim().isEmpty();
 	}
 	
+	/**
+	 * Method getEpisodeIds.
+	 * @param value String
+	 * @return int[]
+	 */
 	public static int[] getEpisodeIds(String value){
 		int[] items = new int[2];
 		items[0] = Integer.parseInt(value.substring(1, value.toUpperCase().indexOf("E")));
@@ -179,6 +230,11 @@ public class TvShowUtils {
 		return items;
 	}
 	
+	/**
+	 * Method buildFileName.
+	 * @param ep Episode
+	 * @return String
+	 */
 	public static String buildFileName(Episode ep){
 		String filename = null;
 		if(ep.getEpisodeName() != null){
@@ -190,11 +246,21 @@ public class TvShowUtils {
 		return filename;
 	}
 	
+	/**
+	 * Method replaceSpecialChars.
+	 * @param value String
+	 * @return String
+	 */
 	public static String replaceSpecialChars(String value){
 		return value.replace(":", "").replace("?","")
 				.replace("\\"," ").replace("/"," ");
 	}
 	
+	/**
+	 * Method getSeasonAndEpisode.
+	 * @param title String
+	 * @return int[]
+	 */
 	private static int[] getSeasonAndEpisode(String title){
 		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
 		Matcher itemMatcher = pattern.matcher(title);

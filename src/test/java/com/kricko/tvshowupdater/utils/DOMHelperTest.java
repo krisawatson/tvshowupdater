@@ -19,10 +19,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the DOMHelper() constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test(expected = java.lang.UnsupportedOperationException.class)
 	public void testDOMHelper_1()
 		throws Exception {
@@ -36,10 +36,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the void appendChild(Document,Element,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testAppendChild_1()
 		throws Exception {
@@ -59,10 +59,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the void appendChild(Document,Element,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testAppendChild_2()
 		throws Exception {
@@ -82,10 +82,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the void appendChild(Document,Element,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testAppendChild_3()
 		throws Exception {
@@ -105,10 +105,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the void appendChild(Document,Element,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testAppendChild_4()
 		throws Exception {
@@ -128,10 +128,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String convertDocToString(Document) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConvertDocToString_1()
 		throws Exception {
@@ -146,10 +146,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String convertDocToString(Document) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConvertDocToString_2()
 		throws Exception {
@@ -164,10 +164,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String convertDocToString(Document) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConvertDocToString_3()
 		throws Exception {
@@ -182,10 +182,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String convertDocToString(Document) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConvertDocToString_4()
 		throws Exception {
@@ -200,10 +200,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String convertDocToString(Document) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConvertDocToString_5()
 		throws Exception {
@@ -218,10 +218,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String convertDocToString(Document) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testConvertDocToString_6()
 		throws Exception {
@@ -236,10 +236,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the Document getEventDocFromUrl(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEventDocFromUrl_1()
 		throws Exception {
@@ -266,10 +266,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the Document getEventDocFromUrl(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEventDocFromUrl_2()
 		throws Exception {
@@ -296,10 +296,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the Document getEventDocFromUrl(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEventDocFromUrl_3()
 		throws Exception {
@@ -326,10 +326,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the Document getEventDocFromUrl(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEventDocFromUrl_4()
 		throws Exception {
@@ -356,10 +356,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the Document getEventDocFromUrl(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEventDocFromUrl_5()
 		throws Exception {
@@ -386,10 +386,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the Document getEventDocFromUrl(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEventDocFromUrl_6()
 		throws Exception {
@@ -416,10 +416,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the Document getEventDocFromUrl(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEventDocFromUrl_7()
 		throws Exception {
@@ -446,10 +446,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String getValueFromElement(Element,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetValueFromElement_1()
 		throws Exception {
@@ -470,10 +470,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String getValueFromElement(Element,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetValueFromElement_2()
 		throws Exception {
@@ -494,10 +494,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String getValueFromElement(Element,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetValueFromElement_3()
 		throws Exception {
@@ -518,10 +518,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String getValueFromElement(Element,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetValueFromElement_4()
 		throws Exception {
@@ -542,10 +542,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String getValueFromElement(Element,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetValueFromElement_5()
 		throws Exception {
@@ -566,10 +566,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the String getValueFromElement(Element,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetValueFromElement_6()
 		throws Exception {
@@ -590,10 +590,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the void setHttpClient(CommonHttpClient) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testSetHttpClient_1()
 		throws Exception {
@@ -607,10 +607,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the boolean writeDocumentToFile(Document,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testWriteDocumentToFile_1()
 		throws Exception {
@@ -634,10 +634,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the boolean writeDocumentToFile(Document,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testWriteDocumentToFile_2()
 		throws Exception {
@@ -661,10 +661,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the boolean writeDocumentToFile(Document,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testWriteDocumentToFile_3()
 		throws Exception {
@@ -688,10 +688,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the boolean writeDocumentToFile(Document,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testWriteDocumentToFile_4()
 		throws Exception {
@@ -715,10 +715,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the boolean writeDocumentToFile(Document,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testWriteDocumentToFile_5()
 		throws Exception {
@@ -742,10 +742,10 @@ public class DOMHelperTest {
 	/**
 	 * Run the boolean writeDocumentToFile(Document,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testWriteDocumentToFile_6()
 		throws Exception {
@@ -769,11 +769,11 @@ public class DOMHelperTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -783,11 +783,11 @@ public class DOMHelperTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

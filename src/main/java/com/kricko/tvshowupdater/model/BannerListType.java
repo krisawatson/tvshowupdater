@@ -24,6 +24,7 @@ package com.kricko.tvshowupdater.model;
  *
  * @author Stuart.Boston
  *
+ * @version $Revision: 1.0 $
  */
 public enum BannerListType {
 
@@ -32,6 +33,11 @@ public enum BannerListType {
     POSTER,
     FANART;
 
+    /**
+     * Method fromString.
+     * @param type String
+     * @return BannerListType
+     */
     public static BannerListType fromString(String type) {
         if (type != null) {
             try {

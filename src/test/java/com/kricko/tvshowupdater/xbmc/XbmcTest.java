@@ -15,10 +15,10 @@ public class XbmcTest {
 	/**
 	 * Run the void cleanVideoLibrary(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCleanVideoLibrary_1()
 		throws Exception {
@@ -35,10 +35,10 @@ public class XbmcTest {
 	/**
 	 * Run the void cleanVideoLibrary(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCleanVideoLibrary_2()
 		throws Exception {
@@ -52,10 +52,10 @@ public class XbmcTest {
 	/**
 	 * Run the void cleanVideoLibrary(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCleanVideoLibrary_3()
 		throws Exception {
@@ -69,10 +69,10 @@ public class XbmcTest {
 	/**
 	 * Run the void cleanVideoLibrary(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCleanVideoLibrary_4()
 		throws Exception {
@@ -86,10 +86,10 @@ public class XbmcTest {
 	/**
 	 * Run the void cleanVideoLibrary(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testCleanVideoLibrary_5()
 		throws Exception {
@@ -103,10 +103,10 @@ public class XbmcTest {
 	/**
 	 * Run the void updateHostVideos(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateHostVideos_1()
 		throws Exception {
@@ -123,10 +123,10 @@ public class XbmcTest {
 	/**
 	 * Run the void updateHostVideos(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateHostVideos_2()
 		throws Exception {
@@ -140,10 +140,10 @@ public class XbmcTest {
 	/**
 	 * Run the void updateHostVideos(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateHostVideos_3()
 		throws Exception {
@@ -157,10 +157,10 @@ public class XbmcTest {
 	/**
 	 * Run the void updateHostVideos(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateHostVideos_4()
 		throws Exception {
@@ -174,10 +174,10 @@ public class XbmcTest {
 	/**
 	 * Run the void updateHostVideos(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testUpdateHostVideos_5()
 		throws Exception {
@@ -191,11 +191,11 @@ public class XbmcTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -205,11 +205,11 @@ public class XbmcTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

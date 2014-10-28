@@ -29,6 +29,8 @@ import com.kricko.tvshowupdater.model.SeriesUpdate;
 import com.kricko.tvshowupdater.model.TVDBUpdates;
 import com.kricko.tvshowupdater.utils.DOMHelper;
 
+/**
+ */
 public class TvdbParser {
 
     private static final String TYPE_BANNER = "banner";
@@ -66,7 +68,8 @@ public class TvdbParser {
      *
      * @param urlString
      * @param bannerMirror
-     * @return
+    
+     * @return List<Actor>
      */
     public static List<Actor> getActors(String urlString, String bannerMirror) {
         List<Actor> results = new ArrayList<Actor>();
@@ -118,7 +121,8 @@ public class TvdbParser {
      * @param urlString
      * @param season
      * @param bannerMirror
-     * @return
+    
+     * @return List<Episode>
      */
     public static List<Episode> getAllEpisodes(String urlString, int season, String bannerMirror) {
         List<Episode> episodeList = new ArrayList<Episode>();
@@ -153,7 +157,8 @@ public class TvdbParser {
      *
      * @param urlString
      * @param bannerMirror
-     * @return
+    
+     * @return Banners
      */
     public static Banners getBanners(String urlString, String bannerMirror) {
         Banners banners = new Banners();
@@ -191,7 +196,8 @@ public class TvdbParser {
      *
      * @param urlString
      * @param bannerMirror
-     * @return
+    
+     * @return Episode
      */
     public static Episode getEpisode(String urlString, String bannerMirror) {
         Episode episode = new Episode();
@@ -229,7 +235,8 @@ public class TvdbParser {
      *
      * @param urlString
      * @param bannerMirror
-     * @return
+    
+     * @return List<Series>
      */
     public static List<Series> getSeriesList(String urlString, String bannerMirror) {
         List<Series> seriesList = new ArrayList<Series>();
@@ -268,7 +275,8 @@ public class TvdbParser {
      * Get a list of updates from the URL
      *
      * @param urlString
-     * @return
+    
+     * @return TVDBUpdates
      */
     public static TVDBUpdates getUpdates(String urlString) {
         TVDBUpdates updates = new TVDBUpdates();
@@ -317,7 +325,8 @@ public class TvdbParser {
      * Parse the error message to return a more user friendly message
      *
      * @param errorMessage
-     * @return
+    
+     * @return String
      */
     public static String parseErrorMessage(String errorMessage) {
         StringBuilder response = new StringBuilder();
@@ -365,6 +374,7 @@ public class TvdbParser {
      *
      * @param input
      * @param delim
+     * @return List<String>
      */
     private static List<String> parseList(String input, String delim) {
         List<String> result = new ArrayList<String>();
@@ -384,8 +394,10 @@ public class TvdbParser {
      * Parse the banner record from the document
      *
      * @param eBanner
-     * @throws Throwable
-     */
+    
+     * @param bannerMirror String
+     * @return Banner
+     * @throws Throwable */
     private static Banner parseNextBanner(Element eBanner, String bannerMirror) {
         Banner banner = new Banner();
         String artwork;
@@ -427,9 +439,12 @@ public class TvdbParser {
     /**
      * Parse the document for episode information
      *
-     * @param doc
-     * @throws Throwable
-     */
+    
+    
+     * @param eEpisode Element
+     * @param bannerMirror String
+     * @return Episode
+     * @throws Throwable */
     private static Episode parseNextEpisode(Element eEpisode, String bannerMirror) {
         Episode episode = new Episode();
 
@@ -477,8 +492,8 @@ public class TvdbParser {
      *
      * @param eEpisode
      * @param key
-     * @return the value, 0 if not found or an error.
-     */
+    
+     * @return the value, 0 if not found or an error. */
     private static int getEpisodeValue(Element eEpisode, String key) {
         int episodeValue;
         try {
@@ -496,8 +511,10 @@ public class TvdbParser {
      * Parse the series record from the document
      *
      * @param eSeries
-     * @throws Throwable
-     */
+    
+     * @param bannerMirror String
+     * @return Series
+     * @throws Throwable */
     private static Series parseNextSeries(Element eSeries, String bannerMirror) {
         Series series = new Series();
 
@@ -543,6 +560,7 @@ public class TvdbParser {
      * Parse the series update record from the document
      *
      * @param element
+     * @return SeriesUpdate
      */
     private static SeriesUpdate parseNextSeriesUpdate(Element element) {
         SeriesUpdate seriesUpdate = new SeriesUpdate();
@@ -557,6 +575,7 @@ public class TvdbParser {
      * Parse the episode update record from the document
      *
      * @param element
+     * @return EpisodeUpdate
      */
     private static EpisodeUpdate parseNextEpisodeUpdate(Element element) {
         EpisodeUpdate episodeUpdate = new EpisodeUpdate();
@@ -572,6 +591,7 @@ public class TvdbParser {
      * Parse the banner update record from the document
      *
      * @param element
+     * @return BannerUpdate
      */
     private static BannerUpdate parseNextBannerUpdate(Element element) {
         BannerUpdate bannerUpdate = new BannerUpdate();

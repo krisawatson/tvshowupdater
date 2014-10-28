@@ -53,6 +53,7 @@ import org.yamj.api.common.http.CommonHttpClient;
  *
  * @author Stuart.Boston
  *
+ * @version $Revision: 1.0 $
  */
 public class DOMHelper {
 
@@ -71,6 +72,10 @@ public class DOMHelper {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Method setHttpClient.
+     * @param newHttpClient CommonHttpClient
+     */
     public static void setHttpClient(CommonHttpClient newHttpClient) {
         httpClient = newHttpClient;
     }
@@ -80,7 +85,8 @@ public class DOMHelper {
      *
      * @param element
      * @param tagName
-     * @return
+    
+     * @return String
      */
     public static String getValueFromElement(Element element, String tagName) {
         NodeList elementNodeList = element.getElementsByTagName(tagName);
@@ -104,7 +110,8 @@ public class DOMHelper {
      * Get a DOM document from the supplied URL
      *
      * @param url
-     * @return
+    
+     * @return Document
      */
     public static synchronized Document getEventDocFromUrl(String url) {
         InputStream in = null;
@@ -145,6 +152,11 @@ public class DOMHelper {
         return doc;
     }
 
+    /**
+     * Method getValidWebpage.
+     * @param url String
+     * @return String
+     */
     private static String getValidWebpage(String url) {
         // Count the number of times we download the web page
         int retryCount = 0;
@@ -187,9 +199,10 @@ public class DOMHelper {
      * Convert a DOM document to a string
      *
      * @param doc
-     * @return
-     * @throws TransformerException
-     */
+    
+    
+     * @return String
+     * @throws TransformerException */
     public static String convertDocToString(Document doc) throws TransformerException {
         //set up a transformer
         TransformerFactory transfac = TransformerFactory.newInstance();
@@ -210,7 +223,8 @@ public class DOMHelper {
      *
      * @param doc The document to save
      * @param localFile The file to write to
-     * @return
+    
+     * @return boolean
      */
     public static boolean writeDocumentToFile(Document doc, String localFile) {
         try {
@@ -257,6 +271,12 @@ public class DOMHelper {
         } while ((t1 - t0) < milliseconds);
     }
 
+    /**
+     * Method requestWebPage.
+     * @param url String
+     * @return String
+     * @throws IOException
+     */
     private static String requestWebPage(String url) throws IOException {
         return httpClient.requestContent(url, Charset.forName(ENCODING));
     }

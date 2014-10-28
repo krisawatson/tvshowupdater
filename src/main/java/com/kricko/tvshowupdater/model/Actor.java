@@ -30,6 +30,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 /**
  *
  * @author matthew.altman
+ * @version $Revision: 1.0 $
  */
 public class Actor implements Comparable<Actor>, Serializable {
 
@@ -41,64 +42,125 @@ public class Actor implements Comparable<Actor>, Serializable {
     private String image;
     private int sortOrder = 0;
 
+    /**
+     * Method getId.
+     * @return int
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Method getName.
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Method getRole.
+     * @return String
+     */
     public String getRole() {
         return role;
     }
 
+    /**
+     * Method getImage.
+     * @return String
+     */
     public String getImage() {
         return image;
     }
 
+    /**
+     * Method getSortOrder.
+     * @return int
+     */
     public int getSortOrder() {
         return sortOrder;
     }
 
+    /**
+     * Method setId.
+     * @param id int
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Method setId.
+     * @param id String
+     */
     public void setId(String id) {
         this.id = NumberUtils.toInt(id, 0);
     }
 
+    /**
+     * Method setName.
+     * @param name String
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Method setRole.
+     * @param role String
+     */
     public void setRole(String role) {
         this.role = role;
     }
 
+    /**
+     * Method setImage.
+     * @param image String
+     */
     public void setImage(String image) {
         this.image = image;
     }
 
+    /**
+     * Method setSortOrder.
+     * @param sortOrder int
+     */
     public void setSortOrder(int sortOrder) {
         this.sortOrder = sortOrder;
     }
 
+    /**
+     * Method setSortOrder.
+     * @param sortOrder String
+     */
     public void setSortOrder(String sortOrder) {
         this.sortOrder = NumberUtils.toInt(sortOrder, 0);
     }
 
+    /**
+     * Method compareTo.
+     * @param other Actor
+     * @return int
+     */
     @Override
     public int compareTo(Actor other) {
         return sortOrder - other.getSortOrder();
     }
 
+    /**
+     * Method toString.
+     * @return String
+     */
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
+    /**
+     * Method hashCode.
+     * @return int
+     */
     @Override
     public int hashCode() {
         return new HashCodeBuilder()
@@ -110,6 +172,11 @@ public class Actor implements Comparable<Actor>, Serializable {
                 .toHashCode();
     }
 
+    /**
+     * Method equals.
+     * @param obj Object
+     * @return boolean
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Actor) {

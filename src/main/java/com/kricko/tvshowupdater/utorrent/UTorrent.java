@@ -10,6 +10,8 @@ import com.kricko.tvshowupdater.utils.Config;
 import com.kricko.tvshowupdater.utils.Constants;
 import com.kricko.tvshowupdater.utils.HttpUtils;
 
+/**
+ */
 public class UTorrent {
 
 	private String host, port, username, password;
@@ -23,6 +25,10 @@ public class UTorrent {
 		password = props.getProperty(Constants.UTORRENT + ".webpass");
 	}
 	
+	/**
+	 * Method getToken.
+	 * @throws IOException
+	 */
 	public void getToken() throws IOException{
 		String response = HttpUtils.get("http://"+host+":"+port + "/gui/token.html", null, username+":"+password);
 		
@@ -31,6 +37,10 @@ public class UTorrent {
 		token = tokenElem.text();
 	}
 	
+	/**
+	 * Method getListOfTorrents.
+	 * @throws IOException
+	 */
 	public void getListOfTorrents() throws IOException{
 		String data = "?token="+token;
 		String response = HttpUtils.get("http://"+host+":"+port + "/gui/", data, username+":"+password);

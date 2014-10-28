@@ -20,10 +20,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the TvdbParser() constructor test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test(expected = java.lang.UnsupportedOperationException.class)
 	public void testTvdbParser_1()
 		throws Exception {
@@ -37,10 +37,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Actor> getActors(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetActors_1()
 		throws Exception {
@@ -55,10 +55,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Actor> getActors(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetActors_2()
 		throws Exception {
@@ -73,10 +73,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Actor> getActors(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetActors_3()
 		throws Exception {
@@ -91,10 +91,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Actor> getActors(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetActors_4()
 		throws Exception {
@@ -109,10 +109,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Actor> getActors(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetActors_5()
 		throws Exception {
@@ -127,10 +127,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_1()
 		throws Exception {
@@ -146,10 +146,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_2()
 		throws Exception {
@@ -165,10 +165,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_3()
 		throws Exception {
@@ -184,10 +184,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_4()
 		throws Exception {
@@ -203,10 +203,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_5()
 		throws Exception {
@@ -222,10 +222,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Episode> getAllEpisodes(String,int,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetAllEpisodes_6()
 		throws Exception {
@@ -241,10 +241,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Banners getBanners(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBanners_1()
 		throws Exception {
@@ -259,10 +259,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Banners getBanners(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBanners_2()
 		throws Exception {
@@ -277,10 +277,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Banners getBanners(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBanners_3()
 		throws Exception {
@@ -295,10 +295,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Banners getBanners(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBanners_4()
 		throws Exception {
@@ -313,10 +313,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Banners getBanners(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetBanners_5()
 		throws Exception {
@@ -331,10 +331,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Episode getEpisode(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_1()
 		throws Exception {
@@ -349,10 +349,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Episode getEpisode(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_2()
 		throws Exception {
@@ -367,10 +367,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Episode getEpisode(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_3()
 		throws Exception {
@@ -385,10 +385,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Episode getEpisode(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_4()
 		throws Exception {
@@ -403,10 +403,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the Episode getEpisode(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetEpisode_5()
 		throws Exception {
@@ -421,10 +421,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Series> getSeriesList(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeriesList_1()
 		throws Exception {
@@ -439,10 +439,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Series> getSeriesList(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeriesList_2()
 		throws Exception {
@@ -457,10 +457,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Series> getSeriesList(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeriesList_3()
 		throws Exception {
@@ -475,10 +475,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Series> getSeriesList(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeriesList_4()
 		throws Exception {
@@ -493,10 +493,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the List<Series> getSeriesList(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetSeriesList_5()
 		throws Exception {
@@ -511,10 +511,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the TVDBUpdates getUpdates(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetUpdates_1()
 		throws Exception {
@@ -528,10 +528,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the TVDBUpdates getUpdates(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetUpdates_2()
 		throws Exception {
@@ -545,10 +545,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the TVDBUpdates getUpdates(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetUpdates_3()
 		throws Exception {
@@ -562,10 +562,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the TVDBUpdates getUpdates(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetUpdates_4()
 		throws Exception {
@@ -579,10 +579,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the TVDBUpdates getUpdates(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetUpdates_5()
 		throws Exception {
@@ -596,10 +596,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the TVDBUpdates getUpdates(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testGetUpdates_6()
 		throws Exception {
@@ -613,10 +613,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_1()
 		throws Exception {
@@ -631,10 +631,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_2()
 		throws Exception {
@@ -649,10 +649,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_3()
 		throws Exception {
@@ -667,10 +667,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_4()
 		throws Exception {
@@ -685,10 +685,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_5()
 		throws Exception {
@@ -703,10 +703,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_6()
 		throws Exception {
@@ -721,10 +721,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_7()
 		throws Exception {
@@ -739,10 +739,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_8()
 		throws Exception {
@@ -757,10 +757,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_9()
 		throws Exception {
@@ -775,10 +775,10 @@ public class TvdbParserTest {
 	/**
 	 * Run the String parseErrorMessage(String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception */
 	@Test
 	public void testParseErrorMessage_10()
 		throws Exception {
@@ -793,11 +793,11 @@ public class TvdbParserTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -807,11 +807,11 @@ public class TvdbParserTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:05
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

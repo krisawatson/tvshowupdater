@@ -15,10 +15,10 @@ public class AppTest {
 	/**
 	 * Run the void main(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testMain_1()
 		throws Exception {
@@ -30,10 +30,10 @@ public class AppTest {
 	/**
 	 * Run the void main(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testMain_2()
 		throws Exception {
@@ -45,10 +45,10 @@ public class AppTest {
 	/**
 	 * Run the void main(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testMain_3()
 		throws Exception {
@@ -60,10 +60,10 @@ public class AppTest {
 	/**
 	 * Run the void main(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testMain_4()
 		throws Exception {
@@ -75,10 +75,10 @@ public class AppTest {
 	/**
 	 * Run the void main(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testMain_5()
 		throws Exception {
@@ -90,10 +90,10 @@ public class AppTest {
 	/**
 	 * Run the void main(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testMain_6()
 		throws Exception {
@@ -105,10 +105,10 @@ public class AppTest {
 	/**
 	 * Run the void main(String[]) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception */
 	@Test
 	public void testMain_7()
 		throws Exception {
@@ -120,11 +120,11 @@ public class AppTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -134,11 +134,11 @@ public class AppTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:04
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

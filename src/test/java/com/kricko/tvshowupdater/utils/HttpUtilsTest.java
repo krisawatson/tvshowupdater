@@ -17,10 +17,10 @@ public class HttpUtilsTest {
 	/**
 	 * Run the void clearProxy() method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testClearProxy_1()
 		throws Exception {
@@ -33,10 +33,10 @@ public class HttpUtilsTest {
 	/**
 	 * Run the String get(String,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test(expected = java.net.MalformedURLException.class)
 	public void testGet_1()
 		throws Exception {
@@ -53,10 +53,10 @@ public class HttpUtilsTest {
 	/**
 	 * Run the String get(String,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test(expected = java.net.MalformedURLException.class)
 	public void testGet_2()
 		throws Exception {
@@ -73,10 +73,10 @@ public class HttpUtilsTest {
 	/**
 	 * Run the String post(String,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test(expected = java.net.MalformedURLException.class)
 	public void testPost_1()
 		throws Exception {
@@ -93,10 +93,10 @@ public class HttpUtilsTest {
 	/**
 	 * Run the String post(String,String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test(expected = java.net.MalformedURLException.class)
 	public void testPost_2()
 		throws Exception {
@@ -113,10 +113,10 @@ public class HttpUtilsTest {
 	/**
 	 * Run the void setProxy(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testSetProxy_1()
 		throws Exception {
@@ -131,11 +131,11 @@ public class HttpUtilsTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -145,11 +145,11 @@ public class HttpUtilsTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {

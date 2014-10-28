@@ -1,6 +1,8 @@
 package com.kricko.tvshowupdater.model;
 
 
+/**
+ */
 public class Details {
 
 	private String name;
@@ -11,34 +13,66 @@ public class Details {
 	
 	private String path;
 
+	/**
+	 * Method getName.
+	 * @return String
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Method setName.
+	 * @param name String
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Method getRssfeed.
+	 * @return String
+	 */
 	public String getRssfeed() {
 		return rssfeed;
 	}
 
+	/**
+	 * Method setRssfeed.
+	 * @param rssfeed String
+	 */
 	public void setRssfeed(String rssfeed) {
 		this.rssfeed = rssfeed;
 	}
 
+	/**
+	 * Method getRegex.
+	 * @return String
+	 */
 	public String getRegex() {
 		return regex;
 	}
 
+	/**
+	 * Method setRegex.
+	 * @param regex String
+	 */
 	public void setRegex(String regex) {
 		this.regex = regex;
 	}
 
+	/**
+	 * Method getPath.
+	 * @return String
+	 */
 	public String getPath() {
 		return path;
 	}
 
+	/**
+	 * Method setPath.
+	 * @param path String
+	 */
 	public void setPath(String path) {
 		this.path = path;
 	}

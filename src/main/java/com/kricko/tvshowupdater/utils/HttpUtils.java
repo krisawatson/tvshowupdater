@@ -11,19 +11,46 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ */
 public class HttpUtils {
 
 	/*
 	 * Returns null if fail, otherwise returns the String response from the post
 	 */
+	/**
+	 * Method post.
+	 * @param strUrl String
+	 * @param data String
+	 * @param authString String
+	 * @return String
+	 * @throws Exception
+	 */
 	public static String post(String strUrl, String data, String authString) throws Exception{
 		return makeHttpCall("POST", strUrl, data, authString);
 	}
 	
+	/**
+	 * Method get.
+	 * @param strUrl String
+	 * @param data String
+	 * @param authString String
+	 * @return String
+	 * @throws IOException
+	 */
 	public static String get(String strUrl, String data, String authString) throws IOException{
 		return makeHttpCall("GET", strUrl, data, authString);
 	}
 	
+	/**
+	 * Method makeHttpCall.
+	 * @param method String
+	 * @param strUrl String
+	 * @param data String
+	 * @param authString String
+	 * @return String
+	 * @throws IOException
+	 */
 	@SuppressWarnings("restriction")
 	private static String makeHttpCall(String method, String strUrl, String data, String authString) 
 			throws IOException{
@@ -83,6 +110,12 @@ public class HttpUtils {
 		return response.toString();
 	}
 	
+	/**
+	 * Method getContentLength.
+	 * @param data String
+	 * @return int
+	 * @throws UnsupportedEncodingException
+	 */
 	private static int getContentLength(String data) throws UnsupportedEncodingException{        
 		ByteArrayOutputStream sizeArray = new ByteArrayOutputStream();
 		PrintWriter sizeGetter = new PrintWriter(new OutputStreamWriter(sizeArray, "UTF-8" ));                
@@ -92,6 +125,11 @@ public class HttpUtils {
 		return sizeArray.size();        
 	}
 	
+	/**
+	 * Method readStream.
+	 * @param is InputStream
+	 * @return String
+	 */
 	private static String readStream(InputStream is)
 	{
 		try
@@ -113,6 +151,11 @@ public class HttpUtils {
 		}
 	}
 	
+	/**
+	 * Method setProxy.
+	 * @param host String
+	 * @param port String
+	 */
 	public static void setProxy(String host, String port){
 		System.setProperty("http.proxyHost", host);
 		System.setProperty("http.proxyPort", port);

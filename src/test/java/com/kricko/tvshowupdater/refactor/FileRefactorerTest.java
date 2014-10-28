@@ -19,6 +19,7 @@ public class FileRefactorerTest {
 	 * Run the FileRefactorer() constructor test.
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
+	 * @throws Exception
 	 */
 	@Test
 	public void testFileRefactorer_1()
@@ -31,10 +32,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_1()
 		throws Exception {
@@ -49,10 +50,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_2()
 		throws Exception {
@@ -67,10 +68,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_3()
 		throws Exception {
@@ -85,10 +86,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_4()
 		throws Exception {
@@ -103,10 +104,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_5()
 		throws Exception {
@@ -121,10 +122,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_6()
 		throws Exception {
@@ -139,10 +140,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_7()
 		throws Exception {
@@ -157,10 +158,10 @@ public class FileRefactorerTest {
 	/**
 	 * Run the void doRefactor(String,String) method test.
 	 *
-	 * @throws Exception
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception */
 	@Test
 	public void testDoRefactor_8()
 		throws Exception {
@@ -175,11 +176,11 @@ public class FileRefactorerTest {
 	/**
 	 * Perform pre-test initialization.
 	 *
-	 * @throws Exception
-	 *         if the initialization fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the initialization fails for some reason */
 	@Before
 	public void setUp()
 		throws Exception {
@@ -189,11 +190,11 @@ public class FileRefactorerTest {
 	/**
 	 * Perform post-test clean-up.
 	 *
-	 * @throws Exception
-	 *         if the clean-up fails for some reason
+	
 	 *
 	 * @generatedBy CodePro at 28/10/14 09:06
-	 */
+	 * @throws Exception
+	 *         if the clean-up fails for some reason */
 	@After
 	public void tearDown()
 		throws Exception {
