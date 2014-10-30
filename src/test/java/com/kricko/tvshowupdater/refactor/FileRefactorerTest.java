@@ -1,11 +1,10 @@
 package com.kricko.tvshowupdater.refactor;
 
-import org.junit.*;
+import static org.junit.Assert.assertNotNull;
 
-import static org.junit.Assert.*;
-
-import com.kricko.tvshowupdater.thetvdb.TheTVDBApi;
-import com.kricko.tvshowupdater.utils.Constants;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * The class <code>FileRefactorerTest</code> contains tests for the class <code>{@link FileRefactorer}</code>.
@@ -27,150 +26,6 @@ public class FileRefactorerTest {
 		FileRefactorer result = new FileRefactorer();
 		assertNotNull(result);
 		// add additional test code here
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_1()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "The Big Bang Theory";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_2()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_3()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_4()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_5()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_6()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_7()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
-	}
-
-	/**
-	 * Run the void doRefactor(String,String) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception */
-	@Test
-	public void testDoRefactor_8()
-		throws Exception {
-		FileRefactorer fixture = new FileRefactorer();
-		fixture.tvdb = new TheTVDBApi(Constants.API_KEY);
-		String seriesName = "";
-		String parentDirectory = "";
-
-		fixture.doRefactor(seriesName, parentDirectory);
 	}
 
 	/**

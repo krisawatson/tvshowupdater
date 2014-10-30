@@ -1,10 +1,102 @@
 {
 	"shows":[
 		{
+			"name":"The Big Bang Theory"
+			"rssfeed":"http://showrss.info/feeds/5.rss"
+			"regex":"(^|)(The Big Bang Theory S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Big Bang Theory, The"
+			"skip":["Season 6", "Season 7"]
+		},
+		{
+			"name":"Brooklyn Nine Nine"
+			"rssfeed":"http://showrss.info/feeds/613.rss"
+			"regex":"(^|)(Brooklyn Nine Nine.*S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Brooklyn Nine Nine"
+			"skip":["Season 1"]
+		},
+		{
+			"name":"Elementary"
+			"rssfeed":"http://showrss.info/feeds/485.rss"
+			"regex":"(^|)(Elementary S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Elementary"
+			"skip":["Season 1", "Season 2"]
+		},
+		{
+			"name":"Family Guy"
+			"rssfeed":"http://showrss.info/feeds/27.rss"
+			"regex":"(^|)(Family Guy S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Family Guy"
+			"skip":["Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9", "Season 11", "Season 12"]
+		},
+		{
+			"name":"The Flash (2014)"
+			"rssfeed":"http://showrss.info/feeds/849.rss"
+			"regex":"(^|)(The Flash \(2014\).*S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Flash (2014), The"
+			"skip":[]
+		},
+		{
+			"name":"The Good Wife"
+			"rssfeed":"http://showrss.info/feeds/208.rss"
+			"regex":"(^|)(The Good Wife S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Good Wife, The"
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"]
+		},
+		{
+			"name":"Gotham"
+			"rssfeed":"http://showrss.info/feeds/928.rss"
+			"regex":"(^|)(Gotham S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Gotham"
+			"skip":[]
+		},
+		{
+			"name":"Greys Anatomy"
+			"rssfeed":"http://showrss.info/feeds/34.rss"
+			"regex":"(^|)(Greys Anatomy S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series A-G/Greys Anatomy"
+			"skip":["Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9", "Season 10"]
+		},
+		{
+			"name":"Homeland"
+			"rssfeed":"http://showrss.info/feeds/400.rss"
+			"regex":"(^|)(Homeland S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series H-O/Homeland"
+			"skip":["Season 1", "Season 2", "Season 3"]
+		},
+		{
+			"name":"Person of Interest"
+			"rssfeed":"http://showrss.info/feeds/388.rss"
+			"regex":"(^|)(Person of Interest S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series P-Z/Person of Interest"
+			"skip":["Season 1", "Season 2", "Season 3"]
+		},
+		{
+			"name":"Revenge"
+			"rssfeed":"http://showrss.info/feeds/393.rss"
+			"regex":"(^|)(Revenge S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series P-Z/Revenge"
+			"skip":["Season 2", "Season 3"]
+		},
+		{
+			"name":"Scandal (2012)"
+			"rssfeed":"http://showrss.info/feeds/439.rss"
+			"regex":"(^|)(Scandal \(2012\) S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series P-Z/Scandal (2012)"
+			"skip":["Season 1", "Season 2", "Season 3"]
+		},
+		{
 			"name":"Silicon Valley"
 			"rssfeed":"http://showrss.info/feeds/799.rss"
-			"regex":"(^|)(Silicon Valley S([0-9]+)E([0-9]+).*)(|$)"
+			"regex":"(^|)(Silicon Valley S([0-9]+)E([0-9]+))(|$)"
 			"path":"G:/TV Series P-Z/Silicon Valley"
+			"skip":[]
+		},
+		{
+			"name":"Suits"
+			"rssfeed":"http://showrss.info/feeds/367.rss"
+			"regex":"(^|)(Suits S([0-9]+)E([0-9]+))(|$)"
+			"path":"G:/TV Series P-Z/Suits"
+			"skip":["Season 1", "Season 2", "Season 3"]
 		}
 	]
 }

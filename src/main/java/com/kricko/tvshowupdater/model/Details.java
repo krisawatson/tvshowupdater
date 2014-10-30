@@ -1,5 +1,7 @@
 package com.kricko.tvshowupdater.model;
 
+import java.util.List;
+
 
 /**
  */
@@ -12,6 +14,8 @@ public class Details {
 	private String regex;
 	
 	private String path;
+	
+	private List<String> skip;
 
 	/**
 	 * Method getName.
@@ -75,5 +79,21 @@ public class Details {
 	 */
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	/**
+	 * Method getSkip
+	 * @return List<String>
+	 */
+	public List<String> getSkip() {
+		return skip;
+	}
+
+	/**
+	 * Method setSkip
+	 * @param skip List<String>
+	 */
+	public void setSkip(List<String> skip) {
+		this.skip = skip;
 	}
 }
