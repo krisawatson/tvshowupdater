@@ -78,8 +78,10 @@ public class TvShowUtils {
 	 * @param detail Details
 	 * @throws Throwable
 	 */
-	public static void downloadNewItems(Item item, Details detail) throws Throwable{
+	public static boolean downloadNewItems(Item item, Details detail) throws Throwable{
 
+		boolean newDownloads = false;
+		
 		Pattern pattern = Pattern.compile(detail.getRegex());
 		Matcher itemMatcher = pattern.matcher(item.getRawTitle());
 		while(itemMatcher.find()){
@@ -98,6 +100,7 @@ public class TvShowUtils {
 			if(episodeExists(existingItems, filePrefix)){
 				System.out.println(filePrefix + " episode already exists");
 			} else {
+				newDownloads = true;
 				Properties prop = Config.getInstance().getProperties();
 				String[] params = {prop.getProperty("torrent.client"),"/DIRECTORY", "\""+dir+"\"", "\""+item.getLink()+"\"" };
 				System.out.println("Executing command: utorrent.exe /DIRECTORY \""+dir+"\" \""+item.getLink()+"\"");
@@ -110,6 +113,11 @@ public class TvShowUtils {
 				Runtime.getRuntime().exec(params);
 			}
 		}
+		
+		if(newDownloads){
+			Thread.sleep(2000);
+		}
+		return newDownloads;
 	}
 
 	/**

@@ -2,12 +2,16 @@ package com.kricko.tvshowupdater;
 
 import java.io.Console;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.httpclient.HttpException;
 import org.json.simple.parser.ParseException;
 
+import com.kricko.tvshowupdater.thread.MonitorTorrentsThread;
 import com.kricko.tvshowupdater.utils.Config;
 import com.kricko.tvshowupdater.xbmc.Xbmc;
 
@@ -81,7 +85,14 @@ public class App
 				if(Config.getInstance().updateBeforeDownload()){
 					RefactorFiles.tidyFolders(false);
 				}
-				DownloadShows.doDownload();
+				boolean newDownloads = DownloadShows.doDownload();
+				
+				if(newDownloads){
+					doMonitorTorrents();
+					RefactorFiles.tidyFolders(true);
+					String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
+					Xbmc.updateHostVideos(hosts);
+				}
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFiles.tidyFolders(true);
 			} else if(option.equals("xbmcupdate") || option.equals("3")){
@@ -96,6 +107,19 @@ public class App
 				System.out.println("Invalid option, try again");
 				showInteractiveCommandLine();
 			}
+		}
+	}
+	
+	private static void doMonitorTorrents() {
+		ExecutorService thread = Executors.newSingleThreadExecutor();
+		thread.execute(new MonitorTorrentsThread());
+		
+		thread.shutdown();
+
+		try {
+			thread.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+		} catch (InterruptedException e) {
+			return;
 		}
 	}
 }

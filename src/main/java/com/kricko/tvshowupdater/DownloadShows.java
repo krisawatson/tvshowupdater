@@ -27,12 +27,14 @@ public class DownloadShows {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static void doDownload() throws JAXBException, IOException, ParseException {
+	public static boolean doDownload() throws JAXBException, IOException, ParseException {
 		JAXBContext jc = JAXBContext.newInstance(Rss.class);
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         
         Shows shows = TvShowUtils.getListOfShows();
+        
+        boolean newDownloads = false;
         
         for(Details detail:shows.getShows()){
         	System.out.println(detail.getName());
@@ -44,7 +46,7 @@ public class DownloadShows {
             items = TvShowUtils.removeDuplicateEpisodes(items, detail.getRegex());
             for(Item item:items){
             	try {
-					TvShowUtils.downloadNewItems(item, detail);
+					newDownloads = newDownloads || TvShowUtils.downloadNewItems(item, detail);
 				} catch (Throwable e) {
 					System.err.println(e.getLocalizedMessage());
 				}
@@ -55,5 +57,7 @@ public class DownloadShows {
         }
         
         TvShowUtils.appendDirToTidyUpList();
+        
+        return newDownloads;
 	}
 }
