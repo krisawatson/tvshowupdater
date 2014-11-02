@@ -1,11 +1,11 @@
 {
 	"shows":[
 		{
-			"name":"The Big Bang Theory"
-			"rssfeed":"http://showrss.info/feeds/5.rss"
-			"regex":"(^|)(The Big Bang Theory S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
-			"path":"G:/TV Series A-G/Big Bang Theory, The"
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7"]
+			"name":"Scorpion"
+			"rssfeed":"http://showrss.info/feeds/931.rss"
+			"regex":"(^|)(Scorpion S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series P-Z/Scorpion"
+			"skip":[]
 		}
 	]
 }

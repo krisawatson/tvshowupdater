@@ -30,34 +30,36 @@ public class DownloadShows {
 	public static boolean doDownload() throws JAXBException, IOException, ParseException {
 		JAXBContext jc = JAXBContext.newInstance(Rss.class);
 
-        Unmarshaller unmarshaller = jc.createUnmarshaller();
-        
-        Shows shows = TvShowUtils.getListOfShows();
-        
-        boolean newDownloads = false;
-        
-        for(Details detail:shows.getShows()){
-        	System.out.println(detail.getName());
-        	URL rssFeed = new URL(detail.getRssfeed());
-            InputStream is = rssFeed.openStream();
-            Rss rss = (Rss) unmarshaller.unmarshal(is);
+		Unmarshaller unmarshaller = jc.createUnmarshaller();
 
-            List<Item> items = rss.getChannel().getItem();
-            items = TvShowUtils.removeDuplicateEpisodes(items, detail.getRegex());
-            for(Item item:items){
-            	try {
-					newDownloads = newDownloads || TvShowUtils.downloadNewItems(item, detail);
-				} catch (Throwable e) {
-					System.err.println(e.getLocalizedMessage());
+		Shows shows = TvShowUtils.getListOfShows();
+
+		boolean newDownloads = false;
+
+		for(Details detail:shows.getShows()){
+			System.out.println(detail.getName());
+			URL rssFeed = new URL(detail.getRssfeed());
+			InputStream is = rssFeed.openStream();
+			Rss rss = (Rss) unmarshaller.unmarshal(is);
+
+			List<Item> items = rss.getChannel().getItem();
+			if(items != null){
+				items = TvShowUtils.removeDuplicateEpisodes(items, detail.getRegex());
+				for(Item item:items){
+					try {
+						newDownloads = newDownloads || TvShowUtils.downloadNewItems(item, detail);
+					} catch (Throwable e) {
+						System.err.println(e.getLocalizedMessage());
+					}
+					System.out.println(detail.getPath());
+					System.out.println(item.getTitle());
 				}
-            	System.out.println(detail.getPath());
-            	System.out.println(item.getTitle());
-            }       
-            is.close();
-        }
-        
-        TvShowUtils.appendDirToTidyUpList();
-        
-        return newDownloads;
+			}
+			is.close();
+		}
+
+		TvShowUtils.appendDirToTidyUpList();
+
+		return newDownloads;
 	}
 }
