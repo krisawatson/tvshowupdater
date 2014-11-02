@@ -4,7 +4,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.json.simple.parser.ParseException;
 import org.junit.Test;
 
 /**
@@ -29,7 +28,7 @@ public class UtorrentTests {
 		try {
 			uTorrent.getToken();
 			uTorrent.getListOfTorrents();
-		} catch (IOException | ParseException e) {
+		} catch (IOException e) {
 			fail();
 		}
 		

@@ -57,7 +57,7 @@ public class UTorrent {
 			Element tokenElem = doc.getElementById("token");
 			token = tokenElem.text();
 		} catch (IOException e) {
-			System.err.println(e.getLocalizedMessage());
+			System.err.println("Failed during get token " + e.getLocalizedMessage());
 		}
 	}
 
@@ -66,26 +66,33 @@ public class UTorrent {
 	 * @throws IOException
 	 * @throws ParseException 
 	 */
-	public Torrent getListOfTorrents() throws IOException, ParseException{
+	public Torrent getListOfTorrents() {
 		String login = username + ":" + password;
 		String base64login = new String(Base64.encodeBase64(login.getBytes()));
 
-		Response response = Jsoup.connect("http://"+host+":"+port + "/gui/?token="+token+"&list=1")
-				.method(Connection.Method.GET)
-				.cookies(cookies)
-				.header("Authorization", "Basic " + base64login)
-				.timeout(0)
-				.execute();
+		Response response;
+		try {
+			response = Jsoup.connect("http://"+host+":"+port + "/gui/?token="+token+"&list=1")
+					.method(Connection.Method.GET)
+					.cookies(cookies)
+					.header("Authorization", "Basic " + base64login)
+					.timeout(0)
+					.execute();
+			
+			ObjectMapper mapper = new ObjectMapper();
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(response.body());
 
-		ObjectMapper mapper = new ObjectMapper();
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) jsonParser.parse(response.body());
+			Torrent torrent = mapper.readValue(jsonObject.toString(), Torrent.class);
 
-		Torrent torrent = mapper.readValue(jsonObject.toString(), Torrent.class);
-		return torrent;
+			return torrent;
+		} catch (IOException | ParseException e) {
+			System.out.println("Failed during getting the list of torrents " + e.getLocalizedMessage());
+		}
+		return null;
 	}
 
-	public List<String> getFinishedHashes(Torrent torrentList) throws IOException, ParseException {
+	public List<String> getFinishedHashes(Torrent torrentList) {
 
 		List<String> hashes = new ArrayList<String>();
 
@@ -102,21 +109,28 @@ public class UTorrent {
 		return hashes;
 	}
 
-	public void removeCompletedTorrents(List<String> hashes) throws IOException {
+	public void removeCompletedTorrents(List<String> hashes) {
 		String login = username + ":" + password;
 		String base64login = new String(Base64.encodeBase64(login.getBytes()));
 
 		String url = "http://"+host+":"+port + "/gui/?token="+token;
 
 		for(String hash:hashes){
-			Response response = Jsoup.connect(url + "&action=remove&hash=" + hash)
-					.method(Connection.Method.POST)
-					.cookies(cookies)
-					.header("Authorization", "Basic " + base64login)
-					.timeout(0)
-					.execute();
+			Response response = null;
+			try {
+				response = Jsoup.connect(url + "&action=remove&hash=" + hash)
+						.method(Connection.Method.POST)
+						.cookies(cookies)
+						.header("Authorization", "Basic " + base64login)
+						.timeout(0)
+						.execute();
+			} catch (IOException e) {
+				System.err.println("Failed during removed completed torrents " + e.getLocalizedMessage());
+			}
 			
-			System.out.println(response.body());
+			if(response != null){
+				System.out.println(response.body());
+			}
 		}
 	}
 }
