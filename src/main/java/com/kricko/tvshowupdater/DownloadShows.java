@@ -47,7 +47,7 @@ public class DownloadShows {
 				items = TvShowUtils.removeDuplicateEpisodes(items, detail.getRegex());
 				for(Item item:items){
 					try {
-						newDownloads = newDownloads || TvShowUtils.downloadNewItems(item, detail);
+						newDownloads = TvShowUtils.downloadNewItems(item, detail) || newDownloads;
 					} catch (Throwable e) {
 						System.err.println(e.getLocalizedMessage());
 					}
