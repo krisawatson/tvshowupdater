@@ -92,6 +92,7 @@ public class App
 					RefactorFiles.tidyFolders(true);
 					String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
 					Xbmc.updateHostVideos(hosts);
+					Xbmc.executeTraktAddon(hosts);
 				}
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFiles.tidyFolders(true);

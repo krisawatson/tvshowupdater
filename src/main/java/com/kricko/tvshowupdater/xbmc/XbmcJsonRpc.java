@@ -100,7 +100,10 @@ public class XbmcJsonRpc implements Runnable
 			cmd = cmd.substring(0, cmd.length()-", ".length());//trimm off the extra ", "
 			cmd += "}";//end params
 		}
-		cmd += ", \"id\": \""+id+"\"}";
+		if(id != -1){
+			cmd += ", \"id\": \""+id+"\"";
+		}
+		cmd += "}";
 
 		System.out.println("Connecting to "+server+"(JSON-RPC) and sending command: " + cmd);
 
@@ -298,6 +301,31 @@ public class XbmcJsonRpc implements Runnable
 		try
 		{
 			JSONObject response = callMethod("VideoLibrary.Clean", 1, null);
+			System.out.println(response);
+		}
+		catch(Exception x)
+		{
+			System.err.println("Failed to cleaning VideoLibrary using JSON-RPC: "+x.getLocalizedMessage());
+		}
+	}
+	
+	public void getAddOns(Map<String,Object> params)
+	{
+		try
+		{
+			JSONObject response = callMethod("Addons.GetAddons", 1, params);
+			System.out.println(response);
+		}
+		catch(Exception x)
+		{
+			System.err.println("Failed to cleaning VideoLibrary using JSON-RPC: "+x.getLocalizedMessage());
+		}
+	}
+	
+	public void executeAddon(Map<String,Object> params){
+		try
+		{
+			JSONObject response = callMethod("Addons.ExecuteAddon", -1, params);
 			System.out.println(response);
 		}
 		catch(Exception x)

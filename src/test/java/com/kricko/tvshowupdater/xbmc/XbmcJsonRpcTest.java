@@ -3,6 +3,7 @@ package com.kricko.tvshowupdater.xbmc;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.codehaus.jackson.map.util.LRUMap;
@@ -170,11 +171,14 @@ public class XbmcJsonRpcTest {
 	 * @generatedBy CodePro at 28/10/14 09:05
 	 * @throws Exception */
 	@Test
-	public void testRun_1()
+	public void testExecuteAddons_1()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("192.168.1.30", 9090, false, 1);
 
-		fixture.run();
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("addonid", "script.trakt");
+		
+		fixture.executeAddon(params);
 
 		// add additional test code here
 	}

@@ -1,6 +1,8 @@
 package com.kricko.tvshowupdater.xbmc;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.httpclient.HttpException;
 
@@ -63,5 +65,34 @@ public class Xbmc {
     				p.getIntProperty("xbmc."+host+".tcpport"), false, 
     				p.getIntProperty("xbmc."+host+".retries"));
     		rpc.cleanVideoLibrary();
+	}
+	
+	/**
+	 * Clean a list of server's video library
+	 * @param hosts
+	
+	
+	 * @throws IOException * @throws HttpException */
+	public static void executeTraktAddon(String[] hosts) throws IOException, HttpException{
+		for(String host:hosts){
+			executeTraktAddon(host);
+    	}
+	}
+	
+	/**
+	 * Clean a single server video library
+	 * @param host
+	
+	
+	 * @throws IOException * @throws HttpException */
+	public static void executeTraktAddon(String host) throws IOException, HttpException{
+			XbmcJsonRpc rpc = new XbmcJsonRpc(p.getProperty("xbmc."+host+".address"), 
+    				p.getIntProperty("xbmc."+host+".tcpport"), false, 
+    				p.getIntProperty("xbmc."+host+".retries"));
+			
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("addonid", "script.trakt");
+			
+    		rpc.executeAddon(params);
 	}
 }
