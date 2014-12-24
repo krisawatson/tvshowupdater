@@ -38,7 +38,9 @@ public class Xbmc {
 	public static void updateHostVideos(String host) throws IOException, HttpException{
 		XbmcJsonRpc rpc = new XbmcJsonRpc(p.getProperty("xbmc."+host+".address"), 
 				p.getIntProperty("xbmc."+host+".tcpport"), false, 
-				p.getIntProperty("xbmc."+host+".retries"));
+				p.getIntProperty("xbmc."+host+".retries"),
+				p.getProperty("xbmc."+host+".user"),
+				p.getProperty("xbmc."+host+".pass"));
 		rpc.updateVideoLibrary();
 	}
 	
@@ -63,7 +65,9 @@ public class Xbmc {
 	public static void cleanVideoLibrary(String host) throws IOException, HttpException{
 			XbmcJsonRpc rpc = new XbmcJsonRpc(p.getProperty("xbmc."+host+".address"), 
     				p.getIntProperty("xbmc."+host+".tcpport"), false, 
-    				p.getIntProperty("xbmc."+host+".retries"));
+    				p.getIntProperty("xbmc."+host+".retries"),
+    				p.getProperty("xbmc."+host+".user"),
+    				p.getProperty("xbmc."+host+".pass"));
     		rpc.cleanVideoLibrary();
 	}
 	
@@ -88,7 +92,9 @@ public class Xbmc {
 	public static void executeTraktAddon(String host) throws IOException, HttpException{
 			XbmcJsonRpc rpc = new XbmcJsonRpc(p.getProperty("xbmc."+host+".address"), 
     				p.getIntProperty("xbmc."+host+".tcpport"), false, 
-    				p.getIntProperty("xbmc."+host+".retries"));
+    				p.getIntProperty("xbmc."+host+".retries"),
+    				p.getProperty("xbmc."+host+".user"),
+    				p.getProperty("xbmc."+host+".pass"));
 			
 			Map<String,Object> params = new HashMap<String,Object>();
 			params.put("addonid", "script.trakt");

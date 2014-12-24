@@ -26,8 +26,8 @@ public class XbmcJsonRpc implements Runnable
 	private boolean socketTimedOut = false, waitingForTimeout = false;;
 	private Socket jsonRPCSocket = null;
 
-	private final static String JSON_RPC_WEBSERVER_USERNAME = "xbmc";
-	private final static String JSON_RPC_WEBSERVER_PASSWORD = null;
+	private String webserverUsername = "xbmc";
+	private String webserverPassword = null;
 
 	/**
 	 * Constructor for XbmcJsonRpc.
@@ -36,12 +36,15 @@ public class XbmcJsonRpc implements Runnable
 	 * @param useHttp boolean
 	 * @param maxRetries int
 	 */
-	public XbmcJsonRpc(String server, int port, boolean useHttp, int maxRetries){
+	public XbmcJsonRpc(String server, int port, boolean useHttp, int maxRetries,
+			String username, String password){
 		this.server = server;
 		this.port = port;
 		this.useHTTP = useHttp;
 		this.useRawTCP = !useHttp;
 		this.maxRetries = maxRetries;
+		this.webserverUsername = username;
+		this.webserverPassword = password;
 	}
 
 	/**
@@ -118,8 +121,8 @@ public class XbmcJsonRpc implements Runnable
 				rpcprefix = "http://"+rpcprefix;            
 			try{
 				String authString = null;
-				if(TvShowUtils.valid(JSON_RPC_WEBSERVER_USERNAME) && TvShowUtils.valid(JSON_RPC_WEBSERVER_PASSWORD)){
-					authString = JSON_RPC_WEBSERVER_USERNAME + ":" + JSON_RPC_WEBSERVER_PASSWORD;
+				if(TvShowUtils.valid(webserverUsername) && TvShowUtils.valid(webserverPassword)){
+					authString = webserverUsername + ":" + webserverPassword;
 				}
 				String strResponse = HttpUtils.post(rpcprefix, cmd, authString);
 				if(!TvShowUtils.valid(strResponse)) throw new Exception("No reponse or invalid response code.");

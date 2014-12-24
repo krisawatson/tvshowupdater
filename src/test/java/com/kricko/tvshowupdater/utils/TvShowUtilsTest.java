@@ -267,7 +267,7 @@ public class TvShowUtilsTest {
 		throws Exception {
 		String value = "";
 
-		int[] result = TvShowUtils.getEpisodeIds(value);
+		int[] result = TvShowUtils.getEpisodeIds(value, "E", 1);
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
@@ -289,7 +289,7 @@ public class TvShowUtilsTest {
 		throws Exception {
 		String value = "a";
 
-		int[] result = TvShowUtils.getEpisodeIds(value);
+		int[] result = TvShowUtils.getEpisodeIds(value, "E", 1);
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:
@@ -311,7 +311,7 @@ public class TvShowUtilsTest {
 		throws Exception {
 		String value = "a";
 
-		int[] result = TvShowUtils.getEpisodeIds(value);
+		int[] result = TvShowUtils.getEpisodeIds(value, "E", 1);
 
 		// add additional test code here
 		// An unexpected exception was thrown in user code while executing this test:

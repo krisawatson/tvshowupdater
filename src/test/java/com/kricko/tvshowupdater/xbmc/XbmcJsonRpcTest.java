@@ -35,7 +35,7 @@ public class XbmcJsonRpcTest {
 		boolean useHttp = true;
 		int maxRetries = 1;
 
-		XbmcJsonRpc result = new XbmcJsonRpc(server, port, useHttp, maxRetries);
+		XbmcJsonRpc result = new XbmcJsonRpc(server, port, useHttp, maxRetries,"xbmc",null);
 
 		// add additional test code here
 		assertNotNull(result);
@@ -51,7 +51,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testCallMethod_1()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 		String method = "";
 		int id = 1;
 		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
@@ -72,7 +72,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testCallMethod_2()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 		String method = "";
 		int id = 1;
 		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
@@ -93,7 +93,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testCallMethod_3()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 		String method = "";
 		int id = 1;
 		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
@@ -114,7 +114,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testCallMethod_4()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 		String method = "";
 		int id = 1;
 		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
@@ -135,7 +135,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testCallMethod_5()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 0);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 0,"xbmc",null);
 		String method = "";
 		int id = 1;
 		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
@@ -156,7 +156,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testCleanVideoLibrary_1()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.cleanVideoLibrary();
 
@@ -173,7 +173,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testExecuteAddons_1()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("192.168.1.30", 9090, false, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("192.168.1.30", 9090, false, 1,"xbmc",null);
 
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("addonid", "script.trakt");
@@ -193,7 +193,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_2()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -210,7 +210,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_3()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -227,7 +227,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_4()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -244,7 +244,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_5()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -261,7 +261,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_6()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -278,7 +278,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_7()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -295,7 +295,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_8()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -312,7 +312,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testRun_9()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.run();
 
@@ -329,7 +329,7 @@ public class XbmcJsonRpcTest {
 	@Test
 	public void testUpdateVideoLibrary_1()
 		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1);
+		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
 
 		fixture.updateVideoLibrary();
 

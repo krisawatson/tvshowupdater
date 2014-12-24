@@ -230,10 +230,10 @@ public class TvShowUtils {
 	 * @param value String
 	 * @return int[]
 	 */
-	public static int[] getEpisodeIds(String value){
+	public static int[] getEpisodeIds(String value, String splitChar, int startIndex){
 		int[] items = new int[2];
-		items[0] = Integer.parseInt(value.substring(1, value.toUpperCase().indexOf("E")));
-		items[1] = Integer.parseInt(value.substring(value.toUpperCase().indexOf("E") + 1));
+		items[0] = Integer.parseInt(value.substring(startIndex, value.toUpperCase().indexOf(splitChar)));
+		items[1] = Integer.parseInt(value.substring(value.toUpperCase().indexOf(splitChar) + 1));
 		
 		return items;
 	}
@@ -274,7 +274,13 @@ public class TvShowUtils {
 		Matcher itemMatcher = pattern.matcher(title);
 		while(itemMatcher.find()){
 			String se = itemMatcher.group();
-			return getEpisodeIds(se);
+			return getEpisodeIds(se, "E", 1);
+		}
+		Pattern pattern2 = Pattern.compile("(^|)[0-9]+x[0-9]+");
+		Matcher itemMatcher2 = pattern2.matcher(title);
+		while(itemMatcher2.find()){
+			String se = itemMatcher2.group();
+			return getEpisodeIds(se, "X", 0);
 		}
 		
 		return null;

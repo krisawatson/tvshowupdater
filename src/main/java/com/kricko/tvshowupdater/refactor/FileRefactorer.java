@@ -81,7 +81,7 @@ public class FileRefactorer {
 				while(itemMatcher.find()){
 					episodeName = itemMatcher.group();
 					System.out.println(episodeName);
-					episodeIds = TvShowUtils.getEpisodeIds(episodeName);
+					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
 				}
 
 				Episode ep = null;
