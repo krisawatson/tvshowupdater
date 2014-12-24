@@ -65,6 +65,7 @@ public class FileRefactorer {
 	public static boolean refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir) throws IOException{
 		if(files != null){
 			Pattern pattern = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
+			Pattern pattern2 = Pattern.compile(Constants.REGEX_SERIES_EPISODE2);
 
 			List<Series> seriesList = null;
 			if(seriesName != null){
@@ -82,6 +83,13 @@ public class FileRefactorer {
 					episodeName = itemMatcher.group();
 					System.out.println(episodeName);
 					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
+				} 
+				if(episodeIds == null){
+					itemMatcher = pattern2.matcher(file.toString());
+					while(itemMatcher.find()){
+						episodeName = itemMatcher.group();
+						episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
+					}
 				}
 
 				Episode ep = null;
