@@ -1,94 +1,108 @@
 {
 	"shows":[
 		{
-			"name":"2 Broke Girls"
-			"rssfeed":"http://showrss.info/feeds/378.rss"
-			"regex":"(^|)(2 Broke Girls S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
-			"path":"G:/TV Series 0-9/2 Broke Girls"
-			"skip":["Season 1", "Season 2", "Season 3"]
-		},
-		{
 			"name":"American Dad"
 			"rssfeed":"http://showrss.info/feeds/4.rss"
-			"regex":"(^|)(American Dad S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
+			"regex":"(^|)(American Dad S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/American Dad"
-			"skip":["Season 8", "Season 9", "Season 10"]
+			"skip":["Season 8", "Season 9", "Season 10", "Season 11"]
 		},
 		{
 			"name":"Bad Judge"
 			"rssfeed":"http://showrss.info/feeds/970.rss"
-			"regex":"(^|)(Bad Judge S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
+			"regex":"(^|)(Bad Judge S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Bad Judge"
 			"skip":[]
 		},
 		{
 			"name":"The Big Bang Theory"
 			"rssfeed":"http://showrss.info/feeds/5.rss"
-			"regex":"(^|)(The Big Bang Theory S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
+			"regex":"(^|)(The Big Bang Theory S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Big Bang Theory, The"
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7"]
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"]
 		},
 		{
 			"name":"Brooklyn Nine Nine"
 			"rssfeed":"http://showrss.info/feeds/613.rss"
-			"regex":"(^|)(Brooklyn Nine Nine.*S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
+			"regex":"(^|)(Brooklyn Nine Nine.*S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Brooklyn Nine Nine"
-			"skip":["Season 1"]
+			"skip":["Season 1", "Season 2"]
 		},
 		{
 			"name":"Constantine"
 			"rssfeed":"http://showrss.info/feeds/962.rss"
-			"regex":"(^|)(Constantine S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
+			"regex":"(^|)(Constantine S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Constantine"
-			"skip":[]
+			"skip":["Season 1"]
+		},
+		{
+			"name":"Daredevil"
+			"rssfeed":"http://showrss.info/feeds/1069.rss"
+			"regex":"(^|)(Marvels Daredevil S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series A-G/Daredevil"
+			"skip":["Season 1"]
 		},
 		{
 			"name":"Elementary"
 			"rssfeed":"http://showrss.info/feeds/485.rss"
-			"regex":"(^|)(Elementary S([0-9]+)E([0-9]+))(?!.*720p)(?!.*720p)(|$)"
+			"regex":"(^|)(Elementary S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Elementary"
-			"skip":["Season 1", "Season 2"]
+			"skip":["Season 1", "Season 2", "Season 3"]
 		},
 		{
 			"name":"Family Guy"
 			"rssfeed":"http://showrss.info/feeds/27.rss"
 			"regex":"(^|)(Family Guy S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Family Guy"
-			"skip":["Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9", "Season 11", "Season 12"]
+			"skip":["Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9", "Season 11", "Season 12", "Season 13"]
 		},
 		{
 			"name":"The Flash (2014)"
 			"rssfeed":"http://showrss.info/feeds/849.rss"
 			"regex":"(^|)(The Flash 2014.*S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Flash (2014), The"
-			"skip":[]
+			"skip":["Season 1"]
+		},
+		{
+			"name":"Forever (2014)"
+			"rssfeed":"http://showrss.info/feeds/929.rss"
+			"regex":"(^|)(Forever US S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series A-G/Forever (2014)"
+			"skip":["Season 1"]
 		},
 		{
 			"name":"The Good Wife"
 			"rssfeed":"http://showrss.info/feeds/208.rss"
 			"regex":"(^|)(The Good Wife S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Good Wife, The"
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"]
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6"]
 		},
 		{
 			"name":"Gotham"
 			"rssfeed":"http://showrss.info/feeds/928.rss"
 			"regex":"(^|)(Gotham S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Gotham"
-			"skip":[]
+			"skip":["Season 1"]
 		},
 		{
 			"name":"Greys Anatomy"
 			"rssfeed":"http://showrss.info/feeds/34.rss"
 			"regex":"(^|)(Greys Anatomy S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series A-G/Greys Anatomy"
-			"skip":["Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9", "Season 10"]
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9", "Season 10", "Season 11"]
 		},
 		{
 			"name":"Homeland"
 			"rssfeed":"http://showrss.info/feeds/400.rss"
 			"regex":"(^|)(Homeland S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series H-O/Homeland"
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4"]
+		},
+		{
+			"name":"House of Cards (US)"
+			"rssfeed":"http://showrss.info/feeds/541.rss"
+			"regex":"(^|)(House of Cards (2013) S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series H-O/House of Cards (US)"
 			"skip":["Season 1", "Season 2", "Season 3"]
 		},
 		{
@@ -96,7 +110,21 @@
 			"rssfeed":"http://showrss.info/feeds/958.rss"
 			"regex":"(^|)(How to Get Away with Murder S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series H-O/How To Get Away With Murder"
+			"skip":["Season 1"]
+		},
+		{
+			"name":"The Man in the High Castle"
+			"rssfeed":"http://showrss.info/feeds/1106.rss"
+			"regex":"(^|)(The Man In The High Castle S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series H-O/Man in the High Castle, The"
 			"skip":[]
+		},
+		{
+			"name":"The Missing"
+			"rssfeed":"http://showrss.info/feeds/972.rss"
+			"regex":"(^|)(The Missing (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series H-O/Missing, The"
+			"skip":["Season 1"]
 		},
 		{
 			"name":"Person of Interest"
@@ -117,35 +145,49 @@
 			"rssfeed":"http://showrss.info/feeds/439.rss"
 			"regex":"(^|)(Scandal US S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series P-Z/Scandal (2012)"
-			"skip":["Season 1", "Season 2", "Season 3"]
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4"]
 		},
 		{
 			"name":"Scorpion"
 			"rssfeed":"http://showrss.info/feeds/931.rss"
 			"regex":"(^|)(Scorpion S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series P-Z/Scorpion"
-			"skip":[]
+			"skip":["Season 1"]
 		},
 		{
 			"name":"Silicon Valley"
 			"rssfeed":"http://showrss.info/feeds/799.rss"
 			"regex":"(^|)(Silicon Valley S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series P-Z/Silicon Valley"
-			"skip":["Season 1"]
+			"skip":["Season 1", "Season 2"]
 		},
 		{
 			"name":"Sons of Anarchy"
 			"rssfeed":"http://showrss.info/feeds/200.rss"
 			"regex":"(^|)(Sons of Anarchy S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series P-Z/Sons of Anarchy"
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6"]
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7"]
+		},
+		{
+			"name":"Stalker"
+			"rssfeed":"http://showrss.info/feeds/964.rss"
+			"regex":"(^|)(Stalker S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series P-Z/Stalker"
+			"skip":["Season 1"]
 		},
 		{
 			"name":"Suits"
 			"rssfeed":"http://showrss.info/feeds/367.rss"
 			"regex":"(^|)(Suits S([0-9]+)E([0-9]+))(?!.*720p)(|$)"
 			"path":"G:/TV Series P-Z/Suits"
-			"skip":["Season 1", "Season 2", "Season 3"]
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"]
+		},
+		{
+			"name":"True Detective"
+			"rssfeed":"http://showrss.info/feeds/699.rss"
+			"regex":"(^|)(True Detective (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*720p)(|$)"
+			"path":"G:/TV Series P-Z/True Detective"
+			"skip":["Season 1", "Season 2"]
 		}
 	]
 }

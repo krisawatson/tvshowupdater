@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Base64;
 
 /**
  */
@@ -79,7 +80,7 @@ public class HttpUtils {
 
 		//authenticate if used
 		if(TvShowUtils.valid(authString)){
-			String authStringEnc = new sun.misc.BASE64Encoder().encode(authString.getBytes());
+			String authStringEnc = Base64.getEncoder().encodeToString(authString.getBytes());
 			conn.setRequestProperty("Authorization", "Basic " + authStringEnc);
 		}
 
