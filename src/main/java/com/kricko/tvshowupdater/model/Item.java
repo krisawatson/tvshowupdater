@@ -24,20 +24,23 @@ public class Item implements Comparable<Item>{
 	@XmlElement(name="description")
 	private String description;
 	
-	@XmlElement(name="showid", namespace="showrss")
+	@XmlElement(name="show_id")
 	private int showId;
 	
-	@XmlElement(name="showname", namespace="showrss")
+	@XmlElement(name="show_name")
 	private String showName;
 	
-	@XmlElement(name="episode", namespace="showrss")
+	@XmlElement(name="episode_id")
 	private Integer episode;
 	
-	@XmlElement(name="info_hash", namespace="showrss")
+	@XmlElement(name="info_hash")
 	private String infoHash;
 	
-	@XmlElement(name="rawtitle", namespace="showrss")
+	@XmlElement(name="raw_title")
 	private String rawTitle;
+
+	@XmlElement(name="enclosure")
+	private String enclosure;
 	
 	/**
 	 * Method getTitle.
@@ -214,8 +217,6 @@ public class Item implements Comparable<Item>{
 	public void setEnclosure(String enclosure) {
 		this.enclosure = enclosure;
 	}
-
-	private String enclosure;
 
 	/**
 	 * Method compareTo.

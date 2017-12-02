@@ -7,7 +7,7 @@
       <src_folder value="file://$MODULE_DIR$/src/test/java" expected_position="1" />
     </src_description>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_9">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -74,7 +74,6 @@
     <orderEntry type="library" name="Maven: org.apache.maven:maven-model:2.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-xjc:2.2.7" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.2.7" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.7" level="project" />
     <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:2.16" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-jxc:2.2.7" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.7" level="project" />
@@ -98,5 +97,7 @@
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.2" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1.1" level="project" />
   </component>
 </module>

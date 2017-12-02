@@ -29,8 +29,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.ws.WebServiceException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
@@ -104,13 +102,13 @@ public class TheTVDBApi {
         bannerMirror = mirrors.getMirror(Mirrors.TYPE_BANNER);
 
         if (xmlMirror == null) {
-            throw new WebServiceException("There is a problem getting the xmlMirror data from TheTVDB, this means it is likely to be down.");
+            throw new RuntimeException("There is a problem getting the xmlMirror data from TheTVDB, this means it is likely to be down.");
         } else {
             xmlMirror += "/api/";
         }
 
         if (bannerMirror == null) {
-            throw new WebServiceException("There is a problem getting the bannerMirror data from TheTVDB, this means it is likely to be down.");
+            throw new RuntimeException("There is a problem getting the bannerMirror data from TheTVDB, this means it is likely to be down.");
         } else {
             bannerMirror += "/banners/";
         }
@@ -126,7 +124,7 @@ public class TheTVDBApi {
      */
     public void setProxy(String host, int port, String username, String password) {
         if (httpClient == null) {
-            throw new WebServiceException("Failed to set proxy information");
+            throw new RuntimeException("Failed to set proxy information");
         } else {
             httpClient.setProxy(host, port, username, password);
         }
@@ -140,7 +138,7 @@ public class TheTVDBApi {
      */
     public void setTimeout(int webTimeoutConnect, int webTimeoutRead) {
         if (httpClient == null) {
-            throw new WebServiceException("Failed to set timeout information");
+            throw new RuntimeException("Failed to set timeout information");
         } else {
             httpClient.setTimeouts(webTimeoutConnect, webTimeoutRead);
         }
@@ -165,7 +163,7 @@ public class TheTVDBApi {
             if (language != null) {
                 urlBuilder.append(language).append(XML_EXTENSION);
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             return null;
         }
@@ -193,7 +191,7 @@ public class TheTVDBApi {
             StringBuilder urlBuilder = new StringBuilder();
             try {
                 urlBuilder.append(getXmlMirror(apiKey));
-            } catch (WebServiceException ex) {
+            } catch (RuntimeException ex) {
                 System.out.println(String.format(ex.getMessage(), ex));
                 urlBuilder.append("http://thetvdb.com/api/");
             }
@@ -230,7 +228,7 @@ public class TheTVDBApi {
             if (language != null) {
                 urlBuilder.append(language).append(XML_EXTENSION);
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             return null;
         }
@@ -314,7 +312,7 @@ public class TheTVDBApi {
             if (language != null) {
                 urlBuilder.append(language).append(XML_EXTENSION);
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             return new Episode();
         }
@@ -369,7 +367,7 @@ public class TheTVDBApi {
             urlBuilder.append(SERIES_URL);
             urlBuilder.append(seriesId);
             urlBuilder.append("/banners.xml");
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             return new Banners();
         }
@@ -392,7 +390,7 @@ public class TheTVDBApi {
             urlBuilder.append(SERIES_URL);
             urlBuilder.append(seriesId);
             urlBuilder.append("/actors.xml");
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             return new ArrayList<Actor>();
         }
@@ -421,7 +419,7 @@ public class TheTVDBApi {
             System.out.println(String.format("Failed to encode title: " + title, ex));
             // Try and use the raw title
             urlBuilder.append(title);
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             return new ArrayList<Series>();
         }
@@ -450,7 +448,7 @@ public class TheTVDBApi {
                 urlBuilder.append(language);
                 urlBuilder.append(XML_EXTENSION);
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             return new Episode();
         }
@@ -536,7 +534,7 @@ public class TheTVDBApi {
             if (language != null) {
                 urlBuilder.append(language).append(XML_EXTENSION);
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format(ex.getMessage(), ex));
             throw ex;
         }

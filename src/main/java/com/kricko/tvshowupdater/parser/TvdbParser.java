@@ -7,8 +7,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.ws.WebServiceException;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.w3c.dom.Document;
@@ -84,7 +82,7 @@ public class TvdbParser {
             if (doc == null) {
                 return results;
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             return results;
         }
 
@@ -145,7 +143,7 @@ public class TvdbParser {
                     }
                 }
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
             System.out.println(String.format("All Episodes error: " + ex.getMessage(), ex));
         }
 
@@ -184,7 +182,7 @@ public class TvdbParser {
                     }
                 }
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
         	System.out.println(String.format("Banners error: " + ex.getMessage(), ex));
         }
 
@@ -222,7 +220,7 @@ public class TvdbParser {
                     }
                 }
             }
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
         	System.out.println(String.format("Series error: " + ex.getMessage(), ex));
         }
 
@@ -249,7 +247,7 @@ public class TvdbParser {
 
         try {
             doc = DOMHelper.getEventDocFromUrl(urlString);
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
         	System.out.println(String.format(ERROR_GET_XML, ex));
             return seriesList;
         }
@@ -285,7 +283,7 @@ public class TvdbParser {
 
         try {
             doc = DOMHelper.getEventDocFromUrl(urlString);
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
         	System.out.println(String.format(ERROR_GET_XML, ex));
             return updates;
         }
@@ -428,7 +426,7 @@ public class TvdbParser {
 
         try {
             banner.setSeriesName(Boolean.parseBoolean(DOMHelper.getValueFromElement(eBanner, SERIES_NAME)));
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
         	System.out.println(String.format("Failed to transform SeriesName to boolean", ex));
             banner.setSeriesName(false);
         }
@@ -499,7 +497,7 @@ public class TvdbParser {
         try {
             String value = DOMHelper.getValueFromElement(eEpisode, key);
             episodeValue = NumberUtils.toInt(value, 0);
-        } catch (WebServiceException ex) {
+        } catch (RuntimeException ex) {
         	System.out.println(String.format("Failed to read episode value", ex));
             episodeValue = 0;
         }

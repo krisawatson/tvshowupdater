@@ -155,11 +155,13 @@ public class FileRefactorer {
 			for (final Iterator<Path> it = stream.iterator(); it.hasNext();) {
 				Path file = dir.resolve(it.next());
 				if(!Files.isDirectory(file)){
+					String filename = file.getFileName().toString();
 					String contentType = Files.probeContentType(file);
-					if(contentType != null && contentType.startsWith("video")
-							&& !file.toString().contains("sample")
-							&& !file.toString().contains("Sample")){
-						System.out.println(file.toString() + " content Type is "+ contentType);
+					if((contentType != null && contentType.startsWith("video"))
+							|| filename.endsWith(".mkv")
+							&& !filename.contains("sample")
+							&& !filename.contains("Sample")){
+						System.out.println(filename + " content Type is "+ contentType);
 						fileList.add(file);
 					}
 				}

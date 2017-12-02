@@ -2,6 +2,7 @@ package com.kricko.tvshowupdater;
 
 import java.io.Console;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -27,9 +28,8 @@ public class App
 	 * @throws ParseException
 	 * @throws HttpException
 	 */
-	public static void main( String[] args ) 
-			throws JAXBException, IOException, ParseException, HttpException 
-	{
+	public static void main( String[] args )
+			throws JAXBException, IOException, ParseException, HttpException, URISyntaxException, InterruptedException {
 		System.out.println("**********************************");
 		System.out.println("Welcome to TV Show Updater");
 		System.out.println("");
@@ -67,6 +67,10 @@ public class App
 			} catch (JAXBException | IOException | ParseException | HttpException e) {
 				System.out.println("Unexpected error");
 				System.exit(-1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -79,8 +83,8 @@ public class App
 	 * @throws ParseException
 	 * @throws HttpException
 	 */
-	private static void doSelectedOption(String option) 
-			throws JAXBException, IOException, ParseException, HttpException{
+	private static void doSelectedOption(String option)
+			throws JAXBException, IOException, ParseException, URISyntaxException, InterruptedException, HttpException {
 		if(option != null){
 			if(option.equals("update") || option.equals("1")){
 				if(Config.getInstance().updateBeforeDownload()){

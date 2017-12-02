@@ -9,8 +9,8 @@
         <module name="tvshowupdater" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="tvshowupdater" target="1.8" />
+    <bytecodeTargetLevel target="9">
+      <module name="tvshowupdater" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>

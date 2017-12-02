@@ -37,7 +37,6 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.ws.WebServiceException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
@@ -131,13 +130,13 @@ public class DOMHelper {
                 doc.getDocumentElement().normalize();
             }
         } catch (UnsupportedEncodingException ex) {
-            throw new WebServiceException("Unable to encode URL: " + url, ex);
+            throw new RuntimeException("Unable to encode URL: " + url, ex);
         } catch (ParserConfigurationException error) {
-            throw new WebServiceException("Unable to parse TheTVDb response, please try again later.", error);
+            throw new RuntimeException("Unable to parse TheTVDb response, please try again later.", error);
         } catch (SAXException error) {
-            throw new WebServiceException("Unable to parse TheTVDb response, please try again later.", error);
+            throw new RuntimeException("Unable to parse TheTVDb response, please try again later.", error);
         } catch (IOException error) {
-            throw new WebServiceException("Unable to parse TheTVDb response, please try again later.", error);
+            throw new RuntimeException("Unable to parse TheTVDb response, please try again later.", error);
         } finally {
             try {
                 if (in != null) {
@@ -181,15 +180,15 @@ public class DOMHelper {
 
                 // Couldn't get a valid webPage so, quit.
                 if (!valid) {
-                    throw new WebServiceException("Failed to download data from " + url);
+                    throw new RuntimeException("Failed to download data from " + url);
                 }
 
                 return webPage;
             }
         } catch (UnsupportedEncodingException ex) {
-            throw new WebServiceException("Unable to encode URL: " + url, ex);
+            throw new RuntimeException("Unable to encode URL: " + url, ex);
         } catch (IOException ex) {
-            throw new WebServiceException("Unable to download URL: " + url, ex);
+            throw new RuntimeException("Unable to download URL: " + url, ex);
         }
 
         return null;
