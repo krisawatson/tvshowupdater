@@ -7,6 +7,7 @@ import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 import org.json.simple.parser.ParseException;
 
+import javax.xml.bind.DataBindingException;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -31,7 +32,13 @@ public class DownloadShows {
 		for(Details detail:shows.getShows()){
 			System.out.println(detail.getName());
 			URL rssFeed = new URL(detail.getRssfeed());
-			Rss rss = JAXB.unmarshal(rssFeed, Rss.class);
+			Rss rss;
+			try {
+				rss = JAXB.unmarshal(rssFeed, Rss.class);
+			} catch (DataBindingException dbe) {
+				System.err.println("Exception caught when trying to parse URL for " + detail.getName());
+				continue;
+			}
 
 			List<Item> items = rss.getChannel().getItem();
 			if(items != null){
