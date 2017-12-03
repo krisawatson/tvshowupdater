@@ -8,11 +8,8 @@ import com.kricko.tvshowupdater.utils.TvShowUtils;
 import org.json.simple.parser.ParseException;
 
 import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
