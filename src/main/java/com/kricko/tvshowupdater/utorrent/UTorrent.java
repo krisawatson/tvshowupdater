@@ -63,8 +63,6 @@ public class UTorrent {
 
 	/**
 	 * Method getListOfTorrents.
-	 * @throws IOException
-	 * @throws ParseException 
 	 */
 	public Torrent getListOfTorrents() {
 		String login = username + ":" + password;

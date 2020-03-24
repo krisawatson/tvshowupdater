@@ -109,7 +109,7 @@ public class FileRefactorer {
 				String newDir = (parentDir == null || currentParentDir.equals("Season "+ episodeIds[0])) 
 						? file.getParent().toString() : parentDir;
 				
-				Path target = Paths.get(newDir.toString(), newFileName);
+				Path target = Paths.get(newDir, newFileName.replaceAll("\"", ""));
 				if(!file.toString().equals(target.toString())){
 					System.out.println("Moving " + file.toString() + " to " + target.toString());
 					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);

@@ -48,14 +48,14 @@
 			"rssfeed":"http://showrss.info/show/115.rss",
 			"regex":"(^|)(The Flash 2014.*S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series A-G/Flash (2014), The",
-			"skip":["Season 1"]
+			"skip":["Season 1", "Season 2"]
 		},
 		{
 			"name":"Gotham",
 			"rssfeed":"http://showrss.info/show/54.rss",
 			"regex":"(^|)(Gotham S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series A-G/Gotham",
-			"skip":["Season 1"]
+			"skip":["Season 1", "Season 2", "Season 3"]
 		},
 		{
 			"name":"Greys Anatomy",
@@ -65,25 +65,11 @@
 			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9", "Season 10", "Season 11"]
 		},
 		{
-			"name":"Homeland",
-			"rssfeed":"http://showrss.info/show/107.rss",
-			"regex":"(^|)(Homeland S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series H-O/Homeland",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6"]
-		},
-		{
 			"name":"House of Cards (US)",
 			"rssfeed":"http://showrss.info/show/274.rss",
 			"regex":"(^|)(House of Cards (2013) S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series H-O/House of Cards (US)",
 			"skip":["Season 1", "Season 2", "Season 3"]
-		},
-		{
-			"name":"How To Get Away With Murder",
-			"rssfeed":"http://showrss.info/show/8.rss",
-			"regex":"(^|)(How to Get Away with Murder S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series H-O/How To Get Away With Murder",
-			"skip":["Season 1"]
 		},
 		{
 			"name":"Lethal Weapon",
@@ -100,40 +86,12 @@
 			"skip":[]
 		},
 		{
-			"name":"The Man in the High Castle",
-			"rssfeed":"http://showrss.info/show/254.rss",
-			"regex":"(^|)(The Man In The High Castle S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series H-O/Man in the High Castle, The",
-			"skip":[]
-		},
-		{
-			"name":"The Missing",
-			"rssfeed":"http://showrss.info/show/673.rss",
-			"regex":"(^|)(The Missing (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series H-O/Missing, The",
-			"skip":["Season 1", "Season 2"]
-		},
-		{
 			"name":"Modern Family",
 			"rssfeed":"http://showrss.info/show/75.rss",
 			"regex":"(^|)(Modern Family (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series H-O/Modern Family",
 			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7",
 				"Season 8", "Season 9"]
-		},
-		{
-			"name":"Person of Interest",
-			"rssfeed":"http://showrss.info/show/268.rss",
-			"regex":"(^|)(Person of Interest S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series P-Z/Person of Interest",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"]
-		},
-		{
-			"name":"Scandal (2012)",
-			"rssfeed":"http://showrss.info/show/13.rss",
-			"regex":"(^|)(Scandal US S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series P-Z/Scandal (2012)",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4"]
 		},
 		{
 			"name":"Scorpion",
@@ -155,13 +113,6 @@
 			"regex":"(^|)(Suits S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series P-Z/Suits",
 			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7"]
-		},
-		{
-			"name":"True Detective",
-			"rssfeed":"http://showrss.info/show/264.rss",
-			"regex":"(^|)(True Detective (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series P-Z/True Detective",
-			"skip":["Season 1", "Season 2"]
 		},
 		{
 			"name":"Young Sheldon",
