@@ -83,13 +83,13 @@ public class App
 			if(option.equals("update") || option.equals("1")){
 				Config config = Config.getInstance();
 				if(config.updateBeforeDownload()){
-					RefactorFiles.tidyFolders(false);
+					RefactorFiles.tidyFolders(true);
 				}
 				boolean newDownloads = DownloadShows.doDownload();
 				
 				if(newDownloads){
 					doMonitorTorrents();
-					RefactorFiles.tidyFolders(true);
+					RefactorFiles.tidyFolders(false);
 					if (config.isXbmcUpdate()) {
 						String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
 						Xbmc.updateHostVideos(hosts);
