@@ -9,7 +9,6 @@ import org.json.simple.parser.ParseException;
 
 import javax.xml.bind.DataBindingException;
 import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -20,11 +19,10 @@ public class DownloadShows {
 
 	/**
 	 * Method doDownload.
-	 * @throws JAXBException
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static boolean doDownload() throws JAXBException, IOException, ParseException {
+	public static boolean doDownload() throws IOException, ParseException {
 		Shows shows = TvShowUtils.getListOfShows();
 
 		boolean newDownloads = false;

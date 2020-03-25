@@ -1,20 +1,18 @@
 package com.kricko.tvshowupdater;
 
+import com.kricko.tvshowupdater.thread.MonitorTorrentsThread;
+import com.kricko.tvshowupdater.utils.Config;
+import com.kricko.tvshowupdater.xbmc.Xbmc;
+import org.apache.commons.httpclient.HttpException;
+import org.json.simple.parser.ParseException;
+
+import javax.xml.bind.JAXBException;
 import java.io.Console;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import javax.xml.bind.JAXBException;
-
-import org.apache.commons.httpclient.HttpException;
-import org.json.simple.parser.ParseException;
-
-import com.kricko.tvshowupdater.thread.MonitorTorrentsThread;
-import com.kricko.tvshowupdater.utils.Config;
-import com.kricko.tvshowupdater.xbmc.Xbmc;
 
 /**
  */
@@ -64,13 +62,9 @@ public class App
 			try {
 				String option = console.readLine("What is your choice: ");
 				doSelectedOption(option);
-			} catch (JAXBException | IOException | ParseException | HttpException e) {
+			} catch (IOException | ParseException | HttpException | InterruptedException e) {
 				System.out.println("Unexpected error");
 				System.exit(-1);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
 			}
 		}
 	}
@@ -78,13 +72,13 @@ public class App
 	/**
 	 * Method doSelectedOption.
 	 * @param option String
-	 * @throws JAXBException
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws HttpException
+	 * @throws InterruptedException
 	 */
 	private static void doSelectedOption(String option)
-			throws JAXBException, IOException, ParseException, URISyntaxException, InterruptedException, HttpException {
+			throws IOException, ParseException, HttpException, InterruptedException {
 		if(option != null){
 			if(option.equals("update") || option.equals("1")){
 				if(Config.getInstance().updateBeforeDownload()){
@@ -119,16 +113,12 @@ public class App
 		}
 	}
 	
-	private static void doMonitorTorrents() {
+	private static void doMonitorTorrents() throws InterruptedException {
 		ExecutorService thread = Executors.newSingleThreadExecutor();
 		thread.execute(new MonitorTorrentsThread());
 		
 		thread.shutdown();
 
-		try {
-			thread.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-		} catch (InterruptedException e) {
-			return;
-		}
+		thread.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 	}
 }
