@@ -84,4 +84,12 @@ public class Config {
 	public boolean updateBeforeDownload(){
 		return getBooleanProperty(Constants.SETTING_UPDATE_BEFORE_DOWNLOAD);
 	}
+
+	/**
+	 * Method isXbmcUpdate.
+	 * @return boolean
+	 */
+	public boolean isXbmcUpdate(){
+		return getBooleanProperty(Constants.SETTING_XBMC_UPDATE);
+	}
 }

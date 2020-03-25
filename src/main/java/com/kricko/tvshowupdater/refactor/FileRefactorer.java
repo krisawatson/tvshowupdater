@@ -64,6 +64,7 @@ public class FileRefactorer {
 	 */
 	public static boolean refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir) throws IOException{
 		if(files != null){
+			System.out.println("File list is not empty in " + parentDir);
 			Pattern pattern = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
 			Pattern pattern2 = Pattern.compile(Constants.REGEX_SERIES_EPISODE2);
 
@@ -115,9 +116,11 @@ public class FileRefactorer {
 					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 				}
 
+				assert parentDir != null;
 				if(parentDir.equals(newDir)){
 					return true;
 				}
+				System.out.println("Parent dir " + parentDir + " new dir " + newDir);
 			}
 		}
 		return false;

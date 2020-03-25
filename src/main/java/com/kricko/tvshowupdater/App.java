@@ -81,7 +81,8 @@ public class App
 			throws IOException, ParseException, HttpException, InterruptedException {
 		if(option != null){
 			if(option.equals("update") || option.equals("1")){
-				if(Config.getInstance().updateBeforeDownload()){
+				Config config = Config.getInstance();
+				if(config.updateBeforeDownload()){
 					RefactorFiles.tidyFolders(false);
 				}
 				boolean newDownloads = DownloadShows.doDownload();
@@ -89,9 +90,11 @@ public class App
 				if(newDownloads){
 					doMonitorTorrents();
 					RefactorFiles.tidyFolders(true);
-					String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
-					Xbmc.updateHostVideos(hosts);
-					Xbmc.executeTraktAddon(hosts);
+					if (config.isXbmcUpdate()) {
+						String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
+						Xbmc.updateHostVideos(hosts);
+						Xbmc.executeTraktAddon(hosts);
+					}
 				}
 			} else if(option.equals("tidyup") || option.equals("2")){
 				RefactorFiles.tidyFolders(true);

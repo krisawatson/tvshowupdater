@@ -21,17 +21,15 @@ public class FileRefactorThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			// Refactor any files in the parent directory first
-			List<Path> files = FileRefactorer.getMovieFiles(Paths.get(path));
-
 			// Get the list of sub-directories and refactor the files
 			List<Path> dirs = FileRefactorer.getDirectories(Paths.get(path));
 
 			for(Path dir:dirs){
 				if(skip == null || !skip.contains(dir.getFileName().toString())){
-					files = FileRefactorer.getMovieFiles(dir);
+					List<Path> files = FileRefactorer.getMovieFiles(dir);
 	
 					if(FileRefactorer.refactorFilesAddTitle(name, files, path)){
+						System.out.println("About to delete dir " + dir);
 						FileRefactorer.deleteDirectory(dir);
 					}
 				}
