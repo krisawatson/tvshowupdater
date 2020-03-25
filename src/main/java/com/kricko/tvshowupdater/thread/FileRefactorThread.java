@@ -1,21 +1,26 @@
 package com.kricko.tvshowupdater.thread;
 
+import com.kricko.tvshowupdater.refactor.FileRefactorer;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
-import com.kricko.tvshowupdater.refactor.FileRefactorer;
+import static java.lang.Thread.currentThread;
 
 public class FileRefactorThread implements Runnable {
 
 	private String name, path;
 	private List<String> skip;
+	private Optional<String> seriesId;
 	
-	public FileRefactorThread(String name, String path, List<String> skip){
+	public FileRefactorThread(String name, String path, List<String> skip, Optional<String> seriesId){
 		this.name = name;
 		this.path = path;
 		this.skip = skip;
+		this.seriesId = seriesId;
 	}
 	
 	@Override
@@ -28,8 +33,8 @@ public class FileRefactorThread implements Runnable {
 				if(skip == null || !skip.contains(dir.getFileName().toString())){
 					List<Path> files = FileRefactorer.getMovieFiles(dir);
 	
-					if(FileRefactorer.refactorFilesAddTitle(name, files, path)){
-						System.out.println("About to delete dir " + dir);
+					if(FileRefactorer.refactorFilesAddTitle(name, files, path, seriesId)){
+						System.out.println(currentThread().getName() + " - About to delete dir " + dir);
 						FileRefactorer.deleteDirectory(dir);
 					}
 				}

@@ -19,28 +19,18 @@
  */
 package com.kricko.tvshowupdater.thetvdb;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
+import com.kricko.tvshowupdater.model.*;
+import com.kricko.tvshowupdater.parser.TvdbParser;
+import com.kricko.tvshowupdater.utils.DOMHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.yamj.api.common.http.CommonHttpClient;
 import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
-import com.kricko.tvshowupdater.model.Actor;
-import com.kricko.tvshowupdater.model.Banners;
-import com.kricko.tvshowupdater.model.Episode;
-import com.kricko.tvshowupdater.model.Mirrors;
-import com.kricko.tvshowupdater.model.Series;
-import com.kricko.tvshowupdater.model.TVDBUpdates;
-import com.kricko.tvshowupdater.parser.TvdbParser;
-import com.kricko.tvshowupdater.utils.DOMHelper;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author altman.matthew
@@ -514,7 +504,7 @@ public class TheTVDBApi {
         return (number >= 0);
     }
     
-    private StringBuilder urlBuilder(String seriesId, String postfix, int seasonNbr, 
+    private StringBuilder urlBuilder(String seriesId, String postfix, int seasonNbr,
     		int episodeNbr, String language) throws Exception{
     	if (!isValidNumber(seriesId) || !isValidNumber(seasonNbr) || !isValidNumber(episodeNbr)) {
             throw new Exception("Invalid number exceptions");

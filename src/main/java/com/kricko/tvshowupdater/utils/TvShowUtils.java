@@ -1,33 +1,19 @@
 package com.kricko.tvshowupdater.utils;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.DirectoryIteratorException;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.json.simple.parser.ParseException;
-
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.parser.TvShowParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static java.lang.Thread.currentThread;
 
 /**
  */
@@ -93,7 +79,7 @@ public class TvShowUtils {
 			
 			Path dir = Paths.get(detail.getPath() + File.separatorChar + "Season " + seasonInt);
 			List<String> existingItems = getExistingItems(dir);
-			System.out.println("The directory is " + dir);
+			System.out.println(currentThread().getName() + " - The directory is " + dir);
 
 			String filePrefix = String.format("S%sE%s", formatIntToString(seasonInt), formatIntToString(episodeInt));
 
@@ -103,7 +89,7 @@ public class TvShowUtils {
 				newDownloads = true;
 				Properties prop = Config.getInstance().getProperties();
 				String[] params = {prop.getProperty("torrent.client"),"/DIRECTORY", "\""+dir+"\"", "\""+item.getLink()+"\"" };
-				System.out.println("Executing command: utorrent.exe /DIRECTORY \""+dir+"\" \""+item.getLink()+"\"");
+				System.out.println(currentThread().getName() + " - Executing command: utorrent.exe /DIRECTORY \""+dir+"\" \""+item.getLink()+"\"");
 				
 				String sDir = dir.toString();
 				if(!tidyUpDirs.contains(sDir)){

@@ -19,11 +19,12 @@
  */
 package com.kricko.tvshowupdater.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -362,7 +363,7 @@ public class Series implements Serializable {
 
     /**
      * Method setSeriesId.
-     * @param seriesId String
+     * @param seriesId Integer
      */
     public void setSeriesId(String seriesId) {
         this.seriesId = seriesId;

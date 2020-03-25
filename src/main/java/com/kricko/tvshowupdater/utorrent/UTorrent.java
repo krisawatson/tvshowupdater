@@ -1,12 +1,10 @@
 package com.kricko.tvshowupdater.utorrent;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kricko.tvshowupdater.model.Torrent;
+import com.kricko.tvshowupdater.utils.Config;
+import com.kricko.tvshowupdater.utils.Constants;
 import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,9 +14,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import com.kricko.tvshowupdater.model.Torrent;
-import com.kricko.tvshowupdater.utils.Config;
-import com.kricko.tvshowupdater.utils.Constants;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static java.lang.Thread.currentThread;
 
 /**
  */
@@ -85,7 +86,7 @@ public class UTorrent {
 
 			return torrent;
 		} catch (IOException | ParseException e) {
-			System.out.println("Failed during getting the list of torrents " + e.getLocalizedMessage());
+			System.out.println(currentThread().getName() + " - Failed during getting the list of torrents " + e.getLocalizedMessage());
 		}
 		return null;
 	}
@@ -95,13 +96,13 @@ public class UTorrent {
 		List<String> hashes = new ArrayList<String>();
 
 		for(List<Object> torrents:torrentList.getTorrents()){
-			if("Seeding".equals(torrents.get(21))){
+			if(torrents.get(21).toString().contains("Seeding")){
 				hashes.add(torrents.get(0).toString());
 			}
 		}
 
 		for(String hash:hashes){
-			System.out.println("Torrent hash that is completed " + hash);
+			System.out.println(currentThread().getName() + " - Torrent hash that is completed " + hash);
 		}
 
 		return hashes;
@@ -114,9 +115,8 @@ public class UTorrent {
 		String url = "http://"+host+":"+port + "/gui/?token="+token;
 
 		for(String hash:hashes){
-			Response response = null;
 			try {
-				response = Jsoup.connect(url + "&action=remove&hash=" + hash)
+				Jsoup.connect(url + "&action=remove&hash=" + hash)
 						.method(Connection.Method.POST)
 						.cookies(cookies)
 						.header("Authorization", "Basic " + base64login)
@@ -124,10 +124,6 @@ public class UTorrent {
 						.execute();
 			} catch (IOException e) {
 				System.err.println("Failed during removed completed torrents " + e.getLocalizedMessage());
-			}
-			
-			if(response != null){
-				System.out.println(response.body());
 			}
 		}
 	}

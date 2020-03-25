@@ -113,7 +113,8 @@
 			"rssfeed":"http://showrss.info/show/275.rss",
 			"regex":"(^|)(Silicon Valley S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series P-Z/Silicon Valley",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4"]
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4"],
+			"tvdbSeriesId": 277165
 		},
 		{
 			"name":"Suits",

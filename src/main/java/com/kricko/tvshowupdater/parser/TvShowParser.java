@@ -1,15 +1,15 @@
 package com.kricko.tvshowupdater.parser;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Paths;
-
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.kricko.tvshowupdater.model.Shows;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.kricko.tvshowupdater.model.Shows;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 /**
  */
@@ -23,6 +23,7 @@ public class TvShowParser {
 	 */
 	public Shows parseShows() throws IOException, ParseException{
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new Jdk8Module());
     	FileReader reader = new FileReader(Paths.get("tvshows.json").toString());
     	JSONParser jsonParser = new JSONParser();
     	JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);

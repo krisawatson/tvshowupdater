@@ -1,6 +1,7 @@
 package com.kricko.tvshowupdater.model;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -16,6 +17,8 @@ public class Details {
 	private String path;
 	
 	private List<String> skip;
+
+	private Optional<String> tvdbSeriesId;
 
 	/**
 	 * Method getName.
@@ -95,5 +98,13 @@ public class Details {
 	 */
 	public void setSkip(List<String> skip) {
 		this.skip = skip;
+	}
+
+	public Optional<String> getTvdbSeriesId() {
+		return tvdbSeriesId;
+	}
+
+	public void setTvdbSeriesId(Optional<String> tvdbSeriesId) {
+		this.tvdbSeriesId = tvdbSeriesId;
 	}
 }

@@ -1,16 +1,13 @@
 package com.kricko.tvshowupdater.xbmc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.map.util.LRUMap;
-import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * The class <code>XbmcJsonRpcTest</code> contains tests for the class <code>{@link XbmcJsonRpc}</code>.
@@ -39,111 +36,6 @@ public class XbmcJsonRpcTest {
 
 		// add additional test code here
 		assertNotNull(result);
-	}
-
-	/**
-	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:05
-	 * @throws Exception */
-	@Test
-	public void testCallMethod_1()
-		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
-		String method = "";
-		int id = 1;
-		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
-
-		JSONObject result = fixture.callMethod(method, id, params);
-
-		// add additional test code here
-		assertEquals(null, result);
-	}
-
-	/**
-	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:05
-	 * @throws Exception */
-	@Test
-	public void testCallMethod_2()
-		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
-		String method = "";
-		int id = 1;
-		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
-
-		JSONObject result = fixture.callMethod(method, id, params);
-
-		// add additional test code here
-		assertEquals(null, result);
-	}
-
-	/**
-	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:05
-	 * @throws Exception */
-	@Test
-	public void testCallMethod_3()
-		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
-		String method = "";
-		int id = 1;
-		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
-
-		JSONObject result = fixture.callMethod(method, id, params);
-
-		// add additional test code here
-		assertEquals(null, result);
-	}
-
-	/**
-	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:05
-	 * @throws Exception */
-	@Test
-	public void testCallMethod_4()
-		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 1,"xbmc",null);
-		String method = "";
-		int id = 1;
-		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
-
-		JSONObject result = fixture.callMethod(method, id, params);
-
-		// add additional test code here
-		assertEquals(null, result);
-	}
-
-	/**
-	 * Run the JSONObject callMethod(String,int,Map<String,Object>) method test.
-	 *
-	
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:05
-	 * @throws Exception */
-	@Test
-	public void testCallMethod_5()
-		throws Exception {
-		XbmcJsonRpc fixture = new XbmcJsonRpc("", 1, true, 0,"xbmc",null);
-		String method = "";
-		int id = 1;
-		Map<String, Object> params = new LRUMap<String, Object>(1, 1);
-
-		JSONObject result = fixture.callMethod(method, id, params);
-
-		// add additional test code here
-		assertEquals(null, result);
 	}
 
 	/**
