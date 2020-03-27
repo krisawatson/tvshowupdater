@@ -48,7 +48,7 @@ public class RefactorFiles {
 					List<Details> details = shows.getShows();
 					ExecutorService threadPool2 = Executors.newFixedThreadPool(details.size());
 					for(Details detail:details){
-						Optional<String> seriesId = null != detail.getTvdbSeriesId() ? detail.getTvdbSeriesId() : Optional.empty();
+						Optional<String> seriesId = detail.getTvdbSeriesId().isPresent() ? detail.getTvdbSeriesId() : Optional.empty();
 						threadPool2.execute(new FileRefactorThread(detail.getName(), detail.getPath(), detail.getSkip(), seriesId));
 					}
 					threadPool2.shutdown();

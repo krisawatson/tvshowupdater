@@ -13,13 +13,15 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING_EPISODES;
+import static com.kricko.tvshowupdater.utils.Constants.FILE_TIDY_UP;
 import static java.lang.Thread.currentThread;
 
 /**
  */
 public class TvShowUtils {
 
-	private static List<String> tidyUpDirs = new ArrayList<String>();
+	private static List<String> tidyUpDirs = new ArrayList<>();
 	
 	/**
 	 * Method removeDuplicateEpisodes.
@@ -159,7 +161,7 @@ public class TvShowUtils {
 	
 	public static void appendDirToTidyUpList(){
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(Constants.FILE_TIDY_UP_DIR, false)));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_TIDY_UP, false)));
 		    for(String dir:tidyUpDirs){
 		    	out.println(dir);
 		    }
@@ -167,6 +169,19 @@ public class TvShowUtils {
 		    out.close();
 		}catch (IOException e) {
 		    //exception handling left as an exercise for the reader
+		}
+	}
+
+	public static void writeMissingEpisodesToFile(List<String> missingEpisodes) {
+		try {
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_MISSING_EPISODES, true)));
+			for(String episodes:missingEpisodes){
+				out.println(episodes);
+			}
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			System.err.println("Failed to write to the file " + FILE_MISSING_EPISODES);
 		}
 	}
 	
@@ -177,7 +192,7 @@ public class TvShowUtils {
 	public static List<String> getListOfTidyUpDirs(){
 		List<String> directories = new ArrayList<String>();
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(Constants.FILE_TIDY_UP_DIR));
+			BufferedReader reader = new BufferedReader(new FileReader(FILE_TIDY_UP));
 			String line = null;
 			while((line = reader.readLine()) != null){
 				directories.add(line);

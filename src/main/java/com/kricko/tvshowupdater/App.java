@@ -56,6 +56,7 @@ public class App
 			System.out.println("\t3 - Update XBMC host video library");
 			System.out.println("\t4 - Clean XBMC servers video library");
 			System.out.println("\t5 - Execute trakt script");
+			System.out.println("\t6 - Identify missing episodes");
 			System.out.println("\t0 - EXIT");
 			System.out.println("");
 
@@ -107,6 +108,8 @@ public class App
 			} else if(option.equals("xbmctrakt") || option.equals("5")){
 				String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
 				Xbmc.executeTraktAddon(hosts);
+			} else if(option.equals("missing") || option.equals("6")){
+				IdentifyMissingEpisodes.identifyMissing();
 			} else if(option.equals("0")){
 				System.exit(0);
 			} else {

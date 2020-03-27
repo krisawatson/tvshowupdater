@@ -4,10 +4,11 @@ package com.kricko.tvshowupdater.utils;
  */
 public interface Constants {
 
-	public final String FILE_TIDY_UP_DIR = "tidyuplist.txt";
+	public final String FILE_TIDY_UP = "tidyuplist.txt";
 	public final String SETTING_PROP = "setting";
 	public final String SETTING_UPDATE_BEFORE_DOWNLOAD = SETTING_PROP + ".update_before_download";
 	public final String SETTING_XBMC_UPDATE = SETTING_PROP + ".xbmc_update";
+	public final String FILE_MISSING_EPISODES = "missing_episodes.txt";
 	
 	// For KAT search engine
 	public final String KAT_URL = "http://kickass.to";

@@ -1,4 +1,4 @@
-package com.kricko.tvshowupdater.refactor;
+package com.kricko.tvshowupdater.service;
 
 import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Series;
@@ -10,10 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,9 +18,11 @@ import static java.lang.Thread.currentThread;
 
 /**
  */
-public class FileRefactorer {
+public class TvMovieService {
 
 	static TheTVDBApi tvdb = new TheTVDBApi(Constants.API_KEY);
+	private static final Pattern PATTERN = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
+	private static final Pattern PATTERN2 = Pattern.compile(Constants.REGEX_SERIES_EPISODE2);
 
 	/**
 	 * Method refactorFilesAddTitle.
@@ -37,8 +36,6 @@ public class FileRefactorer {
 												Optional<String> seriesId) throws IOException{
 		if(files != null){
 			System.out.println(currentThread().getName() + " - File list is not empty in " + parentDir);
-			Pattern pattern = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
-			Pattern pattern2 = Pattern.compile(Constants.REGEX_SERIES_EPISODE2);
 
 			List<Series> seriesList = null;
 			if(seriesName != null){
@@ -51,14 +48,14 @@ public class FileRefactorer {
 			String episodeName = null;
 
 			for(Path file:files){
-				itemMatcher = pattern.matcher(file.toString());
+				itemMatcher = PATTERN.matcher(file.toString());
 				while(itemMatcher.find()){
 					episodeName = itemMatcher.group();
 					System.out.println(currentThread().getName() + " - " + episodeName);
 					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
 				} 
 				if(episodeIds == null){
-					itemMatcher = pattern2.matcher(file.toString());
+					itemMatcher = PATTERN2.matcher(file.toString());
 					while(itemMatcher.find()){
 						episodeName = itemMatcher.group();
 						episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
@@ -138,7 +135,6 @@ public class FileRefactorer {
 							|| filename.endsWith(".mkv")
 							&& !filename.contains("sample")
 							&& !filename.contains("Sample")){
-						System.out.println(filename + " content Type is "+ contentType);
 						fileList.add(file);
 					}
 				}
@@ -181,5 +177,62 @@ public class FileRefactorer {
 				return FileVisitResult.CONTINUE;
 			}
 		});
+	}
+
+	public static List<String> identifyPotentialMissingEpisodes(final Path dir) throws IOException {
+		List<Path> files = getMovieFiles(dir);
+		int[] episodeIds = null;
+		String episodeName = "";
+
+		Map<Integer, SortedSet<Integer>> seasonEpisodes = new HashMap<>();
+		SortedSet<Integer> episodes = new TreeSet<>();
+		int season = 0;
+		for(Path file:files) {
+			Matcher itemMatcher = PATTERN.matcher(file.toString());
+			while(itemMatcher.find()){
+				episodeName = itemMatcher.group();
+				episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
+			}
+			if(episodeIds == null){
+				itemMatcher = PATTERN2.matcher(file.toString());
+				while(itemMatcher.find()){
+					episodeName = itemMatcher.group();
+					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
+				}
+			}
+			assert episodeIds != null;
+			season = episodeIds[0];
+			episodes.add(episodeIds[1]);
+		}
+		seasonEpisodes.put(season, episodes);
+		List<String> missingEpisodes = checkSeasonEpisodes(dir, seasonEpisodes);
+		for (String missing : missingEpisodes) {
+			System.out.println(String.format("%s %s", dir, missing));
+		}
+		return missingEpisodes;
+	}
+
+	private static List<String> checkSeasonEpisodes(Path dir, Map<Integer, SortedSet<Integer>> seasonEpisodes) {
+		List<String> missingEpisodes = new ArrayList<>();
+		seasonEpisodes.keySet().forEach(s -> {
+			SortedSet<Integer> eps = seasonEpisodes.get(s);
+			Set<Integer> missing = getMissingNumbers(eps);
+			if (!missing.isEmpty()) {
+				missingEpisodes.add(String.format("%s - Season %d, Episodes %s", dir, s, missing));
+			}
+		});
+		return missingEpisodes;
+	}
+
+	private static Set<Integer> getMissingNumbers(SortedSet<Integer> episodes) {
+		Set<Integer> missing = new HashSet<>();
+		if (!episodes.isEmpty()) {
+			for (int i = 1; i <= episodes.last(); i++) {
+				if (!episodes.contains(i)) {
+					missing.add(i);
+				}
+			}
+		}
+		return missing;
 	}
 }

@@ -1,4 +1,4 @@
-package com.kricko.tvshowupdater.refactor;
+package com.kricko.tvshowupdater.service;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	FileRefactorerTest.class,
+	TvMovieServiceTest.class,
 })
 public class TestAll {
 

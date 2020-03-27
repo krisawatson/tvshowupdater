@@ -1,6 +1,6 @@
 package com.kricko.tvshowupdater.thread;
 
-import com.kricko.tvshowupdater.refactor.FileRefactorer;
+import com.kricko.tvshowupdater.service.TvMovieService;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -27,15 +27,15 @@ public class FileRefactorThread implements Runnable {
 	public void run() {
 		try {
 			// Get the list of sub-directories and refactor the files
-			List<Path> dirs = FileRefactorer.getDirectories(Paths.get(path));
+			List<Path> dirs = TvMovieService.getDirectories(Paths.get(path));
 
 			for(Path dir:dirs){
 				if(skip == null || !skip.contains(dir.getFileName().toString())){
-					List<Path> files = FileRefactorer.getMovieFiles(dir);
+					List<Path> files = TvMovieService.getMovieFiles(dir);
 	
-					if(FileRefactorer.refactorFilesAddTitle(name, files, path, seriesId)){
+					if(TvMovieService.refactorFilesAddTitle(name, files, path, seriesId)){
 						System.out.println(currentThread().getName() + " - About to delete dir " + dir);
-						FileRefactorer.deleteDirectory(dir);
+						TvMovieService.deleteDirectory(dir);
 					}
 				}
 			}

@@ -1,19 +1,19 @@
-package com.kricko.tvshowupdater.refactor;
-
-import static org.junit.Assert.assertNotNull;
+package com.kricko.tvshowupdater.service;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
+
 /**
- * The class <code>FileRefactorerTest</code> contains tests for the class <code>{@link FileRefactorer}</code>.
+ * The class <code>FileRefactorerTest</code> contains tests for the class <code>{@link TvMovieService}</code>.
  *
  * @generatedBy CodePro at 28/10/14 09:06
  * @author kris
  * @version $Revision: 1.0 $
  */
-public class FileRefactorerTest {
+public class TvMovieServiceTest {
 	/**
 	 * Run the FileRefactorer() constructor test.
 	 *
@@ -23,7 +23,7 @@ public class FileRefactorerTest {
 	@Test
 	public void testFileRefactorer_1()
 		throws Exception {
-		FileRefactorer result = new FileRefactorer();
+		TvMovieService result = new TvMovieService();
 		assertNotNull(result);
 		// add additional test code here
 	}
@@ -64,6 +64,6 @@ public class FileRefactorerTest {
 	 * @generatedBy CodePro at 28/10/14 09:06
 	 */
 	public static void main(String[] args) {
-		new org.junit.runner.JUnitCore().run(FileRefactorerTest.class);
+		new org.junit.runner.JUnitCore().run(TvMovieServiceTest.class);
 	}
 }

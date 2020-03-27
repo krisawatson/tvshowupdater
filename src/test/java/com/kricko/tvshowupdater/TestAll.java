@@ -19,7 +19,7 @@ import org.junit.runners.Suite;
 	DownloadShowsTest.class,
 	AppTest.class,
 	com.kricko.tvshowupdater.parser.TestAll.class,
-	com.kricko.tvshowupdater.refactor.TestAll.class,
+	com.kricko.tvshowupdater.service.TestAll.class,
 	com.kricko.tvshowupdater.thetvdb.TestAll.class,
 	com.kricko.tvshowupdater.utils.TestAll.class,
 	com.kricko.tvshowupdater.utorrent.TestAll.class,
