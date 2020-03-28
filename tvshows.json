@@ -59,6 +59,14 @@
 			"tvdbSeriesId": 279121
 		},
 		{
+			"name":"Game of Thrones",
+			"rssfeed":"https://showrss.info/show/262.rss",
+			"regex":"(^|)(Game of Thrones S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
+			"path":"G:/TV Series A-G/Game of Thrones",
+			"skip":[],
+			"tvdbSeriesId": 121361
+		},
+		{
 			"name":"Gotham",
 			"rssfeed":"http://showrss.info/show/54.rss",
 			"regex":"(^|)(Gotham S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
