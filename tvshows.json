@@ -47,7 +47,7 @@
 			"regex":"(^|)(Family Guy S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series A-G/Family Guy",
 			"skip":["Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9",
-				"Season 11", "Season 12", "Season 13"],
+				"Season 11", "Season 12", "Season 13", "Season 14", "Season 15", "Season 16", "Season 17"],
 			"tvdbSeriesId": 75978
 		},
 		{
@@ -121,7 +121,8 @@
 			"rssfeed":"https://showrss.info/show/1281.rss",
 			"regex":"(^|)(McMillions (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series H-O/McMillions",
-			"skip":[]
+			"skip":[],
+			"tvdbSeriesId": 373265
 		},
 		{
 			"name":"Scorpion",
@@ -136,7 +137,7 @@
 			"rssfeed":"http://showrss.info/show/275.rss",
 			"regex":"(^|)(Silicon Valley S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series P-Z/Silicon Valley",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4"],
+			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6"],
 			"tvdbSeriesId": 277165
 		},
 		{
