@@ -20,6 +20,8 @@ public class Details {
 
 	private Optional<String> tvdbSeriesId;
 
+	private List<String> ignoreMissing;
+
 	/**
 	 * Method getName.
 	 * @return String
@@ -106,5 +108,13 @@ public class Details {
 
 	public void setTvdbSeriesId(Optional<String> tvdbSeriesId) {
 		this.tvdbSeriesId = tvdbSeriesId;
+	}
+
+	public List<String> getIgnoreMissing() {
+		return ignoreMissing;
+	}
+
+	public void setIgnoreMissing(List<String> ignoreMissing) {
+		this.ignoreMissing = ignoreMissing;
 	}
 }

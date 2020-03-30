@@ -32,7 +32,7 @@ public class IdentifyMissingEpisodes {
 				List<Details> details = shows.getShows();
 				ExecutorService threadPool = Executors.newFixedThreadPool(details.size());
 				for(Details detail:details){
-					threadPool.execute(new IdentifyPotentialMissingThread(detail.getName(), detail.getPath()));
+					threadPool.execute(new IdentifyPotentialMissingThread(detail.getName(), detail.getPath(), detail.getIgnoreMissing()));
 				}
 				threadPool.shutdown();
 

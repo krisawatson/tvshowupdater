@@ -13,6 +13,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.lang.Thread.currentThread;
 
@@ -106,9 +107,9 @@ public class TvMovieService {
 	public static List<Path> getDirectories(final Path dir) throws IOException {
 		final List<Path> dirlist = new ArrayList<>();
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-			for (final Iterator<Path> it = stream.iterator(); it.hasNext();) {
-				Path subDir = dir.resolve(it.next());
-				if(Files.isDirectory(subDir)){
+			for (Path path : stream) {
+				Path subDir = dir.resolve(path);
+				if (Files.isDirectory(subDir)) {
 					dirlist.add(subDir);
 				}
 			}
@@ -179,10 +180,10 @@ public class TvMovieService {
 		});
 	}
 
-	public static List<String> identifyPotentialMissingEpisodes(final Path dir) throws IOException {
+	public static List<String> identifyPotentialMissingEpisodes(final Path dir, final List<String> ignorable) throws IOException {
 		List<Path> files = getMovieFiles(dir);
 		int[] episodeIds = null;
-		String episodeName = "";
+		String episodeName;
 
 		Map<Integer, SortedSet<Integer>> seasonEpisodes = new HashMap<>();
 		SortedSet<Integer> episodes = new TreeSet<>();
@@ -200,23 +201,27 @@ public class TvMovieService {
 					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
 				}
 			}
-			assert episodeIds != null;
-			season = episodeIds[0];
-			episodes.add(episodeIds[1]);
+
+			if(null != episodeIds) {
+				season = episodeIds[0];
+				episodes.add(episodeIds[1]);
+			}
 		}
 		seasonEpisodes.put(season, episodes);
-		List<String> missingEpisodes = checkSeasonEpisodes(dir, seasonEpisodes);
+		List<String> missingEpisodes = checkSeasonEpisodes(dir, seasonEpisodes, ignorable);
 		for (String missing : missingEpisodes) {
-			System.out.println(String.format("%s %s", dir, missing));
+			System.out.println(String.format("%s", missing));
 		}
 		return missingEpisodes;
 	}
 
-	private static List<String> checkSeasonEpisodes(Path dir, Map<Integer, SortedSet<Integer>> seasonEpisodes) {
+	private static List<String> checkSeasonEpisodes(Path dir, Map<Integer, SortedSet<Integer>> seasonEpisodes,
+													List<String> ignorable) {
 		List<String> missingEpisodes = new ArrayList<>();
 		seasonEpisodes.keySet().forEach(s -> {
 			SortedSet<Integer> eps = seasonEpisodes.get(s);
 			Set<Integer> missing = getMissingNumbers(eps);
+			missing = removeIgnorable(s, missing, ignorable);
 			if (!missing.isEmpty()) {
 				missingEpisodes.add(String.format("%s - Season %d, Episodes %s", dir, s, missing));
 			}
@@ -234,5 +239,13 @@ public class TvMovieService {
 			}
 		}
 		return missing;
+	}
+
+	private static Set<Integer> removeIgnorable(int season, Set<Integer> missingEpisodes, List<String> ignorable) {
+		return missingEpisodes.stream()
+							  .map(episodeId -> String.format("S%02dE%02d", season, episodeId))
+							  .filter(seasonEpisode -> !ignorable.contains(seasonEpisode))
+							  .map(seasonEpisode -> Integer.parseInt(seasonEpisode.substring(4)))
+							  .collect(Collectors.toSet());
 	}
 }

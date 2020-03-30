@@ -11,11 +11,13 @@ import static com.kricko.tvshowupdater.utils.TvShowUtils.writeMissingEpisodesToF
 
 public class IdentifyPotentialMissingThread implements Runnable {
 
-	private String name, path;
+	private final String name, path;
+	private final List<String> ignorable;
 
-	public IdentifyPotentialMissingThread(String name, String path){
+	public IdentifyPotentialMissingThread(String name, String path, List<String> ignorable){
 		this.name = name;
 		this.path = path;
+		this.ignorable = ignorable;
 	}
 	
 	@Override
@@ -25,7 +27,7 @@ public class IdentifyPotentialMissingThread implements Runnable {
 			List<Path> dirs = TvMovieService.getDirectories(Paths.get(path));
 
 			for(Path dir:dirs){
-				List<String> missing = TvMovieService.identifyPotentialMissingEpisodes(dir);
+				List<String> missing = TvMovieService.identifyPotentialMissingEpisodes(dir, ignorable);
 				writeMissingEpisodesToFile(missing);
 			}
 
