@@ -66,15 +66,6 @@
 			"tvdbSeriesId": 279121
 		},
 		{
-			"name":"Game of Thrones",
-			"rssfeed":"https://showrss.info/show/262.rss",
-			"regex":"(^|)(Game of Thrones S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series A-G/Game of Thrones",
-			"skip":[],
-			"ignoreMissing": [],
-			"tvdbSeriesId": 121361
-		},
-		{
 			"name":"Gotham",
 			"rssfeed":"http://showrss.info/show/54.rss",
 			"regex":"(^|)(Gotham S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
@@ -94,15 +85,6 @@
 			"tvdbSeriesId": 73762
 		},
 		{
-			"name":"House of Cards (US)",
-			"rssfeed":"http://showrss.info/show/274.rss",
-			"regex":"(^|)(House of Cards (2013) S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series H-O/House of Cards (US)",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 6"],
-			"ignoreMissing": [],
-			"tvdbSeriesId": 262980
-		},
-		{
 			"name":"Lethal Weapon",
 			"rssfeed":"http://showrss.info/show/636.rss",
 			"regex":"(^|)(Lethal Weapon S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
@@ -116,7 +98,7 @@
 			"rssfeed":"http://showrss.info/show/453.rss",
 			"regex":"(^|)(Lucifer S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series H-O/Lucifer",
-			"skip":[],
+			"skip":["Season 1", "Season 2", "Season 3"],
 			"ignoreMissing": [],
 			"tvdbSeriesId": 295685
 		},
@@ -126,7 +108,7 @@
 			"regex":"(^|)(Modern Family (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series H-O/Modern Family",
 			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7",
-				"Season 8", "Season 9"],
+				"Season 8", "Season 9", "Season 11"],
 			"ignoreMissing": [],
 			"tvdbSeriesId": 95011
 		},

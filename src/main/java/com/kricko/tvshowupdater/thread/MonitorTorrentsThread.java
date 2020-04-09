@@ -1,10 +1,10 @@
 package com.kricko.tvshowupdater.thread;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.kricko.tvshowupdater.model.Torrent;
 import com.kricko.tvshowupdater.utorrent.UTorrent;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MonitorTorrentsThread implements Runnable {
 
@@ -20,11 +20,12 @@ public class MonitorTorrentsThread implements Runnable {
 				if(hashes != null && !hashes.isEmpty()){
 					uTorrent.removeCompletedTorrents(hashes);
 				}
+				Thread.sleep(5000);
 				torrentList = uTorrent.getListOfTorrents();
 			}
 			
-		} catch (IOException e) {
-			return;
+		} catch (IOException | InterruptedException e) {
+			System.err.println("Failed to get the list of active torrents");
 		}
 	}
 }
