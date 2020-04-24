@@ -6,10 +6,8 @@ import com.kricko.tvshowupdater.xbmc.Xbmc;
 import org.apache.commons.httpclient.HttpException;
 import org.json.simple.parser.ParseException;
 
-import javax.xml.bind.JAXBException;
 import java.io.Console;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -21,13 +19,9 @@ public class App
 	/**
 	 * Method main.
 	 * @param args String[]
-	 * @throws JAXBException
-	 * @throws IOException
-	 * @throws ParseException
-	 * @throws HttpException
 	 */
 	public static void main( String[] args )
-			throws JAXBException, IOException, ParseException, HttpException, URISyntaxException, InterruptedException {
+			throws IOException, ParseException, HttpException, InterruptedException {
 		System.out.println("**********************************");
 		System.out.println("Welcome to TV Show Updater");
 		System.out.println("");
@@ -73,10 +67,6 @@ public class App
 	/**
 	 * Method doSelectedOption.
 	 * @param option String
-	 * @throws IOException
-	 * @throws ParseException
-	 * @throws HttpException
-	 * @throws InterruptedException
 	 */
 	private static void doSelectedOption(String option)
 			throws IOException, ParseException, HttpException, InterruptedException {
