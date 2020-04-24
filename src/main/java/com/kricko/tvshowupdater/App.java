@@ -70,41 +70,58 @@ public class App
 	 */
 	private static void doSelectedOption(String option)
 			throws IOException, ParseException, HttpException, InterruptedException {
-		if(option != null){
-			if(option.equals("update") || option.equals("1")){
-				Config config = Config.getInstance();
-				if(config.updateBeforeDownload()){
-					RefactorFiles.tidyFolders(true);
-				}
-				boolean newDownloads = DownloadShows.doDownload();
-				
-				if(newDownloads){
-					doMonitorTorrents();
-					RefactorFiles.tidyFolders(false);
-					if (config.isXbmcUpdate()) {
-						String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
-						Xbmc.updateHostVideos(hosts);
-						Xbmc.executeTraktAddon(hosts);
+		if (option != null){
+			switch (option) {
+				case "update":
+				case "1":
+					Config config = Config.getInstance();
+					if (config.updateBeforeDownload()) {
+						RefactorFiles.tidyFolders(true);
 					}
+					boolean newDownloads = DownloadShows.doDownload();
+
+					if (newDownloads) {
+						doMonitorTorrents();
+						RefactorFiles.tidyFolders(false);
+						if (config.isXbmcUpdate()) {
+							String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
+							Xbmc.updateHostVideos(hosts);
+							Xbmc.executeTraktAddon(hosts);
+						}
+					}
+					break;
+				case "tidyup":
+				case "2":
+					RefactorFiles.tidyFolders(true);
+					break;
+				case "xbmcupdate":
+				case "3": {
+					String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
+					Xbmc.updateHostVideos(hosts);
+					break;
 				}
-			} else if(option.equals("tidyup") || option.equals("2")){
-				RefactorFiles.tidyFolders(true);
-			} else if(option.equals("xbmcupdate") || option.equals("3")){
-				String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
-				Xbmc.updateHostVideos(hosts);
-			} else if(option.equals("xbmcclean") || option.equals("4")){
-				String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
-				Xbmc.cleanVideoLibrary(hosts);
-			} else if(option.equals("xbmctrakt") || option.equals("5")){
-				String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
-				Xbmc.executeTraktAddon(hosts);
-			} else if(option.equals("missing") || option.equals("6")){
-				IdentifyMissingEpisodes.identifyMissing();
-			} else if(option.equals("0")){
-				System.exit(0);
-			} else {
-				System.out.println("Invalid option, try again");
-				showInteractiveCommandLine();
+				case "xbmcclean":
+				case "4": {
+					String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
+					Xbmc.cleanVideoLibrary(hosts);
+					break;
+				}
+				case "xbmctrakt":
+				case "5": {
+					String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
+					Xbmc.executeTraktAddon(hosts);
+					break;
+				}
+				case "missing":
+				case "6":
+					IdentifyMissingEpisodes.identifyMissing();
+					break;
+				case "0":
+					System.exit(0);
+				default:
+					System.out.println("Invalid option, try again");
+					showInteractiveCommandLine();
+					break;
 			}
 		}
 	}
