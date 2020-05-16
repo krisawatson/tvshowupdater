@@ -10,16 +10,6 @@
 			"tvdbSeriesId": 73141
 		},
 		{
-			"name":"The Big Bang Theory",
-			"rssfeed":"http://showrss.info/show/48.rss",
-			"regex":"(^|)(The Big Bang Theory S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series A-G/Big Bang Theory, The",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8",
-				"Season 9", "Season 10", "Season 11", "Season 12"],
-			"ignoreMissing": [],
-			"tvdbSeriesId": 80379
-		},
-		{
 			"name":"Brooklyn Nine Nine",
 			"rssfeed":"http://showrss.info/show/58.rss",
 			"regex":"(^|)(Brooklyn Nine Nine.*S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
@@ -85,15 +75,6 @@
 			"tvdbSeriesId": 73762
 		},
 		{
-			"name":"Lethal Weapon",
-			"rssfeed":"http://showrss.info/show/636.rss",
-			"regex":"(^|)(Lethal Weapon S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series H-O/Lethal Weapon",
-			"skip":["Season 1", "Season 2", "Season 3"],
-			"ignoreMissing": [],
-			"tvdbSeriesId": 311790
-		},
-		{
 			"name":"Lucifer",
 			"rssfeed":"http://showrss.info/show/453.rss",
 			"regex":"(^|)(Lucifer S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
@@ -111,33 +92,6 @@
 				"Season 8", "Season 9", "Season 11"],
 			"ignoreMissing": [],
 			"tvdbSeriesId": 95011
-		},
-		{
-			"name":"McMillions",
-			"rssfeed":"https://showrss.info/show/1281.rss",
-			"regex":"(^|)(McMillions (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series H-O/McMillions",
-			"skip":["Season 1"],
-			"ignoreMissing": [],
-			"tvdbSeriesId": 373265
-		},
-		{
-			"name":"Scorpion",
-			"rssfeed":"http://showrss.info/show/52.rss",
-			"regex":"(^|)(Scorpion S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series P-Z/Scorpion",
-			"skip":["Season 1", "Season 3", "Season 4"],
-			"ignoreMissing": ["S03E02"],
-			"tvdbSeriesId": 281630
-		},
-		{
-			"name":"Silicon Valley",
-			"rssfeed":"http://showrss.info/show/275.rss",
-			"regex":"(^|)(Silicon Valley S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series P-Z/Silicon Valley",
-			"skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6"],
-			"ignoreMissing": ["S00E01", "S00E02", "S00E03"],
-			"tvdbSeriesId": 277165
 		},
 		{
 			"name":"Suits",

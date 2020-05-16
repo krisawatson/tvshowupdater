@@ -42,6 +42,6 @@ public class FileRefactorThread implements Runnable {
 
 		} catch (IOException e) {
 			System.err.println(e.getLocalizedMessage());
-		}	
+		}
 	}
 }

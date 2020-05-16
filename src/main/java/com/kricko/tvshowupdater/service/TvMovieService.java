@@ -34,7 +34,7 @@ public class TvMovieService {
 	 * @throws IOException
 	 */
 	public static boolean refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir,
-												Optional<String> seriesId) throws IOException{
+												Optional<String> seriesId) throws IOException {
 		if(files != null){
 			System.out.println(currentThread().getName() + " - File list is not empty in " + parentDir);
 

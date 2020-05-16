@@ -14,19 +14,6 @@ import static org.junit.Assert.assertNotNull;
  * @version $Revision: 1.0 $
  */
 public class TvMovieServiceTest {
-	/**
-	 * Run the FileRefactorer() constructor test.
-	 *
-	 * @generatedBy CodePro at 28/10/14 09:06
-	 * @throws Exception
-	 */
-	@Test
-	public void testFileRefactorer_1()
-		throws Exception {
-		TvMovieService result = new TvMovieService();
-		assertNotNull(result);
-		// add additional test code here
-	}
 
 	/**
 	 * Perform pre-test initialization.
@@ -65,5 +52,18 @@ public class TvMovieServiceTest {
 	 */
 	public static void main(String[] args) {
 		new org.junit.runner.JUnitCore().run(TvMovieServiceTest.class);
+	}
+
+	/**
+	 * Run the FileRefactorer() constructor test.
+	 *
+	 * @generatedBy CodePro at 28/10/14 09:06
+	 * @throws Exception
+	 */
+	@Test
+	public void testFileRefactorer_1() {
+		TvMovieService result = new TvMovieService();
+		assertNotNull(result);
+		// add additional test code here
 	}
 }
