@@ -190,10 +190,10 @@ public class TvShowUtils {
 	 * @return List<String>
 	 */
 	public static List<String> getListOfTidyUpDirs(){
-		List<String> directories = new ArrayList<String>();
+		List<String> directories = new ArrayList<>();
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(FILE_TIDY_UP));
-			String line = null;
+			String line;
 			while((line = reader.readLine()) != null){
 				directories.add(line);
 			}
