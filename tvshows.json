@@ -14,7 +14,7 @@
 			"rssfeed":"http://showrss.info/show/58.rss",
 			"regex":"(^|)(Brooklyn Nine Nine.*S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series A-G/Brooklyn Nine Nine",
-			"skip":["Season 1", "Season 2", "Season 5", "Season 6"],
+			"skip":["Season 1", "Season 2", "Season 4", "Season 5", "Season 6", "Season 7"],
 			"ignoreMissing": [],
 			"tvdbSeriesId": 269586
 		},
