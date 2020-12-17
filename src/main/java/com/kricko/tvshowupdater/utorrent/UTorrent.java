@@ -25,7 +25,7 @@ import static java.lang.Thread.currentThread;
  */
 public class UTorrent {
 
-	private String host, port, username, password;
+	private final String host, port, username, password;
 	private String token;
 	private static Map<String, String> cookies;
 
