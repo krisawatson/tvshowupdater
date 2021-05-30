@@ -23,7 +23,7 @@
 			"rssfeed":"http://showrss.info/show/285.rss",
 			"regex":"(^|)(Marvels Daredevil S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
 			"path":"G:/TV Series A-G/Daredevil",
-			"skip":["Season 1", "Season 2"],
+			"skip":["Season 1", "Season 2","Season 3"],
 			"ignoreMissing": [],
 			"tvdbSeriesId": 281662
 		},
