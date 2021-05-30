@@ -52,7 +52,7 @@ public class TvMovieService {
 				itemMatcher = PATTERN.matcher(file.toString());
 				while(itemMatcher.find()){
 					episodeName = itemMatcher.group();
-					System.out.println(currentThread().getName() + " - " + episodeName);
+					System.out.println(currentThread().getName() + " - Matched " + seriesName + " episode to " + episodeName);
 					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
 				} 
 				if(episodeIds == null){

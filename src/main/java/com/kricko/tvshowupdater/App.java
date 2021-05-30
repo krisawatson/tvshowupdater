@@ -45,7 +45,7 @@ public class App
 		while (true)  
 		{
 			System.out.println("Please enter one of the following options:");
-			System.out.println("\t1 - To check if there are shows you need to download");
+			System.out.println("\t1 - Download latest episodes");
 			System.out.println("\t2 - To tidy up existing folders");
 			System.out.println("\t3 - Update XBMC host video library");
 			System.out.println("\t4 - Clean XBMC servers video library");
