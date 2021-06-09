@@ -1,15 +1,6 @@
 {
 	"shows":[
 		{
-			"name":"American Dad",
-			"rssfeed":"http://showrss.info/show/271.rss",
-			"regex":"(^|)(American Dad S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
-			"path":"G:/TV Series A-G/American Dad",
-			"skip":["Season 8", "Season 9", "Season 10", "Season 11", "Season 13", "Season 14", "Season 17"],
-			"ignoreMissing": ["S16E21", "S16E22", "S16E23", "S16E24"],
-			"tvdbSeriesId": 73141
-		},
-		{
 			"name":"Brooklyn Nine Nine",
 			"rssfeed":"http://showrss.info/show/58.rss",
 			"regex":"(^|)(Brooklyn Nine Nine.*S([0-9]+)E([0-9]+))(?!.*1080p)(?!.*720p)(|$)",
