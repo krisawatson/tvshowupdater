@@ -83,11 +83,6 @@ public class App
 					if (newDownloads) {
 						doMonitorTorrents();
 						RefactorFiles.tidyFolders(false);
-						if (config.isXbmcUpdate()) {
-							String[] hosts = Config.getInstance().getProperty("xbmc.host_list").split(",");
-							Xbmc.updateHostVideos(hosts);
-							Xbmc.executeTraktAddon(hosts);
-						}
 					}
 					break;
 				case "tidyup":

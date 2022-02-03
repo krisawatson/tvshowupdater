@@ -14,9 +14,8 @@ public class Config {
 	private static Properties prop = null;
 	protected Config() {
 		prop = new Properties();
-		InputStream in = null;
 		try {
-			in = new FileInputStream(Paths.get("config.properties").toString());
+			InputStream in = new FileInputStream(Paths.get("config.properties").toString());
 			prop.load(in);
 			in.close();
 		} catch (IOException e) {
@@ -83,13 +82,5 @@ public class Config {
 	 */
 	public boolean updateBeforeDownload(){
 		return getBooleanProperty(Constants.SETTING_UPDATE_BEFORE_DOWNLOAD);
-	}
-
-	/**
-	 * Method isXbmcUpdate.
-	 * @return boolean
-	 */
-	public boolean isXbmcUpdate(){
-		return getBooleanProperty(Constants.SETTING_XBMC_UPDATE);
 	}
 }
