@@ -87,7 +87,7 @@
 		{
 			"name": "Peacemaker",
 			"rssfeed":"http://showrss.info/show/1509.rss",
-			"regex":"(^|)(Peacemaker 2022 (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p)(?!.*720p)(|$)",
+			"regex":"(^Peacemaker 2022 (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p$)(?!.*720p$)",
 			"path":"G:/TV Series P-Z/Peacemaker",
 			"skip":[],
 			"ignoreMissing": [],
