@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.Console;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +21,7 @@ public class App
 	 * @param args String[]
 	 */
 	public static void main( String[] args )
-			throws IOException, ParseException, HttpException, InterruptedException {
+			throws IOException, ParseException, HttpException, InterruptedException, URISyntaxException {
 		System.out.println("**********************************");
 		System.out.println("Welcome to TV Show Updater");
 		System.out.println("");
@@ -53,7 +54,7 @@ public class App
 			try {
 				String option = console.readLine("What is your choice: ");
 				doSelectedOption(option);
-			} catch (IOException | ParseException | HttpException | InterruptedException e) {
+			} catch (IOException | ParseException | HttpException | InterruptedException | URISyntaxException e) {
 				System.out.println("Unexpected error");
 				System.exit(-1);
 			}
@@ -65,7 +66,7 @@ public class App
 	 * @param option String
 	 */
 	private static void doSelectedOption(String option)
-			throws IOException, ParseException, HttpException, InterruptedException {
+			throws IOException, ParseException, HttpException, InterruptedException, URISyntaxException {
 		if (option != null){
 			switch (option) {
 				case "update":

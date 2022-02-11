@@ -1,15 +1,15 @@
 package com.kricko.tvshowupdater.parser;
 
-import static org.junit.Assert.assertNotNull;
-
-import java.util.List;
-
+import com.kricko.tvshowupdater.model.Details;
+import com.kricko.tvshowupdater.model.Shows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.kricko.tvshowupdater.model.Details;
-import com.kricko.tvshowupdater.model.Shows;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * The class <code>TvShowParserTest</code> contains tests for the class <code>{@link TvShowParser}</code>.
@@ -54,6 +54,30 @@ public class TvShowParserTest {
 		List<Details> details = result.getShows();
 		// add additional test code here
 		assertNotNull(details);
+	}
+
+
+
+	/**
+	 * Run the Shows parseShows() method test.
+	 *
+
+	 *
+	 * @generatedBy CodePro at 28/10/14 09:04
+	 * @throws Exception */
+	@Test
+	public void testParseShowRegex() throws Exception {
+		TvShowParser fixture = new TvShowParser();
+
+		Shows result = fixture.parseShows();
+
+		List<Details> details = result.getShows();
+		// add additional test code here
+
+		assertEquals(1, details.size());
+		assertEquals("Brooklyn Nine Nine", details.get(0).getName());
+		assertEquals("Brooklyn Nine Nine", details.get(0).getRegexName());
+		assertEquals( "269586", details.get(0).getTvdbSeriesId().orElseGet(null));
 	}
 
 	/**

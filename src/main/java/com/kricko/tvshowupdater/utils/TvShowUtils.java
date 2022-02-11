@@ -8,6 +8,7 @@ import com.kricko.tvshowupdater.parser.TvShowParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -21,7 +22,10 @@ import static java.lang.Thread.currentThread;
  */
 public class TvShowUtils {
 
-	private static List<String> tidyUpDirs = new ArrayList<>();
+
+	private static final String REGEX_PROP = "setting.show_regex";
+	private static final Config config = Config.getInstance();
+	private static final List<String> tidyUpDirs = new ArrayList<>();
 	
 	/**
 	 * Method removeDuplicateEpisodes.
@@ -69,8 +73,9 @@ public class TvShowUtils {
 	public static boolean downloadNewItems(Item item, Details detail) throws Throwable{
 
 		boolean newDownloads = false;
-		
-		Pattern pattern = Pattern.compile(detail.getRegex());
+		String regex = config.getProperty(REGEX_PROP).replaceAll("NAME", detail.getRegexName());
+
+		Pattern pattern = Pattern.compile(regex);
 		Matcher itemMatcher = pattern.matcher(item.getRawTitle());
 		while(itemMatcher.find()){
 			String nameAndEpisode = itemMatcher.group();
@@ -211,7 +216,7 @@ public class TvShowUtils {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static Shows getListOfShows() throws IOException, ParseException{
+	public static Shows getListOfShows() throws IOException, ParseException, URISyntaxException {
 		TvShowParser parser = new TvShowParser();
         return parser.parseShows(); 
 	}

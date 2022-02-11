@@ -1,0 +1,114 @@
+{
+  "shows":[
+    {
+      "name":"Brooklyn Nine Nine",
+      "rssfeed":"http://showrss.info/show/58.rss",
+      "regexName":"Brooklyn Nine Nine",
+      "path":"G:/TV Series A-G/Brooklyn Nine Nine",
+      "skip":["Season 1", "Season 2", "Season 4", "Season 5", "Season 6", "Season 7"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 269586
+    },
+    {
+      "name":"Daredevil",
+      "rssfeed":"http://showrss.info/show/285.rss",
+      "regexName": "Marvels Daredevil",
+      "path":"G:/TV Series A-G/Daredevil",
+      "skip":["Season 1", "Season 2","Season 3"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 281662
+    },
+    {
+      "name":"Elementary",
+      "rssfeed":"http://showrss.info/show/207.rss",
+      "regexName": "Elementary",
+      "path":"G:/TV Series A-G/Elementary",
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 255316
+    },
+    {
+      "name":"Family Guy",
+      "rssfeed":"http://showrss.info/show/57.rss",
+      "regexName": "Family Guy",
+      "path":"G:/TV Series A-G/Family Guy",
+      "skip":["Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9",
+        "Season 11", "Season 12", "Season 13", "Season 14", "Season 15", "Season 16", "Season 17"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 75978
+    },
+    {
+      "name":"The Flash (2014)",
+      "rssfeed":"http://showrss.info/show/115.rss",
+      "regexName": "The Flash 2014",
+      "path":"G:/TV Series A-G/Flash (2014), The",
+      "skip":["Season 1", "Season 2"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 279121
+    },
+    {
+      "name":"Gotham",
+      "rssfeed":"http://showrss.info/show/54.rss",
+      "regexName": "Gotham",
+      "path":"G:/TV Series A-G/Gotham",
+      "skip":["Season 1", "Season 2", "Season 3"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 274431
+    },
+    {
+      "name":"Greys Anatomy",
+      "rssfeed":"http://showrss.info/show/9.rss",
+      "regexName": "Greys Anatomy",
+      "path":"G:/TV Series A-G/Greys Anatomy",
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8",
+        "Season 9", "Season 10", "Season 11"],
+      "ignoreMissing": ["S05E02", "S06E02", "S08E02", "S10E02"],
+      "tvdbSeriesId": 73762
+    },
+    {
+      "name":"Lucifer",
+      "rssfeed":"http://showrss.info/show/453.rss",
+      "regexName": "Lucifer",
+      "path":"G:/TV Series H-O/Lucifer",
+      "skip":["Season 1", "Season 2", "Season 3"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 295685
+    },
+    {
+      "name": "Peacemaker",
+      "rssfeed":"http://showrss.info/show/1509.rss",
+      "regexName": "Peacemaker 2022",
+      "path":"G:/TV Series P-Z/Peacemaker",
+      "skip":[],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 391153
+    },
+    {
+      "name": "Rick and Morty",
+      "rssfeed":"http://showrss.info/show/44.rss",
+      "regexName": "Rick and Morty",
+      "path":"G:/TV Series P-Z/Rick and Morty",
+      "skip":[],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 275274
+    },
+    {
+      "name":"Suits",
+      "rssfeed":"http://showrss.info/show/263.rss",
+      "regexName": "Suits",
+      "path":"G:/TV Series P-Z/Suits",
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 9"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 247808
+    },
+    {
+      "name":"Young Sheldon",
+      "rssfeed":"http://showrss.info/show/881.rss",
+      "regexName": "Young Sheldon",
+      "path":"G:/TV Series P-Z/Young Sheldon",
+      "skip":["Season 1"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 328724
+    }
+  ]
+}

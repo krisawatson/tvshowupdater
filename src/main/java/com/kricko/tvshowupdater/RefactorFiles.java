@@ -7,6 +7,7 @@ import com.kricko.tvshowupdater.utils.TvShowUtils;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
@@ -60,7 +61,7 @@ public class RefactorFiles {
 					}
 				}
 			}
-		} catch (IOException | ParseException e) {
+		} catch (IOException | ParseException | URISyntaxException e) {
 			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
 		}
 	}

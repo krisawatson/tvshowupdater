@@ -7,9 +7,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.net.URISyntaxException;
+import java.util.Objects;
 
 /**
  */
@@ -21,15 +23,15 @@ public class TvShowParser {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public Shows parseShows() throws IOException, ParseException{
+	public Shows parseShows() throws IOException, ParseException, URISyntaxException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new Jdk8Module());
-    	FileReader reader = new FileReader(Paths.get("tvshows.json").toString());
+    	FileReader reader = new FileReader(new File(Objects.requireNonNull(getClass().getClassLoader().getResource("tvshows.json")).toURI()));
     	JSONParser jsonParser = new JSONParser();
     	JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 
     	Shows shows = mapper.readValue(jsonObject.toString(), Shows.class);
-    	
+
     	return shows;
 	}
 }

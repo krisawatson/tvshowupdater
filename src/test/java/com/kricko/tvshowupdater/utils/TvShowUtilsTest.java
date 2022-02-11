@@ -1,19 +1,18 @@
 package com.kricko.tvshowupdater.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.model.Shows;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * The class <code>TvShowUtilsTest</code> contains tests for the class <code>{@link TvShowUtils}</code>.
@@ -140,7 +139,7 @@ public class TvShowUtilsTest {
 		Item item = new Item();
 		item.setRawTitle("");
 		Details detail = new Details();
-		detail.setRegex("");
+		detail.setRegexName("");
 		detail.setPath("");
 
 		TvShowUtils.downloadNewItems(item, detail);
@@ -162,7 +161,7 @@ public class TvShowUtilsTest {
 		item.setRawTitle("");
 		item.setLink("");
 		Details detail = new Details();
-		detail.setRegex("");
+		detail.setRegexName("");
 		detail.setPath("");
 
 		TvShowUtils.downloadNewItems(item, detail);
@@ -184,7 +183,7 @@ public class TvShowUtilsTest {
 		item.setRawTitle("");
 		item.setLink("");
 		Details detail = new Details();
-		detail.setRegex("");
+		detail.setRegexName("");
 		detail.setPath("");
 
 		TvShowUtils.downloadNewItems(item, detail);
@@ -206,7 +205,7 @@ public class TvShowUtilsTest {
 		item.setRawTitle("");
 		item.setLink("");
 		Details detail = new Details();
-		detail.setRegex("");
+		detail.setRegexName("");
 		detail.setPath("");
 
 		TvShowUtils.downloadNewItems(item, detail);
@@ -227,7 +226,7 @@ public class TvShowUtilsTest {
 		Item item = new Item();
 		item.setRawTitle("");
 		Details detail = new Details();
-		detail.setRegex("");
+		detail.setRegexName("");
 		detail.setPath("");
 
 		TvShowUtils.downloadNewItems(item, detail);
@@ -248,7 +247,7 @@ public class TvShowUtilsTest {
 		Item item = new Item();
 		item.setRawTitle("");
 		Details detail = new Details();
-		detail.setRegex("");
+		detail.setRegexName("");
 
 		TvShowUtils.downloadNewItems(item, detail);
 

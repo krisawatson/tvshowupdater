@@ -13,6 +13,8 @@ public class Details {
 	private String rssfeed;
 	
 	private String regex;
+
+	private String regexName;
 	
 	private String path;
 	
@@ -55,19 +57,19 @@ public class Details {
 	}
 
 	/**
-	 * Method getRegex.
+	 * Method getRegexName.
 	 * @return String
 	 */
-	public String getRegex() {
-		return regex;
+	public String getRegexName() {
+		return regexName;
 	}
 
 	/**
-	 * Method setRegex.
-	 * @param regex String
+	 * Method setRegexName.
+	 * @param regexName String
 	 */
-	public void setRegex(String regex) {
-		this.regex = regex;
+	public void setRegexName(String regexName) {
+		this.regexName = regexName;
 	}
 
 	/**
