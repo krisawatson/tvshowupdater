@@ -16,7 +16,6 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
 	RefactorFilesTest.class,
-	DownloadShowsTest.class,
 	AppTest.class,
 	com.kricko.tvshowupdater.parser.TestAll.class,
 	com.kricko.tvshowupdater.service.TestAll.class,

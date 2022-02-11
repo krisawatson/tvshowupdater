@@ -15,11 +15,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
+import static com.kricko.tvshowupdater.utils.Constants.SETTING_REGEX;
+
 /**
  */
 public class DownloadShows {
 
-	private static final String REGEX_PROP = "setting.show_regex";
 	private static final Config config = Config.getInstance();
 	/**
 	 * Method doDownload.
@@ -44,7 +45,7 @@ public class DownloadShows {
 
 			List<Item> items = rss.getChannel().getItem();
 			if(items != null){
-				String regex = config.getProperty(REGEX_PROP).replaceAll("NAME", detail.getRegexName());
+				String regex = config.getProperty(SETTING_REGEX).replaceAll("NAME", detail.getRegexName());
 				items = TvShowUtils.removeDuplicateEpisodes(items, regex);
 				for(Item item:items){
 					try {

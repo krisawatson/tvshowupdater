@@ -15,11 +15,9 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	HttpUtilsTest.class,
 	ConfigTest.class,
 	DOMHelperTest.class,
 	ConstantsTestTest.class,
-	CompressionDefinitionTest.class,
 	ConstantsTest.class,
 	TvShowUtilsTest.class,
 })

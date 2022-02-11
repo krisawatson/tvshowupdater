@@ -14,16 +14,13 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING_EPISODES;
-import static com.kricko.tvshowupdater.utils.Constants.FILE_TIDY_UP;
+import static com.kricko.tvshowupdater.utils.Constants.*;
 import static java.lang.Thread.currentThread;
 
 /**
  */
 public class TvShowUtils {
 
-
-	private static final String REGEX_PROP = "setting.show_regex";
 	private static final Config config = Config.getInstance();
 	private static final List<String> tidyUpDirs = new ArrayList<>();
 	
@@ -73,7 +70,7 @@ public class TvShowUtils {
 	public static boolean downloadNewItems(Item item, Details detail) throws Throwable{
 
 		boolean newDownloads = false;
-		String regex = config.getProperty(REGEX_PROP).replaceAll("NAME", detail.getRegexName());
+		String regex = config.getProperty(SETTING_REGEX).replaceAll("NAME", detail.getRegexName());
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher itemMatcher = pattern.matcher(item.getRawTitle());

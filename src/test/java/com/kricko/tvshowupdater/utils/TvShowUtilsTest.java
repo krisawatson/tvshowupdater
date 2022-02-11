@@ -29,7 +29,7 @@ public class TvShowUtilsTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testTvShowUtils_1()
+	public void testTvShowUtilsConstructor()
 		throws Exception {
 		TvShowUtils result = new TvShowUtils();
 		assertNotNull(result);

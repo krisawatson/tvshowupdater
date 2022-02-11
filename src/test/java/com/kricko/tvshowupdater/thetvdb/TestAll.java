@@ -27,6 +27,6 @@ public class TestAll {
 	 * @generatedBy CodePro at 28/10/14 09:06
 	 */
 	public static void main(String[] args) {
-		JUnitCore.runClasses(new Class[] { TestAll.class });
+		JUnitCore.runClasses(TestAll.class);
 	}
 }
