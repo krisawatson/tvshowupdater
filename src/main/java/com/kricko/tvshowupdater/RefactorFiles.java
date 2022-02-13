@@ -8,9 +8,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -30,43 +28,46 @@ public class RefactorFiles {
 
 		try {
 			Shows shows = getListOfShows();
-			List<Details> details = Collections.emptyList();
+			Set<Details> details = new HashSet<>();
+			List<String> directories = Collections.emptyList();
 			if (existing) {
 				if(shows != null) {
-					details = shows.getShows();
+					details = new HashSet<>(shows.getShows());
 				}
 			} else {
-				List<String> directories = TvShowUtils.getListOfTidyUpDirs();
+				directories = TvShowUtils.getListOfTidyUpDirs();
 				if (!directories.isEmpty()) {
 					for (String dir : directories) {
-						details = shows.getShows()
+						details.addAll(shows.getShows()
 									   .stream()
 									   .filter(showDetails -> dir.replaceAll("\\\\", "/")
 																 .startsWith(showDetails.getPath()))
-									   .collect(Collectors.toList());
+									   .collect(Collectors.toList()));
 					}
 				}
 			}
-			addTitleAndRename(details);
+			addTitleAndRename(details, directories);
 		} catch (IOException | ParseException | URISyntaxException e) {
 			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
 		}
 	}
 
-	public static void addTitleAndRename(List<Details> details) {
+	public static void addTitleAndRename(Set<Details> details, List<String> directories) {
+		ExecutorService threadPool = Executors.newFixedThreadPool(details.size());
+		if (!directories.isEmpty()) {
+			directories.forEach(dir -> threadPool.execute(new FileRefactorThread(null, dir, null, null)));
+		}
 		if (!details.isEmpty()) {
-			ExecutorService threadPool2 = Executors.newFixedThreadPool(details.size());
 			for(Details detail:details){
 				Optional<String> seriesId = detail.getTvdbSeriesId().isPresent() ? detail.getTvdbSeriesId() : Optional.empty();
-				threadPool2.execute(new FileRefactorThread(detail.getName(), detail.getPath(), detail.getSkip(), seriesId));
+				threadPool.execute(new FileRefactorThread(detail.getName(), detail.getPath(), detail.getSkip(), seriesId));
 			}
-			threadPool2.shutdown();
-
-			try{
-				threadPool2.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-			} catch (InterruptedException e) {
-				System.err.println("Failed to terminate the thread pool");
-			}
+		}
+		threadPool.shutdown();
+		try{
+			threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+		} catch (InterruptedException e) {
+			System.err.println("Failed to terminate the thread pool");
 		}
 	}
 
