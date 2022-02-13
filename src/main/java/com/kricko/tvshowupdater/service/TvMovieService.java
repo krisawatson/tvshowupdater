@@ -44,12 +44,11 @@ public class TvMovieService {
 				seriesList = tvdb.searchSeries(seriesName, Constants.LANGUAGE);
 			}
 
-			Matcher itemMatcher = null;
 			int[] episodeIds = null;
 			String episodeName = null;
 
 			for(Path file:files){
-				itemMatcher = PATTERN.matcher(file.toString());
+				Matcher itemMatcher = PATTERN.matcher(file.toString());
 				while(itemMatcher.find()){
 					episodeName = itemMatcher.group();
 					System.out.println(currentThread().getName() + " - Matched " + seriesName + " episode to " + episodeName);
@@ -84,15 +83,21 @@ public class TvMovieService {
 				
 				Path target = Paths.get(newDir, newFileName.replaceAll("\"", ""));
 				if(!file.toString().equals(target.toString())){
-					System.out.println(currentThread().getName() + " - Moving " + file.toString() + " to " + target.toString());
+					System.out.println(currentThread().getName() + " - Moving " + file + " to " + target);
 					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 				}
 
-				assert parentDir != null;
-				if(parentDir.equals(newDir)){
+				System.out.println(currentThread().getName() + " - Parent dir " + parentDir + " new dir " + newDir);
+
+				/**
+				 * This is when the file lives in a folder below the `Season` folder
+				 * i.e. G:\TV Series P-Z\Peacemaker\Season 1\Peacemaker.2022.S01E01.1080p.WEB.H264-CAKES[rarbg]
+				 * Then {@FileRefactorThread} will remove the sub folder
+ 				 */
+				if(newDir.equals(parentDir)){
 					return true;
 				}
-				System.out.println(currentThread().getName() + " - Parent dir " + parentDir + " new dir " + newDir);
+
 			}
 		}
 		return false;

@@ -88,7 +88,7 @@
       "rssfeed":"http://showrss.info/show/44.rss",
       "regexName": "Rick and Morty",
       "path":"G:/TV Series P-Z/Rick and Morty",
-      "skip":[],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4"],
       "ignoreMissing": [],
       "tvdbSeriesId": 275274
     },

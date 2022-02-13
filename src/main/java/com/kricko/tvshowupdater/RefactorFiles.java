@@ -8,11 +8,15 @@ import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import static com.kricko.tvshowupdater.utils.TvShowUtils.getListOfShows;
 
 /**
  */
@@ -24,45 +28,45 @@ public class RefactorFiles {
 	 */
 	public static void tidyFolders(boolean existing) {
 
-		Shows shows;
 		try {
-			List<String> directories = TvShowUtils.getListOfTidyUpDirs();
-			if(!directories.isEmpty()){
-
-				ExecutorService threadPool1 = Executors.newFixedThreadPool(directories.size());
-
-				for(String dir:directories){
-					threadPool1.execute(new FileRefactorThread(null, dir, null, Optional.empty()));
+			Shows shows = getListOfShows();
+			List<Details> details = Collections.emptyList();
+			if (existing) {
+				if(shows != null) {
+					details = shows.getShows();
 				}
-				threadPool1.shutdown();
-
-				try {
-					threadPool1.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-				} catch (InterruptedException e) {
-					return;
-				}
-			}
-
-			if(existing){
-				shows = TvShowUtils.getListOfShows();
-				if(shows != null){
-					List<Details> details = shows.getShows();
-					ExecutorService threadPool2 = Executors.newFixedThreadPool(details.size());
-					for(Details detail:details){
-						Optional<String> seriesId = detail.getTvdbSeriesId().isPresent() ? detail.getTvdbSeriesId() : Optional.empty();
-						threadPool2.execute(new FileRefactorThread(detail.getName(), detail.getPath(), detail.getSkip(), seriesId));
-					}
-					threadPool2.shutdown();
-
-					try{
-						threadPool2.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-					} catch (InterruptedException e) {
-						return;
+			} else {
+				List<String> directories = TvShowUtils.getListOfTidyUpDirs();
+				if (!directories.isEmpty()) {
+					for (String dir : directories) {
+						details = shows.getShows()
+									   .stream()
+									   .filter(showDetails -> dir.replaceAll("\\\\", "/")
+																 .startsWith(showDetails.getPath()))
+									   .collect(Collectors.toList());
 					}
 				}
 			}
+			addTitleAndRename(details);
 		} catch (IOException | ParseException | URISyntaxException e) {
 			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
+		}
+	}
+
+	public static void addTitleAndRename(List<Details> details) {
+		if (!details.isEmpty()) {
+			ExecutorService threadPool2 = Executors.newFixedThreadPool(details.size());
+			for(Details detail:details){
+				Optional<String> seriesId = detail.getTvdbSeriesId().isPresent() ? detail.getTvdbSeriesId() : Optional.empty();
+				threadPool2.execute(new FileRefactorThread(detail.getName(), detail.getPath(), detail.getSkip(), seriesId));
+			}
+			threadPool2.shutdown();
+
+			try{
+				threadPool2.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+			} catch (InterruptedException e) {
+				System.err.println("Failed to terminate the thread pool");
+			}
 		}
 	}
 
