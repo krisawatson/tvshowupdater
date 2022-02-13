@@ -33,8 +33,9 @@ public class TvMovieService {
 	 * @return boolean
 	 * @throws IOException
 	 */
-	public static boolean refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir,
+	public static List<String> refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir,
 												Optional<String> seriesId) throws IOException {
+		List<String> removableFolders = new ArrayList<>();
 		if(files != null){
 			System.out.println(currentThread().getName() + " - File list is not empty in " + parentDir);
 
@@ -94,13 +95,14 @@ public class TvMovieService {
 				 * i.e. G:\TV Series P-Z\Peacemaker\Season 1\Peacemaker.2022.S01E01.1080p.WEB.H264-CAKES[rarbg]
 				 * Then {@FileRefactorThread} will remove the sub folder
  				 */
-				if(newDir.equals(parentDir)){
-					return true;
+				if(!currentParentDir.startsWith("Season")) {
+					System.out.printf("Current Parent directory %s is not the Season folder%n",
+									  currentParentDir);
+					removableFolders.add(currentParentDir);
 				}
-
 			}
 		}
-		return false;
+		return removableFolders;
 	}
 
 	/**

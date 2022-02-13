@@ -84,7 +84,7 @@ public class App
 					break;
 				case "tidyup":
 				case "2":
-					RefactorFiles.tidyFolders(true);
+					RefactorFiles.tidyFolders(false);
 					break;
 				case "missing":
 				case "3":

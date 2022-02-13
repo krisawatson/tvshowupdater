@@ -32,9 +32,10 @@ public class FileRefactorThread implements Runnable {
 			for(Path dir:dirs){
 				if(skip == null || !skip.contains(dir.getFileName().toString())){
 					List<Path> files = TvMovieService.getMovieFiles(dir);
-	
-					if(TvMovieService.refactorFilesAddTitle(name, files, path, seriesId)){
-						System.out.println(currentThread().getName() + " - About to delete dir " + dir);
+
+					List<String> dirsToRemove = TvMovieService.refactorFilesAddTitle(name, files, path, seriesId);
+					for (String remove : dirsToRemove) {
+						System.out.println(currentThread().getName() + " - About to delete dir " + remove);
 						TvMovieService.deleteDirectory(dir);
 					}
 				}
