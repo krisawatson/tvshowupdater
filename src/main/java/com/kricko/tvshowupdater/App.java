@@ -75,9 +75,8 @@ public class App
 					if (config.updateBeforeDownload()) {
 						RefactorFiles.tidyFolders(true);
 					}
-					boolean newDownloads = DownloadShows.doDownload();
 
-					if (newDownloads) {
+					if (DownloadShows.doDownload()) {
 						doMonitorTorrents();
 						RefactorFiles.tidyFolders(false);
 					}
