@@ -106,7 +106,7 @@
       "rssfeed":"http://showrss.info/show/881.rss",
       "regexName": "Young Sheldon",
       "path":"G:/TV Series P-Z/Young Sheldon",
-      "skip":["Season 1"],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4"],
       "ignoreMissing": [],
       "tvdbSeriesId": 328724
     }
