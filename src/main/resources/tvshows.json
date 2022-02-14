@@ -5,7 +5,7 @@
       "rssfeed":"http://showrss.info/show/58.rss",
       "regexName":"Brooklyn Nine Nine",
       "path":"G:/TV Series A-G/Brooklyn Nine Nine",
-      "skip":["Season 1", "Season 2", "Season 4", "Season 5", "Season 6", "Season 7"],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7"],
       "ignoreMissing": [],
       "tvdbSeriesId": 269586
     },
@@ -106,7 +106,7 @@
       "rssfeed":"http://showrss.info/show/263.rss",
       "regexName": "Suits",
       "path":"G:/TV Series P-Z/Suits",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 9"],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 7", "Season 8", "Season 9"],
       "ignoreMissing": [],
       "tvdbSeriesId": 247808
     },
