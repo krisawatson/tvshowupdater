@@ -33,7 +33,7 @@
       "regexName": "Family Guy",
       "path":"G:/TV Series A-G/Family Guy",
       "skip":["Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9",
-        "Season 11", "Season 12", "Season 13", "Season 14", "Season 15", "Season 16", "Season 17"],
+        "Season 11", "Season 12", "Season 13", "Season 14", "Season 15", "Season 16", "Season 17", "Season 19"],
       "ignoreMissing": [],
       "tvdbSeriesId": 75978
     },
@@ -51,7 +51,7 @@
       "rssfeed":"http://showrss.info/show/54.rss",
       "regexName": "Gotham",
       "path":"G:/TV Series A-G/Gotham",
-      "skip":["Season 1", "Season 2", "Season 3"],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
       "ignoreMissing": [],
       "tvdbSeriesId": 274431
     },
@@ -61,7 +61,7 @@
       "regexName": "Greys Anatomy",
       "path":"G:/TV Series A-G/Greys Anatomy",
       "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8",
-        "Season 9", "Season 10", "Season 11"],
+        "Season 9", "Season 10", "Season 11", "Season 15", "Season 16", "Season 17"],
       "ignoreMissing": ["S05E02", "S06E02", "S08E02", "S10E02"],
       "tvdbSeriesId": 73762
     },
@@ -70,7 +70,7 @@
       "rssfeed":"http://showrss.info/show/453.rss",
       "regexName": "Lucifer",
       "path":"G:/TV Series H-O/Lucifer",
-      "skip":["Season 1", "Season 2", "Season 3"],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
       "ignoreMissing": [],
       "tvdbSeriesId": 295685
     },
@@ -79,7 +79,7 @@
       "rssfeed":"http://showrss.info/show/1509.rss",
       "regexName": "Peacemaker 2022",
       "path":"G:/TV Series P-Z/Peacemaker",
-      "skip":[],
+      "skip":["Season 1"],
       "ignoreMissing": [],
       "tvdbSeriesId": 391153
     },
@@ -91,6 +91,15 @@
       "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
       "ignoreMissing": [],
       "tvdbSeriesId": 275274
+    },
+    {
+      "name":"Space Force",
+      "rssfeed":"http://showrss.info/show/1313.rss",
+      "regexName": "Space Force",
+      "path":"G:/TV Series P-Z/Space Force",
+      "skip":["Season 1"],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 368667
     },
     {
       "name":"Suits",
