@@ -1,5 +1,6 @@
 package com.kricko.tvshowupdater.utils;
 
+import com.kricko.tvshowupdater.configuration.Config;
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
@@ -22,6 +23,7 @@ import static org.junit.Assert.assertNotNull;
  * @version $Revision: 1.0 $
  */
 public class TvShowUtilsTest {
+	private static Config config;
 	/**
 	 * Run the TvShowUtils() constructor test.
 	 *
@@ -142,7 +144,7 @@ public class TvShowUtilsTest {
 		detail.setRegexName("");
 		detail.setPath("");
 
-		TvShowUtils.downloadNewItems(item, detail);
+		TvShowUtils.downloadNewItems(config, item, detail);
 
 		// add additional test code here
 	}
@@ -164,7 +166,7 @@ public class TvShowUtilsTest {
 		detail.setRegexName("");
 		detail.setPath("");
 
-		TvShowUtils.downloadNewItems(item, detail);
+		TvShowUtils.downloadNewItems(config, item, detail);
 
 		// add additional test code here
 	}
@@ -186,7 +188,7 @@ public class TvShowUtilsTest {
 		detail.setRegexName("");
 		detail.setPath("");
 
-		TvShowUtils.downloadNewItems(item, detail);
+		TvShowUtils.downloadNewItems(config, item, detail);
 
 		// add additional test code here
 	}
@@ -208,7 +210,7 @@ public class TvShowUtilsTest {
 		detail.setRegexName("");
 		detail.setPath("");
 
-		TvShowUtils.downloadNewItems(item, detail);
+		TvShowUtils.downloadNewItems(config, item, detail);
 
 		// add additional test code here
 	}
@@ -229,7 +231,7 @@ public class TvShowUtilsTest {
 		detail.setRegexName("");
 		detail.setPath("");
 
-		TvShowUtils.downloadNewItems(item, detail);
+		TvShowUtils.downloadNewItems(config, item, detail);
 
 		// add additional test code here
 	}
@@ -249,7 +251,7 @@ public class TvShowUtilsTest {
 		Details detail = new Details();
 		detail.setRegexName("");
 
-		TvShowUtils.downloadNewItems(item, detail);
+		TvShowUtils.downloadNewItems(config, item, detail);
 
 		// add additional test code here
 	}
@@ -664,7 +666,7 @@ public class TvShowUtilsTest {
 	@Before
 	public void setUp()
 		throws Exception {
-		// add additional set up code here
+		config = new Config();
 	}
 
 	/**

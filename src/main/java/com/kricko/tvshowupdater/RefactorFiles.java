@@ -46,7 +46,9 @@ public class RefactorFiles {
 					}
 				}
 			}
-			addTitleAndRename(details, directories);
+			if (!details.isEmpty()) {
+				addTitleAndRename(details, directories);
+			}
 		} catch (IOException | ParseException | URISyntaxException e) {
 			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
 		}

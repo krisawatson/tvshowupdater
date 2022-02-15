@@ -1,0 +1,13 @@
+{
+  "settings": {
+    "updateBeforeDownload": true,
+    "showRegex": "(^NAME (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*1080p$)(?!.*720p$)"
+  },
+  "torrent": {
+    "client": "C:\\Users\\trebl\\AppData\\Roaming\\uTorrent\\uTorrent.exe",
+    "webhost": "localhost",
+    "webport": 7070,
+    "webuser": "admin",
+    "webpass": "nimda"
+  }
+}

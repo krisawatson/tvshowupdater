@@ -1,10 +1,10 @@
 package com.kricko.tvshowupdater;
 
+import com.kricko.tvshowupdater.configuration.Config;
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.model.Rss;
 import com.kricko.tvshowupdater.model.Shows;
-import com.kricko.tvshowupdater.utils.Config;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 import org.json.simple.parser.ParseException;
 
@@ -15,25 +15,24 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
-import static com.kricko.tvshowupdater.utils.Constants.SETTING_REGEX;
+import static java.lang.Thread.currentThread;
 
 /**
  */
 public class DownloadShows {
 
-	private static final Config config = Config.getInstance();
 	/**
 	 * Method doDownload.
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static boolean doDownload() throws IOException, ParseException, URISyntaxException {
+	public static boolean doDownload(Config config) throws IOException, ParseException, URISyntaxException {
 		Shows shows = TvShowUtils.getListOfShows();
 
 		boolean newDownloads = false;
 
 		for(Details detail:shows.getShows()){
-			System.out.println(detail.getName());
+			System.out.printf("%s - Checking for new items for %s%n", currentThread().getName(), detail.getName());
 			URL rssFeed = new URL(detail.getRssfeed());
 			Rss rss;
 			try {
@@ -45,11 +44,11 @@ public class DownloadShows {
 
 			List<Item> items = rss.getChannel().getItem();
 			if(items != null){
-				String regex = config.getProperty(SETTING_REGEX).replaceAll("NAME", detail.getRegexName());
+				String regex = config.getShowRegex().replaceAll("NAME", detail.getRegexName());
 				items = TvShowUtils.removeDuplicateEpisodes(items, regex);
 				for(Item item:items){
 					try {
-						newDownloads = TvShowUtils.downloadNewItems(item, detail) || newDownloads;
+						newDownloads = TvShowUtils.downloadNewItems(config, item, detail) || newDownloads;
 					} catch (Throwable e) {
 						System.err.println(e.getLocalizedMessage());
 					}

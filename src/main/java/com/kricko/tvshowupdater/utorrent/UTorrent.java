@@ -1,9 +1,8 @@
 package com.kricko.tvshowupdater.utorrent;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kricko.tvshowupdater.configuration.TorrentConfig;
 import com.kricko.tvshowupdater.model.Torrent;
-import com.kricko.tvshowupdater.utils.Config;
-import com.kricko.tvshowupdater.utils.Constants;
 import org.apache.commons.codec.binary.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,16 +24,12 @@ import static java.lang.Thread.currentThread;
  */
 public class UTorrent {
 
-	private final String host, port, username, password;
+	private final TorrentConfig torrentConfig;
 	private String token;
 	private static Map<String, String> cookies;
 
-	public UTorrent(){
-		Config props = Config.getInstance();
-		host = props.getProperty(Constants.UTORRENT + ".webhost");
-		port = props.getProperty(Constants.UTORRENT + ".webport");
-		username = props.getProperty(Constants.UTORRENT + ".webuser");
-		password = props.getProperty(Constants.UTORRENT + ".webpass");
+	public UTorrent(TorrentConfig torrentConfig){
+		this.torrentConfig = torrentConfig;
 	}
 
 	/**
@@ -43,12 +38,12 @@ public class UTorrent {
 	 */
 	public void getToken() throws IOException{
 		try {
-			String login = username + ":" + password;
-			String base64login = new String(Base64.encodeBase64(login.getBytes()));
+			String base64Login = getBase64Login();
 
-			Response tokenData = Jsoup.connect("http://"+host+":"+port + "/gui/token.html")
+			Response tokenData = Jsoup.connect(String.format("http://%s:%d/gui/token.html",
+															 torrentConfig.getWebhost(), torrentConfig.getWebport()))
 					.method(Connection.Method.GET)
-					.header("Authorization", "Basic " + base64login)
+					.header("Authorization", "Basic " + base64Login)
 					.timeout(0)
 					.execute();
 
@@ -66,15 +61,16 @@ public class UTorrent {
 	 * Method getListOfTorrents.
 	 */
 	public Torrent getListOfTorrents() {
-		String login = username + ":" + password;
-		String base64login = new String(Base64.encodeBase64(login.getBytes()));
+		String base64Login = getBase64Login();
+		String url = String.format("http://%s:%d/gui/?token=%s&list=1",
+								   torrentConfig.getWebhost(), torrentConfig.getWebport(), token);
 
 		Response response;
 		try {
-			response = Jsoup.connect("http://"+host+":"+port + "/gui/?token="+token+"&list=1")
+			response = Jsoup.connect(url)
 					.method(Connection.Method.GET)
 					.cookies(cookies)
-					.header("Authorization", "Basic " + base64login)
+					.header("Authorization", "Basic " + base64Login)
 					.timeout(0)
 					.execute();
 			
@@ -109,22 +105,26 @@ public class UTorrent {
 	}
 
 	public void removeCompletedTorrents(List<String> hashes) {
-		String login = username + ":" + password;
-		String base64login = new String(Base64.encodeBase64(login.getBytes()));
-
-		String url = "http://"+host+":"+port + "/gui/?token="+token;
+		String base64Login = getBase64Login();
+		String url = String.format("http://%s:%d/gui/?token=%s",
+								   torrentConfig.getWebhost(), torrentConfig.getWebport(), token);
 
 		for(String hash:hashes){
 			try {
 				Jsoup.connect(url + "&action=remove&hash=" + hash)
 						.method(Connection.Method.POST)
 						.cookies(cookies)
-						.header("Authorization", "Basic " + base64login)
+						.header("Authorization", "Basic " + base64Login)
 						.timeout(0)
 						.execute();
 			} catch (IOException e) {
 				System.err.println("Failed during removed completed torrents " + e.getLocalizedMessage());
 			}
 		}
+	}
+
+	private String getBase64Login() {
+		String login = torrentConfig.getWebuser() + ":" + torrentConfig.getWebpass();
+		return new String(Base64.encodeBase64(login.getBytes()));
 	}
 }

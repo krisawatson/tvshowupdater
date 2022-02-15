@@ -15,7 +15,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	ConfigTest.class,
 	DOMHelperTest.class,
 	ConstantsTestTest.class,
 	ConstantsTest.class,

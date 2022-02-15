@@ -1,5 +1,7 @@
 package com.kricko.tvshowupdater.utils;
 
+import com.kricko.tvshowupdater.configuration.Config;
+import com.kricko.tvshowupdater.configuration.TorrentConfig;
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
@@ -10,18 +12,21 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.file.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.kricko.tvshowupdater.utils.Constants.*;
+import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING_EPISODES;
+import static com.kricko.tvshowupdater.utils.Constants.FILE_TIDY_UP;
 import static java.lang.Thread.currentThread;
 
 /**
  */
 public class TvShowUtils {
 
-	private static final Config config = Config.getInstance();
 	private static final List<String> tidyUpDirs = new ArrayList<>();
 	
 	/**
@@ -31,15 +36,15 @@ public class TvShowUtils {
 	 * @return List<Item>
 	 */
 	public static List<Item> removeDuplicateEpisodes(List<Item> items, String regex){
-		Map<Integer,List<String>> shows = new HashMap<Integer,List<String>>();
-		List<Item> newItems = new ArrayList<Item>();
+		Map<Integer,List<String>> shows = new HashMap<>();
+		List<Item> newItems = new ArrayList<>();
 		Pattern pattern = Pattern.compile(regex);
 
 		for(Item item:items){
 			Matcher itemMatcher = pattern.matcher(item.getRawTitle());
 
 			if(!shows.containsKey(item.getShowId())){
-				List<String> episodes = new ArrayList<String>();
+				List<String> episodes = new ArrayList<>();
 
 				while(itemMatcher.find()){
 					newItems.add(item);
@@ -67,10 +72,10 @@ public class TvShowUtils {
 	 * @param detail Details
 	 * @throws Throwable
 	 */
-	public static boolean downloadNewItems(Item item, Details detail) throws Throwable{
+	public static boolean downloadNewItems(Config config, Item item, Details detail) throws Throwable{
 
 		boolean newDownloads = false;
-		String regex = config.getProperty(SETTING_REGEX).replaceAll("NAME", detail.getRegexName());
+		String regex = config.getShowRegex().replaceAll("NAME", detail.getRegexName());
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher itemMatcher = pattern.matcher(item.getRawTitle());
@@ -91,8 +96,8 @@ public class TvShowUtils {
 				System.out.println(filePrefix + " episode already exists");
 			} else {
 				newDownloads = true;
-				Properties prop = Config.getInstance().getProperties();
-				String[] params = {prop.getProperty("torrent.client"),"/DIRECTORY", "\""+dir+"\"", "\""+item.getLink()+"\"" };
+				TorrentConfig torrentConfig = config.getTorrentConfig();
+				String[] params = {torrentConfig.getClient(),"/DIRECTORY", "\""+dir+"\"", "\""+item.getLink()+"\"" };
 				System.out.println(currentThread().getName() + " - Executing command: utorrent.exe /DIRECTORY \""+dir+"\" \""+item.getLink()+"\"");
 				
 				String sDir = dir.toString();

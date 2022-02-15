@@ -5,8 +5,8 @@
       "rssfeed":"http://showrss.info/show/58.rss",
       "regexName":"Brooklyn Nine Nine",
       "path":"G:/TV Series A-G/Brooklyn Nine Nine",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7"],
-      "ignoreMissing": [],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"],
+      "ignoreMissing": ["S04E12"],
       "tvdbSeriesId": 269586
     },
     {
@@ -61,7 +61,8 @@
       "regexName": "Greys Anatomy",
       "path":"G:/TV Series A-G/Greys Anatomy",
       "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8",
-        "Season 9", "Season 10", "Season 11", "Season 15", "Season 16", "Season 17"],
+        "Season 9", "Season 10", "Season 11", "Season 12", "Season 13", "Season 14", "Season 15", "Season 16",
+        "Season 17"],
       "ignoreMissing": ["S05E02", "S06E02", "S08E02", "S10E02"],
       "tvdbSeriesId": 73762
     },
@@ -106,7 +107,7 @@
       "rssfeed":"http://showrss.info/show/263.rss",
       "regexName": "Suits",
       "path":"G:/TV Series P-Z/Suits",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 7", "Season 8", "Season 9"],
+      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9"],
       "ignoreMissing": [],
       "tvdbSeriesId": 247808
     },

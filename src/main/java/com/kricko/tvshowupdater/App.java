@@ -1,7 +1,8 @@
 package com.kricko.tvshowupdater;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kricko.tvshowupdater.configuration.Config;
 import com.kricko.tvshowupdater.thread.MonitorTorrentsThread;
-import com.kricko.tvshowupdater.utils.Config;
 import org.apache.commons.httpclient.HttpException;
 import org.json.simple.parser.ParseException;
 
@@ -14,8 +15,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  */
-public class App 
-{
+public class App {
+
+	private static Config config;
 	/**
 	 * Method main.
 	 * @param args String[]
@@ -25,6 +27,9 @@ public class App
 		System.out.println("**********************************");
 		System.out.println("Welcome to TV Show Updater");
 		System.out.println("");
+
+		ObjectMapper mapper = new ObjectMapper();
+		config = mapper.readValue(App.class.getClassLoader().getResource("config.json"), Config.class);
 
 		if(args.length == 0){
 			showInteractiveCommandLine();
@@ -71,19 +76,18 @@ public class App
 			switch (option) {
 				case "update":
 				case "1":
-					Config config = Config.getInstance();
-					if (config.updateBeforeDownload()) {
-						RefactorFiles.tidyFolders(true);
+					if (config.isUpdateBeforeDownload()) {
+						RefactorFiles.tidyFolders(false);
 					}
 
-					if (DownloadShows.doDownload()) {
+					if (DownloadShows.doDownload(config)) {
 						doMonitorTorrents();
 						RefactorFiles.tidyFolders(false);
 					}
 					break;
 				case "tidyup":
 				case "2":
-					RefactorFiles.tidyFolders(true);
+					RefactorFiles.tidyFolders(false);
 					break;
 				case "missing":
 				case "3":
@@ -101,7 +105,7 @@ public class App
 	
 	private static void doMonitorTorrents() throws InterruptedException {
 		ExecutorService thread = Executors.newSingleThreadExecutor();
-		thread.execute(new MonitorTorrentsThread());
+		thread.execute(new MonitorTorrentsThread(config.getTorrentConfig()));
 		
 		thread.shutdown();
 
