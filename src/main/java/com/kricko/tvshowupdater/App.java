@@ -72,12 +72,13 @@ public class App {
 	 */
 	private static void doSelectedOption(String option)
 			throws IOException, ParseException, HttpException, InterruptedException, URISyntaxException {
+		boolean tidyExisting = config.isTidyExisting();
 		if (option != null){
 			switch (option) {
 				case "update":
 				case "1":
-					if (config.isUpdateBeforeDownload()) {
-						RefactorFiles.tidyFolders(false);
+					if (tidyExisting) {
+						RefactorFiles.tidyFolders(true);
 					}
 
 					if (DownloadShows.doDownload(config)) {
@@ -87,11 +88,11 @@ public class App {
 					break;
 				case "tidyup":
 				case "2":
-					RefactorFiles.tidyFolders(false);
+					RefactorFiles.tidyFolders(tidyExisting);
 					break;
 				case "missing":
 				case "3":
-					IdentifyMissingEpisodes.identifyMissing();
+					IdentifyMissing.identifyMissing();
 					break;
 				case "0":
 					System.exit(0);

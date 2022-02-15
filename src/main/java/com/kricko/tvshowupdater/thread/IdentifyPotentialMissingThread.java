@@ -23,12 +23,15 @@ public class IdentifyPotentialMissingThread implements Runnable {
 	@Override
 	public void run() {
 		try {
-			// Get the list of sub-directories and refactor the files
-			List<Path> dirs = TvMovieService.getDirectories(Paths.get(path));
+			Path parentDir = Paths.get(path);
+			List<String> missingSeasons = TvMovieService.identifyPotentialMissingSeasons(parentDir);
+			writeMissingEpisodesToFile(missingSeasons);
 
+			// Get the list of sub-directories and refactor the files
+			List<Path> dirs = TvMovieService.getDirectories(parentDir);
 			for(Path dir:dirs){
-				List<String> missing = TvMovieService.identifyPotentialMissingEpisodes(dir, ignorable);
-				writeMissingEpisodesToFile(missing);
+				List<String> missingEpisodes = TvMovieService.identifyPotentialMissingEpisodes(dir, ignorable);
+				writeMissingEpisodesToFile(missingEpisodes);
 			}
 
 		} catch (IOException e) {

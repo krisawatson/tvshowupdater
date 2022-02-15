@@ -15,21 +15,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING_EPISODES;
+import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING;
 
 /**
  */
-public class IdentifyMissingEpisodes {
+public class IdentifyMissing {
 
 	/**
-	 * Method identifyMissing.
+	 * Method identifyMissingSeasons.
 	 */
 	public static void identifyMissing() {
-
 		try {
 			Shows shows = TvShowUtils.getListOfShows();
 			if(shows != null){
-				Files.delete(Paths.get(FILE_MISSING_EPISODES));
+				Files.deleteIfExists(Paths.get(FILE_MISSING));
 				List<Details> details = shows.getShows();
 				ExecutorService threadPool = Executors.newFixedThreadPool(details.size());
 				for(Details detail:details){
@@ -47,5 +46,4 @@ public class IdentifyMissingEpisodes {
 			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
 		}
 	}
-
 }

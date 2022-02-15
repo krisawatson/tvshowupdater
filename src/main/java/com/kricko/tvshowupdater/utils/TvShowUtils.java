@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING_EPISODES;
+import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING;
 import static com.kricko.tvshowupdater.utils.Constants.FILE_TIDY_UP;
 import static java.lang.Thread.currentThread;
 
@@ -181,14 +181,14 @@ public class TvShowUtils {
 
 	public static void writeMissingEpisodesToFile(List<String> missingEpisodes) {
 		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_MISSING_EPISODES, true)));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_MISSING, true)));
 			for(String episodes:missingEpisodes){
 				out.println(episodes);
 			}
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			System.err.println("Failed to write to the file " + FILE_MISSING_EPISODES);
+			System.err.println("Failed to write to the file " + FILE_MISSING);
 		}
 	}
 	

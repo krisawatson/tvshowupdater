@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.parseInt;
 import static java.lang.Thread.currentThread;
 
 /**
@@ -24,6 +25,7 @@ public class TvMovieService {
 	static TheTVDBApi tvdb = new TheTVDBApi(Constants.API_KEY);
 	private static final Pattern PATTERN = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
 	private static final Pattern PATTERN2 = Pattern.compile(Constants.REGEX_SERIES_EPISODE2);
+	private static final Pattern SEASON_PATTERN = Pattern.compile(Constants.REGEX_SEASON);
 
 	/**
 	 * Method refactorFilesAddTitle.
@@ -79,8 +81,9 @@ public class TvMovieService {
 				String newFileName = (ep != null) ? TvShowUtils.buildFileName(ep)  + ext : episodeName + ext;
 
 				String currentParentDir = file.getParent().getFileName().toString();
-				String newDir = (parentDir == null || currentParentDir.equals("Season "+ episodeIds[0])) 
-						? file.getParent().toString() : parentDir;
+				String newDir = (parentDir == null || currentParentDir.startsWith("Season"))
+								? file.getParent().toString()
+								: parentDir;
 				
 				Path target = Paths.get(newDir, newFileName.replaceAll("\"", ""));
 				if(!file.toString().equals(target.toString())){
@@ -124,7 +127,6 @@ public class TvMovieService {
 		return dirlist;
 	}
 
-
 	/**
 	 * Method getMovieFiles.
 	 * @param dir Path
@@ -134,21 +136,43 @@ public class TvMovieService {
 	public static List<Path> getMovieFiles(final Path dir) throws IOException {
 		final List<Path> fileList = new ArrayList<>();
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-			for (final Iterator<Path> it = stream.iterator(); it.hasNext();) {
-				Path file = dir.resolve(it.next());
-				if(!Files.isDirectory(file)){
+			for (Path path : stream) {
+				Path file = dir.resolve(path);
+				if (!Files.isDirectory(file)) {
 					String filename = file.getFileName().toString();
 					String contentType = Files.probeContentType(file);
-					if((contentType != null && contentType.startsWith("video"))
+					if ((contentType != null && contentType.startsWith("video"))
 							|| filename.endsWith(".mkv")
 							&& !filename.contains("sample")
-							&& !filename.contains("Sample")){
+							&& !filename.contains("Sample")) {
 						fileList.add(file);
 					}
 				}
 			}
 		}
 		return fileList;
+	}
+
+	/**
+	 * Method getMovieFiles.
+	 * @param dir Path
+	 * @return List<Path>
+	 * @throws IOException
+	 */
+	private static List<Path> getSeasonDirs(final Path dir) throws IOException {
+		final List<Path> list = new ArrayList<>();
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+			for (Path path : stream) {
+				Path file = dir.resolve(path);
+				if (Files.isDirectory(file)) {
+					String seasonName = file.getFileName().toString();
+					if (seasonName.startsWith("Season")) {
+						list.add(file);
+					}
+				}
+			}
+		}
+		return list;
 	}
 
 	/**
@@ -163,7 +187,7 @@ public class TvMovieService {
 			public FileVisitResult postVisitDirectory(Path dir, IOException exc)
 					throws IOException {
 				System.out.println(currentThread().getName() + " - Deleting directory :"+ dir);
-				Files.delete(dir);
+				Files.deleteIfExists(dir);
 				return FileVisitResult.CONTINUE;
 			}
 
@@ -175,7 +199,7 @@ public class TvMovieService {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 				System.out.println(currentThread().getName() + " - Deleting file: "+file);
-				Files.delete(file);
+				Files.deleteIfExists(file);
 				return FileVisitResult.CONTINUE;
 			}
 
@@ -217,9 +241,25 @@ public class TvMovieService {
 		seasonEpisodes.put(season, episodes);
 		List<String> missingEpisodes = checkSeasonEpisodes(dir, seasonEpisodes, ignorable);
 		for (String missing : missingEpisodes) {
-			System.out.println(String.format("%s", missing));
+			System.out.println(String.format("Missing episode %s", missing));
 		}
 		return missingEpisodes;
+	}
+
+
+
+	public static List<String> identifyPotentialMissingSeasons(final Path dir) throws IOException {
+		List<Path> seasons = getSeasonDirs(dir);
+		SortedSet<Integer> seasonIds = new TreeSet<>();
+		List<String> missingSeasons = new ArrayList<>();
+
+		for(Path seasonDir:seasons) {
+			String seasonDirPath = seasonDir.toString();
+			seasonIds.add(parseInt(seasonDirPath.substring(seasonDirPath.lastIndexOf("\\") + 8)));
+		}
+		Set<Integer> missingSeasonIds = getMissingNumbers(seasonIds);
+		missingSeasonIds.forEach(season -> missingSeasons.add(String.format("%s\\Season %d", dir, season)));
+		return missingSeasons;
 	}
 
 	private static List<String> checkSeasonEpisodes(Path dir, Map<Integer, SortedSet<Integer>> seasonEpisodes,
@@ -236,11 +276,11 @@ public class TvMovieService {
 		return missingEpisodes;
 	}
 
-	private static Set<Integer> getMissingNumbers(SortedSet<Integer> episodes) {
+	private static Set<Integer> getMissingNumbers(SortedSet<Integer> sortedSet) {
 		Set<Integer> missing = new HashSet<>();
-		if (!episodes.isEmpty()) {
-			for (int i = 1; i <= episodes.last(); i++) {
-				if (!episodes.contains(i)) {
+		if (!sortedSet.isEmpty()) {
+			for (int i = 1; i <= sortedSet.last(); i++) {
+				if (!sortedSet.contains(i)) {
 					missing.add(i);
 				}
 			}
@@ -252,7 +292,7 @@ public class TvMovieService {
 		return missingEpisodes.stream()
 							  .map(episodeId -> String.format("S%02dE%02d", season, episodeId))
 							  .filter(seasonEpisode -> !ignorable.contains(seasonEpisode))
-							  .map(seasonEpisode -> Integer.parseInt(seasonEpisode.substring(4)))
+							  .map(seasonEpisode -> parseInt(seasonEpisode.substring(4)))
 							  .collect(Collectors.toSet());
 	}
 }

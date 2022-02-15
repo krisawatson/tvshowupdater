@@ -9,12 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Config {
+
+    @JsonProperty("showRegex")
+    private String showRegex;
+
+    @JsonProperty("tidyExisting")
+    private boolean tidyExisting;
+
     @JsonProperty("torrent")
     private TorrentConfig torrentConfig;
 
     @JsonProperty("updateBeforeDownload")
     private boolean updateBeforeDownload;
-
-    @JsonProperty("showRegex")
-    private String showRegex;
 }

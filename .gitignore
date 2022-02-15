@@ -4,6 +4,7 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 release.properties
+/missing.txt
 /missing_episodes.txt
 /tidyuplist.txt
 .classpath
