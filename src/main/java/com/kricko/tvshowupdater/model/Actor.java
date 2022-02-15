@@ -25,6 +25,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.io.Serializable;
 
@@ -39,6 +40,22 @@ public class Actor implements Comparable<Actor>, Serializable {
     private String role;
     private String image;
     private int sortOrder = 0;
+
+    /**
+     * Method setId.
+     * @param id String
+     */
+    public void setId(String id) {
+        this.id = NumberUtils.toInt(id, 0);
+    }
+
+    /**
+     * Method setSortOrder.
+     * @param sortOrder String
+     */
+    public void setSortOrder(String sortOrder) {
+        this.sortOrder = NumberUtils.toInt(sortOrder, 0);
+    }
 
     /**
      * Method compareTo.

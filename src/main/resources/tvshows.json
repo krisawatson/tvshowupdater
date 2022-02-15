@@ -41,7 +41,7 @@
       "rssfeed":"http://showrss.info/show/115.rss",
       "regexName": "The Flash 2014",
       "path":"G:/TV Series A-G/Flash (2014), The",
-      "skipSeason": [1,2,4,5,6,7],
+      "skipSeason": [1,2,3,4,5,6,7],
       "ignoreMissing": [],
       "tvdbSeriesId": 279121
     },
