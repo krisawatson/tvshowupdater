@@ -19,12 +19,15 @@
  */
 package com.kricko.tvshowupdater.model;
 
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-/**
- */
+import java.io.Serializable;
+
+@Getter
+@Setter
 public class EpisodeUpdate implements Serializable {
 
     // Default serial UID
@@ -32,54 +35,6 @@ public class EpisodeUpdate implements Serializable {
     private String id;
     private String series;
     private String time;
-
-    /**
-     * Method getId.
-     * @return String
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     * Method getSeries.
-     * @return String
-     */
-    public String getSeries() {
-        return series;
-    }
-
-    /**
-     * Method getTime.
-     * @return String
-     */
-    public String getTime() {
-        return time;
-    }
-
-    /**
-     * Method setId.
-     * @param id String
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     * Method setSeries.
-     * @param series String
-     */
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
-    /**
-     * Method setTime.
-     * @param time String
-     */
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     /**
      * Method toString.

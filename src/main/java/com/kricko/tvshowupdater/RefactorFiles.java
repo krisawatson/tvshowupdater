@@ -62,7 +62,8 @@ public class RefactorFiles {
 		if (!details.isEmpty()) {
 			for(Details detail:details){
 				Optional<String> seriesId = detail.getTvdbSeriesId().isPresent() ? detail.getTvdbSeriesId() : Optional.empty();
-				threadPool.execute(new FileRefactorThread(detail.getName(), detail.getPath(), detail.getSkip(), seriesId));
+				threadPool.execute(new FileRefactorThread(detail.getName(), detail.getPath(),
+														  detail.getSkipSeason(), seriesId));
 			}
 		}
 		threadPool.shutdown();

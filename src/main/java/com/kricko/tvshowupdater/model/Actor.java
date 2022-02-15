@@ -19,19 +19,17 @@
  */
 package com.kricko.tvshowupdater.model;
 
-import java.io.Serializable;
-
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.apache.commons.lang3.math.NumberUtils;
 
-/**
- *
- * @author matthew.altman
- * @version $Revision: 1.0 $
- */
+import java.io.Serializable;
+
+@Getter
+@Setter
 public class Actor implements Comparable<Actor>, Serializable {
 
     // Default serial UID
@@ -41,102 +39,6 @@ public class Actor implements Comparable<Actor>, Serializable {
     private String role;
     private String image;
     private int sortOrder = 0;
-
-    /**
-     * Method getId.
-     * @return int
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Method getName.
-     * @return String
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Method getRole.
-     * @return String
-     */
-    public String getRole() {
-        return role;
-    }
-
-    /**
-     * Method getImage.
-     * @return String
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * Method getSortOrder.
-     * @return int
-     */
-    public int getSortOrder() {
-        return sortOrder;
-    }
-
-    /**
-     * Method setId.
-     * @param id int
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Method setId.
-     * @param id String
-     */
-    public void setId(String id) {
-        this.id = NumberUtils.toInt(id, 0);
-    }
-
-    /**
-     * Method setName.
-     * @param name String
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Method setRole.
-     * @param role String
-     */
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    /**
-     * Method setImage.
-     * @param image String
-     */
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    /**
-     * Method setSortOrder.
-     * @param sortOrder int
-     */
-    public void setSortOrder(int sortOrder) {
-        this.sortOrder = sortOrder;
-    }
-
-    /**
-     * Method setSortOrder.
-     * @param sortOrder String
-     */
-    public void setSortOrder(String sortOrder) {
-        this.sortOrder = NumberUtils.toInt(sortOrder, 0);
-    }
 
     /**
      * Method compareTo.

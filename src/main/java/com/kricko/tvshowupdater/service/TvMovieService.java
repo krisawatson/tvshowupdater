@@ -239,11 +239,7 @@ public class TvMovieService {
 			}
 		}
 		seasonEpisodes.put(season, episodes);
-		List<String> missingEpisodes = checkSeasonEpisodes(dir, seasonEpisodes, ignorable);
-		for (String missing : missingEpisodes) {
-			System.out.println(String.format("Missing episode %s", missing));
-		}
-		return missingEpisodes;
+		return checkSeasonEpisodes(dir, seasonEpisodes, ignorable);
 	}
 
 

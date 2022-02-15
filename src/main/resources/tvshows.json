@@ -5,7 +5,7 @@
       "rssfeed":"http://showrss.info/show/58.rss",
       "regexName":"Brooklyn Nine Nine",
       "path":"G:/TV Series A-G/Brooklyn Nine Nine",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8"],
+      "skipSeason": [1,2,3,4,5,6,7,8],
       "ignoreMissing": ["S04E12"],
       "tvdbSeriesId": 269586
     },
@@ -14,7 +14,7 @@
       "rssfeed":"http://showrss.info/show/285.rss",
       "regexName": "Marvels Daredevil",
       "path":"G:/TV Series A-G/Daredevil",
-      "skip":["Season 1", "Season 2","Season 3"],
+      "skipSeason": [1,2,3],
       "ignoreMissing": [],
       "tvdbSeriesId": 281662
     },
@@ -23,7 +23,7 @@
       "rssfeed":"http://showrss.info/show/207.rss",
       "regexName": "Elementary",
       "path":"G:/TV Series A-G/Elementary",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
+      "skipSeason": [1,2,3,4,5,7],
       "ignoreMissing": [],
       "tvdbSeriesId": 255316
     },
@@ -32,8 +32,7 @@
       "rssfeed":"http://showrss.info/show/57.rss",
       "regexName": "Family Guy",
       "path":"G:/TV Series A-G/Family Guy",
-      "skip":["Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9",
-        "Season 11", "Season 12", "Season 13", "Season 14", "Season 15", "Season 16", "Season 17", "Season 19"],
+      "skipSeason": [2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19],
       "ignoreMissing": [],
       "tvdbSeriesId": 75978
     },
@@ -42,7 +41,7 @@
       "rssfeed":"http://showrss.info/show/115.rss",
       "regexName": "The Flash 2014",
       "path":"G:/TV Series A-G/Flash (2014), The",
-      "skip":["Season 1", "Season 2", "Season 6", "Season 7"],
+      "skipSeason": [1,2,4,5,6,7],
       "ignoreMissing": [],
       "tvdbSeriesId": 279121
     },
@@ -51,7 +50,7 @@
       "rssfeed":"http://showrss.info/show/54.rss",
       "regexName": "Gotham",
       "path":"G:/TV Series A-G/Gotham",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
+      "skipSeason": [1,2,3,4,5],
       "ignoreMissing": [],
       "tvdbSeriesId": 274431
     },
@@ -60,9 +59,7 @@
       "rssfeed":"http://showrss.info/show/9.rss",
       "regexName": "Greys Anatomy",
       "path":"G:/TV Series A-G/Greys Anatomy",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8",
-        "Season 9", "Season 10", "Season 11", "Season 12", "Season 13", "Season 14", "Season 15", "Season 16",
-        "Season 17"],
+      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
       "ignoreMissing": ["S05E02", "S06E02", "S08E02", "S10E02"],
       "tvdbSeriesId": 73762
     },
@@ -71,7 +68,7 @@
       "rssfeed":"http://showrss.info/show/453.rss",
       "regexName": "Lucifer",
       "path":"G:/TV Series H-O/Lucifer",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
+      "skipSeason": [1,2,3,4,5],
       "ignoreMissing": [],
       "tvdbSeriesId": 295685
     },
@@ -80,7 +77,7 @@
       "rssfeed":"http://showrss.info/show/1509.rss",
       "regexName": "Peacemaker 2022",
       "path":"G:/TV Series P-Z/Peacemaker",
-      "skip":["Season 1"],
+      "skipSeason": [1],
       "ignoreMissing": [],
       "tvdbSeriesId": 391153
     },
@@ -89,7 +86,7 @@
       "rssfeed":"http://showrss.info/show/44.rss",
       "regexName": "Rick and Morty",
       "path":"G:/TV Series P-Z/Rick and Morty",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5"],
+      "skipSeason": [1,2,3,4,5],
       "ignoreMissing": [],
       "tvdbSeriesId": 275274
     },
@@ -98,7 +95,7 @@
       "rssfeed":"http://showrss.info/show/1313.rss",
       "regexName": "Space Force",
       "path":"G:/TV Series P-Z/Space Force",
-      "skip":["Season 1"],
+      "skipSeason": [1],
       "ignoreMissing": [],
       "tvdbSeriesId": 368667
     },
@@ -107,7 +104,7 @@
       "rssfeed":"http://showrss.info/show/263.rss",
       "regexName": "Suits",
       "path":"G:/TV Series P-Z/Suits",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4", "Season 5", "Season 6", "Season 7", "Season 8", "Season 9"],
+      "skipSeason": [1,2,3,4,5,6,7,8,9],
       "ignoreMissing": [],
       "tvdbSeriesId": 247808
     },
@@ -116,7 +113,7 @@
       "rssfeed":"http://showrss.info/show/881.rss",
       "regexName": "Young Sheldon",
       "path":"G:/TV Series P-Z/Young Sheldon",
-      "skip":["Season 1", "Season 2", "Season 3", "Season 4"],
+      "skipSeason": [1,2,3,4],
       "ignoreMissing": [],
       "tvdbSeriesId": 328724
     }

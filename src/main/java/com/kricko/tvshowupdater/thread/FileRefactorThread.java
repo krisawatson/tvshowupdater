@@ -8,15 +8,16 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Integer.parseInt;
 import static java.lang.Thread.currentThread;
 
 public class FileRefactorThread implements Runnable {
 
 	private String name, path;
-	private List<String> skip;
+	private List<Integer> skip;
 	private Optional<String> seriesId;
 	
-	public FileRefactorThread(String name, String path, List<String> skip, Optional<String> seriesId){
+	public FileRefactorThread(String name, String path, List<Integer> skip, Optional<String> seriesId){
 		this.name = name;
 		this.path = path;
 		this.skip = skip;
@@ -30,7 +31,12 @@ public class FileRefactorThread implements Runnable {
 			List<Path> dirs = TvMovieService.getDirectories(Paths.get(path));
 
 			for(Path dir:dirs){
-				if(skip == null || !skip.contains(dir.getFileName().toString())){
+				String dirPathName = dir.getFileName().toString();
+				int season = 0;
+				if (dirPathName.startsWith("Season ")) {
+					season = parseInt(dirPathName.substring(7));
+				}
+				if(skip == null || !skip.contains(season)){
 					List<Path> files = TvMovieService.getMovieFiles(dir);
 
 					List<String> dirsToRemove = TvMovieService.refactorFilesAddTitle(name, files, path, seriesId);
