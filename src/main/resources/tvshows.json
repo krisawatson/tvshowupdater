@@ -10,24 +10,6 @@
       "tvdbSeriesId": 269586
     },
     {
-      "name":"Daredevil",
-      "rssfeed":"http://showrss.info/show/285.rss",
-      "regexName": "Marvels Daredevil",
-      "path":"G:/TV Series A-G/Daredevil",
-      "skipSeason": [1,2,3],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 281662
-    },
-    {
-      "name":"Elementary",
-      "rssfeed":"http://showrss.info/show/207.rss",
-      "regexName": "Elementary",
-      "path":"G:/TV Series A-G/Elementary",
-      "skipSeason": [1,2,3,4,5,7],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 255316
-    },
-    {
       "name":"Family Guy",
       "rssfeed":"http://showrss.info/show/57.rss",
       "regexName": "Family Guy",
@@ -46,15 +28,6 @@
       "tvdbSeriesId": 279121
     },
     {
-      "name":"Gotham",
-      "rssfeed":"http://showrss.info/show/54.rss",
-      "regexName": "Gotham",
-      "path":"G:/TV Series A-G/Gotham",
-      "skipSeason": [1,2,3,4,5],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 274431
-    },
-    {
       "name":"Greys Anatomy",
       "rssfeed":"http://showrss.info/show/9.rss",
       "regexName": "Greys Anatomy",
@@ -68,7 +41,7 @@
       "rssfeed":"http://showrss.info/show/453.rss",
       "regexName": "Lucifer",
       "path":"G:/TV Series H-O/Lucifer",
-      "skipSeason": [1,2,3,4,5],
+      "skipSeason": [2,3,4,5],
       "ignoreMissing": [],
       "tvdbSeriesId": 295685
     },
@@ -98,15 +71,6 @@
       "skipSeason": [1],
       "ignoreMissing": [],
       "tvdbSeriesId": 368667
-    },
-    {
-      "name":"Suits",
-      "rssfeed":"http://showrss.info/show/263.rss",
-      "regexName": "Suits",
-      "path":"G:/TV Series P-Z/Suits",
-      "skipSeason": [1,2,3,4,5,6,7,8,9],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 247808
     },
     {
       "name":"Young Sheldon",
