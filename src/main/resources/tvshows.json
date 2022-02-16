@@ -2,7 +2,7 @@
   "shows":[
     {
       "name":"Brooklyn Nine Nine",
-      "rssfeed":"http://showrss.info/show/58.rss",
+      "rssFeedId": 58,
       "regexName":"Brooklyn Nine Nine",
       "path":"G:/TV Series A-G/Brooklyn Nine Nine",
       "skipSeason": [1,2,3,4,5,6,7,8],
@@ -11,7 +11,7 @@
     },
     {
       "name":"Family Guy",
-      "rssfeed":"http://showrss.info/show/57.rss",
+      "rssFeedId": 57,
       "regexName": "Family Guy",
       "path":"G:/TV Series A-G/Family Guy",
       "skipSeason": [2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19],
@@ -20,7 +20,7 @@
     },
     {
       "name":"The Flash (2014)",
-      "rssfeed":"http://showrss.info/show/115.rss",
+      "rssFeedId": 115,
       "regexName": "The Flash 2014",
       "path":"G:/TV Series A-G/Flash (2014), The",
       "skipSeason": [1,2,3,4,5,6,7],
@@ -29,7 +29,7 @@
     },
     {
       "name":"Greys Anatomy",
-      "rssfeed":"http://showrss.info/show/9.rss",
+      "rssFeedId": 9,
       "regexName": "Greys Anatomy",
       "path":"G:/TV Series A-G/Greys Anatomy",
       "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
@@ -38,7 +38,7 @@
     },
     {
       "name":"Lucifer",
-      "rssfeed":"http://showrss.info/show/453.rss",
+      "rssFeedId": 453,
       "regexName": "Lucifer",
       "path":"G:/TV Series H-O/Lucifer",
       "skipSeason": [2,3,4,5],
@@ -47,7 +47,7 @@
     },
     {
       "name": "Peacemaker",
-      "rssfeed":"http://showrss.info/show/1509.rss",
+      "rssFeedId": 1509,
       "regexName": "Peacemaker 2022",
       "path":"G:/TV Series P-Z/Peacemaker",
       "skipSeason": [1],
@@ -56,7 +56,7 @@
     },
     {
       "name": "Rick and Morty",
-      "rssfeed":"http://showrss.info/show/44.rss",
+      "rssFeedId": 44,
       "regexName": "Rick and Morty",
       "path":"G:/TV Series P-Z/Rick and Morty",
       "skipSeason": [1,2,3,4,5],
@@ -65,7 +65,7 @@
     },
     {
       "name":"Space Force",
-      "rssfeed":"http://showrss.info/show/1313.rss",
+      "rssFeedId": 1313,
       "regexName": "Space Force",
       "path":"G:/TV Series P-Z/Space Force",
       "skipSeason": [1],
@@ -73,8 +73,17 @@
       "tvdbSeriesId": 368667
     },
     {
+      "name":"Squid Game",
+      "rssFeedId": null,
+      "regexName": "Squid Game",
+      "path":"G:/TV Series P-Z/Squid Game",
+      "skipSeason": [1],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 383275
+    },
+    {
       "name":"Young Sheldon",
-      "rssfeed":"http://showrss.info/show/881.rss",
+      "rssFeedId": 881,
       "regexName": "Young Sheldon",
       "path":"G:/TV Series P-Z/Young Sheldon",
       "skipSeason": [1,2,3,4],

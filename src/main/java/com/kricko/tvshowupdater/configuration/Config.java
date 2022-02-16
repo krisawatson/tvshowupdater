@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Config {
 
+    @JsonProperty("rssFeed")
+    private String rssFeed;
+
     @JsonProperty("showRegex")
     private String showRegex;
 

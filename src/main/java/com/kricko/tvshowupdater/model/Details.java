@@ -10,7 +10,7 @@ import java.util.Optional;
 @Setter
 public class Details {
 	private String name;
-	private String rssfeed;
+	private Optional<Integer> rssFeedId;
 	private String regexName;
 	private String path;
 	private List<Integer> skipSeason;
