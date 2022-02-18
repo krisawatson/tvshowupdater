@@ -20,7 +20,10 @@ public class Config {
     private boolean tidyExisting;
 
     @JsonProperty("torrent")
-    private TorrentConfig torrentConfig;
+    private TorrentConfig UTorrentConfig;
+
+    @JsonProperty("qbittorrent")
+    private TorrentConfig qBitTorrentConfig;
 
     @JsonProperty("updateBeforeDownload")
     private boolean updateBeforeDownload;

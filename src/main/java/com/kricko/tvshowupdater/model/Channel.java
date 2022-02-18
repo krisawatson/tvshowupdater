@@ -1,29 +1,28 @@
 package com.kricko.tvshowupdater.model;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.List;
 
 /**
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Channel {
 
-	@XmlElement(name="title")
+	@XmlElement(name="title", namespace="")
 	private String title;
 	
-	@XmlElement(name="link")
+	@XmlElement(name="link", namespace="")
 	private String link;
 	
-	@XmlElement(name="ttl")
+	@XmlElement(name="ttl", namespace="")
 	private String ttl;
 	
-	@XmlElement(name="description")
+	@XmlElement(name="description", namespace="")
 	private String description;
 	
-	@XmlElement(name="item")
+	@XmlElement(name="item", namespace="")
 	private List<Item> item;
 
 	/**

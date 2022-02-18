@@ -7,6 +7,7 @@ import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.parser.TvShowParser;
+import com.kricko.tvshowupdater.torrent.QBitTorrent;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -96,16 +97,14 @@ public class TvShowUtils {
 				System.out.println(filePrefix + " episode already exists");
 			} else {
 				newDownloads = true;
-				TorrentConfig torrentConfig = config.getTorrentConfig();
-				String[] params = {torrentConfig.getClient(),"/DIRECTORY", "\""+dir+"\"", "\""+item.getLink()+"\"" };
-				System.out.println(currentThread().getName() + " - Executing command: utorrent.exe /DIRECTORY \""+dir+"\" \""+item.getLink()+"\"");
-				
+				TorrentConfig torrentConfig = config.getQBitTorrentConfig();
+				QBitTorrent torrentClient = new QBitTorrent(torrentConfig);
+				torrentClient.getToken();
+				torrentClient.addNewTorrent(item.getLink(), dir);
 				String sDir = dir.toString();
 				if(!tidyUpDirs.contains(sDir)){
 					tidyUpDirs.add(sDir);
 				}
-				
-				Runtime.getRuntime().exec(params);
 			}
 		}
 		
@@ -218,9 +217,9 @@ public class TvShowUtils {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static Shows getListOfShows() throws IOException, ParseException, URISyntaxException {
+	public static Shows getListOfShows(File showsFile) throws IOException, ParseException, URISyntaxException {
 		TvShowParser parser = new TvShowParser();
-        return parser.parseShows(); 
+        return parser.parseShows(showsFile);
 	}
 	
 	/**

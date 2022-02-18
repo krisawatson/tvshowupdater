@@ -9,5 +9,12 @@
     "webuser": "admin",
     "webpass": "nimda"
   },
+  "qbittorrent": {
+    "client": "C:\\Program Files\\qBittorrent\\qbittorrent.exe",
+    "webhost": "localhost",
+    "webport": 8080,
+    "webuser": "admin",
+    "webpass": "adminadmin"
+  },
   "updateBeforeDownload": true
 }

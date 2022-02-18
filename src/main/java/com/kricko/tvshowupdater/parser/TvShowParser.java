@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Objects;
 
 /**
  */
@@ -21,10 +20,11 @@ public class TvShowParser {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public Shows parseShows() throws IOException, URISyntaxException {
+	public static Shows parseShows(File showsFile) throws IOException, URISyntaxException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new Jdk8Module());
-    	FileReader reader = new FileReader(new File(Objects.requireNonNull(getClass().getClassLoader().getResource("tvshows.json")).toURI()));
+		FileReader reader = new FileReader(showsFile);
+//    	FileReader reader = new FileReader(new File(Objects.requireNonNull(getClass().getClassLoader().getResource("tvshows.json")).toURI()));
 		return mapper.readValue(reader, Shows.class);
 	}
 }

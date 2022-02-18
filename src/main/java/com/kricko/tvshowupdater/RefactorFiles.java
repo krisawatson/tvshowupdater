@@ -4,17 +4,12 @@ import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.thread.FileRefactorThread;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import static com.kricko.tvshowupdater.utils.TvShowUtils.getListOfShows;
 
 /**
  */
@@ -24,33 +19,27 @@ public class RefactorFiles {
 	 * Method tidyFolders.
 	 * @param existing boolean
 	 */
-	public static void tidyFolders(boolean existing) {
-
-		try {
-			Shows shows = getListOfShows();
-			Set<Details> details = new HashSet<>();
-			List<String> directories = Collections.emptyList();
-			if (existing) {
-				if(shows != null) {
-					details = new HashSet<>(shows.getShows());
-				}
-			} else {
-				directories = TvShowUtils.getListOfTidyUpDirs();
-				if (!directories.isEmpty()) {
-					for (String dir : directories) {
-						details.addAll(shows.getShows()
-									   .stream()
-									   .filter(showDetails -> dir.replaceAll("\\\\", "/")
-																 .startsWith(showDetails.getPath()))
-									   .collect(Collectors.toList()));
-					}
+	public static void tidyFolders(boolean existing, Shows shows) {
+		Set<Details> details = new HashSet<>();
+		List<String> directories = Collections.emptyList();
+		if (existing) {
+			if(shows != null) {
+				details = new HashSet<>(shows.getShows());
+			}
+		} else {
+			directories = TvShowUtils.getListOfTidyUpDirs();
+			if (!directories.isEmpty()) {
+				for (String dir : directories) {
+					details.addAll(shows.getShows()
+										.stream()
+										.filter(showDetails -> dir.replaceAll("\\\\", "/")
+																  .startsWith(showDetails.getPath()))
+										.collect(Collectors.toList()));
 				}
 			}
-			if (!details.isEmpty()) {
-				addTitleAndRename(details, directories);
-			}
-		} catch (IOException | ParseException | URISyntaxException e) {
-			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
+		}
+		if (!details.isEmpty()) {
+			addTitleAndRename(details, directories);
 		}
 	}
 

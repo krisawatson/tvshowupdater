@@ -3,11 +3,8 @@ package com.kricko.tvshowupdater;
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.thread.IdentifyPotentialMissingThread;
-import com.kricko.tvshowupdater.utils.TvShowUtils;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -24,9 +21,8 @@ public class IdentifyMissing {
 	/**
 	 * Method identifyMissingSeasons.
 	 */
-	public static void identifyMissing() {
+	public static void identifyMissing(Shows shows) {
 		try {
-			Shows shows = TvShowUtils.getListOfShows();
 			if(shows != null){
 				Files.deleteIfExists(Paths.get(FILE_MISSING));
 				List<Details> details = shows.getShows();
@@ -42,7 +38,7 @@ public class IdentifyMissing {
 					System.err.println(e.getLocalizedMessage());
 				}
 			}
-		} catch (IOException | ParseException | URISyntaxException e) {
+		} catch (IOException e) {
 			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
 		}
 	}

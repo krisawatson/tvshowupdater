@@ -2,7 +2,8 @@ package com.kricko.tvshowupdater.thread;
 
 import com.kricko.tvshowupdater.configuration.TorrentConfig;
 import com.kricko.tvshowupdater.model.Torrent;
-import com.kricko.tvshowupdater.utorrent.UTorrent;
+import com.kricko.tvshowupdater.torrent.Filter;
+import com.kricko.tvshowupdater.torrent.QBitTorrent;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,18 +18,16 @@ public class MonitorTorrentsThread implements Runnable {
 
 	@Override
 	public void run() {
-		UTorrent uTorrent = new UTorrent(config);
+		QBitTorrent torrentClient = new QBitTorrent(config);
 		
 		try {
-			uTorrent.getToken();
-			Torrent torrentList = uTorrent.getListOfTorrents();
-			while(torrentList != null && torrentList.getTorrents().size() > 0){
-				List<String> hashes = uTorrent.getFinishedHashes(torrentList);
-				if(hashes != null && !hashes.isEmpty()){
-					uTorrent.removeCompletedTorrents(hashes);
-				}
+			torrentClient.getToken();
+			List<Torrent> torrentList = torrentClient.getListOfTorrents(Filter.ALL);
+			while(!torrentList.isEmpty()){
+				List<Torrent> completedTorrents = torrentClient.getListOfTorrents(Filter.COMPLETED);
+				completedTorrents.forEach(torrent -> torrentClient.removeCompletedTorrents(torrent.getHash()));
 				Thread.sleep(5000);
-				torrentList = uTorrent.getListOfTorrents();
+				torrentList = torrentClient.getListOfTorrents(Filter.ALL);
 			}
 			
 		} catch (IOException | InterruptedException e) {

@@ -9,19 +9,19 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Item implements Comparable<Item>{
 	
-	@XmlElement(name="title")
+	@XmlElement(name="title", namespace="")
 	private String title;
 	
-	@XmlElement(name="link")
+	@XmlElement(name="link", namespace="")
 	private String link;
 	
-	@XmlElement(name="guid")
+	@XmlElement(name="guid", namespace="")
 	private String guid;
 	
-	@XmlElement(name="pubDate")
+	@XmlElement(name="pubDate", namespace="")
 	private String pubDate;
 	
-	@XmlElement(name="description")
+	@XmlElement(name="description", namespace="")
 	private String description;
 	
 	@XmlElement(name="show_id")

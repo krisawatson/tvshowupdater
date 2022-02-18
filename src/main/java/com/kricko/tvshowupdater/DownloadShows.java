@@ -28,8 +28,8 @@ public class DownloadShows {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public static boolean doDownload(Config config) throws IOException, ParseException, URISyntaxException {
-		Shows shows = TvShowUtils.getListOfShows();
+	public static boolean doDownload(Config config, Shows shows) throws IOException, URISyntaxException,
+			ParseException {
 
 		AtomicBoolean newDownloads = new AtomicBoolean(false);
 
