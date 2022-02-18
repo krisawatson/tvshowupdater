@@ -31,7 +31,7 @@ public class App {
 
 		Options options = new Options();
 
-		Option option = new Option("o", "option", true, "arg: download, tidyup, missing");
+		Option option = new Option("o", "option", true, "arg: update, tidyup, missing");
 		option.setRequired(true);
 		options.addOption(option);
 
