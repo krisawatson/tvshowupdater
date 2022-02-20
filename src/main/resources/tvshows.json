@@ -1,6 +1,16 @@
 {
   "shows":[
     {
+      "name":"Barry",
+      "rssFeedId": 981,
+      "regexName": "Barry",
+      "path":"G:/TV Series A-G/Barry",
+      "skipSeason": [],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 333072,
+      "oneomId": 49102
+    },
+    {
       "name":"The Book of Boba Fett",
       "rssFeedId": 1505,
       "regexName": "The Book of Boba Fett",
@@ -25,7 +35,7 @@
       "rssFeedId": 115,
       "regexName": "The Flash 2014",
       "path":"G:/TV Series A-G/Flash (2014), The",
-      "skipSeason": [1,2,3,4,5,6,7],
+      "skipSeason": [1,2,3,4,5,6,7,8],
       "ignoreMissing": [],
       "tvdbSeriesId": 279121,
       "oneomId": 30758
