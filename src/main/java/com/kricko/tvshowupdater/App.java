@@ -14,6 +14,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import static com.kricko.tvshowupdater.DownloadShows.doDownload;
+import static com.kricko.tvshowupdater.DownloadShows.downloadFromOneOm;
 import static com.kricko.tvshowupdater.parser.TvShowParser.parseShows;
 import static java.util.Objects.requireNonNull;
 
@@ -43,6 +45,10 @@ public class App {
 		configOpt.setRequired(false);
 		options.addOption(configOpt);
 
+		Option useOneOmOpt= new Option("oo", "oneom", false, "Use One Om for downloads");
+		configOpt.setRequired(false);
+		options.addOption(useOneOmOpt);
+
 		CommandLineParser parser = new BasicParser();
 		HelpFormatter formatter = new HelpFormatter();
 		CommandLine cmd = null;//not a good practice, it serves it purpose
@@ -59,9 +65,10 @@ public class App {
 		String selectedOption = cmd.getOptionValue("option");
 		String showsFilePath = cmd.getOptionValue("shows");
 		String configFilePath = cmd.getOptionValue("config");
+		boolean useOneOm = cmd.hasOption("oneom");
 		System.out.println("**********************************");
 		System.out.println("Welcome to TV Show Updater");
-		System.out.println("");
+		System.out.println("**********************************");
 
 		ObjectMapper mapper = new ObjectMapper();
 		URL configFile = (null == configFilePath)
@@ -69,14 +76,14 @@ public class App {
 						  : new File(configFilePath).toURI().toURL();
 		config = mapper.readValue(configFile, Config.class);
 
-		doSelectedOption(selectedOption, showsFilePath);
+		doSelectedOption(selectedOption, showsFilePath, useOneOm);
 	}
 
 	/**
 	 * Method doSelectedOption.
 	 * @param option String
 	 */
-	private static void doSelectedOption(String option, String showsFilePath)
+	private static void doSelectedOption(String option, String showsFilePath, boolean useOneOm)
 			throws IOException, InterruptedException, URISyntaxException, org.json.simple.parser.ParseException {
 		boolean tidyExisting = config.isTidyExisting();
 		File showsFile = (null == showsFilePath)
@@ -87,13 +94,7 @@ public class App {
 			switch (option) {
 				case "update":
 				case "1":
-					if (tidyExisting) {
-						RefactorFiles.tidyFolders(true, shows);
-					}
-					if (DownloadShows.doDownload(config, shows)) {
-						doMonitorTorrents();
-						RefactorFiles.tidyFolders(false, shows);
-					}
+					updateShows(tidyExisting, shows, useOneOm);
 					break;
 				case "tidyup":
 				case "2":
@@ -117,5 +118,16 @@ public class App {
 		thread.shutdown();
 
 		thread.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+	}
+
+	private static void updateShows(boolean tidyExisting, Shows shows, boolean useOneOm) throws InterruptedException {
+		if (tidyExisting) {
+			RefactorFiles.tidyFolders(true, shows);
+		}
+		// New approach
+		if ((useOneOm) ? downloadFromOneOm(config, shows) : doDownload(config, shows)) {
+			doMonitorTorrents();
+			RefactorFiles.tidyFolders(false, shows);
+		}
 	}
 }

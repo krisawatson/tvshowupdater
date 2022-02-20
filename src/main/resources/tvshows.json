@@ -1,22 +1,24 @@
 {
   "shows":[
     {
-      "name":"Brooklyn Nine Nine",
-      "rssFeedId": 58,
-      "regexName":"Brooklyn Nine Nine",
-      "path":"G:/TV Series A-G/Brooklyn Nine Nine",
-      "skipSeason": [1,2,3,4,5,6,7,8],
-      "ignoreMissing": ["S04E12"],
-      "tvdbSeriesId": 269586
+      "name":"The Book of Boba Fett",
+      "rssFeedId": 1505,
+      "regexName": "The Book of Boba Fett",
+      "path":"G:/TV Series A-G/Book of Boba Fett",
+      "skipSeason": [],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 393589,
+      "oneomId": 68246
     },
     {
       "name":"Family Guy",
       "rssFeedId": 57,
       "regexName": "Family Guy",
       "path":"G:/TV Series A-G/Family Guy",
-      "skipSeason": [2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19],
+      "skipSeason": [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19],
       "ignoreMissing": [],
-      "tvdbSeriesId": 75978
+      "tvdbSeriesId": 75978,
+      "oneomId": 1760
     },
     {
       "name":"The Flash (2014)",
@@ -25,7 +27,8 @@
       "path":"G:/TV Series A-G/Flash (2014), The",
       "skipSeason": [1,2,3,4,5,6,7],
       "ignoreMissing": [],
-      "tvdbSeriesId": 279121
+      "tvdbSeriesId": 279121,
+      "oneomId": 30758
     },
     {
       "name":"Greys Anatomy",
@@ -33,17 +36,29 @@
       "regexName": "Greys Anatomy",
       "path":"G:/TV Series A-G/Greys Anatomy",
       "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
-      "ignoreMissing": ["S05E02", "S06E02", "S08E02", "S10E02"],
-      "tvdbSeriesId": 73762
+      "ignoreMissing": ["S05E02", "S05E24", "S06E02", "S08E02", "S10E02"],
+      "tvdbSeriesId": 73762,
+      "oneomId": 499
     },
     {
       "name":"Lucifer",
       "rssFeedId": 453,
       "regexName": "Lucifer",
       "path":"G:/TV Series H-O/Lucifer",
-      "skipSeason": [2,3,4,5],
+      "skipSeason": [1,2,3,4,5,6],
+      "ignoreMissing": ["S01E14"],
+      "tvdbSeriesId": 295685,
+      "oneomId": 1360
+    },
+    {
+      "name":"The Mandalorian",
+      "rssFeedId": 1234,
+      "regexName": "The Mandalorian",
+      "path":"G:/TV Series H-O/Mandalorian",
+      "skipSeason": [1,2],
       "ignoreMissing": [],
-      "tvdbSeriesId": 295685
+      "tvdbSeriesId": 361753,
+      "oneomId": 56569
     },
     {
       "name": "Peacemaker",
@@ -52,7 +67,8 @@
       "path":"G:/TV Series P-Z/Peacemaker",
       "skipSeason": [],
       "ignoreMissing": [],
-      "tvdbSeriesId": 391153
+      "tvdbSeriesId": 391153,
+      "oneomId": 68550
     },
     {
       "name": "Rick and Morty",
@@ -60,17 +76,19 @@
       "regexName": "Rick and Morty",
       "path":"G:/TV Series P-Z/Rick and Morty",
       "skipSeason": [0,1,2,3,4,5],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 275274
+      "ignoreMissing": ["S00E177","S05E00"],
+      "tvdbSeriesId": 275274,
+      "oneomId": 191
     },
     {
       "name":"Space Force",
       "rssFeedId": 1313,
       "regexName": "Space Force",
       "path":"G:/TV Series P-Z/Space Force",
-      "skipSeason": [1],
+      "skipSeason": [1,2],
       "ignoreMissing": [],
-      "tvdbSeriesId": 368667
+      "tvdbSeriesId": 368667,
+      "oneomId": 59451
     },
     {
       "name":"Squid Game",
@@ -79,7 +97,8 @@
       "path":"G:/TV Series P-Z/Squid Game",
       "skipSeason": [1],
       "ignoreMissing": [],
-      "tvdbSeriesId": 383275
+      "tvdbSeriesId": 383275,
+      "oneomId": 67994
     },
     {
       "name":"Young Sheldon",
@@ -88,7 +107,8 @@
       "path":"G:/TV Series P-Z/Young Sheldon",
       "skipSeason": [1,2,3,4],
       "ignoreMissing": [],
-      "tvdbSeriesId": 328724
+      "tvdbSeriesId": 328724,
+      "oneomId": 46179
     }
   ]
 }

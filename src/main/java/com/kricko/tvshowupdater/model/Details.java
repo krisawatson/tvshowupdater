@@ -16,4 +16,5 @@ public class Details {
 	private List<Integer> skipSeason;
 	private Optional<String> tvdbSeriesId;
 	private List<String> ignoreMissing;
+	private Optional<Integer> oneomId;
 }

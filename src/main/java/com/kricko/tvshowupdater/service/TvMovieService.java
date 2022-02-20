@@ -36,7 +36,7 @@ public class TvMovieService {
 	 * @throws IOException
 	 */
 	public static List<String> refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir,
-												Optional<String> seriesId) throws IOException {
+													 Optional<String> seriesId) throws IOException {
 		List<String> removableFolders = new ArrayList<>();
 		if(files != null){
 			System.out.println(currentThread().getName() + " - File list is not empty in " + parentDir);
@@ -68,8 +68,8 @@ public class TvMovieService {
 				Episode ep = null;
 				if(seriesList != null){
 					if(episodeIds != null){
-						System.out.println(String.format("%s - Series %d Episodes %d",
-								currentThread().getName(), episodeIds[0], episodeIds[1]));
+						System.out.printf("%s - Series %d Episodes %d%n",
+										  currentThread().getName(), episodeIds[0], episodeIds[1]);
 						ep = tvdb.getEpisode(seriesId.orElse(seriesList.get(0).getId()),
 								episodeIds[0], episodeIds[1], Constants.LANGUAGE);
 					}
@@ -78,7 +78,11 @@ public class TvMovieService {
 				String fileName = file.getFileName().toString();
 				System.out.println(currentThread().getName() + " - Checking if need to refactor " + file.getParent().toString() + File.separatorChar +fileName);
 				String ext = fileName.substring(fileName.lastIndexOf("."));
-				String newFileName = (ep != null) ? TvShowUtils.buildFileName(ep)  + ext : episodeName + ext;
+				String newFileName = (ep != null)
+									 ? TvShowUtils.buildFileName(ep)  + ext
+									 : (null != episodeName)
+									   ? episodeName + ext
+									   : fileName;
 
 				String currentParentDir = file.getParent().getFileName().toString();
 				String newDir = (parentDir == null || currentParentDir.startsWith("Season"))

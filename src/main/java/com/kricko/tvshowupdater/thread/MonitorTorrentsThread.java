@@ -21,7 +21,6 @@ public class MonitorTorrentsThread implements Runnable {
 		QBitTorrent torrentClient = new QBitTorrent(config);
 		
 		try {
-			torrentClient.getToken();
 			List<Torrent> torrentList = torrentClient.getListOfTorrents(Filter.ALL);
 			while(!torrentList.isEmpty()){
 				List<Torrent> completedTorrents = torrentClient.getListOfTorrents(Filter.COMPLETED);

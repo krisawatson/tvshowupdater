@@ -1,5 +1,9 @@
 package com.kricko.tvshowupdater.utils;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
 /**
  */
 public interface Constants {
@@ -22,4 +26,6 @@ public interface Constants {
 	 * List of config properties constants
 	 */
 	String UTORRENT = "utorrent";
+
+	List<String> EXCLUDED_IN_TORRENT_NAME = asList("1080p");
 }
