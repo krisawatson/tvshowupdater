@@ -86,25 +86,15 @@ public class TvShowUtils {
 
 			int seasonInt = seasonAndEpisode[0];
 			int episodeInt = seasonAndEpisode[1];
-			
+
 			Path dir = Paths.get(detail.getPath() + File.separatorChar + "Season " + seasonInt);
-			List<String> existingItems = getExistingItems(dir);
-			System.out.println(currentThread().getName() + " - The directory is " + dir);
 
-			String filePrefix = String.format("S%sE%s", formatIntToString(seasonInt), formatIntToString(episodeInt));
-
-			if(episodeExists(existingItems, filePrefix)){
-				System.out.println(filePrefix + " episode already exists");
-			} else {
+			if (!detail.getSkipSeason().contains(seasonInt)
+					&& episodeDoesntExist(dir, seasonInt, episodeInt, detail.getIgnoreMissing())
+					&& null != item.getLink()){
+				System.out.printf("%s - %s doesn't exist so downloading%n", currentThread().getName(), nameAndEpisode);
 				newDownloads = true;
-				TorrentConfig torrentConfig = config.getQBitTorrentConfig();
-				QBitTorrent torrentClient = new QBitTorrent(torrentConfig);
-				torrentClient.getToken();
-				torrentClient.addNewTorrent(item.getLink(), dir);
-				String sDir = dir.toString();
-				if(!tidyUpDirs.contains(sDir)){
-					tidyUpDirs.add(sDir);
-				}
+				downloadMagnetLink(config, item.getLink(), dir);
 			}
 		}
 		
@@ -114,19 +104,35 @@ public class TvShowUtils {
 		return newDownloads;
 	}
 
+	public static void downloadMagnetLink(Config config, String magnetUrl, Path dir) {
+		TorrentConfig torrentConfig = config.getQBitTorrentConfig();
+		QBitTorrent torrentClient = new QBitTorrent(torrentConfig);
+		torrentClient.addNewTorrent(magnetUrl, dir);
+		String sDir = dir.toString();
+		if(!tidyUpDirs.contains(sDir)){
+			tidyUpDirs.add(sDir);
+		}
+	}
+
+	public static boolean episodeDoesntExist(Path dir, int seasonInt, int episodeInt, List<String> ignorable) {
+		List<String> existingItems = getExistingItems(dir);
+
+		String filePrefix = String.format("S%sE%s", formatIntToString(seasonInt), formatIntToString(episodeInt));
+		return !episodeExists(existingItems, filePrefix, ignorable);
+	}
+
 	/**
 	 * Method episodeExists.
 	 * @param items List<String>
 	 * @param episodeName String
 	 * @return boolean
 	 */
-	private static boolean episodeExists(List<String> items, String episodeName){
-		if(!items.isEmpty()){
-			for(String item:items){
-				if(item.contains(episodeName)) return true;
+	private static boolean episodeExists(List<String> items, String episodeName, List<String> ignorable){
+		if (!items.isEmpty()){
+			for (String item:items){
+				if (item.startsWith(episodeName) || ignorable.contains(episodeName)) return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -149,17 +155,14 @@ public class TvShowUtils {
 	 * @return List<String>
 	 * @throws Throwable
 	 */
-	private static List<String> getExistingItems(Path dir) throws Throwable{
+	private static List<String> getExistingItems(Path dir) {
 		List<String> result = new ArrayList<>();
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{mp4,avi,mkv}")) {
 			for (Path entry: stream) {
 				result.add(entry.getFileName().toString());
 			}
-		} catch (NoSuchFileException nsfe){
-			// Nothing to do here
-		}catch (DirectoryIteratorException | IOException ex) {
-			// I/O error encounted during the iteration, the cause is an IOException
-			throw ex.getCause();
+		} catch (DirectoryIteratorException | IOException ex) {
+			System.err.println("Failed to get list of existing items");
 		} 
 		
 		return result;
