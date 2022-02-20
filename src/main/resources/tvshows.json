@@ -5,7 +5,7 @@
       "rssFeedId": 981,
       "regexName": "Barry",
       "path":"G:/TV Series A-G/Barry",
-      "skipSeason": [],
+      "skipSeason": [1,2],
       "ignoreMissing": [],
       "tvdbSeriesId": 333072,
       "oneomId": 49102
@@ -14,7 +14,7 @@
       "name":"The Book of Boba Fett",
       "rssFeedId": 1505,
       "regexName": "The Book of Boba Fett",
-      "path":"G:/TV Series A-G/Book of Boba Fett",
+      "path":"G:/TV Series A-G/Book of Boba Fett, The",
       "skipSeason": [],
       "ignoreMissing": [],
       "tvdbSeriesId": 393589,
