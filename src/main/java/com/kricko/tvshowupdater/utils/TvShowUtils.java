@@ -153,16 +153,22 @@ public class TvShowUtils {
 	 * Method getExistingItems.
 	 * @param dir Path
 	 * @return List<String>
-	 * @throws Throwable
 	 */
 	private static List<String> getExistingItems(Path dir) {
 		List<String> result = new ArrayList<>();
+		if (!Files.exists(dir)) {
+			try {
+				Files.createDirectories(dir);
+			} catch (IOException ex) {
+				System.out.printf("Directory %s doesn't exist and failed to create%n", dir);
+			}
+		}
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{mp4,avi,mkv}")) {
 			for (Path entry: stream) {
 				result.add(entry.getFileName().toString());
 			}
 		} catch (DirectoryIteratorException | IOException ex) {
-			System.err.println("Failed to get list of existing items");
+			System.err.println("Failed to get list of existing items in " + dir);
 		} 
 		
 		return result;
