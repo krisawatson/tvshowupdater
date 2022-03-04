@@ -5,13 +5,9 @@ import com.kricko.tvshowupdater.configuration.TorrentConfig;
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
-import com.kricko.tvshowupdater.model.Shows;
-import com.kricko.tvshowupdater.parser.TvShowParser;
 import com.kricko.tvshowupdater.torrent.QBitTorrent;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,6 +116,81 @@ public class TvShowUtils {
 		String filePrefix = String.format("S%sE%s", formatIntToString(seasonInt), formatIntToString(episodeInt));
 		return !episodeExists(existingItems, filePrefix, ignorable);
 	}
+	
+	public static void appendDirToTidyUpList(){
+		try {
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_TIDY_UP, false)));
+		    for(String dir:tidyUpDirs){
+		    	out.println(dir);
+		    }
+		    out.flush();
+		    out.close();
+		}catch (IOException e) {
+		    //exception handling left as an exercise for the reader
+		}
+	}
+
+	public static void writeMissingEpisodesToFile(List<String> missingEpisodes) {
+		try {
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_MISSING, true)));
+			for(String episodes:missingEpisodes){
+				out.println(episodes);
+			}
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			System.err.println("Failed to write to the file " + FILE_MISSING);
+		}
+	}
+	
+	/**
+	 * Method getListOfTidyUpDirs.
+	 * @return List<String>
+	 */
+	public static List<String> getListOfTidyUpDirs(){
+		List<String> directories = new ArrayList<>();
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(FILE_TIDY_UP));
+			String line;
+			while((line = reader.readLine()) != null){
+				directories.add(line);
+			}
+			reader.close();
+		} catch (IOException e) {
+			System.err.println(e.getLocalizedMessage());
+		}
+		
+		return directories;
+	}
+	
+	/**
+	 * Method getEpisodeIds.
+	 * @param value String
+	 * @return int[]
+	 */
+	public static int[] getEpisodeIds(String value, String splitChar, int startIndex){
+		int[] items = new int[2];
+		items[0] = Integer.parseInt(value.substring(startIndex, value.toUpperCase().indexOf(splitChar)));
+		items[1] = Integer.parseInt(value.substring(value.toUpperCase().indexOf(splitChar) + 1));
+		
+		return items;
+	}
+	
+	/**
+	 * Method buildFileName.
+	 * @param ep Episode
+	 * @return String
+	 */
+	public static String buildFileName(Episode ep){
+		String filename = null;
+		if(ep.getEpisodeName() != null){
+			filename = "S"+formatIntToString(ep.getSeasonNumber())
+					+ "E"+formatIntToString(ep.getEpisodeNumber()) 
+					+ " - " + replaceSpecialChars(ep.getEpisodeName());
+		}
+		
+		return filename;
+	}
 
 	/**
 	 * Method episodeExists.
@@ -169,105 +240,9 @@ public class TvShowUtils {
 			}
 		} catch (DirectoryIteratorException | IOException ex) {
 			System.err.println("Failed to get list of existing items in " + dir);
-		} 
-		
-		return result;
-	}
-	
-	public static void appendDirToTidyUpList(){
-		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_TIDY_UP, false)));
-		    for(String dir:tidyUpDirs){
-		    	out.println(dir);
-		    }
-		    out.flush();
-		    out.close();
-		}catch (IOException e) {
-		    //exception handling left as an exercise for the reader
 		}
-	}
 
-	public static void writeMissingEpisodesToFile(List<String> missingEpisodes) {
-		try {
-			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_MISSING, true)));
-			for(String episodes:missingEpisodes){
-				out.println(episodes);
-			}
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-			System.err.println("Failed to write to the file " + FILE_MISSING);
-		}
-	}
-	
-	/**
-	 * Method getListOfTidyUpDirs.
-	 * @return List<String>
-	 */
-	public static List<String> getListOfTidyUpDirs(){
-		List<String> directories = new ArrayList<>();
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(FILE_TIDY_UP));
-			String line;
-			while((line = reader.readLine()) != null){
-				directories.add(line);
-			}
-			reader.close();
-		} catch (IOException e) {
-			System.err.println(e.getLocalizedMessage());
-		}
-		
-		return directories;
-	}
-	
-	/**
-	 * Method getListOfShows.
-	 * @return Shows
-	 * @throws IOException
-	 * @throws ParseException
-	 */
-	public static Shows getListOfShows(File showsFile) throws IOException, ParseException, URISyntaxException {
-		TvShowParser parser = new TvShowParser();
-        return parser.parseShows(showsFile);
-	}
-	
-	/**
-	 * Method valid.
-	 * @param s String
-	 * @return boolean
-	 */
-	public static boolean valid(String s)
-	{
-		return s != null && !s.trim().isEmpty();
-	}
-	
-	/**
-	 * Method getEpisodeIds.
-	 * @param value String
-	 * @return int[]
-	 */
-	public static int[] getEpisodeIds(String value, String splitChar, int startIndex){
-		int[] items = new int[2];
-		items[0] = Integer.parseInt(value.substring(startIndex, value.toUpperCase().indexOf(splitChar)));
-		items[1] = Integer.parseInt(value.substring(value.toUpperCase().indexOf(splitChar) + 1));
-		
-		return items;
-	}
-	
-	/**
-	 * Method buildFileName.
-	 * @param ep Episode
-	 * @return String
-	 */
-	public static String buildFileName(Episode ep){
-		String filename = null;
-		if(ep.getEpisodeName() != null){
-			filename = "S"+formatIntToString(ep.getSeasonNumber())
-					+ "E"+formatIntToString(ep.getEpisodeNumber()) 
-					+ " - " + replaceSpecialChars(ep.getEpisodeName());
-		}
-		
-		return filename;
+		return result;
 	}
 	
 	/**
@@ -275,7 +250,7 @@ public class TvShowUtils {
 	 * @param value String
 	 * @return String
 	 */
-	public static String replaceSpecialChars(String value){
+	private static String replaceSpecialChars(String value){
 		return value.replace(":", "").replace("?","")
 				.replace("\\"," ").replace("/"," ");
 	}
