@@ -89,7 +89,7 @@ public class TvMovieService {
 								? file.getParent().toString()
 								: parentDir;
 				
-				Path target = Paths.get(newDir, newFileName.replaceAll("\"", ""));
+				Path target = Paths.get(newDir, newFileName.replaceAll("\"", "").replace("*", "_"));
 				if(!file.toString().equals(target.toString())){
 					System.out.println(currentThread().getName() + " - Moving " + file + " to " + target);
 					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);

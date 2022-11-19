@@ -67,9 +67,14 @@ public class QBitTorrent {
 			Response response = httpClient.newCall(request).execute();
 
 			ObjectMapper mapper = new ObjectMapper();
+			var body = response.body();
+			if (null != response.body()) {
+				response.body().close();
+			}
 
-			return mapper.readValue(Objects.requireNonNull(response.body()).string(),
-									new TypeReference<List<Torrent>>(){});
+			return mapper.readValue(Objects.requireNonNull(body).string(),
+					new TypeReference<>() {
+					});
 		} catch (IOException e) {
 			System.out.println(currentThread().getName() + " - Failed getting the list of completed torrents " + e.getLocalizedMessage());
 		}

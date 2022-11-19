@@ -15,7 +15,7 @@
       "rssFeedId": 1505,
       "regexName": "The Book of Boba Fett",
       "path":"G:/TV Series A-G/Book of Boba Fett, The",
-      "skipSeason": [],
+      "skipSeason": [1],
       "ignoreMissing": [],
       "tvdbSeriesId": 393589,
       "oneomId": 68246
@@ -25,7 +25,7 @@
       "rssFeedId": 57,
       "regexName": "Family Guy",
       "path":"G:/TV Series A-G/Family Guy",
-      "skipSeason": [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19],
+      "skipSeason": [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20],
       "ignoreMissing": [],
       "tvdbSeriesId": 75978,
       "oneomId": 1760
@@ -45,7 +45,7 @@
       "rssFeedId": 9,
       "regexName": "Greys Anatomy",
       "path":"G:/TV Series A-G/Greys Anatomy",
-      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
+      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
       "ignoreMissing": ["S05E02", "S05E24", "S06E02", "S08E02", "S10E02"],
       "tvdbSeriesId": 73762,
       "oneomId": 499
@@ -86,7 +86,7 @@
       "regexName": "Rick and Morty",
       "path":"G:/TV Series P-Z/Rick and Morty",
       "skipSeason": [0,1,2,3,4,5],
-      "ignoreMissing": ["S00E177","S05E00"],
+      "ignoreMissing": ["S00E177","S05E00", "S06E00"],
       "tvdbSeriesId": 275274,
       "oneomId": 191
     },
