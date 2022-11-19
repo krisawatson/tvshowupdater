@@ -5,7 +5,7 @@
       "rssFeedId": 981,
       "regexName": "Barry",
       "path":"G:/TV Series A-G/Barry",
-      "skipSeason": [1,2],
+      "skipSeason": [1,2,3],
       "ignoreMissing": [],
       "tvdbSeriesId": 333072,
       "oneomId": 49102
