@@ -57,21 +57,15 @@ public class QBitTorrent {
 	public List<Torrent> getListOfTorrents(Filter filter) throws IOException {
 		String url = String.format("http://%s:%d/api/v2/torrents/info?filter=%s",
 								   torrentConfig.getWebhost(), torrentConfig.getWebport(), filter.getFilterName());
-		try {
-			getTokenWithRetry();
-			Request request = new Request.Builder()
-					.url(url)
-					.method("GET", null)
-					.addHeader("Cookie", cookieList.get(0))
-					.build();
-			Response response = httpClient.newCall(request).execute();
-
+		getTokenWithRetry();
+		Request request = new Request.Builder()
+				.url(url)
+				.method("GET", null)
+				.addHeader("Cookie", cookieList.get(0))
+				.build();
+		Response response = httpClient.newCall(request).execute();
+		try (var body = response.body()) {
 			ObjectMapper mapper = new ObjectMapper();
-			var body = response.body();
-			if (null != response.body()) {
-				response.body().close();
-			}
-
 			return mapper.readValue(Objects.requireNonNull(body).string(),
 					new TypeReference<>() {
 					});
