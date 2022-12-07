@@ -75,15 +75,18 @@ public class QBitTorrent {
 		return Collections.emptyList();
 	}
 
-	public void removeCompletedTorrents(String hash) {
-		String url = String.format("http://%s:%d/api/v2/torrents/delete?hashes=%s&deleteFiles=false",
-								   torrentConfig.getWebhost(), torrentConfig.getWebport(), hash);
+	public void removeCompletedTorrents(String hashes) {
+		String url = String.format("http://%s:%d/api/v2/torrents/delete",
+								   torrentConfig.getWebhost(), torrentConfig.getWebport());
 
 		try {
 			getTokenWithRetry();
+			RequestBody requestBody = new FormBody.Builder().add("hashes", hashes)
+															.add("deleteFiles", "false")
+															.build();
 			Request request = new Request.Builder()
 					.url(url)
-					.method("GET", null)
+					.method("POST", requestBody)
 					.addHeader("Cookie", cookieList.get(0))
 					.build();
 

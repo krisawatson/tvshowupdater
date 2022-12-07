@@ -117,7 +117,7 @@ public class App {
 		
 		thread.shutdown();
 
-		thread.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+		thread.awaitTermination(60L, TimeUnit.SECONDS);
 	}
 
 	private static void updateShows(boolean tidyExisting, Shows shows, boolean useOneOm) throws InterruptedException {

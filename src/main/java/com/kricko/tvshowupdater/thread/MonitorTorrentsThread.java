@@ -7,6 +7,7 @@ import com.kricko.tvshowupdater.torrent.QBitTorrent;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MonitorTorrentsThread implements Runnable {
 
@@ -21,15 +22,14 @@ public class MonitorTorrentsThread implements Runnable {
 		QBitTorrent torrentClient = new QBitTorrent(config);
 		
 		try {
-			List<Torrent> torrentList = torrentClient.getListOfTorrents(Filter.ALL);
-			while(!torrentList.isEmpty()){
+			while(!torrentClient.getListOfTorrents(Filter.ALL).isEmpty()){
 				List<Torrent> completedTorrents = torrentClient.getListOfTorrents(Filter.COMPLETED);
-				completedTorrents.forEach(torrent -> torrentClient.removeCompletedTorrents(torrent.getHash()));
-				Thread.sleep(5000);
-				torrentList = torrentClient.getListOfTorrents(Filter.ALL);
+				String hashes = completedTorrents.stream().map(Torrent::getHash).collect(Collectors.joining("|"));
+				if (!hashes.isEmpty())
+					torrentClient.removeCompletedTorrents(hashes);
 			}
 			
-		} catch (IOException | InterruptedException e) {
+		} catch (IOException e) {
 			System.err.println("Failed to get the list of active torrents");
 		}
 	}
