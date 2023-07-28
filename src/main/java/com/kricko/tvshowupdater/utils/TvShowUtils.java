@@ -18,7 +18,8 @@ import java.util.regex.Pattern;
 
 import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING;
 import static com.kricko.tvshowupdater.utils.Constants.FILE_TIDY_UP;
-import static java.lang.Thread.currentThread;
+import static com.kricko.tvshowupdater.utils.Logger.logError;
+import static com.kricko.tvshowupdater.utils.Logger.logLine;
 
 /**
  */
@@ -88,7 +89,8 @@ public class TvShowUtils {
 			if (!detail.getSkipSeason().contains(seasonInt)
 					&& episodeDoesntExist(dir, seasonInt, episodeInt, detail.getIgnoreMissing())
 					&& null != item.getLink()){
-				System.out.printf("%s - %s doesn't exist so downloading%n", currentThread().getName(), nameAndEpisode);
+				logLine(String.format("%s doesn't exist so downloading", nameAndEpisode),
+						TvShowUtils.class.getSimpleName());
 				newDownloads = true;
 				downloadMagnetLink(config, item.getLink(), dir);
 			}
@@ -139,7 +141,7 @@ public class TvShowUtils {
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			System.err.println("Failed to write to the file " + FILE_MISSING);
+			logError(String.format("Failed to write to the file %s", FILE_MISSING), TvShowUtils.class.getSimpleName());
 		}
 	}
 	
@@ -157,7 +159,8 @@ public class TvShowUtils {
 			}
 			reader.close();
 		} catch (IOException e) {
-			System.err.println(e.getLocalizedMessage());
+			logError(String.format("Failed getting list of tidy up directories %s", e.getLocalizedMessage()),
+					 TvShowUtils.class.getSimpleName());
 		}
 		
 		return directories;
@@ -231,7 +234,8 @@ public class TvShowUtils {
 			try {
 				Files.createDirectories(dir);
 			} catch (IOException ex) {
-				System.out.printf("Directory %s doesn't exist and failed to create%n", dir);
+				logError(String.format("Directory %s doesn't exist and failed to create%n", dir),
+						 TvShowUtils.class.getSimpleName());
 			}
 		}
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{mp4,avi,mkv}")) {
@@ -239,7 +243,8 @@ public class TvShowUtils {
 				result.add(entry.getFileName().toString());
 			}
 		} catch (DirectoryIteratorException | IOException ex) {
-			System.err.println("Failed to get list of existing items in " + dir);
+			logError(String.format("Failed to get list of existing items in %s", dir),
+					 TvShowUtils.class.getSimpleName());
 		}
 
 		return result;

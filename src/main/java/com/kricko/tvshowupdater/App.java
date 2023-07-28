@@ -15,7 +15,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static com.kricko.tvshowupdater.DownloadShows.doDownload;
-import static com.kricko.tvshowupdater.DownloadShows.downloadFromOneOm;
 import static com.kricko.tvshowupdater.parser.TvShowParser.parseShows;
 import static java.util.Objects.requireNonNull;
 
@@ -65,7 +64,6 @@ public class App {
 		String selectedOption = cmd.getOptionValue("option");
 		String showsFilePath = cmd.getOptionValue("shows");
 		String configFilePath = cmd.getOptionValue("config");
-		boolean useOneOm = cmd.hasOption("oneom");
 		System.out.println("**********************************");
 		System.out.println("Welcome to TV Show Updater");
 		System.out.println("**********************************");
@@ -76,14 +74,14 @@ public class App {
 						  : new File(configFilePath).toURI().toURL();
 		config = mapper.readValue(configFile, Config.class);
 
-		doSelectedOption(selectedOption, showsFilePath, useOneOm);
+		doSelectedOption(selectedOption, showsFilePath);
 	}
 
 	/**
 	 * Method doSelectedOption.
 	 * @param option String
 	 */
-	private static void doSelectedOption(String option, String showsFilePath, boolean useOneOm)
+	private static void doSelectedOption(String option, String showsFilePath)
 			throws IOException, InterruptedException, URISyntaxException, org.json.simple.parser.ParseException {
 		boolean tidyExisting = config.isTidyExisting();
 		File showsFile = (null == showsFilePath)
@@ -94,7 +92,7 @@ public class App {
 			switch (option) {
 				case "update":
 				case "1":
-					updateShows(tidyExisting, shows, useOneOm);
+					updateShows(tidyExisting, shows);
 					break;
 				case "tidyup":
 				case "2":
@@ -120,12 +118,12 @@ public class App {
 		thread.awaitTermination(60L, TimeUnit.SECONDS);
 	}
 
-	private static void updateShows(boolean tidyExisting, Shows shows, boolean useOneOm) throws InterruptedException {
+	private static void updateShows(boolean tidyExisting, Shows shows) throws InterruptedException {
 		if (tidyExisting) {
 			RefactorFiles.tidyFolders(true, shows);
 		}
 		// New approach
-		if ((useOneOm) ? downloadFromOneOm(config, shows) : doDownload(config, shows)) {
+		if (doDownload(config, shows)) {
 			doMonitorTorrents();
 			RefactorFiles.tidyFolders(false, shows);
 		}

@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Config {
 
-    @JsonProperty("oneOmSeries")
-    private String oneOmSeries;
-
     @JsonProperty("rssFeed")
     private String rssFeed;
 

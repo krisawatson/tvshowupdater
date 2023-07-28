@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import static com.kricko.tvshowupdater.utils.Logger.logError;
 import static java.lang.Thread.currentThread;
 
 /**
@@ -70,7 +71,8 @@ public class QBitTorrent {
 					new TypeReference<>() {
 					});
 		} catch (IOException e) {
-			System.out.println(currentThread().getName() + " - Failed getting the list of completed torrents " + e.getLocalizedMessage());
+			logError(String.format("Failed getting the list of completed torrents %s", e.getLocalizedMessage()),
+					 this.getClass().getSimpleName());
 		}
 		return Collections.emptyList();
 	}
@@ -92,7 +94,8 @@ public class QBitTorrent {
 
 			httpClient.newCall(request).execute();
 		} catch (IOException e) {
-			System.err.println("Failed during removed completed torrents " + e.getLocalizedMessage());
+			logError(String.format("Failed during removed completed torrents %s", e.getLocalizedMessage()),
+					 this.getClass().getSimpleName());
 		}
 	}
 
@@ -111,7 +114,8 @@ public class QBitTorrent {
 
 			cookieList = response.headers().values("Set-Cookie");
 		} catch (IOException e) {
-			System.err.println("Failed during get token " + e.getLocalizedMessage());
+			logError(String.format("Failed during get token %s", e.getLocalizedMessage()),
+					 this.getClass().getSimpleName());
 		}
 	}
 
