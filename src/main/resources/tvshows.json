@@ -35,7 +35,7 @@
       "rssFeedId": 115,
       "regexName": "The Flash 2014",
       "path":"G:/TV Series A-G/Flash (2014), The",
-      "skipSeason": [1,2,3,4,5,6,7,8],
+      "skipSeason": [1,2,3,4,5,6,7,8,9],
       "ignoreMissing": [],
       "tvdbSeriesId": 279121,
       "oneomId": 30758
@@ -115,8 +115,8 @@
       "rssFeedId": 881,
       "regexName": "Young Sheldon",
       "path":"G:/TV Series P-Z/Young Sheldon",
-      "skipSeason": [1,2,3,4],
-      "ignoreMissing": [],
+      "skipSeason": [1,2,3,4,5,6],
+      "ignoreMissing": ["S06E614"],
       "tvdbSeriesId": 328724,
       "oneomId": 46179
     }
