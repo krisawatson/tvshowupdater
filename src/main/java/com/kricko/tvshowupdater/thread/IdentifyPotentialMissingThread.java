@@ -1,6 +1,7 @@
 package com.kricko.tvshowupdater.thread;
 
 import com.kricko.tvshowupdater.service.TvMovieService;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import static com.kricko.tvshowupdater.utils.TvShowUtils.writeMissingEpisodesToFile;
 
+@Slf4j
 public class IdentifyPotentialMissingThread implements Runnable {
 
 	private final String name, path;
@@ -35,7 +37,7 @@ public class IdentifyPotentialMissingThread implements Runnable {
 			}
 
 		} catch (IOException e) {
-			System.err.println(e.getLocalizedMessage());
+			log.error("Failed to run", e);
 		}	
 	}
 }

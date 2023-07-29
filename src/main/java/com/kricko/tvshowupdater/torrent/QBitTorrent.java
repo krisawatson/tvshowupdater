@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kricko.tvshowupdater.configuration.TorrentConfig;
 import com.kricko.tvshowupdater.model.Torrent;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -12,11 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.kricko.tvshowupdater.utils.Logger.logError;
-import static java.lang.Thread.currentThread;
-
 /**
  */
+@Slf4j
 public class QBitTorrent {
 
 	private final TorrentConfig torrentConfig;
@@ -46,9 +45,9 @@ public class QBitTorrent {
 
 			Response response = httpClient.newCall(request).execute();
 
-			System.out.println("Response status to adding torrent was: " + response.code());
+			log.info("Response status to adding torrent was: {}", response.code());
 		} catch (IOException e) {
-			System.out.println(currentThread().getName() + " - Failed during getting the list of torrents " + e.getLocalizedMessage());
+			log.error("Failed during getting the list of torrents", e);
 		}
 	}
 
@@ -71,8 +70,7 @@ public class QBitTorrent {
 					new TypeReference<>() {
 					});
 		} catch (IOException e) {
-			logError(String.format("Failed getting the list of completed torrents %s", e.getLocalizedMessage()),
-					 this.getClass().getSimpleName());
+			log.error("Failed getting the list of completed torrents", e);
 		}
 		return Collections.emptyList();
 	}
@@ -94,8 +92,7 @@ public class QBitTorrent {
 
 			httpClient.newCall(request).execute();
 		} catch (IOException e) {
-			logError(String.format("Failed during removed completed torrents %s", e.getLocalizedMessage()),
-					 this.getClass().getSimpleName());
+			log.error("Failed during removed completed torrents", e);
 		}
 	}
 
@@ -114,8 +111,7 @@ public class QBitTorrent {
 
 			cookieList = response.headers().values("Set-Cookie");
 		} catch (IOException e) {
-			logError(String.format("Failed during get token %s", e.getLocalizedMessage()),
-					 this.getClass().getSimpleName());
+			log.error("Failed during get token", e);
 		}
 	}
 

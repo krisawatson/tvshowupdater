@@ -6,6 +6,7 @@ import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.model.Rss;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.xml.bind.DataBindingException;
 import javax.xml.bind.JAXB;
@@ -14,11 +15,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import static com.kricko.tvshowupdater.utils.Logger.logError;
-import static com.kricko.tvshowupdater.utils.Logger.logLine;
-
 /**
  */
+@Slf4j
 public class DownloadShows {
 
 	/**
@@ -29,7 +28,7 @@ public class DownloadShows {
 		AtomicBoolean newDownloads = new AtomicBoolean(false);
 
 		for(Details detail:shows.getShows()){
-			logLine(String.format("Checking for new items for %s", detail.getName()), DownloadShows.class.getSimpleName());
+			log.info("Checking for new items for {}", detail.getName());
 			detail.getRssFeedId().ifPresent(rssFeedId -> {
 				Rss rss;
 				try {
@@ -44,15 +43,14 @@ public class DownloadShows {
 							try {
 								newDownloads.set(TvShowUtils.downloadNewItems(config, item, detail) || newDownloads.get());
 							} catch (Throwable e) {
-								System.err.println(e.getLocalizedMessage());
+								log.error(e.getLocalizedMessage());
 							}
-							System.out.println(detail.getPath());
-							System.out.println(item.getTitle());
+							log.info(detail.getPath());
+							log.info(item.getTitle());
 						}
 					}
 				} catch (DataBindingException | MalformedURLException e) {
-					logError(String.format("Exception caught when trying to parse URL for %s", detail.getName()),
-							 DownloadShows.class.getSimpleName());
+					log.error("Exception caught when trying to parse URL for {}", detail.getName());
 				}
 			});
 		}

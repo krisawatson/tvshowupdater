@@ -6,6 +6,7 @@ import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.torrent.QBitTorrent;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.file.*;
@@ -18,11 +19,10 @@ import java.util.regex.Pattern;
 
 import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING;
 import static com.kricko.tvshowupdater.utils.Constants.FILE_TIDY_UP;
-import static com.kricko.tvshowupdater.utils.Logger.logError;
-import static com.kricko.tvshowupdater.utils.Logger.logLine;
 
 /**
  */
+@Slf4j
 public class TvShowUtils {
 
 	private static final List<String> tidyUpDirs = new ArrayList<>();
@@ -89,8 +89,7 @@ public class TvShowUtils {
 			if (!detail.getSkipSeason().contains(seasonInt)
 					&& episodeDoesntExist(dir, seasonInt, episodeInt, detail.getIgnoreMissing())
 					&& null != item.getLink()){
-				logLine(String.format("%s doesn't exist so downloading", nameAndEpisode),
-						TvShowUtils.class.getSimpleName());
+				log.info("{} doesn't exist so downloading", nameAndEpisode);
 				newDownloads = true;
 				downloadMagnetLink(config, item.getLink(), dir);
 			}
@@ -127,8 +126,8 @@ public class TvShowUtils {
 		    }
 		    out.flush();
 		    out.close();
-		}catch (IOException e) {
-		    //exception handling left as an exercise for the reader
+		} catch (IOException e) {
+			log.warn("Failed to append item to list of tidy up directories", e);
 		}
 	}
 
@@ -141,7 +140,7 @@ public class TvShowUtils {
 			out.flush();
 			out.close();
 		} catch (IOException e) {
-			logError(String.format("Failed to write to the file %s", FILE_MISSING), TvShowUtils.class.getSimpleName());
+			log.error("Failed to write to the file {}", FILE_MISSING, e);
 		}
 	}
 	
@@ -159,8 +158,7 @@ public class TvShowUtils {
 			}
 			reader.close();
 		} catch (IOException e) {
-			logError(String.format("Failed getting list of tidy up directories %s", e.getLocalizedMessage()),
-					 TvShowUtils.class.getSimpleName());
+			log.error("Failed getting list of tidy up directories", e);
 		}
 		
 		return directories;
@@ -234,8 +232,7 @@ public class TvShowUtils {
 			try {
 				Files.createDirectories(dir);
 			} catch (IOException ex) {
-				logError(String.format("Directory %s doesn't exist and failed to create%n", dir),
-						 TvShowUtils.class.getSimpleName());
+				log.error("Directory {} doesn't exist and failed to create", dir, ex);
 			}
 		}
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{mp4,avi,mkv}")) {
@@ -243,8 +240,7 @@ public class TvShowUtils {
 				result.add(entry.getFileName().toString());
 			}
 		} catch (DirectoryIteratorException | IOException ex) {
-			logError(String.format("Failed to get list of existing items in %s", dir),
-					 TvShowUtils.class.getSimpleName());
+			log.error("Failed to get list of existing items in {}", dir, ex);
 		}
 
 		return result;

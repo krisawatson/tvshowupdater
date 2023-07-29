@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kricko.tvshowupdater.configuration.Config;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.thread.MonitorTorrentsThread;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.*;
 
 import java.io.File;
@@ -20,6 +21,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  */
+@Slf4j
 public class App {
 
 	private static Config config;
@@ -55,7 +57,7 @@ public class App {
 		try {
 			cmd = parser.parse(options, args);
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			log.error("Failed to parse command options", e);
 			formatter.printHelp("java -jar tvshowupdater.jar ", options);
 
 			System.exit(1);
@@ -64,9 +66,9 @@ public class App {
 		String selectedOption = cmd.getOptionValue("option");
 		String showsFilePath = cmd.getOptionValue("shows");
 		String configFilePath = cmd.getOptionValue("config");
-		System.out.println("**********************************");
-		System.out.println("Welcome to TV Show Updater");
-		System.out.println("**********************************");
+		log.info("**********************************");
+		log.info("Welcome to TV Show Updater");
+		log.info("**********************************");
 
 		ObjectMapper mapper = new ObjectMapper();
 		URL configFile = (null == configFilePath)
@@ -110,7 +112,6 @@ public class App {
 	
 	private static void doMonitorTorrents() throws InterruptedException {
 		ExecutorService thread = Executors.newSingleThreadExecutor();
-//		thread.execute(new MonitorTorrentsThread(config.getUTorrentConfig()));
 		thread.execute(new MonitorTorrentsThread(config.getQBitTorrentConfig()));
 		
 		thread.shutdown();

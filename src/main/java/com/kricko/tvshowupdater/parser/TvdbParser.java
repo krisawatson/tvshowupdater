@@ -1,12 +1,8 @@
 package com.kricko.tvshowupdater.parser;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import com.kricko.tvshowupdater.model.*;
+import com.kricko.tvshowupdater.utils.DOMHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.w3c.dom.Document;
@@ -14,21 +10,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.kricko.tvshowupdater.model.Actor;
-import com.kricko.tvshowupdater.model.Banner;
-import com.kricko.tvshowupdater.model.BannerListType;
-import com.kricko.tvshowupdater.model.BannerType;
-import com.kricko.tvshowupdater.model.BannerUpdate;
-import com.kricko.tvshowupdater.model.Banners;
-import com.kricko.tvshowupdater.model.Episode;
-import com.kricko.tvshowupdater.model.EpisodeUpdate;
-import com.kricko.tvshowupdater.model.Series;
-import com.kricko.tvshowupdater.model.SeriesUpdate;
-import com.kricko.tvshowupdater.model.TVDBUpdates;
-import com.kricko.tvshowupdater.utils.DOMHelper;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  */
+@Slf4j
 public class TvdbParser {
 
     private static final String TYPE_BANNER = "banner";
@@ -144,7 +135,7 @@ public class TvdbParser {
                 }
             }
         } catch (RuntimeException ex) {
-            System.out.println(String.format("All Episodes error: " + ex.getMessage(), ex));
+            log.info("All Episodes error: {}", ex.getMessage(), ex);
         }
 
         return episodeList;
@@ -183,7 +174,7 @@ public class TvdbParser {
                 }
             }
         } catch (RuntimeException ex) {
-        	System.out.println(String.format("Banners error: " + ex.getMessage(), ex));
+        	log.info("Banners error: {}", ex.getMessage(), ex);
         }
 
         return banners;
@@ -221,7 +212,7 @@ public class TvdbParser {
                 }
             }
         } catch (RuntimeException ex) {
-        	System.out.println(String.format("Series error: " + ex.getMessage(), ex));
+        	log.info("Series error: {}", ex.getMessage(), ex);
         }
 
         return episode;
@@ -248,7 +239,7 @@ public class TvdbParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(urlString);
         } catch (RuntimeException ex) {
-        	System.out.println(String.format(ERROR_GET_XML, ex));
+        	log.info(String.format(ERROR_GET_XML, ex));
             return seriesList;
         }
 
@@ -284,7 +275,7 @@ public class TvdbParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(urlString);
         } catch (RuntimeException ex) {
-        	System.out.println(String.format(ERROR_GET_XML, ex));
+        	log.warn(ERROR_GET_XML, ex);
             return updates;
         }
 
@@ -427,7 +418,7 @@ public class TvdbParser {
         try {
             banner.setSeriesName(Boolean.parseBoolean(DOMHelper.getValueFromElement(eBanner, SERIES_NAME)));
         } catch (RuntimeException ex) {
-        	System.out.println(String.format("Failed to transform SeriesName to boolean", ex));
+        	log.warn("Failed to transform SeriesName to boolean", ex);
             banner.setSeriesName(false);
         }
 
@@ -498,7 +489,7 @@ public class TvdbParser {
             String value = DOMHelper.getValueFromElement(eEpisode, key);
             episodeValue = NumberUtils.toInt(value, 0);
         } catch (RuntimeException ex) {
-        	System.out.println(String.format("Failed to read episode value", ex));
+        	log.warn("Failed to read episode value", ex);
             episodeValue = 0;
         }
 

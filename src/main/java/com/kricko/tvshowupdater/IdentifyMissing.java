@@ -3,6 +3,7 @@ package com.kricko.tvshowupdater;
 import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.thread.IdentifyPotentialMissingThread;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,6 +17,7 @@ import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING;
 
 /**
  */
+@Slf4j
 public class IdentifyMissing {
 
 	/**
@@ -35,11 +37,11 @@ public class IdentifyMissing {
 				try{
 					threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 				} catch (InterruptedException e) {
-					System.err.println(e.getLocalizedMessage());
+					log.error("Thread interrupted", e);
 				}
 			}
 		} catch (IOException e) {
-			System.err.println("Failed to refactor files " + e.getLocalizedMessage());
+			log.error("Failed to refactor files", e);
 		}
 	}
 }

@@ -4,11 +4,13 @@ import com.kricko.tvshowupdater.configuration.TorrentConfig;
 import com.kricko.tvshowupdater.model.Torrent;
 import com.kricko.tvshowupdater.torrent.Filter;
 import com.kricko.tvshowupdater.torrent.QBitTorrent;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class MonitorTorrentsThread implements Runnable {
 
 	private final TorrentConfig config;
@@ -30,7 +32,7 @@ public class MonitorTorrentsThread implements Runnable {
 			}
 			
 		} catch (IOException e) {
-			System.err.println("Failed to get the list of active torrents");
+			log.error("Failed to get the list of active torrents", e);
 		}
 	}
 }

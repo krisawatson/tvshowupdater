@@ -5,6 +5,7 @@ import com.kricko.tvshowupdater.model.Series;
 import com.kricko.tvshowupdater.thetvdb.TheTVDBApi;
 import com.kricko.tvshowupdater.utils.Constants;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,10 +17,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
-import static java.lang.Thread.currentThread;
 
 /**
  */
+@Slf4j
 public class TvMovieService {
 
 	static TheTVDBApi tvdb = new TheTVDBApi(Constants.API_KEY);
@@ -39,11 +40,11 @@ public class TvMovieService {
 													 Optional<String> seriesId) throws IOException {
 		List<String> removableFolders = new ArrayList<>();
 		if(files != null){
-			System.out.println(currentThread().getName() + " - File list is not empty in " + parentDir);
+			log.info("File list is not empty in {}", parentDir);
 
 			List<Series> seriesList = null;
 			if(seriesName != null){
-				System.out.println(currentThread().getName() + " - Searching Series Name " + seriesName);
+				log.info("Searching Series Name {}", seriesName);
 				seriesList = tvdb.searchSeries(seriesName, Constants.LANGUAGE);
 			}
 
@@ -54,7 +55,7 @@ public class TvMovieService {
 				Matcher itemMatcher = PATTERN.matcher(file.toString());
 				while(itemMatcher.find()){
 					episodeName = itemMatcher.group();
-					System.out.println(currentThread().getName() + " - Matched " + seriesName + " episode to " + episodeName);
+					log.info("Matched {} episode to {}", seriesName, episodeName);
 					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
 				} 
 				if(episodeIds == null){
@@ -68,15 +69,15 @@ public class TvMovieService {
 				Episode ep = null;
 				if(seriesList != null){
 					if(episodeIds != null){
-						System.out.printf("%s - Series %d Episodes %d%n",
-										  currentThread().getName(), episodeIds[0], episodeIds[1]);
+						log.info("Series {} Episodes {}}", episodeIds[0], episodeIds[1]);
 						ep = tvdb.getEpisode(seriesId.orElse(seriesList.get(0).getId()),
 								episodeIds[0], episodeIds[1], Constants.LANGUAGE);
 					}
 				}
 
 				String fileName = file.getFileName().toString();
-				System.out.println(currentThread().getName() + " - Checking if need to refactor " + file.getParent().toString() + File.separatorChar +fileName);
+				String filePath = file.getParent().toString() + File.separatorChar +fileName;
+				log.info("Checking if need to refactor {}", filePath);
 				String ext = fileName.substring(fileName.lastIndexOf("."));
 				String newFileName = (ep != null)
 									 ? TvShowUtils.buildFileName(ep)  + ext
@@ -91,11 +92,11 @@ public class TvMovieService {
 				
 				Path target = Paths.get(newDir, newFileName.replaceAll("\"", "").replace("*", "_"));
 				if(!file.toString().equals(target.toString())){
-					System.out.println(currentThread().getName() + " - Moving " + file + " to " + target);
+					log.info("Moving {} to {}", file, target);
 					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
 				}
 
-				System.out.println(currentThread().getName() + " - Parent dir " + parentDir + " new dir " + newDir);
+				log.info("Parent dir {} new dir {}", parentDir, newDir);
 
 				/**
 				 * This is when the file lives in a folder below the `Season` folder
@@ -103,8 +104,7 @@ public class TvMovieService {
 				 * Then {@FileRefactorThread} will remove the sub folder
  				 */
 				if(!currentParentDir.startsWith("Season")) {
-					System.out.printf("Current Parent directory %s is not the Season folder%n",
-									  currentParentDir);
+					log.info("Current Parent directory {} is not the Season folder", currentParentDir);
 					removableFolders.add(currentParentDir);
 				}
 			}
@@ -190,7 +190,7 @@ public class TvMovieService {
 			@Override
 			public FileVisitResult postVisitDirectory(Path dir, IOException exc)
 					throws IOException {
-				System.out.println(currentThread().getName() + " - Deleting directory :"+ dir);
+				log.info("Deleting directory: {}", dir);
 				Files.deleteIfExists(dir);
 				return FileVisitResult.CONTINUE;
 			}
@@ -202,14 +202,14 @@ public class TvMovieService {
 
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-				System.out.println(currentThread().getName() + " - Deleting file: "+file);
+				log.info("Deleting file: {}", file);
 				Files.deleteIfExists(file);
 				return FileVisitResult.CONTINUE;
 			}
 
 			@Override
 			public FileVisitResult visitFileFailed(Path file, IOException exc) {
-				System.out.println(exc.toString());
+				log.warn("Failed to visit file", exc);
 				return FileVisitResult.CONTINUE;
 			}
 		});

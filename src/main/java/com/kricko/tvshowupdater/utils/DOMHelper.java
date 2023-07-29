@@ -19,33 +19,26 @@
  */
 package com.kricko.tvshowupdater.utils;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.yamj.api.common.http.CommonHttpClient;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
-import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
-import org.xml.sax.SAXException;
-import org.yamj.api.common.http.CommonHttpClient;
+import java.io.*;
+import java.nio.charset.Charset;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -54,6 +47,7 @@ import org.yamj.api.common.http.CommonHttpClient;
  *
  * @version $Revision: 1.0 $
  */
+@Slf4j
 public class DOMHelper {
 
     private static final String YES = "yes";
@@ -63,7 +57,7 @@ public class DOMHelper {
     private static final int RETRY_TIME = 250;
     private static CommonHttpClient httpClient = null;
     // Constants
-    private static final String ERROR_WRITING = "Error writing the document to ";
+    private static final String ERROR_WRITING = "Error writing the document to {}";
 
     // Hide the constructor
     protected DOMHelper() {
@@ -144,7 +138,7 @@ public class DOMHelper {
                 }
             } catch (IOException ex) {
                 // Input Stream was already closed or null
-            	System.out.println(String.format("Failed to close InputStream", ex));
+            	log.error("Failed to close InputStream", ex);
             }
         }
 
@@ -218,46 +212,6 @@ public class DOMHelper {
     }
 
     /**
-     * Write the Document out to a file using nice formatting
-     *
-     * @param doc The document to save
-     * @param localFile The file to write to
-    
-     * @return boolean
-     */
-    public static boolean writeDocumentToFile(Document doc, String localFile) {
-        try {
-            TransformerFactory transfact = TransformerFactory.newInstance();
-            Transformer trans = transfact.newTransformer();
-            trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, YES);
-            trans.setOutputProperty(OutputKeys.INDENT, YES);
-            trans.transform(new DOMSource(doc), new StreamResult(new File(localFile)));
-            return true;
-        } catch (TransformerConfigurationException ex) {
-        	System.out.println(String.format(ERROR_WRITING + localFile, ex));
-            return false;
-        } catch (TransformerException ex) {
-        	System.out.println(String.format(ERROR_WRITING + localFile, ex));
-            return false;
-        }
-    }
-
-    /**
-     * Add a child element to a parent element
-     *
-     * @param doc
-     * @param parentElement
-     * @param elementName
-     * @param elementValue
-     */
-    public static void appendChild(Document doc, Element parentElement, String elementName, String elementValue) {
-        Element child = doc.createElement(elementName);
-        Text text = doc.createTextNode(elementValue);
-        child.appendChild(text);
-        parentElement.appendChild(child);
-    }
-
-    /**
      * Wait for a few milliseconds
      *
      * @param milliseconds
@@ -277,6 +231,6 @@ public class DOMHelper {
      * @throws IOException
      */
     private static String requestWebPage(String url) throws IOException {
-        return httpClient.requestContent(url, Charset.forName(ENCODING));
+        return httpClient.requestContent(url, Charset.forName(ENCODING)).getContent();
     }
 }

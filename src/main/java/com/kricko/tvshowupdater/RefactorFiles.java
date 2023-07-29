@@ -4,6 +4,7 @@ import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.thread.FileRefactorThread;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  */
+@Slf4j
 public class RefactorFiles {
 
 	/**
@@ -59,7 +61,7 @@ public class RefactorFiles {
 		try{
 			threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 		} catch (InterruptedException e) {
-			System.err.println("Failed to terminate the thread pool");
+			log.error("Failed to terminate the thread pool", e);
 		}
 	}
 
