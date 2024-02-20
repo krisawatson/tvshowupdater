@@ -4,8 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kricko.tvshowupdater.configuration.Config;
 import com.kricko.tvshowupdater.model.Shows;
 import com.kricko.tvshowupdater.thread.MonitorTorrentsThread;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,17 +22,35 @@ import static java.util.Objects.requireNonNull;
 
 /**
  */
-@Slf4j
 public class App {
 
+	private static final Logger log = LoggerFactory.getLogger(App.class);
 	private static Config config;
 	/**
 	 * Method main.
 	 * @param args String[]
 	 */
-	public static void main( String[] args )
-			throws IOException, InterruptedException, URISyntaxException, org.json.simple.parser.ParseException {
+	public static void main(String[] args) {
+		try {
+			Options options = createOptions();
+			CommandLine cmd = parseCommandLine(options, args);
 
+			String selectedOption = cmd.getOptionValue("option");
+			String showsFilePath = cmd.getOptionValue("shows");
+			String configFilePath = cmd.getOptionValue("config");
+
+			log.info("**********************************");
+			log.info("Welcome to TV Show Updater");
+			log.info("**********************************");
+
+			loadConfig(configFilePath);
+			doSelectedOption(selectedOption, showsFilePath);
+		} catch (Exception e) {
+			log.error("An error occurred", e);
+		}
+	}
+
+	private static Options createOptions() {
 		Options options = new Options();
 
 		Option option = new Option("o", "option", true, "arg: update, tidyup, missing");
@@ -50,33 +69,29 @@ public class App {
 		configOpt.setRequired(false);
 		options.addOption(useOneOmOpt);
 
+		return options;
+	}
+
+	private static CommandLine parseCommandLine(Options options, String[] args) throws ParseException {
 		CommandLineParser parser = new BasicParser();
 		HelpFormatter formatter = new HelpFormatter();
-		CommandLine cmd = null;//not a good practice, it serves it purpose
+		CommandLine cmd = parser.parse(options, args);
 
-		try {
-			cmd = parser.parse(options, args);
-		} catch (ParseException e) {
-			log.error("Failed to parse command options", e);
+		if (!cmd.hasOption("option") || !cmd.hasOption("shows")) {
+			log.error("Required options are missing");
 			formatter.printHelp("java -jar tvshowupdater.jar ", options);
-
 			System.exit(1);
 		}
 
-		String selectedOption = cmd.getOptionValue("option");
-		String showsFilePath = cmd.getOptionValue("shows");
-		String configFilePath = cmd.getOptionValue("config");
-		log.info("**********************************");
-		log.info("Welcome to TV Show Updater");
-		log.info("**********************************");
+		return cmd;
+	}
 
+	private static void loadConfig(String configFilePath) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		URL configFile = (null == configFilePath)
-						  ? App.class.getClassLoader().getResource("config.json")
-						  : new File(configFilePath).toURI().toURL();
+		URL configFile = (configFilePath == null)
+				? App.class.getClassLoader().getResource("config.json")
+				: new File(configFilePath).toURI().toURL();
 		config = mapper.readValue(configFile, Config.class);
-
-		doSelectedOption(selectedOption, showsFilePath);
 	}
 
 	/**
@@ -84,7 +99,7 @@ public class App {
 	 * @param option String
 	 */
 	private static void doSelectedOption(String option, String showsFilePath)
-			throws IOException, InterruptedException, URISyntaxException, org.json.simple.parser.ParseException {
+			throws IOException, InterruptedException, URISyntaxException {
 		boolean tidyExisting = config.isTidyExisting();
 		File showsFile = (null == showsFilePath)
 						 ? new File(requireNonNull(App.class.getClassLoader().getResource("tvshows.json")).toURI())
@@ -106,17 +121,21 @@ public class App {
 					break;
 				case "0":
 					System.exit(0);
+					break;
+				default:
+					log.warn("Invalid option: {}", option);
 			}
 		}
 	}
 	
 	private static void doMonitorTorrents() throws InterruptedException {
 		ExecutorService thread = Executors.newSingleThreadExecutor();
-		thread.execute(new MonitorTorrentsThread(config.getQBitTorrentConfig()));
-		
-		thread.shutdown();
-
-		thread.awaitTermination(60L, TimeUnit.SECONDS);
+		try {
+			thread.execute(new MonitorTorrentsThread(config.getQBitTorrentConfig()));
+		} finally {
+			thread.shutdown();
+			thread.awaitTermination(60L, TimeUnit.SECONDS);
+		}
 	}
 
 	private static void updateShows(boolean tidyExisting, Shows shows) throws InterruptedException {

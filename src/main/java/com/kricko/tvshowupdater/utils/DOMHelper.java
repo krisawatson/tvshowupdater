@@ -23,22 +23,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.yamj.api.common.http.CommonHttpClient;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.*;
-import java.nio.charset.Charset;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Generic set of routines to process the DOM model data
@@ -55,7 +55,7 @@ public class DOMHelper {
     private static final int RETRY_COUNT = 5;
     // Milliseconds to retry
     private static final int RETRY_TIME = 250;
-    private static CommonHttpClient httpClient = null;
+    private static HttpClient httpClient = null;
     // Constants
     private static final String ERROR_WRITING = "Error writing the document to {}";
 
@@ -69,7 +69,7 @@ public class DOMHelper {
      * Method setHttpClient.
      * @param newHttpClient CommonHttpClient
      */
-    public static void setHttpClient(CommonHttpClient newHttpClient) {
+    public static void setHttpClient(HttpClient newHttpClient) {
         httpClient = newHttpClient;
     }
 
@@ -95,7 +95,7 @@ public class DOMHelper {
             if (tagNodeList == null || tagNodeList.getLength() == 0) {
                 return "";
             }
-            return ((Node) tagNodeList.item(0)).getNodeValue();
+            return tagNodeList.item(0).getNodeValue();
         }
     }
 
@@ -183,32 +183,13 @@ public class DOMHelper {
             throw new RuntimeException("Unable to encode URL: " + url, ex);
         } catch (IOException ex) {
             throw new RuntimeException("Unable to download URL: " + url, ex);
+        } catch (URISyntaxException ex) {
+            throw new RuntimeException("Invalid URL: " + url, ex);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException("Request failed with interruption", ex);
         }
 
         return null;
-    }
-
-    /**
-     * Convert a DOM document to a string
-     *
-     * @param doc
-    
-    
-     * @return String
-     * @throws TransformerException */
-    public static String convertDocToString(Document doc) throws TransformerException {
-        //set up a transformer
-        TransformerFactory transfac = TransformerFactory.newInstance();
-        Transformer trans = transfac.newTransformer();
-        trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, YES);
-        trans.setOutputProperty(OutputKeys.INDENT, YES);
-
-        //create string from xml tree
-        StringWriter sw = new StringWriter();
-        StreamResult result = new StreamResult(sw);
-        DOMSource source = new DOMSource(doc);
-        trans.transform(source, result);
-        return sw.toString();
     }
 
     /**
@@ -230,7 +211,12 @@ public class DOMHelper {
      * @return String
      * @throws IOException
      */
-    private static String requestWebPage(String url) throws IOException {
-        return httpClient.requestContent(url, Charset.forName(ENCODING)).getContent();
+    private static String requestWebPage(String url) throws IOException, URISyntaxException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                                         .uri(new URI(url))
+                                         .GET()
+                                         .build();
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8))
+                         .body();
     }
 }

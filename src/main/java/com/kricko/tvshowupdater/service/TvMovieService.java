@@ -7,10 +7,8 @@ import com.kricko.tvshowupdater.utils.Constants;
 import com.kricko.tvshowupdater.utils.TvShowUtils;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +24,6 @@ public class TvMovieService {
 	static TheTVDBApi tvdb = new TheTVDBApi(Constants.API_KEY);
 	private static final Pattern PATTERN = Pattern.compile(Constants.REGEX_SERIES_EPISODE);
 	private static final Pattern PATTERN2 = Pattern.compile(Constants.REGEX_SERIES_EPISODE2);
-	private static final Pattern SEASON_PATTERN = Pattern.compile(Constants.REGEX_SEASON);
 
 	/**
 	 * Method refactorFilesAddTitle.
@@ -39,77 +36,111 @@ public class TvMovieService {
 	public static List<String> refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir,
 													 Optional<String> seriesId) throws IOException {
 		List<String> removableFolders = new ArrayList<>();
-		if(files != null){
+
+		if (files != null) {
 			log.info("File list is not empty in {}", parentDir);
 
-			List<Series> seriesList = null;
-			if(seriesName != null){
-				log.info("Searching Series Name {}", seriesName);
-				seriesList = tvdb.searchSeries(seriesName, Constants.LANGUAGE);
-			}
+			List<Series> seriesList = (seriesName != null) ? tvdb.searchSeries(seriesName, Constants.LANGUAGE) : null;
 
-			int[] episodeIds = null;
-			String episodeName = null;
-
-			for(Path file:files){
-				Matcher itemMatcher = PATTERN.matcher(file.toString());
-				while(itemMatcher.find()){
-					episodeName = itemMatcher.group();
-					log.info("Matched {} episode to {}", seriesName, episodeName);
-					episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
-				} 
-				if(episodeIds == null){
-					itemMatcher = PATTERN2.matcher(file.toString());
-					while(itemMatcher.find()){
-						episodeName = itemMatcher.group();
-						episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
-					}
-				}
-
-				Episode ep = null;
-				if(seriesList != null){
-					if(episodeIds != null){
-						log.info("Series {} Episodes {}}", episodeIds[0], episodeIds[1]);
-						ep = tvdb.getEpisode(seriesId.orElse(seriesList.get(0).getId()),
-								episodeIds[0], episodeIds[1], Constants.LANGUAGE);
-					}
-				}
-
-				String fileName = file.getFileName().toString();
-				String filePath = file.getParent().toString() + File.separatorChar +fileName;
-				log.info("Checking if need to refactor {}", filePath);
-				String ext = fileName.substring(fileName.lastIndexOf("."));
-				String newFileName = (ep != null)
-									 ? TvShowUtils.buildFileName(ep)  + ext
-									 : (null != episodeName)
-									   ? episodeName + ext
-									   : fileName;
-
-				String currentParentDir = file.getParent().getFileName().toString();
-				String newDir = (parentDir == null || currentParentDir.startsWith("Season"))
-								? file.getParent().toString()
-								: parentDir;
-				
-				Path target = Paths.get(newDir, newFileName.replaceAll("\"", "").replace("*", "_"));
-				if(!file.toString().equals(target.toString())){
-					log.info("Moving {} to {}", file, target);
-					Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
-				}
-
-				log.info("Parent dir {} new dir {}", parentDir, newDir);
-
-				/**
-				 * This is when the file lives in a folder below the `Season` folder
-				 * i.e. G:\TV Series P-Z\Peacemaker\Season 1\Peacemaker.2022.S01E01.1080p.WEB.H264-CAKES[rarbg]
-				 * Then {@FileRefactorThread} will remove the sub folder
- 				 */
-				if(!currentParentDir.startsWith("Season")) {
-					log.info("Current Parent directory {} is not the Season folder", currentParentDir);
-					removableFolders.add(currentParentDir);
-				}
+			for (Path file : files) {
+				processFile(seriesName, seriesId, seriesList, file, parentDir, removableFolders);
 			}
 		}
+
 		return removableFolders;
+	}
+
+	private static void processFile(String seriesName, Optional<String> seriesId, List<Series> seriesList,
+									Path file, String parentDir, List<String> removableFolders) throws IOException {
+		Matcher itemMatcher = PATTERN.matcher(file.toString());
+		int[] episodeIds = null;
+		String episodeName = null;
+
+		while (itemMatcher.find()) {
+			episodeName = itemMatcher.group();
+			log.info("Matched {} episode to {}", seriesName, episodeName);
+			episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
+		}
+
+		if (episodeIds == null) {
+			itemMatcher = PATTERN2.matcher(file.toString());
+			while (itemMatcher.find()) {
+				episodeName = itemMatcher.group();
+				episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
+			}
+		}
+
+		Episode ep = getEpisodeDetails(seriesList, seriesId, episodeIds);
+
+		String newFileName = buildNewFileName(ep, episodeName, file);
+
+		String currentParentDir = file.getParent().getFileName().toString();
+		String newDir = determineNewDir(parentDir, currentParentDir, file);
+
+		moveFileIfNeeded(file, newFileName, currentParentDir, newDir);
+
+		handleRemovableFolders(currentParentDir, removableFolders);
+	}
+
+	private static Episode getEpisodeDetails(List<Series> seriesList, Optional<String> seriesId, int[] episodeIds) {
+		Episode ep = null;
+
+		if (seriesList != null && episodeIds != null) {
+			log.info("Series {} Episodes {}", episodeIds[0], episodeIds[1]);
+			ep = tvdb.getEpisode(seriesId.orElse(seriesList.get(0).getId()), episodeIds[0], episodeIds[1], Constants.LANGUAGE);
+		}
+
+		return ep;
+	}
+
+	private static String buildNewFileName(Episode ep, String episodeName, Path file) {
+		String fileName = file.getFileName().toString();
+		String ext = fileName.substring(fileName.lastIndexOf("."));
+		return (ep != null) ? TvShowUtils.buildFileName(ep) + ext : (episodeName != null) ? episodeName + ext : fileName;
+	}
+
+	private static String determineNewDir(String parentDir, String currentParentDir, Path file) {
+		String newDir;
+
+		if (parentDir == null) {
+			newDir = currentParentDir;  // Keep the existing directory if parentDir is not specified
+		} else if (currentParentDir.startsWith("Season")) {
+			newDir = file.getParent().toString();
+		} else {
+			// Append "Season" to the current parent directory
+			newDir = findNearestSeasonDirectory(file.getParent()).toString();
+		}
+
+		return newDir;
+	}
+
+	private static Path findNearestSeasonDirectory(Path directory) {
+		Path currentDir = directory;
+
+		while (currentDir != null) {
+			String dirName = currentDir.getFileName().toString();
+			if (dirName.matches("Season\\s\\d+")) {
+				return currentDir;
+			}
+			currentDir = currentDir.getParent();
+		}
+
+		return directory; // Return the original directory if no "Season" directory is found
+	}
+
+	private static void moveFileIfNeeded(Path file, String newFileName, String currentParentDir, String newDir) throws IOException {
+		Path target = Paths.get(newDir, newFileName.replaceAll("\"", "").replace("*", "_"));
+		if (!file.toString().equals(target.toString())) {
+			log.info("Moving {} to {}", file, target);
+			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+		}
+	}
+
+	private static void handleRemovableFolders(String currentParentDir, List<String> removableFolders) {
+		if (!currentParentDir.matches("Season\\s\\d+")) {
+			log.info("Current Parent directory {} is not the Season folder", currentParentDir);
+			removableFolders.add(currentParentDir);
+		}
 	}
 
 	/**
@@ -119,16 +150,13 @@ public class TvMovieService {
 	 * @throws IOException
 	 */
 	public static List<Path> getDirectories(final Path dir) throws IOException {
-		final List<Path> dirlist = new ArrayList<>();
-		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-			for (Path path : stream) {
-				Path subDir = dir.resolve(path);
-				if (Files.isDirectory(subDir)) {
-					dirlist.add(subDir);
-				}
-			}
+		if (Files.exists(dir) && Files.isDirectory(dir)) {
+			return Files.list(dir)
+						.filter(Files::isDirectory)
+						.collect(Collectors.toList());
+		} else {
+			return List.of();
 		}
-		return dirlist;
 	}
 
 	/**
@@ -139,22 +167,32 @@ public class TvMovieService {
 	 */
 	public static List<Path> getMovieFiles(final Path dir) throws IOException {
 		final List<Path> fileList = new ArrayList<>();
+		traverseDirectory(dir, fileList);
+		return fileList;
+	}
+
+	private static void traverseDirectory(Path dir, List<Path> fileList) throws IOException {
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 			for (Path path : stream) {
 				Path file = dir.resolve(path);
-				if (!Files.isDirectory(file)) {
+
+				if (Files.isDirectory(file)) {
+					// Recursively traverse subdirectories
+					traverseDirectory(file, fileList);
+				} else {
+					// Check if it's a movie file based on your criteria
 					String filename = file.getFileName().toString();
 					String contentType = Files.probeContentType(file);
-					if ((contentType != null && contentType.startsWith("video"))
-							|| filename.endsWith(".mkv")
-							&& !filename.contains("sample")
-							&& !filename.contains("Sample")) {
+
+					if ((contentType != null && contentType.startsWith("video")) ||
+							(filename.endsWith(".mkv") &&
+									!filename.contains("sample") &&
+									!filename.contains("Sample"))) {
 						fileList.add(file);
 					}
 				}
 			}
 		}
-		return fileList;
 	}
 
 	/**
@@ -163,20 +201,16 @@ public class TvMovieService {
 	 * @return List<Path>
 	 * @throws IOException
 	 */
-	private static List<Path> getSeasonDirs(final Path dir) throws IOException {
-		final List<Path> list = new ArrayList<>();
-		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-			for (Path path : stream) {
-				Path file = dir.resolve(path);
-				if (Files.isDirectory(file)) {
-					String seasonName = file.getFileName().toString();
-					if (seasonName.startsWith("Season")) {
-						list.add(file);
-					}
-				}
-			}
+	public static List<Path> getSeasonDirs(final Path dir) throws IOException {
+		List<Path> seasonDirs = new ArrayList<>();
+
+		if (Files.exists(dir) && Files.isDirectory(dir)) {
+			SeasonDirectoryVisitor seasonDirectoryVisitor = new SeasonDirectoryVisitor();
+			Files.walkFileTree(dir, EnumSet.noneOf(FileVisitOption.class), 1, seasonDirectoryVisitor);
+			seasonDirs = seasonDirectoryVisitor.getSeasonDirs();
 		}
-		return list;
+
+		return seasonDirs;
 	}
 
 	/**
@@ -184,35 +218,9 @@ public class TvMovieService {
 	 * @param path Path
 	 * @throws IOException
 	 */
-	public static void deleteDirectory(Path path) throws IOException{
-		Files.walkFileTree(path, new FileVisitor<Path>() {
-
-			@Override
-			public FileVisitResult postVisitDirectory(Path dir, IOException exc)
-					throws IOException {
-				log.info("Deleting directory: {}", dir);
-				Files.deleteIfExists(dir);
-				return FileVisitResult.CONTINUE;
-			}
-
-			@Override
-			public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
-				return FileVisitResult.CONTINUE;
-			}
-
-			@Override
-			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-				log.info("Deleting file: {}", file);
-				Files.deleteIfExists(file);
-				return FileVisitResult.CONTINUE;
-			}
-
-			@Override
-			public FileVisitResult visitFileFailed(Path file, IOException exc) {
-				log.warn("Failed to visit file", exc);
-				return FileVisitResult.CONTINUE;
-			}
-		});
+	public static void deleteDirectory(Path path, String remove) throws IOException{
+		Path removable = Path.of(path.toString(), remove);
+		Files.walkFileTree(removable, new RemovableDirectoryVisitor());
 	}
 
 	public static List<String> identifyPotentialMissingEpisodes(final Path dir, final List<String> ignorable) throws IOException {

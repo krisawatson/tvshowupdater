@@ -13,11 +13,10 @@ import static com.kricko.tvshowupdater.utils.TvShowUtils.writeMissingEpisodesToF
 @Slf4j
 public class IdentifyPotentialMissingThread implements Runnable {
 
-	private final String name, path;
+	private final String path;
 	private final List<String> ignorable;
 
-	public IdentifyPotentialMissingThread(String name, String path, List<String> ignorable){
-		this.name = name;
+	public IdentifyPotentialMissingThread(String path, List<String> ignorable){
 		this.path = path;
 		this.ignorable = ignorable;
 	}
@@ -30,6 +29,7 @@ public class IdentifyPotentialMissingThread implements Runnable {
 			writeMissingEpisodesToFile(missingSeasons);
 
 			// Get the list of sub-directories and refactor the files
+			log.info("Checking if there are missing episodes for {}", parentDir);
 			List<Path> dirs = TvMovieService.getDirectories(parentDir);
 			for(Path dir:dirs){
 				List<String> missingEpisodes = TvMovieService.identifyPotentialMissingEpisodes(dir, ignorable);

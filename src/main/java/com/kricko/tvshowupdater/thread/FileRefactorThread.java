@@ -43,7 +43,7 @@ public class FileRefactorThread implements Runnable {
 					List<String> dirsToRemove = TvMovieService.refactorFilesAddTitle(name, files, path, seriesId);
 					for (String remove : dirsToRemove) {
 						log.info("About to delete dir {}", remove);
-						TvMovieService.deleteDirectory(dir);
+						TvMovieService.deleteDirectory(dir, remove);
 					}
 				}
 			}

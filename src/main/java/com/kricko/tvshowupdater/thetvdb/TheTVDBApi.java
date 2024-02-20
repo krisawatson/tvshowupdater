@@ -26,11 +26,10 @@ import com.kricko.tvshowupdater.parser.TvdbParser;
 import com.kricko.tvshowupdater.utils.DOMHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.yamj.api.common.http.CommonHttpClient;
-import org.yamj.api.common.http.DefaultPoolingHttpClient;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,14 +42,10 @@ import java.util.List;
 public class TheTVDBApi {
 
     private String apiKey = null;
-    private CommonHttpClient httpClient;
-    private static String xmlMirror = "http://thetvdb.com/api/";
-    private static String bannerMirror = "http://thetvdb.com/banners/";
+    private static String xmlMirror = "https://thetvdb.com/api/";
+    private static String bannerMirror = "https://thetvdb.com/banners/";
     private static final String XML_EXTENSION = ".xml";
     private static final String SERIES_URL = "/series/";
-    private static final String ALL_URL = "/all/";
-    private static final String WEEKLY_UPDATES_URL = "/updates/updates_week.xml";
-    private static final String URL = "URL: ";
 
     /**
      * Create an API object with the passed API Key
@@ -59,23 +54,21 @@ public class TheTVDBApi {
      */
     public TheTVDBApi(String apiKey) {
         // No HttpClient passed, so use a default
-        this(apiKey, new DefaultPoolingHttpClient());
+        this(apiKey, HttpClient.newHttpClient());
     }
 
     /**
      * Create an API object with the passed API key and using the supplied HttpClient
      *
      * @param apiKey Must not be null or empty
-     * @param httpClient
      */
-    public TheTVDBApi(String apiKey, CommonHttpClient httpClient) {
+    public TheTVDBApi(String apiKey, HttpClient httpClient) {
         if (StringUtils.isBlank(apiKey)) {
             return;
         }
 
         this.apiKey = apiKey;
-        this.httpClient = httpClient;
-        DOMHelper.setHttpClient(this.httpClient);
+        DOMHelper.setHttpClient(httpClient);
     }
 
     /**

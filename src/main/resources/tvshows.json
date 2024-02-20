@@ -25,7 +25,7 @@
       "rssFeedId": 57,
       "regexName": "Family Guy",
       "path":"G:/TV Series A-G/Family Guy",
-      "skipSeason": [1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20],
+      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
       "ignoreMissing": [],
       "tvdbSeriesId": 75978,
       "oneomId": 1760
@@ -85,7 +85,7 @@
       "rssFeedId": 44,
       "regexName": "Rick and Morty",
       "path":"G:/TV Series P-Z/Rick and Morty",
-      "skipSeason": [0,1,2,3,4,5],
+      "skipSeason": [0,1,2,3,4,5,6,7],
       "ignoreMissing": ["S00E177","S05E00", "S06E00"],
       "tvdbSeriesId": 275274,
       "oneomId": 191
