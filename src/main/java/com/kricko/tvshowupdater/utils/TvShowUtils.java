@@ -26,7 +26,7 @@ import static com.kricko.tvshowupdater.utils.Constants.FILE_TIDY_UP;
 public class TvShowUtils {
 
 	private static final List<String> tidyUpDirs = new ArrayList<>();
-	
+
 	/**
 	 * Method removeDuplicateEpisodes.
 	 * @param items List<Item>
@@ -47,16 +47,19 @@ public class TvShowUtils {
 				while(itemMatcher.find()){
 					newItems.add(item);
 					episodes.add(itemMatcher.group());
-					shows.put(item.getShowId(), episodes);
 				}
+
+				shows.put(item.getShowId(), episodes);
 			} else {
 				List<String> episodes = shows.get(item.getShowId());
+
 				while(itemMatcher.find()){
 					if(!episodes.contains(itemMatcher.group())){
 						episodes.add(itemMatcher.group());
 						newItems.add(item);
 					}
 				}
+
 				shows.put(item.getShowId(), episodes);
 			}
 		}
@@ -94,7 +97,7 @@ public class TvShowUtils {
 				downloadMagnetLink(config, item.getLink(), dir);
 			}
 		}
-		
+
 		if(newDownloads){
 			Thread.sleep(2000);
 		}
@@ -117,7 +120,7 @@ public class TvShowUtils {
 		String filePrefix = String.format("S%sE%s", formatIntToString(seasonInt), formatIntToString(episodeInt));
 		return !episodeExists(existingItems, filePrefix, ignorable);
 	}
-	
+
 	public static void appendDirToTidyUpList(){
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_TIDY_UP, false)));
@@ -143,7 +146,7 @@ public class TvShowUtils {
 			log.error("Failed to write to the file {}", FILE_MISSING, e);
 		}
 	}
-	
+
 	/**
 	 * Method getListOfTidyUpDirs.
 	 * @return List<String>
@@ -160,10 +163,10 @@ public class TvShowUtils {
 		} catch (IOException e) {
 			log.error("Failed getting list of tidy up directories", e);
 		}
-		
+
 		return directories;
 	}
-	
+
 	/**
 	 * Method getEpisodeIds.
 	 * @param value String
@@ -173,10 +176,10 @@ public class TvShowUtils {
 		int[] items = new int[2];
 		items[0] = Integer.parseInt(value.substring(startIndex, value.toUpperCase().indexOf(splitChar)));
 		items[1] = Integer.parseInt(value.substring(value.toUpperCase().indexOf(splitChar) + 1));
-		
+
 		return items;
 	}
-	
+
 	/**
 	 * Method buildFileName.
 	 * @param ep Episode
@@ -186,10 +189,10 @@ public class TvShowUtils {
 		String filename = null;
 		if(ep.getEpisodeName() != null){
 			filename = "S"+formatIntToString(ep.getSeasonNumber())
-					+ "E"+formatIntToString(ep.getEpisodeNumber()) 
+					+ "E"+formatIntToString(ep.getEpisodeNumber())
 					+ " - " + replaceSpecialChars(ep.getEpisodeName());
 		}
-		
+
 		return filename;
 	}
 
@@ -245,7 +248,7 @@ public class TvShowUtils {
 
 		return result;
 	}
-	
+
 	/**
 	 * Method replaceSpecialChars.
 	 * @param value String
@@ -255,7 +258,7 @@ public class TvShowUtils {
 		return value.replace(":", "").replace("?","")
 				.replace("\\"," ").replace("/"," ");
 	}
-	
+
 	/**
 	 * Method getSeasonAndEpisode.
 	 * @param title String
@@ -274,7 +277,7 @@ public class TvShowUtils {
 			String se = itemMatcher2.group();
 			return getEpisodeIds(se, "X", 0);
 		}
-		
+
 		return null;
 	}
 }

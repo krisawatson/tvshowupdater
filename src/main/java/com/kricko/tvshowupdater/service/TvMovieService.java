@@ -37,110 +37,15 @@ public class TvMovieService {
 													 Optional<String> seriesId) throws IOException {
 		List<String> removableFolders = new ArrayList<>();
 
-		if (files != null) {
+		if (!files.isEmpty()) {
 			log.info("File list is not empty in {}", parentDir);
 
 			List<Series> seriesList = (seriesName != null) ? tvdb.searchSeries(seriesName, Constants.LANGUAGE) : null;
 
-			for (Path file : files) {
-				processFile(seriesName, seriesId, seriesList, file, parentDir, removableFolders);
-			}
+			files.parallelStream().forEach(file -> processFile(seriesName, seriesId, seriesList, file, parentDir, removableFolders));
 		}
 
 		return removableFolders;
-	}
-
-	private static void processFile(String seriesName, Optional<String> seriesId, List<Series> seriesList,
-									Path file, String parentDir, List<String> removableFolders) throws IOException {
-		Matcher itemMatcher = PATTERN.matcher(file.toString());
-		int[] episodeIds = null;
-		String episodeName = null;
-
-		while (itemMatcher.find()) {
-			episodeName = itemMatcher.group();
-			log.info("Matched {} episode to {}", seriesName, episodeName);
-			episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
-		}
-
-		if (episodeIds == null) {
-			itemMatcher = PATTERN2.matcher(file.toString());
-			while (itemMatcher.find()) {
-				episodeName = itemMatcher.group();
-				episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
-			}
-		}
-
-		Episode ep = getEpisodeDetails(seriesList, seriesId, episodeIds);
-
-		String newFileName = buildNewFileName(ep, episodeName, file);
-
-		String currentParentDir = file.getParent().getFileName().toString();
-		String newDir = determineNewDir(parentDir, currentParentDir, file);
-
-		moveFileIfNeeded(file, newFileName, currentParentDir, newDir);
-
-		handleRemovableFolders(currentParentDir, removableFolders);
-	}
-
-	private static Episode getEpisodeDetails(List<Series> seriesList, Optional<String> seriesId, int[] episodeIds) {
-		Episode ep = null;
-
-		if (seriesList != null && episodeIds != null) {
-			log.info("Series {} Episodes {}", episodeIds[0], episodeIds[1]);
-			ep = tvdb.getEpisode(seriesId.orElse(seriesList.get(0).getId()), episodeIds[0], episodeIds[1], Constants.LANGUAGE);
-		}
-
-		return ep;
-	}
-
-	private static String buildNewFileName(Episode ep, String episodeName, Path file) {
-		String fileName = file.getFileName().toString();
-		String ext = fileName.substring(fileName.lastIndexOf("."));
-		return (ep != null) ? TvShowUtils.buildFileName(ep) + ext : (episodeName != null) ? episodeName + ext : fileName;
-	}
-
-	private static String determineNewDir(String parentDir, String currentParentDir, Path file) {
-		String newDir;
-
-		if (parentDir == null) {
-			newDir = currentParentDir;  // Keep the existing directory if parentDir is not specified
-		} else if (currentParentDir.startsWith("Season")) {
-			newDir = file.getParent().toString();
-		} else {
-			// Append "Season" to the current parent directory
-			newDir = findNearestSeasonDirectory(file.getParent()).toString();
-		}
-
-		return newDir;
-	}
-
-	private static Path findNearestSeasonDirectory(Path directory) {
-		Path currentDir = directory;
-
-		while (currentDir != null) {
-			String dirName = currentDir.getFileName().toString();
-			if (dirName.matches("Season\\s\\d+")) {
-				return currentDir;
-			}
-			currentDir = currentDir.getParent();
-		}
-
-		return directory; // Return the original directory if no "Season" directory is found
-	}
-
-	private static void moveFileIfNeeded(Path file, String newFileName, String currentParentDir, String newDir) throws IOException {
-		Path target = Paths.get(newDir, newFileName.replaceAll("\"", "").replace("*", "_"));
-		if (!file.toString().equals(target.toString())) {
-			log.info("Moving {} to {}", file, target);
-			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
-		}
-	}
-
-	private static void handleRemovableFolders(String currentParentDir, List<String> removableFolders) {
-		if (!currentParentDir.matches("Season\\s\\d+")) {
-			log.info("Current Parent directory {} is not the Season folder", currentParentDir);
-			removableFolders.add(currentParentDir);
-		}
 	}
 
 	/**
@@ -169,30 +74,6 @@ public class TvMovieService {
 		final List<Path> fileList = new ArrayList<>();
 		traverseDirectory(dir, fileList);
 		return fileList;
-	}
-
-	private static void traverseDirectory(Path dir, List<Path> fileList) throws IOException {
-		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-			for (Path path : stream) {
-				Path file = dir.resolve(path);
-
-				if (Files.isDirectory(file)) {
-					// Recursively traverse subdirectories
-					traverseDirectory(file, fileList);
-				} else {
-					// Check if it's a movie file based on your criteria
-					String filename = file.getFileName().toString();
-					String contentType = Files.probeContentType(file);
-
-					if ((contentType != null && contentType.startsWith("video")) ||
-							(filename.endsWith(".mkv") &&
-									!filename.contains("sample") &&
-									!filename.contains("Sample"))) {
-						fileList.add(file);
-					}
-				}
-			}
-		}
 	}
 
 	/**
@@ -254,7 +135,88 @@ public class TvMovieService {
 		return checkSeasonEpisodes(dir, seasonEpisodes, ignorable);
 	}
 
+	private static void processFile(String seriesName, Optional<String> seriesId, List<Series> seriesList,
+									Path file, String parentDir, List<String> removableFolders) {
+		Matcher itemMatcher = PATTERN.matcher(file.toString());
+		int[] episodeIds = null;
+		String episodeName = null;
 
+		while (itemMatcher.find()) {
+			episodeName = itemMatcher.group();
+			log.info("Matched {} episode to {}", seriesName, episodeName);
+			episodeIds = TvShowUtils.getEpisodeIds(episodeName, "E", 1);
+		}
+
+		if (episodeIds == null) {
+			itemMatcher = PATTERN2.matcher(file.toString());
+			while (itemMatcher.find()) {
+				episodeName = itemMatcher.group();
+				episodeIds = TvShowUtils.getEpisodeIds(episodeName, "X", 0);
+			}
+		}
+
+		Episode ep = getEpisodeDetails(seriesList, seriesId, episodeIds);
+
+		String newFileName = buildNewFileName(ep, episodeName, file);
+
+		String currentParentDir = file.getParent().getFileName().toString();
+		String newDir = determineNewDir(parentDir, currentParentDir, file);
+
+        try {
+            moveFileIfNeeded(file, newFileName, currentParentDir, newDir);
+        } catch (IOException e) {
+            log.error("Unable to move file");
+			return;
+        }
+
+        handleRemovableFolders(currentParentDir, removableFolders);
+	}
+
+	private static Episode getEpisodeDetails(List<Series> seriesList, Optional<String> seriesId, int[] episodeIds) {
+		Episode ep = null;
+
+		if (seriesList != null && episodeIds != null) {
+			log.info("Series {} Episodes {}", episodeIds[0], episodeIds[1]);
+			ep = tvdb.getEpisode(seriesId.orElse(seriesList.get(0).getId()), episodeIds[0], episodeIds[1], Constants.LANGUAGE);
+		}
+
+		return ep;
+	}
+
+	private static String buildNewFileName(Episode ep, String episodeName, Path file) {
+		String fileName = file.getFileName().toString();
+		String ext = fileName.substring(fileName.lastIndexOf("."));
+		return (ep != null) ? TvShowUtils.buildFileName(ep) + ext : (episodeName != null) ? episodeName + ext : fileName;
+	}
+
+	private static String determineNewDir(String parentDir, String currentParentDir, Path file) {
+		String newDir;
+
+		if (parentDir == null) {
+			newDir = currentParentDir;  // Keep the existing directory if parentDir is not specified
+		} else if (currentParentDir.startsWith("Season")) {
+			newDir = file.getParent().toString();
+		} else {
+			// Append "Season" to the current parent directory
+			newDir = findNearestSeasonDirectory(file.getParent()).toString();
+		}
+
+		return newDir;
+	}
+
+	private static Path findNearestSeasonDirectory(Path directory) {
+		Path currentDir = directory;
+
+		while (currentDir != null) {
+			String dirName = currentDir.getFileName().toString();
+			if (dirName.matches("Season\\s\\d+")) {
+				return currentDir;
+			}
+			currentDir = currentDir.getParent();
+		}
+
+		return directory; // Return the original directory if no "Season" directory is found
+	}
 
 	public static List<String> identifyPotentialMissingSeasons(final Path dir) throws IOException {
 		List<Path> seasons = getSeasonDirs(dir);
@@ -302,5 +264,46 @@ public class TvMovieService {
 							  .filter(seasonEpisode -> !ignorable.contains(seasonEpisode))
 							  .map(seasonEpisode -> parseInt(seasonEpisode.substring(4)))
 							  .collect(Collectors.toSet());
+	}
+
+
+
+	private static void moveFileIfNeeded(Path file, String newFileName, String currentParentDir, String newDir) throws IOException {
+		Path target = Paths.get(newDir, newFileName.replaceAll("\"", "").replace("*", "_"));
+		if (!file.toString().equals(target.toString())) {
+			log.info("Moving {} to {}", file, target);
+			Files.move(file, target, StandardCopyOption.REPLACE_EXISTING);
+		}
+	}
+
+	private static void handleRemovableFolders(String currentParentDir, List<String> removableFolders) {
+		if (!currentParentDir.matches("Season\\s\\d+")) {
+			log.info("Current Parent directory {} is not the Season folder", currentParentDir);
+			removableFolders.add(currentParentDir);
+		}
+	}
+
+	private static void traverseDirectory(Path dir, List<Path> fileList) throws IOException {
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+			for (Path path : stream) {
+				Path file = dir.resolve(path);
+
+				if (Files.isDirectory(file)) {
+					// Recursively traverse subdirectories
+					traverseDirectory(file, fileList);
+				} else {
+					// Check if it's a movie file based on your criteria
+					String filename = file.getFileName().toString();
+					String contentType = Files.probeContentType(file);
+
+					if ((contentType != null && contentType.startsWith("video")) ||
+							(filename.endsWith(".mkv") &&
+									!filename.contains("sample") &&
+									!filename.contains("Sample"))) {
+						fileList.add(file);
+					}
+				}
+			}
+		}
 	}
 }

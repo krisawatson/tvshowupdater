@@ -10,11 +10,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import static com.kricko.tvshowupdater.DownloadShows.doDownload;
 import static com.kricko.tvshowupdater.parser.TvShowParser.parseShows;
@@ -91,7 +90,9 @@ public class App {
 		URL configFile = (configFilePath == null)
 				? App.class.getClassLoader().getResource("config.json")
 				: new File(configFilePath).toURI().toURL();
-		config = mapper.readValue(configFile, Config.class);
+		try (InputStream inputStream = configFile.openStream()) {
+			config = mapper.readValue(inputStream, Config.class);
+		}
 	}
 
 	/**
@@ -99,7 +100,7 @@ public class App {
 	 * @param option String
 	 */
 	private static void doSelectedOption(String option, String showsFilePath)
-			throws IOException, InterruptedException, URISyntaxException {
+			throws IOException, InterruptedException, URISyntaxException, ExecutionException {
 		boolean tidyExisting = config.isTidyExisting();
 		File showsFile = (null == showsFilePath)
 						 ? new File(requireNonNull(App.class.getClassLoader().getResource("tvshows.json")).toURI())
@@ -138,12 +139,13 @@ public class App {
 		}
 	}
 
-	private static void updateShows(boolean tidyExisting, Shows shows) throws InterruptedException {
+	private static void updateShows(boolean tidyExisting, Shows shows) throws InterruptedException, ExecutionException {
 		if (tidyExisting) {
 			RefactorFiles.tidyFolders(true, shows);
 		}
 		// New approach
-		if (doDownload(config, shows)) {
+		CompletableFuture<Boolean> downloadFuture = CompletableFuture.supplyAsync(() -> doDownload(config, shows));
+		if (downloadFuture.get()) {
 			doMonitorTorrents();
 			RefactorFiles.tidyFolders(false, shows);
 		}
