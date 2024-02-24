@@ -59,13 +59,12 @@ public class TvMovieService {
 			return Files.list(dir)
 						.filter(Files::isDirectory)
 						.collect(Collectors.toList());
-		} else {
-			return List.of();
 		}
+		return List.of();
 	}
 
 	/**
-	 * Method getMovieFiles.
+	 * Get a list of movie files from a given directory.
 	 * @param dir Path
 	 * @return List<Path>
 	 * @throws IOException
@@ -131,6 +130,7 @@ public class TvMovieService {
 				episodes.add(episodeIds[1]);
 			}
 		}
+
 		seasonEpisodes.put(season, episodes);
 		return checkSeasonEpisodes(dir, seasonEpisodes, ignorable);
 	}
