@@ -31,8 +31,7 @@ public class TvMovieService {
 	 * @param files List<Path>
 	 * @param parentDir String
 	 * @return boolean
-	 * @throws IOException
-	 */
+     */
 	public static List<String> refactorFilesAddTitle(String seriesName, List<Path> files, String parentDir,
 													 Optional<String> seriesId) throws IOException {
 		List<String> removableFolders = new ArrayList<>();
@@ -52,8 +51,7 @@ public class TvMovieService {
 	 * Method getDirectories.
 	 * @param dir Path
 	 * @return List<Path>
-	 * @throws IOException
-	 */
+     */
 	public static List<Path> getDirectories(final Path dir) throws IOException {
 		if (Files.exists(dir) && Files.isDirectory(dir)) {
 			return Files.list(dir)
@@ -67,8 +65,7 @@ public class TvMovieService {
 	 * Get a list of movie files from a given directory.
 	 * @param dir Path
 	 * @return List<Path>
-	 * @throws IOException
-	 */
+     */
 	public static List<Path> getMovieFiles(final Path dir) throws IOException {
 		final List<Path> fileList = new ArrayList<>();
 		traverseDirectory(dir, fileList);
@@ -79,8 +76,7 @@ public class TvMovieService {
 	 * Method getMovieFiles.
 	 * @param dir Path
 	 * @return List<Path>
-	 * @throws IOException
-	 */
+     */
 	public static List<Path> getSeasonDirs(final Path dir) throws IOException {
 		List<Path> seasonDirs = new ArrayList<>();
 
@@ -96,8 +92,7 @@ public class TvMovieService {
 	/**
 	 * Method deleteDirectory.
 	 * @param path Path
-	 * @throws IOException
-	 */
+     */
 	public static void deleteDirectory(Path path, String remove) throws IOException{
 		Path removable = Path.of(path.toString(), remove);
 		Files.walkFileTree(removable, new RemovableDirectoryVisitor());
@@ -228,14 +223,14 @@ public class TvMovieService {
 			seasonIds.add(parseInt(seasonDirPath.substring(seasonDirPath.lastIndexOf("\\") + 8)));
 		}
 		Set<Integer> missingSeasonIds = getMissingNumbers(seasonIds);
-		missingSeasonIds.forEach(season -> missingSeasons.add(String.format("%s\\Season %d", dir, season)));
+		missingSeasonIds.parallelStream().forEach(season -> missingSeasons.add(String.format("%s\\Season %d", dir, season)));
 		return missingSeasons;
 	}
 
 	private static List<String> checkSeasonEpisodes(Path dir, Map<Integer, SortedSet<Integer>> seasonEpisodes,
 													List<String> ignorable) {
 		List<String> missingEpisodes = new ArrayList<>();
-		seasonEpisodes.keySet().forEach(s -> {
+		seasonEpisodes.keySet().parallelStream().forEach(s -> {
 			SortedSet<Integer> eps = seasonEpisodes.get(s);
 			Set<Integer> missing = getMissingNumbers(eps);
 			missing = removeIgnorable(s, missing, ignorable);

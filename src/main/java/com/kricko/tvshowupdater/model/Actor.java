@@ -98,13 +98,11 @@ public class Actor implements Comparable<Actor>, Serializable {
      */
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Actor) {
-            final Actor other = (Actor) obj;
-            return new EqualsBuilder()
-                    .append(id, other.id)
-                    .append(name, other.name)
-                    .append(role, other.role)
-                    .isEquals();
+        if (obj instanceof Actor other) {
+            return new EqualsBuilder().append(id, other.id)
+                                      .append(name, other.name)
+                                      .append(role, other.role)
+                                      .isEquals();
         } else {
             return false;
         }

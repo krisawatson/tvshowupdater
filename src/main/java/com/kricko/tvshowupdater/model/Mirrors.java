@@ -19,16 +19,15 @@
  */
 package com.kricko.tvshowupdater.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import com.kricko.tvshowupdater.utils.DOMHelper;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.kricko.tvshowupdater.utils.DOMHelper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -104,34 +103,26 @@ public class Mirrors {
      */
     private void addMirror(int typeMask, String url) {
         switch (typeMask) {
-            case MASK_XML:
-                xmlList.add(url);
-                break;
-            case MASK_BANNER:
-                bannerList.add(url);
-                break;
-            case (MASK_XML + MASK_BANNER):
+            case MASK_XML -> xmlList.add(url);
+            case MASK_BANNER -> bannerList.add(url);
+            case (MASK_XML + MASK_BANNER) -> {
                 xmlList.add(url);
                 bannerList.add(url);
-                break;
-            case MASK_ZIP:
-                zipList.add(url);
-                break;
-            case (MASK_XML + MASK_ZIP):
+            }
+            case MASK_ZIP -> zipList.add(url);
+            case (MASK_XML + MASK_ZIP) -> {
                 xmlList.add(url);
                 zipList.add(url);
-                break;
-            case (MASK_BANNER + MASK_ZIP):
+            }
+            case (MASK_BANNER + MASK_ZIP) -> {
                 bannerList.add(url);
                 zipList.add(url);
-                break;
-            case (MASK_XML + MASK_BANNER + MASK_ZIP):
+            }
+            case (MASK_XML + MASK_BANNER + MASK_ZIP) -> {
                 xmlList.add(url);
                 bannerList.add(url);
                 zipList.add(url);
-                break;
-            default:
-                break;
+            }
         }
     }
 }

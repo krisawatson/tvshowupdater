@@ -22,6 +22,7 @@ public class QBitTorrent {
 	private static List<String> cookieList;
 	private static final OkHttpClient httpClient = new OkHttpClient().newBuilder().build();
 	private static final String NOT_RUNNING_FAILURE = "Failed to connect to";
+	private static final int WAIT_TIME = 5000;
 
 	public QBitTorrent(TorrentConfig torrentConfig){
 		this.torrentConfig = torrentConfig;
@@ -40,37 +41,40 @@ public class QBitTorrent {
 			Request request = new Request.Builder()
 					.url(url)
 					.method("POST", body)
-					.addHeader("Cookie", cookieList.get(0))
+					.addHeader("Cookie", cookieList.getFirst())
 					.build();
 
 			Response response = httpClient.newCall(request).execute();
 
 			log.info("Response status to adding torrent was: {}", response.code());
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			log.error("Failed during getting the list of torrents", e);
 		}
-	}
+    }
 
 	/**
 	 * Method getListOfTorrents.
 	 */
-	public List<Torrent> getListOfTorrents(Filter filter) throws IOException {
+	public List<Torrent> getListOfTorrents(Filter filter) throws IOException, InterruptedException {
 		String url = String.format("http://%s:%d/api/v2/torrents/info?filter=%s",
 								   torrentConfig.getWebhost(), torrentConfig.getWebport(), filter.getFilterName());
 		getTokenWithRetry();
 		Request request = new Request.Builder()
 				.url(url)
 				.method("GET", null)
-				.addHeader("Cookie", cookieList.get(0))
+				.addHeader("Cookie", cookieList.getFirst())
 				.build();
 		Response response = httpClient.newCall(request).execute();
-		try (var body = response.body()) {
+		ResponseBody body = response.body();
+		try {
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.readValue(Objects.requireNonNull(body).string(),
-					new TypeReference<>() {
-					});
+                                    new TypeReference<>() {
+                                    });
 		} catch (IOException e) {
 			log.error("Failed getting the list of completed torrents", e);
+		} finally {
+            if (null != body) body.close();
 		}
 		return Collections.emptyList();
 	}
@@ -87,40 +91,36 @@ public class QBitTorrent {
 			Request request = new Request.Builder()
 					.url(url)
 					.method("POST", requestBody)
-					.addHeader("Cookie", cookieList.get(0))
+					.addHeader("Cookie", cookieList.getFirst())
 					.build();
 
 			httpClient.newCall(request).execute();
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			log.error("Failed during removed completed torrents", e);
 		}
 	}
 
 	/**
 	 * Method getToken.
-	 * @throws IOException
-	 */
+     */
 	private void getToken() throws IOException{
-		try {
-			Request request = new Request.Builder()
-					.url(String.format("http://%s:%d/api/v2/auth/login",
-									   torrentConfig.getWebhost(), torrentConfig.getWebport()))
-					.method("GET", null)
-					.build();
-			Response response = httpClient.newCall(request).execute();
+		Request request = new Request.Builder().url(String.format("http://%s:%d/api/v2/auth/login",
+																  torrentConfig.getWebhost(),
+																  torrentConfig.getWebport()))
+											   .method("GET", null)
+											   .build();
+		Response response = httpClient.newCall(request).execute();
 
-			cookieList = response.headers().values("Set-Cookie");
-		} catch (IOException e) {
-			log.error("Failed during get token", e);
-		}
+		cookieList = response.headers().values("Set-Cookie");
 	}
 
-	private void getTokenWithRetry() throws IOException {
+	private void getTokenWithRetry() throws IOException, InterruptedException {
 		try {
 			getToken();
 		} catch (IOException e) {
 			if (e.getLocalizedMessage().startsWith(NOT_RUNNING_FAILURE)) {
-				Runtime.getRuntime().exec(torrentConfig.getClient());
+				new ProcessBuilder().command(torrentConfig.getClient()).start();
+				Thread.sleep(WAIT_TIME);
 				getToken();
 			}
 		}

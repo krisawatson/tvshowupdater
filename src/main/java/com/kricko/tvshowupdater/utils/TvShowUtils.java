@@ -7,6 +7,7 @@ import com.kricko.tvshowupdater.model.Episode;
 import com.kricko.tvshowupdater.model.Item;
 import com.kricko.tvshowupdater.torrent.QBitTorrent;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.nio.file.*;
@@ -39,7 +40,7 @@ public class TvShowUtils {
 		Pattern pattern = Pattern.compile(regex);
 
 		for(Item item:items){
-			Matcher itemMatcher = pattern.matcher(item.getRawTitle());
+			Matcher itemMatcher = pattern.matcher(getTitle(item));
 
 			if(!shows.containsKey(item.getShowId())){
 				List<String> episodes = new ArrayList<>();
@@ -79,7 +80,7 @@ public class TvShowUtils {
 		String regex = config.getShowRegex().replaceAll("NAME", detail.getRegexName());
 
 		Pattern pattern = Pattern.compile(regex);
-		Matcher itemMatcher = pattern.matcher(item.getRawTitle());
+		Matcher itemMatcher = pattern.matcher(getTitle(item));
 		while(itemMatcher.find()){
 			String nameAndEpisode = itemMatcher.group();
 			int[] seasonAndEpisode = getSeasonAndEpisode(nameAndEpisode);
@@ -279,5 +280,9 @@ public class TvShowUtils {
 		}
 
 		return null;
+	}
+
+	private static String getTitle(Item item) {
+		return StringUtils.isNotBlank(item.getRawTitle()) ? item.getRawTitle() : item.getTitle();
 	}
 }

@@ -108,23 +108,11 @@ public class App {
 		Shows shows = parseShows(showsFile);
 		if (option != null){
 			switch (option) {
-				case "update":
-				case "1":
-					updateShows(tidyExisting, shows);
-					break;
-				case "tidyup":
-				case "2":
-					RefactorFiles.tidyFolders(tidyExisting, shows);
-					break;
-				case "missing":
-				case "3":
-					IdentifyMissing.identifyMissing(shows);
-					break;
-				case "0":
-					System.exit(0);
-					break;
-				default:
-					log.warn("Invalid option: {}", option);
+				case "update", "1" -> updateShows(tidyExisting, shows);
+				case "tidyup", "2" -> RefactorFiles.tidyFolders(tidyExisting, shows);
+				case "missing", "3" -> IdentifyMissing.identifyMissing(shows);
+				case "0" -> System.exit(0);
+				default -> log.warn("Invalid option: {}", option);
 			}
 		}
 	}

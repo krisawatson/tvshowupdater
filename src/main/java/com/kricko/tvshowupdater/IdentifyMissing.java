@@ -28,7 +28,7 @@ public class IdentifyMissing {
 		try {
 			if (shows != null) {
 				Files.deleteIfExists(Paths.get(FILE_MISSING));
-				List<Details> details = shows.getShows();
+				List<Details> details = shows.shows();
 				identifyMissingInParallel(details);
 			}
 		} catch (IOException e) {

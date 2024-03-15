@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXB;
-import java.net.URL;
+import java.net.URI;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -23,7 +23,7 @@ public class DownloadShows {
 	public static boolean doDownload(Config config, Shows shows) {
 		AtomicBoolean newDownloads = new AtomicBoolean(false);
 
-		for (Details detail : shows.getShows()) {
+		for (Details detail : shows.shows()) {
 			log.info("Checking for new items for {}", detail.getName());
 			detail.getRssFeedId().ifPresent(rssFeedId -> {
 				try {
@@ -45,7 +45,7 @@ public class DownloadShows {
 	private static Rss parseRssFeed(Config config, int rssFeedId) {
 		try {
 			String rssFeed = String.format(config.getRssFeed(), rssFeedId);
-			URL rssFeedUrl = new URL(rssFeed);
+			URI rssFeedUrl = new URI(rssFeed);
 			return JAXB.unmarshal(rssFeedUrl, Rss.class);
 		} catch (Exception e) {
 			log.error("Exception caught when trying to parse RSS feed for feed ID: {}", rssFeedId, e);

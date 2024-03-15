@@ -23,7 +23,7 @@ public class RefactorFiles {
 	private static final Logger log = LoggerFactory.getLogger(RefactorFiles.class);
 
 	public static void tidyFolders(boolean existing, Shows shows) {
-		Set<Details> details = existing ? new HashSet<>(shows.getShows()) : getDetailsForTidyUp(shows);
+		Set<Details> details = existing ? new HashSet<>(shows.shows()) : getDetailsForTidyUp(shows);
 		if (!details.isEmpty()) {
 			addTitleAndRename(details);
 		}
@@ -35,8 +35,8 @@ public class RefactorFiles {
 
 		if (!directories.isEmpty()) {
 			for (String dir : directories) {
-				details.addAll(shows.getShows()
-									.stream()
+				details.addAll(shows.shows()
+									.parallelStream()
 									.filter(showDetails -> dir.replaceAll("\\\\", "/").startsWith(showDetails.getPath()))
 									.collect(Collectors.toList()));
 			}

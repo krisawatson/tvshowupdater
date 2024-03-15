@@ -31,7 +31,7 @@ public class MonitorTorrentsThread implements Runnable {
 					torrentClient.removeCompletedTorrents(hashes);
 			}
 			
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			log.error("Failed to get the list of active torrents", e);
 		}
 	}
