@@ -3,7 +3,6 @@ package com.kricko.tvshowupdater;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kricko.tvshowupdater.configuration.Config;
 import com.kricko.tvshowupdater.model.Shows;
-import com.kricko.tvshowupdater.thread.MonitorTorrentsThread;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +12,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.concurrent.*;
 
 import static com.kricko.tvshowupdater.DownloadShows.doDownload;
+import static com.kricko.tvshowupdater.RefactorFiles.tidyFolders;
 import static com.kricko.tvshowupdater.parser.TvShowParser.parseShows;
+import static com.kricko.tvshowupdater.thread.MonitorTorrents.waitForTorrentsToComplete;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -72,7 +72,7 @@ public class App {
 	}
 
 	private static CommandLine parseCommandLine(Options options, String[] args) throws ParseException {
-		CommandLineParser parser = new BasicParser();
+		CommandLineParser parser = DefaultParser.builder().build();
 		HelpFormatter formatter = new HelpFormatter();
 		CommandLine cmd = parser.parse(options, args);
 
@@ -99,8 +99,7 @@ public class App {
 	 * Method doSelectedOption.
 	 * @param option String
 	 */
-	private static void doSelectedOption(String option, String showsFilePath)
-			throws IOException, InterruptedException, URISyntaxException, ExecutionException {
+	private static void doSelectedOption(String option, String showsFilePath) throws IOException, URISyntaxException {
 		boolean tidyExisting = config.isTidyExisting();
 		File showsFile = (null == showsFilePath)
 						 ? new File(requireNonNull(App.class.getClassLoader().getResource("tvshows.json")).toURI())
@@ -109,33 +108,23 @@ public class App {
 		if (option != null){
 			switch (option) {
 				case "update", "1" -> updateShows(tidyExisting, shows);
-				case "tidyup", "2" -> RefactorFiles.tidyFolders(tidyExisting, shows);
+				case "tidyup", "2" -> tidyFolders(tidyExisting, shows);
 				case "missing", "3" -> IdentifyMissing.identifyMissing(shows);
 				case "0" -> System.exit(0);
 				default -> log.warn("Invalid option: {}", option);
 			}
 		}
 	}
-	
-	private static void doMonitorTorrents() throws InterruptedException {
-		ExecutorService thread = Executors.newSingleThreadExecutor();
-		try {
-			thread.execute(new MonitorTorrentsThread(config.getQBitTorrentConfig()));
-		} finally {
-			thread.shutdown();
-			thread.awaitTermination(60L, TimeUnit.SECONDS);
-		}
-	}
 
-	private static void updateShows(boolean tidyExisting, Shows shows) throws InterruptedException, ExecutionException {
-		if (tidyExisting) {
-			RefactorFiles.tidyFolders(true, shows);
-		}
+	private static void updateShows(boolean tidyExisting, Shows shows) {
 		// New approach
-		CompletableFuture<Boolean> downloadFuture = CompletableFuture.supplyAsync(() -> doDownload(config, shows));
-		if (downloadFuture.get()) {
-			doMonitorTorrents();
-			RefactorFiles.tidyFolders(false, shows);
-		}
+		doDownload(config, shows);
+		waitForTorrentsToComplete(config.getQBitTorrentConfig()).whenComplete((ignore, error) -> {
+			if (null != error) {
+				log.error("Failed while monitoring torrents, {}", error.getLocalizedMessage());
+			} else {
+				tidyFolders(tidyExisting, shows);
+			}
+		});
 	}
 }

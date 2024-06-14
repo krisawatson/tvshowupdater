@@ -11,8 +11,12 @@ import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXB;
 import java.net.URI;
+import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Map;
+
+import static com.kricko.tvshowupdater.utils.TvShowUtils.downloadNewItems;
 
 /**
  */
@@ -20,26 +24,26 @@ public class DownloadShows {
 
 	private static final Logger log = LoggerFactory.getLogger(DownloadShows.class);
 
-	public static boolean doDownload(Config config, Shows shows) {
-		AtomicBoolean newDownloads = new AtomicBoolean(false);
+	public static void doDownload(Config config, Shows shows) {
+		Map<String, Path> newDownloadDetails = new HashMap<>();
 
-		for (Details detail : shows.shows()) {
+		shows.shows().parallelStream().forEach(detail -> {
 			log.info("Checking for new items for {}", detail.getName());
 			detail.getRssFeedId().ifPresent(rssFeedId -> {
 				try {
 					Rss rss = parseRssFeed(config, rssFeedId);
 					if (rss != null) {
-						processRssItems(config, detail, newDownloads, rss);
+						newDownloadDetails.putAll(processRssItems(config, detail, rss));
 					}
 				} catch (Exception e) {
 					log.error("Exception caught when trying to process RSS feed for {}", detail.getName(), e);
 				}
 			});
-		}
+		});
 
-		TvShowUtils.appendDirToTidyUpList();
-
-		return newDownloads.get();
+		newDownloadDetails.keySet().parallelStream().forEach(episode -> {
+			log.info("Downloading {} to {}", episode, newDownloadDetails.get(episode));
+		});
 	}
 
 	private static Rss parseRssFeed(Config config, int rssFeedId) {
@@ -53,20 +57,20 @@ public class DownloadShows {
 		}
 	}
 
-	private static void processRssItems(Config config, Details detail, AtomicBoolean newDownloads, Rss rss) {
+	private static Map<String, Path> processRssItems(Config config, Details detail, Rss rss) {
 		List<Item> items = rss.getChannel().getItem();
+		Map<String, Path> downloadItems = new HashMap<>();
 		if (items != null) {
 			String regex = config.getShowRegex().replaceAll("NAME", detail.getRegexName());
 			items = TvShowUtils.removeDuplicateEpisodes(items, regex);
-			for (Item item : items) {
+			items.parallelStream().forEach(item -> {
 				try {
-					newDownloads.set(TvShowUtils.downloadNewItems(config, item, detail) || newDownloads.get());
+					downloadItems.putAll(downloadNewItems(config, item, detail));
 				} catch (Throwable e) {
 					log.error("Error during item download for show '{}': {}", detail.getName(), e.getMessage());
 				}
-				log.info("Show Path: {}", detail.getPath());
-				log.info("Item Title: {}", item.getTitle());
-			}
+			});
 		}
+		return downloadItems;
 	}
 }

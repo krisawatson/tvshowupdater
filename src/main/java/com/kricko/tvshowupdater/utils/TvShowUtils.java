@@ -74,10 +74,11 @@ public class TvShowUtils {
 	 * @param detail Details
 	 * @throws Throwable
 	 */
-	public static boolean downloadNewItems(Config config, Item item, Details detail) throws Throwable{
+	public static Map<String, Path> downloadNewItems(Config config, Item item, Details detail) throws Throwable {
 
 		boolean newDownloads = false;
 		String regex = config.getShowRegex().replaceAll("NAME", detail.getRegexName());
+		Map<String, Path> downloadItems = new HashMap<>();
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher itemMatcher = pattern.matcher(getTitle(item));
@@ -93,16 +94,17 @@ public class TvShowUtils {
 			if (!detail.getSkipSeason().contains(seasonInt)
 					&& episodeDoesntExist(dir, seasonInt, episodeInt, detail.getIgnoreMissing())
 					&& null != item.getLink()){
-				log.info("{} doesn't exist so downloading", nameAndEpisode);
+				downloadItems.put(nameAndEpisode, dir);
 				newDownloads = true;
 				downloadMagnetLink(config, item.getLink(), dir);
 			}
 		}
+		appendDirToTidyUpList();
 
 		if(newDownloads){
 			Thread.sleep(2000);
 		}
-		return newDownloads;
+		return downloadItems;
 	}
 
 	public static void downloadMagnetLink(Config config, String magnetUrl, Path dir) {

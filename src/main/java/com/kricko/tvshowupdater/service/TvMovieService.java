@@ -160,7 +160,8 @@ public class TvMovieService {
         try {
             moveFileIfNeeded(file, newFileName, currentParentDir, newDir);
         } catch (IOException e) {
-            log.error("Unable to move file");
+            log.error("Unable to move file {} to {} with name {}, {}",
+					  file, newDir, newFileName, e.getLocalizedMessage());
 			return;
         }
 

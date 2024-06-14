@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+
+import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
 /**
  */
@@ -38,7 +38,7 @@ public class RefactorFiles {
 				details.addAll(shows.shows()
 									.parallelStream()
 									.filter(showDetails -> dir.replaceAll("\\\\", "/").startsWith(showDetails.getPath()))
-									.collect(Collectors.toList()));
+									.toList());
 			}
 		}
 
@@ -46,7 +46,7 @@ public class RefactorFiles {
 	}
 
 	public static void addTitleAndRename(Set<Details> details) {
-		ExecutorService threadPool = Executors.newFixedThreadPool(details.size());
+		ExecutorService threadPool = newVirtualThreadPerTaskExecutor();
 
 		details.parallelStream().forEach(detail -> {
 			Optional<String> seriesId = detail.getTvdbSeriesId();

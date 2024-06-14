@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
@@ -45,8 +46,6 @@ public class QBitTorrent {
 					.build();
 
 			Response response = httpClient.newCall(request).execute();
-
-			log.info("Response status to adding torrent was: {}", response.code());
 		} catch (IOException | InterruptedException e) {
 			log.error("Failed during getting the list of torrents", e);
 		}
@@ -64,17 +63,15 @@ public class QBitTorrent {
 				.method("GET", null)
 				.addHeader("Cookie", cookieList.getFirst())
 				.build();
-		Response response = httpClient.newCall(request).execute();
-		ResponseBody body = response.body();
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			return mapper.readValue(Objects.requireNonNull(body).string(),
-                                    new TypeReference<>() {
-                                    });
+		try(Response response = httpClient.newCall(request).execute(); ResponseBody body = response.body()) {
+				ObjectMapper mapper = new ObjectMapper();
+				return mapper.readValue(Objects.requireNonNull(body).string(),
+										new TypeReference<>() {
+										});
+		} catch (SocketTimeoutException e) {
+			log.info("Socket Timed out, continuing");
 		} catch (IOException e) {
 			log.error("Failed getting the list of completed torrents", e);
-		} finally {
-            if (null != body) body.close();
 		}
 		return Collections.emptyList();
 	}

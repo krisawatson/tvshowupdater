@@ -14,9 +14,10 @@ import static java.lang.Integer.parseInt;
 @Slf4j
 public class FileRefactorThread implements Runnable {
 
-	private String name, path;
-	private List<Integer> skip;
-	private Optional<String> seriesId;
+	private final String name;
+    private final String path;
+	private final List<Integer> skip;
+	private final Optional<String> seriesId;
 	
 	public FileRefactorThread(String name, String path, List<Integer> skip, Optional<String> seriesId){
 		this.name = name;

@@ -12,7 +12,7 @@
   "qbittorrent": {
     "client": "C:\\Program Files\\qBittorrent\\qbittorrent.exe",
     "webhost": "localhost",
-    "webport": 8080,
+    "webport": 8088,
     "webuser": "admin",
     "webpass": "adminadmin"
   },

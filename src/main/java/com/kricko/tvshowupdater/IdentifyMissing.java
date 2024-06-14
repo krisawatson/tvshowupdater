@@ -11,10 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import static com.kricko.tvshowupdater.utils.Constants.FILE_MISSING;
+import static java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor;
 
 /**
  */
@@ -37,7 +37,7 @@ public class IdentifyMissing {
 	}
 
 	private static void identifyMissingInParallel(List<Details> details) {
-		ExecutorService threadPool = Executors.newFixedThreadPool(details.size());
+		ExecutorService threadPool = newVirtualThreadPerTaskExecutor();
 		try {
 			details.parallelStream().forEach(detail -> threadPool.execute(
 					new IdentifyPotentialMissingThread(detail.getPath(), detail.getIgnoreMissing())));
