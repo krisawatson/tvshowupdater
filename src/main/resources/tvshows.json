@@ -7,7 +7,8 @@
       "path":"Z:/TV/TV Series A-G/Barry",
       "skipSeason": [1,2,3],
       "ignoreMissing": [],
-      "tvdbSeriesId": 333072
+      "tvdbSeriesId": 333072,
+      "skipTorrentsWith": []
     },
     {
       "name":"The Book of Boba Fett",
@@ -16,7 +17,18 @@
       "path":"Z:/TV/TV Series A-G/Book of Boba Fett, The",
       "skipSeason": [1],
       "ignoreMissing": [],
-      "tvdbSeriesId": 393589
+      "tvdbSeriesId": 393589,
+      "skipTorrentsWith": []
+    },
+    {
+      "name":"Cobra Kai",
+      "rssFeedId": 996,
+      "regexName": "Cobra Kai",
+      "path":"Z:/TV/TV Series A-G/Cobra Kai",
+      "skipSeason": [],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 332858,
+      "skipTorrentsWith": ["1080p", "WEBRip"]
     },
     {
       "name":"Family Guy",
@@ -25,7 +37,8 @@
       "path":"Z:/TV/TV Series A-G/Family Guy",
       "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
       "ignoreMissing": [],
-      "tvdbSeriesId": 75978
+      "tvdbSeriesId": 75978,
+      "skipTorrentsWith": []
     },
     {
       "name":"The Flash (2014)",
@@ -34,7 +47,8 @@
       "path":"Z:/TV/TV Series A-G/Flash (2014), The",
       "skipSeason": [1,2,3,4,5,6,7,8,9],
       "ignoreMissing": [],
-      "tvdbSeriesId": 279121
+      "tvdbSeriesId": 279121,
+      "skipTorrentsWith": []
     },
     {
       "name":"Greys Anatomy",
@@ -43,7 +57,8 @@
       "path":"Z:/TV/TV Series A-G/Greys Anatomy",
       "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
       "ignoreMissing": ["S05E02", "S05E24", "S06E02", "S08E02", "S10E02"],
-      "tvdbSeriesId": 73762
+      "tvdbSeriesId": 73762,
+      "skipTorrentsWith": []
     },
     {
       "name":"Lucifer",
@@ -52,7 +67,8 @@
       "path":"Z:/TV/TV Series H-O/Lucifer",
       "skipSeason": [1,2,3,4,5,6],
       "ignoreMissing": ["S01E14"],
-      "tvdbSeriesId": 295685
+      "tvdbSeriesId": 295685,
+      "skipTorrentsWith": []
     },
     {
       "name":"The Mandalorian",
@@ -61,7 +77,8 @@
       "path":"Z:/TV/TV Series H-O/Mandalorian",
       "skipSeason": [1,2],
       "ignoreMissing": [],
-      "tvdbSeriesId": 361753
+      "tvdbSeriesId": 361753,
+      "skipTorrentsWith": []
     },
     {
       "name": "Peacemaker",
@@ -70,7 +87,8 @@
       "path": "Z:/TV/TV Series P-Z/Peacemaker",
       "skipSeason": [],
       "ignoreMissing": [],
-      "tvdbSeriesId": 391153
+      "tvdbSeriesId": 391153,
+      "skipTorrentsWith": []
     },
     {
       "name": "The Penguin",
@@ -79,7 +97,8 @@
       "path": "Z:/TV/TV Series P-Z/The Penguin",
       "skipSeason": [],
       "ignoreMissing": [],
-      "tvdbSeriesId": 417648
+      "tvdbSeriesId": 417648,
+      "skipTorrentsWith": []
     },
     {
       "name": "Rick and Morty",
@@ -88,7 +107,8 @@
       "path":"Z:/TV/TV Series P-Z/Rick and Morty",
       "skipSeason": [0,1,2,3,4,5,6,7],
       "ignoreMissing": ["S00E177","S05E00", "S06E00"],
-      "tvdbSeriesId": 275274
+      "tvdbSeriesId": 275274,
+      "skipTorrentsWith": []
     },
     {
       "name":"Space Force",
@@ -97,7 +117,8 @@
       "path":"Z:/TV/TV Series P-Z/Space Force",
       "skipSeason": [1,2],
       "ignoreMissing": [],
-      "tvdbSeriesId": 368667
+      "tvdbSeriesId": 368667,
+      "skipTorrentsWith": []
     },
     {
       "name":"Squid Game",
@@ -106,7 +127,8 @@
       "path":"Z:/TV/TV Series P-Z/Squid Game",
       "skipSeason": [1],
       "ignoreMissing": [],
-      "tvdbSeriesId": 383275
+      "tvdbSeriesId": 383275,
+      "skipTorrentsWith": []
     },
     {
       "name":"Young Sheldon",
@@ -115,7 +137,8 @@
       "path":"Z:/TV/TV Series P-Z/Young Sheldon",
       "skipSeason": [1,2,3,4,5,6],
       "ignoreMissing": ["S06E614"],
-      "tvdbSeriesId": 328724
+      "tvdbSeriesId": 328724,
+      "skipTorrentsWith": []
     }
   ]
 }

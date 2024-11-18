@@ -61,7 +61,7 @@ public class DownloadShows {
 		List<Item> items = rss.getChannel().getItem();
 		Map<String, Path> downloadItems = new HashMap<>();
 		if (items != null) {
-			String regex = config.getShowRegex().replaceAll("NAME", detail.getRegexName());
+			String regex = buildRegex(config.getShowRegex(), detail);
 			items = TvShowUtils.removeDuplicateEpisodes(items, regex);
 			items.parallelStream().forEach(item -> {
 				try {
@@ -72,5 +72,13 @@ public class DownloadShows {
 			});
 		}
 		return downloadItems;
+	}
+
+	private static String buildRegex(String baseRegex, Details detail) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(baseRegex.replaceAll("NAME", detail.getRegexName()));
+		detail.getSkipTorrentsWith().parallelStream().forEach(toSkip -> builder.append("(?!.* " + toSkip + ")"));
+		builder.append(".*$");
+		return builder.toString();
 	}
 }

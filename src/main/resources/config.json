@@ -1,6 +1,6 @@
 {
   "rssFeed": "http://showrss.info/show/%d.rss",
-  "showRegex": "(^NAME (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))(?!.*WEBRip$)(?!.*720p$)",
+  "showRegex": "(^NAME (S([0-9]+)E([0-9]+)|[0-9]+x[0-9]+))",
   "tidyExisting": false,
   "torrent": {
     "client": "C:\\Users\\trebl\\AppData\\Roaming\\uTorrent\\uTorrent.exe",

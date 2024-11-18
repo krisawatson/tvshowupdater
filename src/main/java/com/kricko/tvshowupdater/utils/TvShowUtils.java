@@ -11,10 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,7 +32,7 @@ public class TvShowUtils {
 	 * @return List<Item>
 	 */
 	public static List<Item> removeDuplicateEpisodes(List<Item> items, String regex){
-		Map<Integer,List<String>> shows = new HashMap<>();
+		Map<Integer, Set<String>> shows = new HashMap<>();
 		List<Item> newItems = new ArrayList<>();
 		Pattern pattern = Pattern.compile(regex);
 
@@ -43,7 +40,7 @@ public class TvShowUtils {
 			Matcher itemMatcher = pattern.matcher(getTitle(item));
 
 			if(!shows.containsKey(item.getShowId())){
-				List<String> episodes = new ArrayList<>();
+				Set<String> episodes = new HashSet<>();
 
 				while(itemMatcher.find()){
 					newItems.add(item);
@@ -52,7 +49,7 @@ public class TvShowUtils {
 
 				shows.put(item.getShowId(), episodes);
 			} else {
-				List<String> episodes = shows.get(item.getShowId());
+				Set<String> episodes = shows.get(item.getShowId());
 
 				while(itemMatcher.find()){
 					if(!episodes.contains(itemMatcher.group())){
