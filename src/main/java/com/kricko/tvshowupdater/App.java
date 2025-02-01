@@ -90,7 +90,7 @@ public class App {
 		URL configFile = (configFilePath == null)
 				? App.class.getClassLoader().getResource("config.json")
 				: new File(configFilePath).toURI().toURL();
-		try (InputStream inputStream = configFile.openStream()) {
+		try (InputStream inputStream = requireNonNull(configFile).openStream()) {
 			config = mapper.readValue(inputStream, Config.class);
 		}
 	}

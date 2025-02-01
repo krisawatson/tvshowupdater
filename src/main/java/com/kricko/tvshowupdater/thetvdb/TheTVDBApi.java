@@ -116,7 +116,7 @@ public class TheTVDBApi {
             return new Episode();
         }
 
-        StringBuilder url = null;
+        StringBuilder url;
         
     	try{
     		url = urlBuilder(seriesId, "/default/", seasonNbr, episodeNbr, language);

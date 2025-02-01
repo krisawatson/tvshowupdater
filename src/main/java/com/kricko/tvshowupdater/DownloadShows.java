@@ -77,7 +77,11 @@ public class DownloadShows {
 	private static String buildRegex(String baseRegex, Details detail) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(baseRegex.replaceAll("NAME", detail.getRegexName()));
-		detail.getSkipTorrentsWith().parallelStream().forEach(toSkip -> builder.append("(?!.* " + toSkip + ")"));
+		detail.getSkipTorrentsWith().parallelStream().forEach(toSkip -> {
+			builder.append("(?!.* ");
+			builder.append(toSkip);
+			builder.append(")");
+		});
 		builder.append(".*$");
 		return builder.toString();
 	}

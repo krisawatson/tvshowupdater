@@ -39,17 +39,17 @@ public class TvShowUtils {
 		for(Item item:items){
 			Matcher itemMatcher = pattern.matcher(getTitle(item));
 
-			if(!shows.containsKey(item.getShowId())){
-				Set<String> episodes = new HashSet<>();
+            Set<String> episodes;
+            if(!shows.containsKey(item.getShowId())){
+                episodes = new HashSet<>();
 
 				while(itemMatcher.find()){
 					newItems.add(item);
 					episodes.add(itemMatcher.group());
 				}
 
-				shows.put(item.getShowId(), episodes);
-			} else {
-				Set<String> episodes = shows.get(item.getShowId());
+            } else {
+                episodes = shows.get(item.getShowId());
 
 				while(itemMatcher.find()){
 					if(!episodes.contains(itemMatcher.group())){
@@ -58,9 +58,9 @@ public class TvShowUtils {
 					}
 				}
 
-				shows.put(item.getShowId(), episodes);
-			}
-		}
+            }
+            shows.put(item.getShowId(), episodes);
+        }
 
 		return newItems;
 	}
@@ -69,7 +69,7 @@ public class TvShowUtils {
 	 * Method downloadNewItems.
 	 * @param item Item
 	 * @param detail Details
-	 * @throws Throwable
+	 * @throws Throwable any exception thrown
 	 */
 	public static Map<String, Path> downloadNewItems(Config config, Item item, Details detail) throws Throwable {
 
@@ -83,13 +83,14 @@ public class TvShowUtils {
 			String nameAndEpisode = itemMatcher.group();
 			int[] seasonAndEpisode = getSeasonAndEpisode(nameAndEpisode);
 
-			int seasonInt = seasonAndEpisode[0];
+            assert seasonAndEpisode != null;
+            int seasonInt = seasonAndEpisode[0];
 			int episodeInt = seasonAndEpisode[1];
 
 			Path dir = Paths.get(detail.getPath() + File.separatorChar + "Season " + seasonInt);
 
 			if (!detail.getSkipSeason().contains(seasonInt)
-					&& episodeDoesntExist(dir, seasonInt, episodeInt, detail.getIgnoreMissing())
+					&& episodeDoesNotExist(dir, seasonInt, episodeInt, detail.getIgnoreMissing())
 					&& null != item.getLink()){
 				downloadItems.put(nameAndEpisode, dir);
 				newDownloads = true;
@@ -114,7 +115,7 @@ public class TvShowUtils {
 		}
 	}
 
-	public static boolean episodeDoesntExist(Path dir, int seasonInt, int episodeInt, List<String> ignorable) {
+	public static boolean episodeDoesNotExist(Path dir, int seasonInt, int episodeInt, List<String> ignorable) {
 		List<String> existingItems = getExistingItems(dir);
 
 		String filePrefix = String.format("S%sE%s", formatIntToString(seasonInt), formatIntToString(episodeInt));
@@ -267,13 +268,13 @@ public class TvShowUtils {
 	private static int[] getSeasonAndEpisode(String title){
 		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
 		Matcher itemMatcher = pattern.matcher(title);
-		while(itemMatcher.find()){
+		if (itemMatcher.find()){
 			String se = itemMatcher.group();
 			return getEpisodeIds(se, "E", 1);
 		}
 		Pattern pattern2 = Pattern.compile("(^|)[0-9]+x[0-9]+");
 		Matcher itemMatcher2 = pattern2.matcher(title);
-		while(itemMatcher2.find()){
+		if (itemMatcher2.find()){
 			String se = itemMatcher2.group();
 			return getEpisodeIds(se, "X", 0);
 		}

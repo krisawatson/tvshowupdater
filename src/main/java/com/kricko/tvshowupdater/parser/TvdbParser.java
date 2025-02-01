@@ -128,7 +128,7 @@ public class TvdbParser {
                 if (nEpisode.getNodeType() == Node.ELEMENT_NODE) {
                     eEpisode = (Element) nEpisode;
                     episode = parseNextEpisode(eEpisode, bannerMirror);
-                    if ((episode != null) && (season == -1 || episode.getSeasonNumber() == season)) {
+                    if (season == -1 || episode.getSeasonNumber() == season) {
                         // Add the episode only if the season is -1 (all seasons) or matches the season
                         episodeList.add(episode);
                     }
@@ -167,9 +167,7 @@ public class TvdbParser {
                     if (nBanner.getNodeType() == Node.ELEMENT_NODE) {
                         eBanner = (Element) nBanner;
                         banner = parseNextBanner(eBanner, bannerMirror);
-                        if (banner != null) {
-                            banners.addBanner(banner);
-                        }
+                        banners.addBanner(banner);
                     }
                 }
             }
@@ -204,10 +202,6 @@ public class TvdbParser {
                     if (nEpisode.getNodeType() == Node.ELEMENT_NODE) {
                         eEpisode = (Element) nEpisode;
                         episode = parseNextEpisode(eEpisode, bannerMirror);
-                        if (episode != null) {
-                            // We only need the first episode
-                            break;
-                        }
                     }
                 }
             }
@@ -239,7 +233,7 @@ public class TvdbParser {
         try {
             doc = DOMHelper.getEventDocFromUrl(urlString);
         } catch (RuntimeException ex) {
-        	log.info(String.format(ERROR_GET_XML, ex));
+        	log.info(ERROR_GET_XML, ex);
             return seriesList;
         }
 
@@ -250,9 +244,7 @@ public class TvdbParser {
                 if (nSeries.getNodeType() == Node.ELEMENT_NODE) {
                     eSeries = (Element) nSeries;
                     series = parseNextSeries(eSeries, bannerMirror);
-                    if (series != null) {
-                        seriesList.add(series);
-                    }
+                    seriesList.add(series);
                 }
             }
         }

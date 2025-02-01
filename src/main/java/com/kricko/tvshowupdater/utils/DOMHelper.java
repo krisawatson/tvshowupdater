@@ -83,20 +83,16 @@ public class DOMHelper {
      */
     public static String getValueFromElement(Element element, String tagName) {
         NodeList elementNodeList = element.getElementsByTagName(tagName);
-        if (elementNodeList == null) {
+        Element tagElement = (Element) elementNodeList.item(0);
+        if (tagElement == null) {
             return "";
-        } else {
-            Element tagElement = (Element) elementNodeList.item(0);
-            if (tagElement == null) {
-                return "";
-            }
-
-            NodeList tagNodeList = tagElement.getChildNodes();
-            if (tagNodeList == null || tagNodeList.getLength() == 0) {
-                return "";
-            }
-            return tagNodeList.item(0).getNodeValue();
         }
+
+        NodeList tagNodeList = tagElement.getChildNodes();
+        if (tagNodeList.getLength() == 0) {
+            return "";
+        }
+        return tagNodeList.item(0).getNodeValue();
     }
 
     /**
@@ -153,12 +149,10 @@ public class DOMHelper {
     private static String getValidWebpage(String url) {
         // Count the number of times we download the web page
         int retryCount = 0;
-        // Is the web page valid
-        boolean valid = false;
         String webPage;
 
         try {
-            while (!valid && (retryCount < RETRY_COUNT)) {
+            while (retryCount < RETRY_COUNT) {
                 retryCount++;
                 webPage = requestWebPage(url);
                 if (StringUtils.isNotBlank(webPage)) {
@@ -167,17 +161,12 @@ public class DOMHelper {
                         // Wait an increasing amount of time the more retries that happen
                         waiting(retryCount * RETRY_TIME);
                         continue;
-                    } else {
-                        valid = true;
                     }
+                    return webPage;
                 }
 
                 // Couldn't get a valid webPage so, quit.
-                if (!valid) {
-                    throw new RuntimeException("Failed to download data from " + url);
-                }
-
-                return webPage;
+                throw new RuntimeException("Failed to download data from " + url);
             }
         } catch (UnsupportedEncodingException ex) {
             throw new RuntimeException("Unable to encode URL: " + url, ex);
