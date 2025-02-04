@@ -81,6 +81,16 @@
       "skipTorrentsWith": []
     },
     {
+      "name":"Nashville",
+      "rssFeedId": 105,
+      "regexName": "Nashville \\(2012\\)",
+      "path":"Z:/TV/TV Series H-O/Nashville",
+      "skipSeason": [],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 259055,
+      "skipTorrentsWith": []
+    },
+    {
       "name": "Peacemaker",
       "rssFeedId": 1509,
       "regexName": "Peacemaker 2022",

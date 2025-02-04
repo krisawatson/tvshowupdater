@@ -52,7 +52,7 @@ public class DownloadShows {
 			URI rssFeedUrl = new URI(rssFeed);
 			return JAXB.unmarshal(rssFeedUrl, Rss.class);
 		} catch (Exception e) {
-			log.error("Exception caught when trying to parse RSS feed for feed ID: {}", rssFeedId, e);
+			log.error("Exception caught when trying to parse RSS feed for feed ID: {}, Error {}", rssFeedId, e.getMessage());
 			return null;
 		}
 	}
@@ -76,7 +76,7 @@ public class DownloadShows {
 
 	private static String buildRegex(String baseRegex, Details detail) {
 		StringBuilder builder = new StringBuilder();
-		builder.append(baseRegex.replaceAll("NAME", detail.getRegexName()));
+		builder.append(baseRegex.replace("NAME", detail.getRegexName()));
 		detail.getSkipTorrentsWith().parallelStream().forEach(toSkip -> {
 			builder.append("(?!.* ");
 			builder.append(toSkip);

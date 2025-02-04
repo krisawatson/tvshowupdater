@@ -45,15 +45,15 @@ public class TvShowUtils {
 
 				while(itemMatcher.find()){
 					newItems.add(item);
-					episodes.add(itemMatcher.group());
+					episodes.add(itemMatcher.group(1));
 				}
 
             } else {
                 episodes = shows.get(item.getShowId());
 
 				while(itemMatcher.find()){
-					if(!episodes.contains(itemMatcher.group())){
-						episodes.add(itemMatcher.group());
+					if(!episodes.contains(itemMatcher.group(1))){
+						episodes.add(itemMatcher.group(1));
 						newItems.add(item);
 					}
 				}
@@ -74,7 +74,7 @@ public class TvShowUtils {
 	public static Map<String, Path> downloadNewItems(Config config, Item item, Details detail) throws Throwable {
 
 		boolean newDownloads = false;
-		String regex = config.getShowRegex().replaceAll("NAME", detail.getRegexName());
+		String regex = config.getShowRegex().replace("NAME", detail.getRegexName());
 		Map<String, Path> downloadItems = new HashMap<>();
 
 		Pattern pattern = Pattern.compile(regex);
