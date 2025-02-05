@@ -81,16 +81,6 @@
       "skipTorrentsWith": []
     },
     {
-      "name":"Nashville",
-      "rssFeedId": 105,
-      "regexName": "Nashville \\(2012\\)",
-      "path":"Z:/TV/TV Series H-O/Nashville",
-      "skipSeason": [],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 259055,
-      "skipTorrentsWith": []
-    },
-    {
       "name": "Peacemaker",
       "rssFeedId": 1509,
       "regexName": "Peacemaker 2022",
@@ -138,6 +128,16 @@
       "skipSeason": [1],
       "ignoreMissing": [],
       "tvdbSeriesId": 383275,
+      "skipTorrentsWith": []
+    },
+    {
+      "name":"The Day of the Jackal",
+      "rssFeedId": 1825,
+      "regexName": "The Day of the Jackal",
+      "path":"Z:/TV/TV Series P-Z/The Day of the Jackal",
+      "skipSeason": [],
+      "ignoreMissing": [],
+      "tvdbSeriesId": 426866,
       "skipTorrentsWith": []
     },
     {

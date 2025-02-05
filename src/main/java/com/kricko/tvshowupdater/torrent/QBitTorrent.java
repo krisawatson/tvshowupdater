@@ -13,12 +13,15 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  */
 @Slf4j
 public class QBitTorrent {
 
+	private static final Logger logger = Logger.getLogger(OkHttpClient.class.getName());
 	private final TorrentConfig torrentConfig;
 	private static List<String> cookieList;
 	private static final OkHttpClient httpClient = new OkHttpClient().newBuilder().build();
@@ -26,6 +29,7 @@ public class QBitTorrent {
 	private static final int WAIT_TIME = 5000;
 
 	public QBitTorrent(TorrentConfig torrentConfig){
+		logger.setLevel(Level.FINE);
 		this.torrentConfig = torrentConfig;
 	}
 
@@ -46,6 +50,8 @@ public class QBitTorrent {
 					.build();
 
 			Response response = httpClient.newCall(request).execute();
+            assert response.body() != null;
+            response.body().close();
 		} catch (IOException | InterruptedException e) {
 			log.error("Failed during getting the list of torrents", e);
 		}
@@ -91,7 +97,9 @@ public class QBitTorrent {
 					.addHeader("Cookie", cookieList.getFirst())
 					.build();
 
-			httpClient.newCall(request).execute();
+			Response response = httpClient.newCall(request).execute();
+			assert response.body() != null;
+			response.body().close();
 		} catch (IOException | InterruptedException e) {
 			log.error("Failed during removed completed torrents", e);
 		}
@@ -109,6 +117,8 @@ public class QBitTorrent {
 		Response response = httpClient.newCall(request).execute();
 
 		cookieList = response.headers().values("Set-Cookie");
+		assert response.body() != null;
+		response.body().close();
 	}
 
 	private void getTokenWithRetry() throws IOException, InterruptedException {
