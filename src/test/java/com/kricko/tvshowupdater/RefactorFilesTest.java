@@ -70,7 +70,7 @@ class RefactorFilesTest {
     void testRefactorFilesAddTitleSeason1() throws IOException {
         // Setup test data
         Path seasonDir = Files.createDirectories(parentDir.resolve("Season 1"));
-        Path file = Files.createFile(seasonDir.resolve("S01E01.mkv"));
+        Files.createFile(seasonDir.resolve("S01E01.mkv"));
 
         // Get all video files
         List<Path> files = tvMovieService.getMovieFiles(seasonDir);
@@ -86,7 +86,7 @@ class RefactorFilesTest {
     void testRefactorFilesAddTitleSeason2() throws IOException {
         // Setup test data
         Path seasonDir = Files.createDirectories(parentDir.resolve("Season 2"));
-        Path file = Files.createFile(seasonDir.resolve("S02E01.mkv"));
+        Files.createFile(seasonDir.resolve("S02E01.mkv"));
 
         // Get all video files
         List<Path> files = tvMovieService.getMovieFiles(seasonDir);
@@ -102,7 +102,7 @@ class RefactorFilesTest {
     void testRefactorFilesAddTitleSeason3() throws IOException {
         // Setup test data
         Path seasonDir = Files.createDirectories(parentDir.resolve("Season 3"));
-        Path file = Files.createFile(seasonDir.resolve("S03E01.mkv"));
+        Files.createFile(seasonDir.resolve("S03E01.mkv"));
 
         // Get all video files
         List<Path> files = tvMovieService.getMovieFiles(seasonDir);
@@ -118,7 +118,7 @@ class RefactorFilesTest {
     void testRefactorFilesAddTitleSeason4() throws IOException {
         // Setup test data
         Path seasonDir = Files.createDirectories(parentDir.resolve("Season 4"));
-        Path file = Files.createFile(seasonDir.resolve("S04E01.mkv"));
+        Files.createFile(seasonDir.resolve("S04E01.mkv"));
 
         // Get all video files
         List<Path> files = tvMovieService.getMovieFiles(seasonDir);
