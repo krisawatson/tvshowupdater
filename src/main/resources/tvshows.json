@@ -145,7 +145,7 @@
       "rssFeedId": 881,
       "regexName": "Young Sheldon",
       "path":"Z:/TV/TV Series P-Z/Young Sheldon",
-      "skipSeason": [1,2,3,4,5,6],
+      "skipSeason": [1,2,3,4,5,6,7],
       "ignoreMissing": ["S06E614"],
       "tvdbSeriesId": 328724,
       "skipTorrentsWith": []
