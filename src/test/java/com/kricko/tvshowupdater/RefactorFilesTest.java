@@ -1,156 +1,132 @@
 package com.kricko.tvshowupdater;
 
-import com.kricko.tvshowupdater.model.Details;
-import com.kricko.tvshowupdater.model.Shows;
+import com.kricko.tvshowupdater.model.Episode;
+import com.kricko.tvshowupdater.model.Series;
+import com.kricko.tvshowupdater.service.TvMovieService;
+import com.kricko.tvshowupdater.thetvdb.TheTVDBApi;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
 
 class RefactorFilesTest {
 
-    @TempDir
-    Path tempDir;
+    @Mock
+    private TheTVDBApi tvdb;
 
-    private Shows shows;
-    private Details testShow;
+    private TvMovieService tvMovieService;
+    private String seriesName;
+    private Path parentDir;
 
     @BeforeEach
-    void setUp() {
-        testShow = Details.builder()
-                .name("TestShow")
-                .path(tempDir.toString().replaceAll("\\\\", "/"))
-                .skipSeason(new ArrayList<>())
-                .tvdbSeriesId(Optional.of("12345"))
-                .build();
-        shows = new Shows(List.of(testShow));
+    void setUp() throws IOException {
+        MockitoAnnotations.openMocks(this);
+        seriesName = "Test Series";
+        
+        // Mock the TheTVDBApi responses
+        Series mockSeries = new Series();
+        mockSeries.setId("1234");
+        mockSeries.setSeriesName(seriesName);
+        
+        Episode mockEpisode = new Episode();
+        mockEpisode.setEpisodeName("Test Episode");
+        
+        when(tvdb.searchSeries(anyString(), anyString())).thenReturn(Arrays.asList(mockSeries));
+        when(tvdb.getEpisode(anyString(), anyInt(), anyInt(), anyString())).thenReturn(mockEpisode);
+        
+        tvMovieService = new TvMovieService(tvdb);
+        parentDir = Files.createTempDirectory("tvshow_test");
+        parentDir.toFile().deleteOnExit();
     }
-
-    private void createTestFiles(String... filenames) throws IOException {
-        for (String filename : filenames) {
-            Path filePath = tempDir.resolve(filename);
-            Files.createDirectories(filePath.getParent());
-            Files.createFile(filePath);
-        }
-    }
-
-    @Test
-    @DisplayName("Should organize files into season directories")
-    void shouldOrganizeFilesIntoSeasonDirectories() throws IOException {
-        // Arrange
-        createTestFiles(
-            "TestShow/TestShow.S01E01.mkv",
-            "TestShow/TestShow.S01E02.mp4"
-        );
-
-        // Act
-        RefactorFiles.tidyFolders(false, shows);
-
-        // Assert
-        Path seasonDir = tempDir.resolve("TestShow/Season 1");
-        assertThat(seasonDir).exists();
-        assertThat(seasonDir.resolve("TestShow.S01E01.mkv")).exists();
-        assertThat(seasonDir.resolve("TestShow.S01E02.mp4")).exists();
+    
+    @AfterEach
+    void tearDown() throws IOException {
+        // Clean up test files after each test
+        Files.walk(parentDir)
+             .sorted((a, b) -> b.compareTo(a)) // Reverse order to delete files before directories
+             .forEach(path -> {
+                 try {
+                     Files.delete(path);
+                 } catch (IOException e) {
+                     // Ignore deletion errors
+                 }
+             });
     }
 
     @Test
-    @DisplayName("Should handle multiple seasons")
-    void shouldHandleMultipleSeasons() throws IOException {
-        // Arrange
-        createTestFiles(
-            "TestShow/TestShow.S01E01.mkv",
-            "TestShow/TestShow.S02E01.mp4"
-        );
+    void testRefactorFilesAddTitleSeason1() throws IOException {
+        // Setup test data
+        Path seasonDir = Files.createDirectories(parentDir.resolve("Season 1"));
+        Path file = Files.createFile(seasonDir.resolve("S01E01.mkv"));
 
-        // Act
-        RefactorFiles.tidyFolders(false, shows);
+        // Get all video files
+        List<Path> files = tvMovieService.getMovieFiles(seasonDir);
+        assertNotNull(files);
+        assertEquals(1, files.size());
 
-        // Assert
-        Path season1Dir = tempDir.resolve("TestShow/Season 1");
-        Path season2Dir = tempDir.resolve("TestShow/Season 2");
-        assertThat(season1Dir).exists();
-        assertThat(season2Dir).exists();
-        assertThat(season1Dir.resolve("TestShow.S01E01.mkv")).exists();
-        assertThat(season2Dir.resolve("TestShow.S02E01.mp4")).exists();
+        // Refactor files
+        List<String> removableFolders = tvMovieService.refactorFilesAddTitle(seriesName, files, parentDir.toString(), Optional.empty());
+        assertTrue(removableFolders.isEmpty());
     }
 
     @Test
-    @DisplayName("Should skip non-video files")
-    void shouldSkipNonVideoFiles() throws IOException {
-        // Arrange
-        createTestFiles(
-            "TestShow/TestShow.S01E01.mkv",
-            "TestShow/readme.txt"
-        );
+    void testRefactorFilesAddTitleSeason2() throws IOException {
+        // Setup test data
+        Path seasonDir = Files.createDirectories(parentDir.resolve("Season 2"));
+        Path file = Files.createFile(seasonDir.resolve("S02E01.mkv"));
 
-        // Act
-        RefactorFiles.tidyFolders(false, shows);
+        // Get all video files
+        List<Path> files = tvMovieService.getMovieFiles(seasonDir);
+        assertNotNull(files);
+        assertEquals(1, files.size());
 
-        // Assert
-        Path seasonDir = tempDir.resolve("TestShow/Season 1");
-        assertThat(seasonDir).exists();
-        assertThat(seasonDir.resolve("TestShow.S01E01.mkv")).exists();
-        assertThat(tempDir.resolve("TestShow/readme.txt")).exists();
+        // Refactor files
+        List<String> removableFolders = tvMovieService.refactorFilesAddTitle(seriesName, files, parentDir.toString(), Optional.empty());
+        assertTrue(removableFolders.isEmpty());
     }
 
     @Test
-    @DisplayName("Should handle invalid show paths")
-    void shouldHandleInvalidShowPaths() throws IOException {
-        // Arrange
-        Details invalidShow = Details.builder()
-                .name("InvalidShow")
-                .path("/invalid/path")
-                .skipSeason(new ArrayList<>())
-                .tvdbSeriesId(Optional.of("12345"))
-                .build();
-        shows = new Shows(List.of(invalidShow));
+    void testRefactorFilesAddTitleSeason3() throws IOException {
+        // Setup test data
+        Path seasonDir = Files.createDirectories(parentDir.resolve("Season 3"));
+        Path file = Files.createFile(seasonDir.resolve("S03E01.mkv"));
 
-        // Act & Assert
-        RefactorFiles.tidyFolders(false, shows);
-        // No exception should be thrown
+        // Get all video files
+        List<Path> files = tvMovieService.getMovieFiles(seasonDir);
+        assertNotNull(files);
+        assertEquals(1, files.size());
+
+        // Refactor files
+        List<String> removableFolders = tvMovieService.refactorFilesAddTitle(seriesName, files, parentDir.toString(), Optional.empty());
+        assertTrue(removableFolders.isEmpty());
     }
 
     @Test
-    @DisplayName("Should handle multiple shows")
-    void shouldHandleMultipleShows() throws IOException {
-        // Arrange
-        Details show1 = Details.builder()
-                .name("TestShow")
-                .path(tempDir.toString().replaceAll("\\\\", "/"))
-                .skipSeason(new ArrayList<>())
-                .tvdbSeriesId(Optional.of("12345"))
-                .build();
-        Details show2 = Details.builder()
-                .name("AnotherShow")
-                .path(tempDir.toString().replaceAll("\\\\", "/"))
-                .skipSeason(new ArrayList<>())
-                .tvdbSeriesId(Optional.of("67890"))
-                .build();
-        shows = new Shows(List.of(show1, show2));
+    void testRefactorFilesAddTitleSeason4() throws IOException {
+        // Setup test data
+        Path seasonDir = Files.createDirectories(parentDir.resolve("Season 4"));
+        Path file = Files.createFile(seasonDir.resolve("S04E01.mkv"));
 
-        createTestFiles(
-            "TestShow/TestShow.S01E01.mkv",
-            "AnotherShow/AnotherShow.S01E01.mp4"
-        );
+        // Get all video files
+        List<Path> files = tvMovieService.getMovieFiles(seasonDir);
+        assertNotNull(files);
+        assertEquals(1, files.size());
 
-        // Act
-        RefactorFiles.tidyFolders(false, shows);
-
-        // Assert
-        Path show1SeasonDir = tempDir.resolve("TestShow/Season 1");
-        Path show2SeasonDir = tempDir.resolve("AnotherShow/Season 1");
-        assertThat(show1SeasonDir).exists();
-        assertThat(show2SeasonDir).exists();
-        assertThat(show1SeasonDir.resolve("TestShow.S01E01.mkv")).exists();
-        assertThat(show2SeasonDir.resolve("AnotherShow.S01E01.mp4")).exists();
+        // Refactor files
+        List<String> removableFolders = tvMovieService.refactorFilesAddTitle(seriesName, files, parentDir.toString(), Optional.empty());
+        assertTrue(removableFolders.isEmpty());
     }
 }

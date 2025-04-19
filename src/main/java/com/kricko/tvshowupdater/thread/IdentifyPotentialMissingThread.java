@@ -1,43 +1,46 @@
 package com.kricko.tvshowupdater.thread;
 
+import com.kricko.tvshowupdater.model.Details;
 import com.kricko.tvshowupdater.service.TvMovieService;
+import com.kricko.tvshowupdater.thetvdb.TheTVDBApi;
+import com.kricko.tvshowupdater.utils.Constants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
-import static com.kricko.tvshowupdater.utils.TvShowUtils.writeMissingEpisodesToFile;
-
 @Slf4j
-public class IdentifyPotentialMissingThread implements Runnable {
+public class IdentifyPotentialMissingThread extends Thread {
 
-	private final String path;
-	private final List<String> ignorable;
+    private final Details show;
+    private final List<String> ignorable;
+    private final TvMovieService tvMovieService;
 
-	public IdentifyPotentialMissingThread(String path, List<String> ignorable){
-		this.path = path;
-		this.ignorable = ignorable;
-	}
-	
-	@Override
-	public void run() {
-		try {
-			Path parentDir = Paths.get(path);
-			List<String> missingSeasons = TvMovieService.identifyPotentialMissingSeasons(parentDir);
-			writeMissingEpisodesToFile(missingSeasons);
+    public IdentifyPotentialMissingThread(Details show, List<String> ignorable) {
+        this.show = show;
+        this.ignorable = ignorable;
+        this.tvMovieService = new TvMovieService(new TheTVDBApi(Constants.API_KEY));
+    }
 
-			// Get the list of sub-directories and refactor the files
-			log.info("Checking if there are missing episodes for {}", parentDir);
-			List<Path> dirs = TvMovieService.getDirectories(parentDir);
-			for(Path dir:dirs){
-				List<String> missingEpisodes = TvMovieService.identifyPotentialMissingEpisodes(dir, ignorable);
-				writeMissingEpisodesToFile(missingEpisodes);
-			}
+    @Override
+    public void run() {
+        try {
+            Path path = Path.of(show.getPath());
+            List<String> missingSeasons = tvMovieService.identifyPotentialMissingSeasons(path);
+            if (!missingSeasons.isEmpty()) {
+                log.info("Missing season directories for {}: {}", show.getName(), missingSeasons);
+            }
 
-		} catch (IOException e) {
-			log.error("Failed to run", e);
-		}	
-	}
+            List<Path> directories = tvMovieService.getDirectories(path);
+            for (Path dir : directories) {
+                List<String> missingEpisodes = tvMovieService.identifyPotentialMissingEpisodes(dir, ignorable);
+                if (!missingEpisodes.isEmpty()) {
+                    log.info("Missing episodes for {}: {}", show.getName(), missingEpisodes);
+                }
+            }
+        } catch (IOException e) {
+            log.error("Failed to identify missing episodes for {}", show.getName(), e);
+        }
+    }
 }

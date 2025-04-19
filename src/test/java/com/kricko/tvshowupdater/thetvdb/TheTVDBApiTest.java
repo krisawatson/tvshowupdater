@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @SuppressWarnings("unchecked")
@@ -40,11 +40,6 @@ class TheTVDBApiTest {
         tvdbApi = new TheTVDBApi(API_KEY, httpClient);
     }
 
-    private void setupCommonMocks(String responseBody) throws IOException, InterruptedException, URISyntaxException {
-        when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
-        when(httpResponse.body()).thenReturn(responseBody);
-    }
-
     @Test
     @DisplayName("Should search for series")
     void shouldSearchForSeries() throws IOException, InterruptedException, URISyntaxException {
@@ -53,14 +48,16 @@ class TheTVDBApiTest {
             <?xml version="1.0" encoding="UTF-8" ?>
             <Data>
                 <Series>
-                    <seriesid>123</seriesid>
+                    <id>123</id>
                     <SeriesName>Test Show</SeriesName>
                     <Overview>A test show</Overview>
                     <FirstAired>2020-01-01</FirstAired>
+                    <banner>path/to/banner.jpg</banner>
                 </Series>
             </Data>
             """;
-        setupCommonMocks(searchResponse);
+        when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
+        when(httpResponse.body()).thenReturn(searchResponse);
 
         // Act
         List<Series> results = tvdbApi.searchSeries("Test Show", "en");
@@ -75,6 +72,7 @@ class TheTVDBApiTest {
                 assertThat(series.getSeriesName()).isEqualTo("Test Show");
                 assertThat(series.getOverview()).isEqualTo("A test show");
                 assertThat(series.getFirstAired()).isEqualTo("2020-01-01");
+                assertThat(series.getBanner()).isEqualTo("https://thetvdb.com/banners/path/to/banner.jpg");
             });
     }
 
@@ -95,7 +93,8 @@ class TheTVDBApiTest {
                 </Episode>
             </Data>
             """;
-        setupCommonMocks(episodeResponse);
+        when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
+        when(httpResponse.body()).thenReturn(episodeResponse);
 
         // Act
         Episode episode = tvdbApi.getEpisode("123", 1, 1, "en");
@@ -122,7 +121,8 @@ class TheTVDBApiTest {
             <Data>
             </Data>
             """;
-        setupCommonMocks(searchResponse);
+        when(httpClient.send(any(HttpRequest.class), any(BodyHandler.class))).thenReturn(httpResponse);
+        when(httpResponse.body()).thenReturn(searchResponse);
 
         // Act
         List<Series> results = tvdbApi.searchSeries("NonExistentShow", "en");
@@ -133,19 +133,12 @@ class TheTVDBApiTest {
 
     @Test
     @DisplayName("Should handle invalid episode request")
-    void shouldHandleInvalidEpisodeRequest() throws IOException, InterruptedException, URISyntaxException {
-        // Arrange
-        String episodeResponse = """
-            <?xml version="1.0" encoding="UTF-8" ?>
-            <Data>
-            </Data>
-            """;
-        setupCommonMocks(episodeResponse);
-
+    void shouldHandleInvalidEpisodeRequest() {
         // Act
         Episode episode = tvdbApi.getEpisode("-1", -1, -1, "en");
 
         // Assert
         assertThat(episode).isNotNull();
+        assertThat(episode.getId()).isNull();
     }
 }
