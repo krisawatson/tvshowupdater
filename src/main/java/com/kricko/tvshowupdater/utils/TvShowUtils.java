@@ -265,7 +265,7 @@ public class TvShowUtils {
 	 * @param title String
 	 * @return int[]
 	 */
-	private static int[] getSeasonAndEpisode(String title){
+	public static int[] getSeasonAndEpisode(String title){
 		Pattern pattern = Pattern.compile("(^|)S([0-9]+)E([0-9]+)");
 		Matcher itemMatcher = pattern.matcher(title);
 		if (itemMatcher.find()){

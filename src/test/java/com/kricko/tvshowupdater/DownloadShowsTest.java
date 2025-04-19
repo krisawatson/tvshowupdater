@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -43,15 +44,19 @@ class DownloadShowsTest {
     @DisplayName("Should attempt to download shows when valid configuration is provided")
     void shouldAttemptToDownloadShowsWhenValidConfigurationIsProvided() {
         // Arrange
-        Details show1 = new Details();
-        show1.setName("Show1");
-        show1.setRegexName("S01E01");
-        show1.setRssFeedId(Optional.of(1));
+        Details show1 = Details.builder()
+                .name("Show1")
+                .regexName("S01E01")
+                .rssFeedId(Optional.of(1))
+                .skipSeason(new ArrayList<>())
+                .build();
         
-        Details show2 = new Details();
-        show2.setName("Show2");
-        show2.setRegexName("S02E03");
-        show2.setRssFeedId(Optional.of(2));
+        Details show2 = Details.builder()
+                .name("Show2")
+                .regexName("S02E03")
+                .rssFeedId(Optional.of(2))
+                .skipSeason(new ArrayList<>())
+                .build();
         
         List<Details> showsList = Arrays.asList(show1, show2);
         when(shows.shows()).thenReturn(showsList);
@@ -96,10 +101,12 @@ class DownloadShowsTest {
     @DisplayName("Should handle exception during show processing")
     void shouldHandleExceptionDuringShowProcessing() {
         // Arrange
-        Details show = new Details();
-        show.setName("Show1");
-        show.setRegexName("S01E01");
-        show.setRssFeedId(Optional.of(1));
+        Details show = Details.builder()
+                .name("Show1")
+                .regexName("S01E01")
+                .rssFeedId(Optional.of(1))
+                .skipSeason(new ArrayList<>())
+                .build();
         List<Details> showsList = Collections.singletonList(show);
         when(shows.shows()).thenReturn(showsList);
 
