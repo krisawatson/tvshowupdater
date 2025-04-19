@@ -44,7 +44,7 @@ class TvMovieServiceTest {
 
         // Assert the result (add your assertions here)
         assertEquals(1, result.size());
-        assertThat(result.get(0), containsString("- Season 1, Episodes [3]")); // Example missing episode
+        assertThat(result.getFirst(), containsString("- Season 1, Episodes [3]")); // Example missing episode
     }
 
 
@@ -57,7 +57,7 @@ class TvMovieServiceTest {
 
         // Assert the result (add your assertions here)
         assertEquals(1, result.size());
-        assertThat(result.get(0), containsString("- Season 2, Episodes [3, 4, 5]")); // Example missing episode
+        assertThat(result.getFirst(), containsString("- Season 2, Episodes [3, 4, 5]")); // Example missing episode
     }
 
     // Helper method to create a mock Path
