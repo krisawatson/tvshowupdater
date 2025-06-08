@@ -44,8 +44,8 @@ public class FileRefactorThread extends Thread {
             if (!allFiles.isEmpty()) {
                 for (Path file : allFiles) {
                     String fileName = file.getFileName().toString();
-                    if (!skip.contains(Integer.parseInt(fileName.replaceAll(".*S(\\d+)E\\d+.*", "$1")))) {
-                        int season = Integer.parseInt(fileName.replaceAll(".*S(\\d+)E\\d+.*", "$1"));
+                    if (!skip.contains(Integer.parseInt(fileName.replaceAll(".*[sS](\\d+)[eE]\\d+.*", "$1")))) {
+                        int season = Integer.parseInt(fileName.replaceAll(".*[sS](\\d+)[eE]\\d+.*", "$1"));
                         // Create season directory
                         Path seasonDir = showPath.resolve("Season " + season);
                         Files.createDirectories(seasonDir);
