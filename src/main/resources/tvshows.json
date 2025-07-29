@@ -1,16 +1,6 @@
 {
   "shows":[
     {
-      "name":"Barry",
-      "rssFeedId": 981,
-      "regexName": "Barry",
-      "path":"Z:/TV/TV Series A-G/Barry",
-      "skipSeason": [1,2,3],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 333072,
-      "skipTorrentsWith": []
-    },
-    {
       "name":"The Book of Boba Fett",
       "rssFeedId": 1505,
       "regexName": "The Book of Boba Fett",
@@ -25,7 +15,7 @@
       "rssFeedId": 996,
       "regexName": "Cobra Kai",
       "path":"Z:/TV/TV Series A-G/Cobra Kai",
-      "skipSeason": [],
+      "skipSeason": [1,2,3,4,5,6],
       "ignoreMissing": [],
       "tvdbSeriesId": 332858,
       "skipTorrentsWith": ["1080p", "WEBRip"]
@@ -35,7 +25,7 @@
       "rssFeedId": 57,
       "regexName": "Family Guy",
       "path":"Z:/TV/TV Series A-G/Family Guy",
-      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],
       "ignoreMissing": [],
       "tvdbSeriesId": 75978,
       "skipTorrentsWith": []
@@ -55,7 +45,7 @@
       "rssFeedId": 9,
       "regexName": "Grey's Anatomy",
       "path":"Z:/TV/TV Series A-G/Greys Anatomy",
-      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+      "skipSeason": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
       "ignoreMissing": ["S05E02", "S05E24", "S06E02", "S08E02", "S10E02"],
       "tvdbSeriesId": 73762,
       "skipTorrentsWith": []
@@ -81,13 +71,13 @@
       "skipTorrentsWith": []
     },
     {
-      "name": "Peacemaker",
-      "rssFeedId": 1509,
-      "regexName": "Peacemaker 2022",
-      "path": "Z:/TV/TV Series P-Z/Peacemaker",
+      "name":"MobLand",
+      "rssFeedId": 1852,
+      "regexName": "MobLand",
+      "path":"Z:/TV/TV Series H-O/MobLand",
       "skipSeason": [],
       "ignoreMissing": [],
-      "tvdbSeriesId": 391153,
+      "tvdbSeriesId": 446831,
       "skipTorrentsWith": []
     },
     {
@@ -105,24 +95,14 @@
       "rssFeedId": 44,
       "regexName": "Rick and Morty",
       "path":"Z:/TV/TV Series P-Z/Rick and Morty",
-      "skipSeason": [0,1,2,3,4,5,6,7],
+      "skipSeason": [0,1,2,3,4,5,6,7,8],
       "ignoreMissing": ["S00E177","S05E00", "S06E00"],
       "tvdbSeriesId": 275274,
       "skipTorrentsWith": []
     },
     {
-      "name":"Space Force",
-      "rssFeedId": 1313,
-      "regexName": "Space Force",
-      "path":"Z:/TV/TV Series P-Z/Space Force",
-      "skipSeason": [1,2],
-      "ignoreMissing": [],
-      "tvdbSeriesId": 368667,
-      "skipTorrentsWith": []
-    },
-    {
       "name":"Squid Game",
-      "rssFeedId": null,
+      "rssFeedId": 1865,
       "regexName": "Squid Game",
       "path":"Z:/TV/TV Series P-Z/Squid Game",
       "skipSeason": [1],
